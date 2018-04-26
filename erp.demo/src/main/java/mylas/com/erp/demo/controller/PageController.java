@@ -12,6 +12,8 @@ public class PageController {
 	@RequestMapping(value= {"/","/home","/index"})
 	public ModelAndView indexPage() {
 		ModelAndView mav = new ModelAndView("index");
+		mav.addObject("title", "HomePage");
+		mav.addObject("userClickHome", true);
 		return mav;
 	}
 	@RequestMapping(value= {"/add"})
