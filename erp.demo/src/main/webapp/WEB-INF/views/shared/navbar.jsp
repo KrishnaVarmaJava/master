@@ -2,7 +2,10 @@
         <nav role="navigation" class="navbar topnavbar">
             <!-- START navbar header-->
             <div class="navbar-header">
-                <a href="index.html" class="navbar-brand">
+                        	<c:if test="${userClickForgotPassword==true }">
+					<%@include file="../adminindex.jsp"%>
+				</c:if>
+                <a href="${contextRoot}admin" class="navbar-brand">
                     <div class="brand-logo">
                         <img src="${images}/logo.png" alt="Admin Logo" class="img-responsive">
                     </div>

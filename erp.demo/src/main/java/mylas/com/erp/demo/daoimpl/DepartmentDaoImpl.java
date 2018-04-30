@@ -1,12 +1,12 @@
-package mylas.com.erp.demobackend.daoimpl;
+package mylas.com.erp.demo.daoimpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import mylas.com.erp.demobackend.dao.DepartmentDao;
-import mylas.com.erp.demobackend.dto.Department;
+import mylas.com.erp.demo.dao.DepartmentDao;
+import mylas.com.erp.demo.dto.Department;
 
 @Repository("departmentdao")
 public class DepartmentDaoImpl implements DepartmentDao {

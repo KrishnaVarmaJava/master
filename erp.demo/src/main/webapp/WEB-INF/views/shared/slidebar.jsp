@@ -11,13 +11,13 @@
                     <li>
                         <a href="#dashboard" title="Dashboard" data-toggle="collapse" class="menu-toggle">
                             <em class="material-icons">dashboard</em>
-                            <span>Dashboard</span>
+                            <span>Services</span>
                         </a>
                         <ul id="dashboard" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Dashboard</li>
                             <li class=" active">
                                 <a href="index.html" title="Dashboard v1">
-                                    <span>Dashboard v1</span>
+                                    <span>Employee Regestration</span>
                                 </a>
                             </li>
                             <li class=" ">
