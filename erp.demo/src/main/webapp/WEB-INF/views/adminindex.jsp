@@ -7,6 +7,7 @@
 <spring:url var="js" value="/resources/js" />
 <spring:url var="images" value="/resources/images" />
 <spring:url var="plugins" value="/resources/plugins" />
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +17,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Admin Employee regestration Page</title>
     <!-- Favicon-->
-    <link rel="icon" href="${images}favicon.png" type="image/x-icon">
+    <link rel="icon" href="../../resources/images/favicon.png" type="image/x-icon">
 
     <!--REQUIRED PLUGIN CSS-->
     <link href="${plugins}/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -77,7 +78,7 @@
         <nav role="navigation" class="navbar topnavbar">
             <!-- START navbar header-->
             <div class="navbar-header">
-                <a href="${contextRoot}admin" class="navbar-brand">
+                <a href="${contextRoot}/admin" class="navbar-brand">
                     <div class="brand-logo">
 					<h3 style="color:#fff">Admin Page</h3>
                       
@@ -226,7 +227,7 @@
                                     <li class="media unread">
                                         <a href="#">
                                             <div class="media-left">
-                                                <img class="media-object img-circle" width="32" src="${images}/mail/nine.jpg" alt="user">
+                                                <img class="media-object img-circle" width="32" src="<c:url value="/images/mail/nine.jpg"/>" alt="user">
                                             </div>
                                             <div class="media-body">
                                                 <p class="pull-right"><small>Just Now</small></p>
@@ -238,7 +239,7 @@
                                     <li class="media">
                                         <a href="#">
                                             <div class="media-left">
-                                                <img class="media-object img-circle" width="32" src="${images}/mail/2.jpg" alt="user">
+                                                <img class="media-object img-circle" width="32" src="../../resources/images/mail/2.jpg" alt="user">
                                             </div>
                                             <div class="media-body">
                                                 <p class="pull-right"><small>2 hour ago</small></p>
@@ -250,7 +251,7 @@
                                     <li class="media">
                                         <a href="#">
                                             <div class="media-left">
-                                                <img class="media-object img-circle" width="32" src="${images}/mail/five.jpg" alt="user">
+                                                <img class="media-object img-circle" width="32" src="../../resources/images/mail/five.jpg" alt="user">
                                             </div>
                                             <div class="media-body">
                                                 <p class="pull-right"><small>12 hour ago</small></p>
@@ -262,7 +263,7 @@
                                     <li class="media">
                                         <a href="#">
                                             <div class="media-left">
-                                                <img class="media-object img-circle" width="32" src="${images}/mail/1.jpg" alt="user">
+                                                <img class="media-object img-circle" width="32" src="../../resources/images/mail/1.jpg" alt="user">
                                             </div>
                                             <div class="media-body">
                                                 <p class="pull-right"><small>2 days ago</small></p>
@@ -274,7 +275,7 @@
                                     <li class="media">
                                         <a href="#">
                                             <div class="media-left">
-                                                <img class="media-object img-circle" width="32" src="${images}/mail/seven.jpg" alt="user">
+                                                <img class="media-object img-circle" width="32" src="../../resources/images/mail/seven.jpg" alt="user">
                                             </div>
                                             <div class="media-body">
                                                 <p class="pull-right"><small>3 days ago</small></p>
@@ -286,7 +287,7 @@
                                     <li class="media unread">
                                         <a href="#">
                                             <div class="media-left">
-                                                <img class="media-object img-circle" width="32" src="${images}/mail/three.jpg" alt="user">
+                                                <img class="media-object img-circle" width="32" src="../../resources/images/mail/three.jpg" alt="user">
                                             </div>
                                             <div class="media-body">
                                                 <p class="pull-right"><small>4 days ago</small></p>
@@ -337,7 +338,7 @@
         <!-- END Top Navbar-->
     </header>
     <!-- sidebar-->
-    <aside class="aside">
+  <aside class="aside">
         <!-- START Sidebar (left)-->
         <div class="aside-inner">
             <nav data-sidebar-anyclick-close="" class="sidebar">
@@ -350,20 +351,17 @@
                     <li>
                         <a href="#dashboard" title="Dashboard" data-toggle="collapse" class="menu-toggle">
                             <em class="material-icons">dashboard</em>
-                            <span>Employee</span>
+                            <span>Employee Details</span>
                         </a>
                         <ul id="dashboard" class="nav sidebar-subnav collapse">
-                            <li class="sidebar-subnav-header">Employee</li>
+                            <li class="sidebar-subnav-header">Dashboard</li>
+                            <c:forEach items="${services}" var="service">
                             <li>
-                                <a href="index.html" title="Dashboard v1">
-                                    <span>Dashboard v1</span>
+                               <a href="#" title="${service}">
+                                    <span>${service.getServiceName()}</span>
                                 </a>
                             </li>
-                            <li >
-                                <a href="index_2.html" title="Dashboard v2">
-                                    <span>Dashboard v2</span>
-                                </a>
-                            </li>
+							</c:forEach>
                         </ul>
                     </li>
                     <li>
@@ -1382,12 +1380,12 @@
                                 <div class="card-inner">
                            
                                     <div class="demo">
-                                        <form action="${contextRoot}admin" method="post">
+                                        <form action="${contextRoot}/admin" method="post">
 										        <div class="row clearfix">
                                                 <div class="col-sm-4">
                                                  <div class="form-group">
                                                     <div class="form-line">
-                                                    <input type="text" class="form-control" name="firstname">
+                                                    <input type="text" class="form-control" name="firstname" id="firstname">
                                                     <label class="form-label">Firstname </label>
                                                     </div>
                                                      </div>
@@ -1395,7 +1393,7 @@
                                                 <div class="col-sm-4">
                                                       <div class="form-group">
                                                     <div class="form-line">
-                                                    <input type="text" class="form-control" name="lastname">
+                                                    <input type="text" class="form-control" name="lastname" id="lastname">
                                                     <label class="form-label">Lastname </label>
                                                     </div>
                                                      </div>
@@ -1588,7 +1586,7 @@
                             <div class="col-md-3">
                                 <div class="user-card-wrapper">
                                     <div class="user-card">
-                                        <img class="img-responsive" src="${images}/mail/1.jpg" alt="" />
+                                        <img class="img-responsive" src="/images/mail/1.jpg"<c:url value="${images}/mail/1.jpg"/>" alt="" />
                                         <div class="user-card-info">
                                             <h6>Micheal White</h6>
                                             <span>CO-FOUNDER / CEO</span>
@@ -1603,7 +1601,7 @@
 							    <div class="col-md-3">
                                 <div class="user-card-wrapper">
                                     <div class="user-card">
-                                        <img class="img-responsive" src="${images}/mail/1.jpg" alt="" />
+                                        <img class="img-responsive" src="../../resources/images/mail/1.jpg" alt="" />
                                         <div class="user-card-info">
                                             <h6>Micheal White</h6>
                                             <span>CO-FOUNDER / CEO</span>
@@ -1618,7 +1616,7 @@
 							    <div class="col-md-3">
                                 <div class="user-card-wrapper">
                                     <div class="user-card">
-                                        <img class="img-responsive" src="${images}/mail/1.jpg" alt="" />
+                                        <img class="img-responsive" src="../../resources/images/mail/1.jpg" alt="" />
                                         <div class="user-card-info">
                                             <h6>Micheal White</h6>
                                             <span>CO-FOUNDER / CEO</span>
@@ -1634,7 +1632,7 @@
 								    <div class="col-md-3">
                                 <div class="user-card-wrapper">
                                     <div class="user-card">
-                                        <img class="img-responsive" src="${images}/mail/1.jpg" alt="" />
+                                        <img class="img-responsive" src="../../resources/images/mail/1.jpg" alt="" />
                                         <div class="user-card-info">
                                             <h6>Micheal White</h6>
                                             <span>CO-FOUNDER / CEO</span>
@@ -1654,7 +1652,7 @@
                             <div class="col-md-3">
                                 <div class="user-card-wrapper">
                                     <div class="user-card">
-                                        <img class="img-responsive" src="${images}/mail/1.jpg" alt="" />
+                                        <img class="img-responsive" src="../../resources/images/mail/1.jpg" alt="" />
                                         <div class="user-card-info">
                                             <h6>Micheal White</h6>
                                             <span>CO-FOUNDER / CEO</span>
@@ -1670,7 +1668,7 @@
                                      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                         <div class="card">
                             <div class="card-image" style="text-align:center">
-                                <img src="${images}/mail/1.jpg">
+                                <img src="../../resources/images/mail/1.jpg"">
                                 
                             </div>
                             <div class="body">

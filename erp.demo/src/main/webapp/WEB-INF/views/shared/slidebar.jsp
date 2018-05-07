@@ -1,3 +1,4 @@
+    <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
     <aside class="aside">
         <!-- START Sidebar (left)-->
         <div class="aside-inner">
@@ -15,16 +16,16 @@
                         </a>
                         <ul id="dashboard" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Dashboard</li>
-                            <li class=" active">
-                                <a href="index.html" title="Dashboard v1">
-                                    <span>Employee Regestration</span>
+                            <c:forEach items="${services}" var="service">
+                            <li>
+                            <c:if test="${userClickReg==true }">
+								<%@include file="../adminindex.jsp"%>
+							</c:if>
+                               <a href="${contextRoot}/admin/${service.getServiceID()}/register" title="${service}">
+                                    <span>${service.getServiceName()}</span>
                                 </a>
                             </li>
-                            <li class=" ">
-                                <a href="index_2.html" title="Dashboard v2">
-                                    <span>Dashboard v2</span>
-                                </a>
-                            </li>
+                            </c:forEach>
                         </ul>
                     </li>
                     <li>

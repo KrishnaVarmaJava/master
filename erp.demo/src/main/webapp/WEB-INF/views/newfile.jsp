@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:url var="css" value="/resources/css" />
@@ -13,7 +13,14 @@
 <title>EmpForm</title>
 </head>
 <body>
-${firstname}
-${lastname}
+	<c:forEach items="${employees} var="emp">
+		<li>
+			<h1>
+				${emp.getFirstName()} <br> ${emp.getLastName()}
+			</h1>
+
+		</li>
+
+	</c:forEach>
 </body>
 </html>

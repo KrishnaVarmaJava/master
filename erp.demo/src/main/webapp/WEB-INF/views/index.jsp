@@ -6,6 +6,7 @@
 <spring:url var="js" value="/resources/js" />
 <spring:url var="images" value="/resources/images" />
 <spring:url var="plugins" value="/resources/plugins" />
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 
@@ -17,7 +18,7 @@
 	name="viewport">
 <title>Material Admin Template ${title}</title>
 <!-- Favicon-->
-<link rel="icon" href="${images }favicon.png" type="image/x-icon">
+<link rel="icon" href="${images}/favicon.png" type="image/x-icon">
 
 <!--REQUIRED PLUGIN CSS-->
 <link href="${plugins}/font-awesome/css/font-awesome.min.css"

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import mylas.com.erp.demo.dao.DepartmentDao;
+import mylas.com.erp.demo.dao.ServicesDao;
 
 
 
@@ -18,17 +19,35 @@ public class PageController {
 	@Autowired
 	DepartmentDao departmentdao;
 	
+	@Autowired
+	ServicesDao servicesdao;
+	
+	
 	@RequestMapping(value= "/admin", method=RequestMethod.GET)
 	public ModelAndView adminIndexPage() {
-		ModelAndView mav = new ModelAndView("adminindex");
+		ModelAndView mav = new ModelAndView("index");
 		mav.addObject("title", "HomePage");
+		
+		mav.addObject("services", servicesdao.list());
+		
 		mav.addObject("userClickHome", true);
 		return mav;
 	}
+	
+	@RequestMapping(value="/admin/regesteremp/register")
+	public ModelAndView empRegesterPage() {
+		ModelAndView mav = new ModelAndView("adminindex");
+		mav.addObject("services", servicesdao.list());
+		mav.addObject("title", "Employee Regester Page");
+		mav.addObject("userClickReg", true);
+		return mav;		
+	}
+	
+	 
 	@RequestMapping(value= "/admin", method=RequestMethod.POST)
 	public ModelAndView regesterEmpIndexPage(
-			@RequestParam String firstname,
-			@RequestParam String lastname			
+			@RequestParam(name="firstname", required=false) String firstname,
+			@RequestParam(name="lastname", required=false) String lastname			
 			) {
 		ModelAndView mav = new ModelAndView("newfile");
 		mav.addObject("firstname", firstname);
@@ -38,7 +57,8 @@ public class PageController {
 
 	@RequestMapping(value= {"/","/home","/index"})
 	public ModelAndView indexPage() {
-		ModelAndView mav = new ModelAndView("index");		
+		ModelAndView mav = new ModelAndView("index");
+		mav.addObject("services", servicesdao.list());
 		mav.addObject("title", "HomePage");
 		mav.addObject("userClickHome", true);
 		return mav;
