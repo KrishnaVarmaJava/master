@@ -1,19 +1,13 @@
 package mylas.com.erp.demo.daoimpl;
 
 import java.util.List;
-
-import javax.sql.DataSource;
-
 import mylas.com.erp.demo.dao.EmployeeDao;
 import mylas.com.erp.demo.dto.Employee;
 
 public class EmployeeDaoImpl implements EmployeeDao{
 
 
-	private DataSource datasource;
-	
-	
-	
+		
 	@Override
 	public void save(Employee emp) {
 		

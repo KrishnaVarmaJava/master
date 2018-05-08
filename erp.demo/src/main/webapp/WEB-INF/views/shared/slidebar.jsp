@@ -12,7 +12,7 @@
                     <li>
                         <a href="#dashboard" title="Dashboard" data-toggle="collapse" class="menu-toggle">
                             <em class="material-icons">dashboard</em>
-                            <span>Services</span>
+                            <span>Employee Details</span>
                         </a>
                         <ul id="dashboard" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Dashboard</li>
@@ -35,6 +35,16 @@
                         </a>
                         <ul id="layout" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Layouts</li>
+                                                        <li>
+                                <a href="../../pages/layout/l_sidebar_light.html" title="Light Sidebar">
+                                    <span>Light Sidebar</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../../pages/layout/l_sidebar_dark.html" title="Dark Sidebar">
+                                    <span>Dark Sidebar</span>
+                                </a>
+                            </li>
                             <li>
                                 <a href="pages/layout/l_no_fixed.html" title="No Fixed">
                                     <span>Layout No Fixed</span>

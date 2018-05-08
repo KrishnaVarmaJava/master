@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:url var="css" value="/resources/css" />
@@ -8,6 +7,7 @@
 <spring:url var="images" value="/resources/images" />
 <spring:url var="plugins" value="/resources/plugins" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 
@@ -15,9 +15,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Admin Employee regestration Page</title>
+    <title>Amp Demo</title>
     <!-- Favicon-->
-    <link rel="icon" href="../../resources/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="../../favicon.png" type="image/x-icon">
 
     <!--REQUIRED PLUGIN CSS-->
     <link href="${plugins}/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -26,41 +26,17 @@
     <link href="${plugins}/animate-css/animate.css" rel="stylesheet" />
     <link href="${plugins}/spinkit/spinkit.css" rel="stylesheet">
 
+    <!--THIS PAGE LEVEL CSS-->
+    <link href="${plugins}/tablesaw/css/tablesaw.min.css" rel="stylesheet">
+	  <link href="${plugins}/nifty-modal/component.css" rel="stylesheet" />
+	
+
     <!--REQUIRED THEME CSS -->
     <link href="${css}/style.css" rel="stylesheet">
     <link href="${css}/layout.css" rel="stylesheet">
     <link href="${css}/themes/main_theme.css" rel="stylesheet" />
-
-    <!--THIS PAGE LEVEL CSS-->
-    <link href="${plugins}/unslider/css/unslider.css" rel="stylesheet" />
-    <link href="${plugins}/chartist/css/chartist.min.css" rel="stylesheet">
-    <!--Chat Css-->
-    <link href="${plugins}/wchat/assets/css/style-light.css" rel="stylesheet">
-    <link href="${plugins}/wchat/assets/css/mobile.css" rel="stylesheet" id="style">
-
-    <!-- EMOJI ONE JS -->
-    <link rel="stylesheet" href="${plugins}/wchat/smiley/assets/sprites/emojione.sprites.css"/>
-    <script src="${plugins}/wchat/smiley/js/emojione.min.js"></script>
-
-    <script type="text/javascript">
-        // #################################################
-        // # Optional
-
-        // default is PNG but you may also use SVG
-        emojione.imageType = 'png';
-        emojione.sprites = false;
-
-        // default is ignore ASCII smileys like :) but you can easily turn them on
-        emojione.ascii = true;
-
-        // if you want to host the images somewhere else
-        // you can easily change the default paths
-        emojione.imagePathPNG = 'resources/plugins/wchat/smiley/assets/png/';
-        emojione.imagePathSVG = 'resources/plugins/wchat/smiley/assets/svg/';
-
-        // #################################################
-    </script>
-    <!--#End# Chat Css-->
+		 <link href="${css}/custom_style.css" rel="stylesheet">
+ <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -71,16 +47,15 @@
 
 <body class="theme-indigo light layout-fixed">
 <div class="wrapper">
-   
-   
+
     <!-- top navbar-->
     <header class="topnavbar-wrapper">
         <nav role="navigation" class="navbar topnavbar">
             <!-- START navbar header-->
-            <div class="navbar-header">
-                <a href="${contextRoot}/admin" class="navbar-brand">
+          <div class="navbar-header">
+                <a href="index.html" class="navbar-brand">
                     <div class="brand-logo">
-					<h3 style="color:#fff">Admin Page</h3>
+					<h3 style="color:#fff">Amp Demo</h3>
                       
                     </div>
                     <div class="brand-logo-collapsed">
@@ -227,7 +202,7 @@
                                     <li class="media unread">
                                         <a href="#">
                                             <div class="media-left">
-                                                <img class="media-object img-circle" width="32" src="<c:url value="/images/mail/nine.jpg"/>" alt="user">
+                                                <img class="media-object img-circle" width="32" src="${images}/mail/nine.jpg" alt="user">
                                             </div>
                                             <div class="media-body">
                                                 <p class="pull-right"><small>Just Now</small></p>
@@ -239,7 +214,7 @@
                                     <li class="media">
                                         <a href="#">
                                             <div class="media-left">
-                                                <img class="media-object img-circle" width="32" src="../../resources/images/mail/2.jpg" alt="user">
+                                                <img class="media-object img-circle" width="32" src="${images}/mail/2.jpg" alt="user">
                                             </div>
                                             <div class="media-body">
                                                 <p class="pull-right"><small>2 hour ago</small></p>
@@ -251,7 +226,7 @@
                                     <li class="media">
                                         <a href="#">
                                             <div class="media-left">
-                                                <img class="media-object img-circle" width="32" src="../../resources/images/mail/five.jpg" alt="user">
+                                                <img class="media-object img-circle" width="32" src="${images}/mail/five.jpg" alt="user">
                                             </div>
                                             <div class="media-body">
                                                 <p class="pull-right"><small>12 hour ago</small></p>
@@ -263,7 +238,7 @@
                                     <li class="media">
                                         <a href="#">
                                             <div class="media-left">
-                                                <img class="media-object img-circle" width="32" src="../../resources/images/mail/1.jpg" alt="user">
+                                                <img class="media-object img-circle" width="32" src="${images}/mail/1.jpg" alt="user">
                                             </div>
                                             <div class="media-body">
                                                 <p class="pull-right"><small>2 days ago</small></p>
@@ -275,7 +250,7 @@
                                     <li class="media">
                                         <a href="#">
                                             <div class="media-left">
-                                                <img class="media-object img-circle" width="32" src="../../resources/images/mail/seven.jpg" alt="user">
+                                                <img class="media-object img-circle" width="32" src="${images}/mail/seven.jpg" alt="user">
                                             </div>
                                             <div class="media-body">
                                                 <p class="pull-right"><small>3 days ago</small></p>
@@ -287,7 +262,7 @@
                                     <li class="media unread">
                                         <a href="#">
                                             <div class="media-left">
-                                                <img class="media-object img-circle" width="32" src="../../resources/images/mail/three.jpg" alt="user">
+                                                <img class="media-object img-circle" width="32" src="${images}/mail/three.jpg" alt="user">
                                             </div>
                                             <div class="media-body">
                                                 <p class="pull-right"><small>4 days ago</small></p>
@@ -338,7 +313,7 @@
         <!-- END Top Navbar-->
     </header>
     <!-- sidebar-->
-  <aside class="aside">
+    <aside class="aside">
         <!-- START Sidebar (left)-->
         <div class="aside-inner">
             <nav data-sidebar-anyclick-close="" class="sidebar">
@@ -348,20 +323,27 @@
                     <li class="nav-heading ">
                         <span>MAIN NAVIGATION</span>
                     </li>
-                    <li>
-                        <a href="#dashboard" title="Dashboard" data-toggle="collapse" class="menu-toggle">
+                    <li class="">
+                        <a href="#employees" title="Dashboard" data-toggle="collapse" class="menu-toggle">
                             <em class="material-icons">dashboard</em>
                             <span>Employees</span>
                         </a>
-                        <ul id="dashboard" class="nav sidebar-subnav collapse">
-                            <li class="sidebar-subnav-header">Dashboard</li>
-                            <c:forEach items="${services}" var="service">
+                        <ul id="employees" class="nav sidebar-subnav collapse">
+                           
+                         <c:forEach items="${services}" var="service">
                             <li>
                                <a href="${contextRoot}/admin/${service.getServiceID()}/register" title="${service}">
                                     <span>${service.getServiceName()}</span>
                                 </a>
                             </li>
 							</c:forEach>
+							
+
+
+
+
+
+                           
                         </ul>
                     </li>
                     <li>
@@ -372,37 +354,47 @@
                         <ul id="layout" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Layouts</li>
                             <li>
-                                <a href="pages/layout/l_no_fixed.html" title="No Fixed">
+                                <a href="../../pages/layout/l_sidebar_light.html" title="Light Sidebar">
+                                    <span>Light Sidebar</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../../pages/layout/l_sidebar_dark.html" title="Dark Sidebar">
+                                    <span>Dark Sidebar</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../../pages/layout/l_no_fixed.html" title="No Fixed">
                                     <span>Layout No Fixed</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/layout/l_fixed.html" title="Fixed All">
+                                <a href="../../pages/layout/l_fixed.html" title="Fixed All">
                                     <span>Layout Fixed</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/layout/l_boxed.html" title="Layout Boxed">
+                                <a href="../../pages/layout/l_boxed.html" title="Layout Boxed">
                                     <span>Layout Boxed</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/layout/l_collapsed.html" title="Sidebar Collapsed">
+                                <a href="../../pages/layout/l_collapsed.html" title="Sidebar Collapsed">
                                     <span>Sidebar Collapsed</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/layout/l_collapsed_T.html" title="Collapsed Text">
+                                <a href="../../pages/layout/l_collapsed_T.html" title="Collapsed Text">
                                     <span>Collapsed Text</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/layout/l_float.html" title="Layout Float">
+                                <a href="../../pages/layout/l_float.html" title="Layout Float">
                                     <span>Layout Float</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/layout/l_scrollbar.html" title="Menu Scrollbar">
+                                <a href="../../pages/layout/l_scrollbar.html" title="Menu Scrollbar">
                                     <span>Menu Scrollbar</span>
                                 </a>
                             </li>
@@ -419,52 +411,52 @@
                         <ul id="components" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Basic UI</li>
                             <li>
-                                <a href="pages/basic-ui/alerts.html" title="Alerts">
+                                <a href="../../pages/basic-ui/alerts.html" title="Alerts">
                                     <span>Alerts</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/badges.html" title="Badges">
+                                <a href="../../pages/basic-ui/badges.html" title="Badges">
                                     <span>Badges</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/breadcrumbs.html" title="Breadcrumbs">
+                                <a href="../../pages/basic-ui/breadcrumbs.html" title="Breadcrumbs">
                                     <span>Breadcrumbs</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/buttons.html" title="Buttons">
+                                <a href="../../pages/basic-ui/buttons.html" title="Buttons">
                                     <span>Buttons</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/cards.html" title="Card">
+                                <a href="../../pages/basic-ui/cards.html" title="Card">
                                     <span>Card</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/card-draggable.html" title="Card Draggable">
+                                <a href="../../pages/basic-ui/card-draggable.html" title="Card Draggable">
                                     <span>Card Draggable</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/collapse.html" title="Collapse">
+                                <a href="../../pages/basic-ui/collapse.html" title="Collapse">
                                     <span>Collapse</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/colors.html" title="Colors">
+                                <a href="../../pages/basic-ui/colors.html" title="Colors">
                                     <span>Colors</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/dropdown.html" title="Dropdown">
+                                <a href="../../pages/basic-ui/dropdown.html" title="Dropdown">
                                     <span>Dropdown</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/helper-classes.html" title="Helper Classes">
+                                <a href="../../pages/basic-ui/helper-classes.html" title="Helper Classes">
                                     <span>Helper Classes</span>
                                 </a>
                             </li>
@@ -475,109 +467,109 @@
                                 <ul id="icon" class="nav sidebar-subnav collapse">
                                     <li class="sidebar-subnav-header">Icons</li>
                                     <li>
-                                        <a href="pages/basic-ui/icon/font-awesome.html" title="Font Awesome">
+                                        <a href="../../pages/basic-ui/icon/font-awesome.html" title="Font Awesome">
                                             <span>Font Awesome</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="pages/basic-ui/icon/glyphicon.html" title="Glyphicon">
+                                        <a href="../../pages/basic-ui/icon/glyphicon.html" title="Glyphicon">
                                             <span>Glyphicon</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="pages/basic-ui/icon/ionicons.html" title="Ionicons">
+                                        <a href="../../pages/basic-ui/icon/ionicons.html" title="Ionicons">
                                             <span>Ionicons</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="pages/basic-ui/icon/material-icons.html" title="Material Icons">
+                                        <a href="../../pages/basic-ui/icon/material-icons.html" title="Material Icons">
                                             <span>Material Icons</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="pages/basic-ui/icon/simple-line-icon.html" title="Simple Line Icon">
+                                        <a href="../../pages/basic-ui/icon/simple-line-icon.html" title="Simple Line Icon">
                                             <span>Simple Line Icon</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="pages/basic-ui/icon/themify-icons.html" title="Themify Icons">
+                                        <a href="../../pages/basic-ui/icon/themify-icons.html" title="Themify Icons">
                                             <span>Themify Icons</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="pages/basic-ui/icon/weather-icons.html" title="Weather Icons">
+                                        <a href="../../pages/basic-ui/icon/weather-icons.html" title="Weather Icons">
                                             <span>Weather Icons</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="pages/basic-ui/icon/7-stroke.html" title="7 Stroke">
+                                        <a href="../../pages/basic-ui/icon/7-stroke.html" title="7 Stroke">
                                             <span>7 Stroke</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/labels.html" title="Labels">
+                                <a href="../../pages/basic-ui/labels.html" title="Labels">
                                     <span>Labels</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/list-group.html" title="List Group">
+                                <a href="../../pages/basic-ui/list-group.html" title="List Group">
                                     <span>List Group</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/media-object-thumbnails.html" title="Media Object & Thumbnails">
+                                <a href="../../pages/basic-ui/media-object-thumbnails.html" title="Media Object & Thumbnails">
                                     <span>Media Object & Thumbnails</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/pagination.html" title="Pagination">
+                                <a href="../../pages/basic-ui/pagination.html" title="Pagination">
                                     <span>Pagination</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/preloaders.html" title="Preloaders">
+                                <a href="../../pages/basic-ui/preloaders.html" title="Preloaders">
                                     <span>Preloaders</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/progressbars.html" title="Progress Bars">
+                                <a href="../../pages/basic-ui/progressbars.html" title="Progress Bars">
                                     <span>Progress Bars</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/nouislider.html" title="Nouislider">
+                                <a href="../../pages/basic-ui/nouislider.html" title="Nouislider">
                                     <span>Nouislider</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/range-sliders.html" title="Range Sliders">
+                                <a href="../../pages/basic-ui/range-sliders.html" title="Range Sliders">
                                     <span>Range Sliders</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/spinner-button.html" title="Spinner Button">
+                                <a href="../../pages/basic-ui/spinner-button.html" title="Spinner Button">
                                     <span>Spinner Button</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/tabs.html" title="Tabs">
+                                <a href="../../pages/basic-ui/tabs.html" title="Tabs">
                                     <span>Tabs</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/tooltips-popovers.html" title="Tooltips Popovers">
+                                <a href="../../pages/basic-ui/tooltips-popovers.html" title="Tooltips Popovers">
                                     <span>Tooltips Popovers</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/treeview.html" title="Treeview">
+                                <a href="../../pages/basic-ui/treeview.html" title="Treeview">
                                     <span>Treeview</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/basic-ui/typography.html" title="Typography">
+                                <a href="../../pages/basic-ui/typography.html" title="Typography">
                                     <span>Typography</span>
                                 </a>
                             </li>
@@ -591,117 +583,117 @@
                         <ul id="advanceui" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Advance UI</li>
                             <li>
-                                <a href="pages/advance-ui/alertify.html" title="Alertify">
+                                <a href="../../pages/advance-ui/alertify.html" title="Alertify">
                                     <span>Alertify</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/animations.html" title="Animations">
+                                <a href="../../pages/advance-ui/animations.html" title="Animations">
                                     <span>Animations</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/bootbox.html" title="Bootbox">
+                                <a href="../../pages/advance-ui/bootbox.html" title="Bootbox">
                                     <span>Bootbox</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/carousel.html" title="Carousel">
+                                <a href="../../pages/advance-ui/carousel.html" title="Carousel">
                                     <span>Carousel</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/chips.html" title="Chips">
+                                <a href="../../pages/advance-ui/chips.html" title="Chips">
                                     <span>Chips</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/contextmenu.html" title="Context Menu">
+                                <a href="../../pages/advance-ui/contextmenu.html" title="Context Menu">
                                     <span>Context Menu</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/image-gallery.html" title="Image Gallery">
+                                <a href="../../pages/advance-ui/image-gallery.html" title="Image Gallery">
                                     <span>Image Gallery</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/lightbox.html" title="Lightbox">
+                                <a href="../../pages/advance-ui/lightbox.html" title="Lightbox">
                                     <span>Lightbox</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/masonry.html" title="Masonry">
+                                <a href="../../pages/advance-ui/masonry.html" title="Masonry">
                                     <span>Masonry</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/modals.html" title="Modals">
+                                <a href="../../pages/advance-ui/modals.html" title="Modals">
                                     <span>Modals</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/notifications.html" title="Notifications">
+                                <a href="../../pages/advance-ui/notifications.html" title="Notifications">
                                     <span>Notifications</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/scroll-1.html" title="Scroll 1">
+                                <a href="../../pages/advance-ui/scroll-1.html" title="Scroll 1">
                                     <span>Scroll 1</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/scroll-2.html" title="Scroll 2">
+                                <a href="../../pages/advance-ui/scroll-2.html" title="Scroll 2">
                                     <span>Scroll 2</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/session-timeout.html" title="Session Timeout">
+                                <a href="../../pages/advance-ui/session-timeout.html" title="Session Timeout">
                                     <span>Session Timeout</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/session-idle-timeout.html" title="Session Idle Timeout">
+                                <a href="../../pages/advance-ui/session-idle-timeout.html" title="Session Idle Timeout">
                                     <span>Session Idle Timeout</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/sortable-nestable.html" title="Sortable Nestable">
+                                <a href="../../pages/advance-ui/sortable-nestable.html" title="Sortable Nestable">
                                     <span>Sortable Nestable</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/sweetalert.html" title="Sweet Alert">
+                                <a href="../../pages/advance-ui/sweetalert.html" title="Sweet Alert">
                                     <span>Sweet Alert</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/timeline-basic.html" title="Timeline Basic">
+                                <a href="../../pages/advance-ui/timeline-basic.html" title="Timeline Basic">
                                     <span>Timeline Basic</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/timeline-horizontal.html" title="Timeline Horizontal">
+                                <a href="../../pages/advance-ui/timeline-horizontal.html" title="Timeline Horizontal">
                                     <span>Timeline Horizontal</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/timeline-single.html" title="Timeline Single">
+                                <a href="../../pages/advance-ui/timeline-single.html" title="Timeline Single">
                                     <span>Timeline Single</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/toastr.html" title="Toastr">
+                                <a href="../../pages/advance-ui/toastr.html" title="Toastr">
                                     <span>Toastr</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/tour.html" title="Tour">
+                                <a href="../../pages/advance-ui/tour.html" title="Tour">
                                     <span>Tour</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/advance-ui/waves.html" title="Waves">
+                                <a href="../../pages/advance-ui/waves.html" title="Waves">
                                     <span>Waves</span>
                                 </a>
                             </li>
@@ -715,42 +707,42 @@
                         <ul id="elements" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Elements</li>
                             <li>
-                                <a href="pages/elements/hoverideas.html" title="Hover Ideas">
+                                <a href="../../pages/elements/hoverideas.html" title="Hover Ideas">
                                     <span>Hover Ideas</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/elements/hoverideas-set2.html" title="Hover Ideas 2">
+                                <a href="../../pages/elements/hoverideas-set2.html" title="Hover Ideas 2">
                                     <span>Hover Ideas 2</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/elements/pricing.html" title="Pricing">
+                                <a href="../../pages/elements/pricing.html" title="Pricing">
                                     <span>Pricing</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/elements/pricing-2.html" title="Pricing 2">
+                                <a href="../../pages/elements/pricing-2.html" title="Pricing 2">
                                     <span>Pricing 2</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/elements/rating.html" title="Rating">
+                                <a href="../../pages/elements/rating.html" title="Rating">
                                     <span>Rating</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/elements/ribbons.html" title="Ribbons">
+                                <a href="../../pages/elements/ribbons.html" title="Ribbons">
                                     <span>Ribbons</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/elements/steps.html" title="Steps">
+                                <a href="../../pages/elements/steps.html" title="Steps">
                                     <span>Steps</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/elements/user-card.html" title="User Card">
+                                <a href="../../pages/elements/user-card.html" title="User Card">
                                     <span>User Card</span>
                                 </a>
                             </li>
@@ -764,7 +756,7 @@
                         <ul id="forms" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Forms</li>
                             <li>
-                                <a href="pages/forms/basic-form-elements.html" title="Basic Elements">
+                                <a href="../../pages/forms/basic-form-elements.html" title="Basic Elements">
                                     <span>Basic Elements</span>
                                 </a>
                             </li>
@@ -775,94 +767,94 @@
                                 <ul id="advanceform" class="nav sidebar-subnav collapse">
                                     <li class="sidebar-subnav-header">Advance Element</li>
                                     <li>
-                                        <a href="pages/forms/advance-form-elements/bootstrap-select.html" title="Bootstrap Select">
+                                        <a href="../../pages/forms/advance-form-elements/bootstrap-select.html" title="Bootstrap Select">
                                             <span>Bootstrap Select</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="pages/forms/advance-form-elements/masked-input.html" title="Masked Input">
+                                        <a href="../../pages/forms/advance-form-elements/masked-input.html" title="Masked Input">
                                             <span>Masked Input</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="pages/forms/advance-form-elements/color-picker.html" title="Color Picker">
+                                        <a href="../../pages/forms/advance-form-elements/color-picker.html" title="Color Picker">
                                             <span>Color Picker</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="pages/forms/advance-form-elements/datetimepicker.html" title="Date & Time Picker">
+                                        <a href="../../pages/forms/advance-form-elements/datetimepicker.html" title="Date & Time Picker">
                                             <span>Date & Time Picker</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="pages/forms/advance-form-elements/advanced-form-elements.html" title="Advance Form Elements">
+                                        <a href="../../pages/forms/advance-form-elements/advanced-form-elements.html" title="Advance Form Elements">
                                             <span>Advance Form Elements</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="pages/forms/material-form-elements.html" title="Material Elements">
+                                <a href="../../pages/forms/material-form-elements.html" title="Material Elements">
                                     <span>Material Elements</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/forms/form-layouts.html" title="Form Layout">
+                                <a href="../../pages/forms/form-layouts.html" title="Form Layout">
                                     <span>Form Layout</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/forms/form-validation.html" title="Form Validation">
+                                <a href="../../pages/forms/form-validation.html" title="Form Validation">
                                     <span>Form Validation</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/forms/form-wizard.html" title="Form Wizard">
+                                <a href="../../pages/forms/form-wizard.html" title="Form Wizard">
                                     <span>Form Wizard</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/forms/form-editable.html" title="Form Editable">
+                                <a href="../../pages/forms/form-editable.html" title="Form Editable">
                                     <span>Form Editable</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/forms/dropify.html" title="Dropify File Upload">
+                                <a href="../../pages/forms/dropify.html" title="Dropify File Upload">
                                     <span>Dropify File Upload</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/forms/dropzone-fileupload.html" title="Dropzone File Upload">
+                                <a href="../../pages/forms/dropzone-fileupload.html" title="Dropzone File Upload">
                                     <span>Dropzone File Upload</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/forms/multiple-fileupload.html" title="Multiple File Upload">
+                                <a href="../../pages/forms/multiple-fileupload.html" title="Multiple File Upload">
                                     <span>Multiple File Upload</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/forms/image-crop.html" title="Image Cropper">
+                                <a href="../../pages/forms/image-crop.html" title="Image Cropper">
                                     <span>Image Cropper</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/forms/markdown.html" title="Markdown Form Editor">
+                                <a href="../../pages/forms/markdown.html" title="Markdown Form Editor">
                                     <span>Markdown Form Editor</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/forms/ckeditors.html" title="CK Editor">
+                                <a href="../../pages/forms/ckeditors.html" title="CK Editor">
                                     <span>CK Editor</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/forms/summernote.html" title="Summernote">
+                                <a href="../../pages/forms/summernote.html" title="Summernote">
                                     <span>Summernote</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/forms/tinymce-editor.html" title="Tinymce Editor">
+                                <a href="../../pages/forms/tinymce-editor.html" title="Tinymce Editor">
                                     <span>Tinymce Editor</span>
                                 </a>
                             </li>
@@ -876,52 +868,52 @@
                         <ul id="charts" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Charts</li>
                             <li>
-                                <a href="pages/charts/chartjs.html" title="ChartJs">
+                                <a href="../../pages/charts/chartjs.html" title="ChartJs">
                                     <span>ChartJs</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/charts/chartist-bar.html" title="Chartist Bar">
+                                <a href="../../pages/charts/chartist-bar.html" title="Chartist Bar">
                                     <span>Chartist Bar</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/charts/chartist-line-area.html" title="Chartist Line Area">
+                                <a href="../../pages/charts/chartist-line-area.html" title="Chartist Line Area">
                                     <span>Chartist Line Area</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/charts/chartist-pie.html" title="Chartist Pie">
+                                <a href="../../pages/charts/chartist-pie.html" title="Chartist Pie">
                                     <span>Chartist Pie</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/charts/c3.html" title="C3 Charts">
+                                <a href="../../pages/charts/c3.html" title="C3 Charts">
                                     <span>C3 Charts</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/charts/flot.html" title="Flot">
+                                <a href="../../pages/charts/flot.html" title="Flot">
                                     <span>Flot Chart</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/charts/morris.html" title="Morris">
+                                <a href="../../pages/charts/morris.html" title="Morris">
                                     <span>Morris</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/charts/nvd3.html" title="NVD3">
+                                <a href="../../pages/charts/nvd3.html" title="NVD3">
                                     <span>NVD3</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/charts/sparkline.html" title="Sparkline">
+                                <a href="../../pages/charts/sparkline.html" title="Sparkline">
                                     <span>Sparkline</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/charts/jquery-knob.html" title="Jquery Knob">
+                                <a href="../../pages/charts/jquery-knob.html" title="Jquery Knob">
                                     <span>Jquery Knob</span>
                                 </a>
                             </li>
@@ -935,32 +927,32 @@
                         <ul id="tables" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Tables</li>
                             <li>
-                                <a href="pages/tables/normal-tables.html" title="Basic Tables">
+                                <a href="../../pages/tables/normal-tables.html" title="Basic Tables">
                                     <span>Basic Tables</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/tables/responsive-table.html" title="Responsive Table">
+                                <a href="../../pages/tables/responsive-table.html" title="Responsive Table">
                                     <span>Responsive Table</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/tables/footable.html" title="Footable">
+                                <a href="../../pages/tables/footable.html" title="Footable">
                                     <span>Footable</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="pages/tables/editable-table.html" title="Editable">
+                            <li class="active">
+                                <a href="../../pages/tables/editable-table.html" title="Editable">
                                     <span>Editable</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/tables/jquery-datatable.html" title="Jquery Data Tables">
+                                <a href="../../pages/tables/jquery-datatable.html" title="Jquery Data Tables">
                                     <span>Jquery Data Tables</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/tables/jsgrid.html" title="Jsgrid">
+                                <a href="../../pages/tables/jsgrid.html" title="Jsgrid">
                                     <span>Jsgrid</span>
                                 </a>
                             </li>
@@ -974,32 +966,32 @@
                         <ul id="widgets" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Widgets</li>
                             <li>
-                                <a href="pages/widgets/box-widget.html" title="Box Widget">
+                                <a href="../../pages/widgets/box-widget.html" title="Box Widget">
                                     <span>Box Widget</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/widgets/blog-widget.html" title="Blog Widget">
+                                <a href="../../pages/widgets/blog-widget.html" title="Blog Widget">
                                     <span>Blog Widget</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/widgets/chart-widget.html" title="Chart Widget">
+                                <a href="../../pages/widgets/chart-widget.html" title="Chart Widget">
                                     <span>Chart Widget</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/widgets/data-widget.html" title="Data Widget">
+                                <a href="../../pages/widgets/data-widget.html" title="Data Widget">
                                     <span>Data Widget</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/widgets/social-widget.html" title="Social Widget">
+                                <a href="../../pages/widgets/social-widget.html" title="Social Widget">
                                     <span>Social Widget</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/widgets/weather-widget.html" title="Weather Widget">
+                                <a href="../../pages/widgets/weather-widget.html" title="Weather Widget">
                                     <span>Weather Widget</span>
                                 </a>
                             </li>
@@ -1016,67 +1008,67 @@
                         <ul id="appview" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">App Views</li>
                             <li>
-                                <a href="pages/app-views/article.html" title="Article">
+                                <a href="../../pages/app-views/article.html" title="Article">
                                     <span>Article</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/app-views/calendar.html" title="Calendar">
+                                <a href="../../pages/app-views/calendar.html" title="Calendar">
                                     <span>Calendar</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/app-views/contacts.html" title="Contacts">
+                                <a href="../../pages/app-views/contacts.html" title="Contacts">
                                     <span>Contacts</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/app-views/chat.html" title="Chat">
+                                <a href="../../pages/app-views/chat.html" title="Chat">
                                     <span>Chat</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/app-views/faq.html" title="FAQ">
+                                <a href="../../pages/app-views/faq.html" title="FAQ">
                                     <span>FAQ</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/app-views/forum.html" title="Forum">
+                                <a href="../../pages/app-views/forum.html" title="Forum">
                                     <span>Forum</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/app-views/filemanager.html" title="File Manager">
+                                <a href="../../pages/app-views/filemanager.html" title="File Manager">
                                     <span>File Manager</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/app-views/inbox.html" title="Inbox">
+                                <a href="../../pages/app-views/inbox.html" title="Inbox">
                                     <span>Inbox</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/app-views/invoice.html" title="Invoice">
+                                <a href="../../pages/app-views/invoice.html" title="Invoice">
                                     <span>Invoice</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/app-views/search_result.html" title="Search Result">
+                                <a href="../../pages/app-views/search_result.html" title="Search Result">
                                     <span>Search Result</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/app-views/social_board.html" title="Social Board">
+                                <a href="../../pages/app-views/social_board.html" title="Social Board">
                                     <span>Social Board</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/app-views/task_board.html" title="Task Board">
+                                <a href="../../pages/app-views/task_board.html" title="Task Board">
                                     <span>Task Board</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/app-views/to_do.html" title="To Do">
+                                <a href="../../pages/app-views/to_do.html" title="To Do">
                                     <span>To Do</span>
                                 </a>
                             </li>
@@ -1090,32 +1082,32 @@
                         <ul id="ecommerce" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Ecommerce</li>
                             <li>
-                                <a href="pages/ecommerce/product-grid.html" title="Product Grid">
+                                <a href="../../pages/ecommerce/product-grid.html" title="Product Grid">
                                     <span>Product Grid</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/ecommerce/product-list.html" title="Product List">
+                                <a href="../../pages/ecommerce/product-list.html" title="Product List">
                                     <span>Product List</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/ecommerce/checkout.html" title="Checkout">
+                                <a href="../../pages/ecommerce/checkout.html" title="Checkout">
                                     <span>Checkout</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/ecommerce/product-detail.html" title="Product Detail">
+                                <a href="../../pages/ecommerce/product-detail.html" title="Product Detail">
                                     <span>Product Detail</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/ecommerce/ec-cart.html" title="Cart">
+                                <a href="../../pages/ecommerce/ec-cart.html" title="Cart">
                                     <span>Cart</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/ecommerce/ec-order.html" title="Order">
+                                <a href="../../pages/ecommerce/ec-order.html" title="Order">
                                     <span>Order</span>
                                 </a>
                             </li>
@@ -1129,47 +1121,48 @@
                         <ul id="pages" class="nav sidebar-subnav collapse">
                             <li class="sidebar-subnav-header">Pages</li>
                             <li>
-                                <a href="pages/extra-page/profile.html" title="Profile">
+                                <a href="../../pages/extra-page/profile.html" title="Profile">
                                     <span>Profile</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/extra-page/lock-screen.html" title="Lock Screen">
+                                <a href="../../pages/extra-page/lock-screen.html" title="Lock Screen">
                                     <span>Lock Screen</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/extra-page/log_in.html" title="Log In">
+                                <a href="../extra-page/log_in.html" title="Log In">
                                     <span>Log In</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/extra-page/register.html" title="Register">
+                                <a href="../extra-page/register.html" title="Register">
                                     <span>Register</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/extra-page/forgot-password.html" title="Forgot Password">
+                                <a href="../../pages/extra-page/forgot-password.html" title="Forgot Password">
                                     <span>Forgot Password</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/extra-page/404.html" title="400 Page">
+                                <a href="../../pages/extra-page/404.html" title="400 Page">
                                     <span>404 Page</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/extra-page/500.html" title="500 Page">
+                                <a href="../../pages/extra-page/500.html" title="500 Page">
                                     <span>500 Page</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="pages/extra-page/blank.html" title="Blank Page">
+                                <a href="../../pages/extra-page/blank.html" title="Blank Page">
                                     <span>Blank Page</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
+
                     <li>
                         <a href="#multilevel" title="Multilevel" data-toggle="collapse" class="menu-toggle">
                             <em class="material-icons">menu</em>
@@ -1218,6 +1211,7 @@
                             </li>
                         </ul>
                     </li>
+
                 </ul>
                 <!-- END sidebar nav-->
             </nav>
@@ -1369,368 +1363,343 @@
         <!-- Page content-->
         <div class="content-wrapper">
             <div class="container-fluid">
-                <div class="page-header">
-                    <h2>Employee</h2>
+			
+			 <div class="row clearfix">
+                
+				<div class="">
+				
+			
+				 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topbar">
+				 
+	             <div class="col-md-6">
+				 <div class="row pagetitle">
+				<span > Attendance Sheet </span>
+				 </div>
+				  </div>
+			 
+			
                 </div>
+			
+				</div>
+				</div>
+					</div>
+					
+					
+                <div class="row clearfix">
+                
 				
-				
-				   <div class="col-md-12">
-                        <div class="card">
-                            <div class="body">
-                                <div class="card-inner">
-                           
-                                    <div class="demo">
-                                        <form action="${contextRoot}/admin" method="post">
-										        <div class="row clearfix">
-                                                <div class="col-sm-4">
-                                                 <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control" name="firstname" id="firstname">
-                                                    <label class="form-label">Firstname </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                      <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control" name="lastname" id="lastname">
-                                                    <label class="form-label">Lastname </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                       <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Employee ID </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                            </div>
-											
-											<div class="row clearfix">
-                                                <div class="col-sm-4">
-                                                 <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Email </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                      <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Address1 </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                       <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Address2 </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                            </div>
-											<div class="row clearfix">
-                                                <div class="col-sm-4">
-                                                 <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">City </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                      <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">State </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                       <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Pin </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                            </div>
-											<div class="row clearfix">
-                                                <div class="col-sm-4">
-                                                 <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Mobile </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                      <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Emergency Contact No </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                       <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Pancard No </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-												
-                                            </div>
-											
-											<div class="row clearfix">
-                                                <div class="col-sm-4">
-                                                 <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Aadhar card No </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                      <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Hire Date </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                       <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Term Date</label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-												
-                                            </div>
-											
-											<div class="row clearfix">
-                                                <div class="col-sm-4">
-                                                 <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Reason for Termination </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                      <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Birth Date </label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                       <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Marital Status</label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-												
-                                            </div>
-											<div class="col-sm-4" style="padding:0px;">
-											        <div  style="padding-left:20px;">
-											<label class="form-label">Gender</label>
-                                            <input name="group1" type="radio" id="radio_1" checked />
-                                            <label for="radio_1">Male</label>
-                                            <input name="group1" type="radio" id="radio_2" />
-                                            <label for="radio_2">Female</label>
-                                           </div>
-                                        </div>
-										<div class="col-sm-4">
-                                                       <div class="form-group">
-                                                    <div class="form-line">
-                                                    <input type="text" class="form-control">
-                                                    <label class="form-label">Title</label>
-                                                    </div>
-                                                     </div>
-                                                </div>
-                                             
-                                            </div>
-                                          
-                                   <div class="clearfix"></div>
-								   <div class="col-lg-12 col-sm-12 col-xs-12">
-								   <div style="text-align:center">
-                                                            <button type="button" class="btn btn-primary waves-effect">Create Employee</button>
-														
-                                                        </div>
-														 </div>
-														
-														
-                                        </form>
-                                    </div>
-                                </div>
-                              
-                                   
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-             
-                  <div class="row clearfix">
-                            <div class="col-md-3">
-                                <div class="user-card-wrapper">
-                                    <div class="user-card">
-                                        <img class="img-responsive" src="/images/mail/1.jpg"<c:url value="${images}/mail/1.jpg"/>" alt="" />
-                                        <div class="user-card-info">
-                                            <h6>Micheal White</h6>
-                                            <span>CO-FOUNDER / CEO</span>
-                                            <div class="user-card-socials">
-                                                <a href="#" title=""><i class="fa fa-twitter"></i></a>
-                                                <a href="#" title=""><i class="fa fa-facebook"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-							    <div class="col-md-3">
-                                <div class="user-card-wrapper">
-                                    <div class="user-card">
-                                        <img class="img-responsive" src="../../resources/images/mail/1.jpg" alt="" />
-                                        <div class="user-card-info">
-                                            <h6>Micheal White</h6>
-                                            <span>CO-FOUNDER / CEO</span>
-                                            <div class="user-card-socials">
-                                                <a href="#" title=""><i class="fa fa-twitter"></i></a>
-                                                <a href="#" title=""><i class="fa fa-facebook"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-							    <div class="col-md-3">
-                                <div class="user-card-wrapper">
-                                    <div class="user-card">
-                                        <img class="img-responsive" src="../../resources/images/mail/1.jpg" alt="" />
-                                        <div class="user-card-info">
-                                            <h6>Micheal White</h6>
-                                            <span>CO-FOUNDER / CEO</span>
-                                            <div class="user-card-socials">
-                                                <a href="#" title=""><i class="fa fa-twitter"></i></a>
-                                                <a href="#" title=""><i class="fa fa-facebook"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-							
-								    <div class="col-md-3">
-                                <div class="user-card-wrapper">
-                                    <div class="user-card">
-                                        <img class="img-responsive" src="../../resources/images/mail/1.jpg" alt="" />
-                                        <div class="user-card-info">
-                                            <h6>Micheal White</h6>
-                                            <span>CO-FOUNDER / CEO</span>
-                                            <div class="user-card-socials">
-                                                <a href="#" title=""><i class="fa fa-twitter"></i></a>
-                                                <a href="#" title=""><i class="fa fa-facebook"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-							</div>
-							
-							<!--ROW END-->
-							<!--ROW START-->
-							                 <div class="row clearfix">
-                            <div class="col-md-3">
-                                <div class="user-card-wrapper">
-                                    <div class="user-card">
-                                        <img class="img-responsive" src="../../resources/images/mail/1.jpg" alt="" />
-                                        <div class="user-card-info">
-                                            <h6>Micheal White</h6>
-                                            <span>CO-FOUNDER / CEO</span>
-                                            <div class="user-card-socials">
-                                                <a href="#" title=""><i class="fa fa-twitter"></i></a>
-                                                <a href="#" title=""><i class="fa fa-facebook"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-							
-                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="card">
-                            <div class="card-image" style="text-align:center">
-                                <img src="../../resources/images/mail/1.jpg"">
-                                
-                            </div>
-                            <div class="body">
-                                Lorem ipsum Deserunt 
-                            </div>
-                            <div class="card-footer">
-                                <a href="javascript:void(0);" class="col-red">Read More</a>
-                                <div class="footer-icon pull-right">
-                                    <a href="javascript:void(0);"><i class="material-icons">share</i></a>
-                                    <a href="javascript:void(0);"><i class="material-icons">remove_red_eye</i> <span>12</span></a>
-                                    <a href="javascript:void(0);"><i class="material-icons">comment</i> 5</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                            </div>
-							</diV>
-								<!--ROW END-->
-							
+		
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                    
+					
 
+                        <!-- Table Kitchen Sink -->
+                        <div class="card">
+                        		 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
+				<div class="col-md-2 padding_col">
+					  <div class="form-group">
+                                        
+                                        <input type="text" class="form-control" placeholder="Username" />
+                                    </div>
+					</div>
+					<div class="col-md-2 padding_col">
+					     <div class="form-group">
+                                       
+                                        <select class="form-control" size="1">
+                                            <option value="0">Please select</option>
+                                            <option value="1">Option #1</option>
+                                            <option value="2">Option #2</option>
+                                            <option value="3">Option #3</option>
+                                        </select>
+                                    </div>
+					</div>
+					<div class="col-md-2 padding_col">
+					     <div class="form-group">
+                                       
+                                        <select class="form-control" size="1">
+                                            <option value="0">Please select</option>
+                                            <option value="1">Option #1</option>
+                                            <option value="2">Option #2</option>
+                                            <option value="3">Option #3</option>
+                                        </select>
+                                    </div>
+					</div>
+					<div class="col-md-2 padding_col">
+					
+					</div>
+					<div class="col-md-2 padding_col">
+				   
+					</div>
+					<div class="col-md-2 ">
+					 <button type="button" class="btn btn-primary  pull-right waves-effect ">  Search</button>
+					</div>
+				</div>
+                            <div class="body">
+                               <table class="tablesaw table-striped table-hover table-bordered" data-tablesaw-mode="swipe" data-tablesaw-minimap>
+                                    <thead class="tableheding">
+                                    <tr>
+                                        <th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">Employee</th>
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="3">1</th>
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="2">2</th>
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">3 </th>
+										 
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">4</th>
+										   <th data-tablesaw-sortable-col data-tablesaw-priority="2">5</th>
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">6</th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="1">7 </th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="1">8 </th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="1">9 </th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="1">10 </th>
+										           <th data-tablesaw-sortable-col data-tablesaw-priority="3">11</th>
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="2">12</th>
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">13 </th>
+										 
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">14</th>
+										   <th data-tablesaw-sortable-col data-tablesaw-priority="2">15</th>
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">16</th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="1">17 </th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="1">18 </th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="1">19 </th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="1">20 </th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="3">21</th>
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="2">22</th>
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">23 </th>
+										 
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">24</th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="2">25</th>
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">26</th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="1">27 </th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="1">28 </th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="1">29 </th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="1">30 </th>
+										<th data-tablesaw-sortable-col data-tablesaw-priority="1">31 </th>
+                                      
+                                    </tr>
+                                    </thead>
+									<div class="clearfix"></div>
+								
+								
+                                    <tbody>
+									
+									
+                                         <tr>
+                                        <th><a href="javascript:void(0)">Daniel</a></th>
+                                     
+                                        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                         <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                         <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                  <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										    <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										 <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                   <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                        <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                  <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+										      <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                       <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										     <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										      <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                    </tr>
+									  <tr>
+                                        <th><a href="javascript:void(0)">Richard Miles</a></th>
+                                     
+                                        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                         <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                         <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                  <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										    <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										 <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                   <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                        <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                  <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+										      <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                       <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										     <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										      <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                    </tr>
+                                   
+								     <tr>
+                                        <th><a href="javascript:void(0)">John Smith</a></th>
+                                     
+                                        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                         <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                         <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                  <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										    <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										 <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                   <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                        <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                  <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+										      <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                       <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										     <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										      <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                    </tr>
+                                   
+								     <tr>
+                                        <th><a href="javascript:void(0)">Mike Litorus</a></th>
+                                     
+                                        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                         <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                         <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                  <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										    <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										 <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                   <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                        <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                  <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+										      <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                       <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										     <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										      <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                    </tr>
+                                   
+								     <tr>
+                                        <th><a href="javascript:void(0)">Wilmer Deluna</a></th>
+                                     
+                                        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                         <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                         <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                  <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										    <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										 <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                   <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                        <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                            <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                  <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+										      <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										        <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                       <td><i class="icon-display  fa fa-close  attenedance_check_red" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                          <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                           <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										     <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+										      <td><i class="icon-display  fa fa-check attenedance_check_green" ></i></td>
+                                    </tr>
+                                   
+                                   
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- #END# Kitchen Sink -->
+
+                   
+                </div>
+            </div>
         </div>
-		 </div>
+			<div class="md-overlay custom-overlay"></div>
     </section>
     <!-- FOOTER-->
     <footer>
         <span>&copy; 2018 -  <b class="col-blue">Amp</b></span>
     </footer>
 </div>
-    <!-- CORE PLUGIN JS -->
-    <script src="${plugins}/jquery/jquery.min.js"></script>
-    <script src="${plugins}/bootstrap/js/bootstrap.js"></script>
-    <script src="${plugins}/modernizr/modernizr.custom.js"></script>
-    <script src="${plugins}/screenfull/dist/screenfull.js"></script>
-    <script src="${plugins}/jQuery-Storage-API/jquery.storageapi.js"></script>
-    <script src="${plugins}/jquery-slimscroll/jquery.slimscroll.js"></script>
-    <script src="${plugins}/node-waves/waves.js"></script>
+<!-- CORE PLUGIN JS -->
+<script src="${plugins}/jquery/jquery.min.js"></script>
+<script src="${plugins}/bootstrap/js/bootstrap.js"></script>
+<script src="${plugins}/modernizr/modernizr.custom.js"></script>
+<script src="${plugins}/screenfull/dist/screenfull.js"></script>
+<script src="${plugins}/jQuery-Storage-API/jquery.storageapi.js"></script>
+<script src="${plugins}/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script src="${plugins}/node-waves/waves.js"></script>
 
-    <!--THIS PAGE LEVEL JS-->
-    <script src="${plugins}/masonry/masonry.pkgd.min.js"></script>
-    <script src="${plugins}/jquery-knob/jquery.knob.min.js"></script>
-    <script src="${plugins}/jquery-sparkline/jquery.sparkline.js"></script>
-    <script src="${plugins}/skycon/skycons.js"></script>
-    <script src='${plugins}/chartist/chartist.js'></script>
-    <script src="${plugins}/masonry/masonry.min.js"></script>
-    <script src="${plugins}/unslider/js/unslider-min.js"></script>
-    <!--Chat js-->
-    <script src="${plugins}/wchat/assets/js/custom.js"></script>
-    <script type="text/javascript" src="${plugins}/wchat/chatjs/lightbox.js"></script>
-    <script type="text/javascript" src="${plugins}/wchat/chatjs/dashboard.js"></script>
-    <script type="text/javascript" src="${plugins}/wchat/chatjs/custom.js"></script>
-    <!-- #End# Chat js-->
+<!--THIS PAGE LEVEL JS-->
+<script src="${plugins}/tablesaw/js/tablesaw.js"></script>
+<script src="${plugins}/tablesaw/js/tablesaw-init.js"></script>
+<script src="${js}/pages/ui/modals.js"></script>
+<script src="${plugins}/bootstrap-notify/bootstrap-notify.js"></script>
+<script src="${plugins}/nifty-modal/modalEffects.js"></script>
+<script src="${plugins}/nifty-modal/classie.js"></script>
 
-    <script src="${js}/pages/charts/jquery-knob.js"></script>
-    <script src="${js}/pages/index_2.js"></script>
+<!-- LAYOUT JS -->
+<script src="${js}/demo.js"></script>
+<script src="${js}/layout.js"></script>
 
-    <!-- LAYOUT JS -->
-    <script src="${js}/demo.js"></script>
-    <script src="${js}/layout.js"></script>
 
-    <script>
 
-    </script>
+
+
+
 </body>
 
 </html>

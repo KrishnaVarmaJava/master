@@ -13,14 +13,9 @@
 <title>EmpForm</title>
 </head>
 <body>
-	<c:forEach items="${employees} var="emp">
-		<li>
+
 			<h1>
-				${emp.getFirstName()} <br> ${emp.getLastName()}
+				${employee.getFirstName()} <br> ${employee.getLastName()}
 			</h1>
-
-		</li>
-
-	</c:forEach>
 </body>
 </html>
