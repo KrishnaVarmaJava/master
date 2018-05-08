@@ -2,6 +2,7 @@ package mylas.com.erp.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import mylas.com.erp.demo.dao.DepartmentDao;
+import mylas.com.erp.demo.dao.EmployeeDao;
 import mylas.com.erp.demo.dao.ServicesDao;
+import mylas.com.erp.demo.dto.Employee;
 
 
 
@@ -21,8 +24,7 @@ public class PageController {
 	
 	@Autowired
 	ServicesDao servicesdao;
-	
-	
+		
 	@RequestMapping(value= "/admin", method=RequestMethod.GET)
 	public ModelAndView adminIndexPage() {
 		ModelAndView mav = new ModelAndView("index");
@@ -42,6 +44,16 @@ public class PageController {
 		mav.addObject("userClickReg", true);
 		return mav;		
 	}
+	
+/*	@RequestMapping(value="/admin/regesteremp/register", method=RequestMethod.POST)
+	public ModelAndView saveempRegesterPage(@ModelAttribute("emp") Employee emp) {
+		empdao.save(emp);
+		ModelAndView mav = new ModelAndView("redirect:/adminindex");
+		mav.addObject("services", servicesdao.list());
+		mav.addObject("title", "Employee Regester Page");
+		mav.addObject("userClickReg", true);
+		return mav;		
+	}*/
 	
 	 
 	@RequestMapping(value= "/admin", method=RequestMethod.POST)
@@ -83,17 +95,4 @@ public class PageController {
 		return mav;
 	}
 	
-
-	
-	@RequestMapping(value= "/addvar/{message}")
-	public ModelAndView indexPagemsgreqvar(
-			@PathVariable("message")String message
-			) {
-		if(message==null) {
-			message="Default Message";
-		}
-		ModelAndView mav = new ModelAndView("index");
-		mav.addObject("message", message);
-		return mav;
-	}
 }
