@@ -17,7 +17,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Amp Demo</title>
     <!-- Favicon-->
-    <link rel="icon" href="../../resources/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="${images}/resources/images/favicon.png" type="image/x-icon">
 
     <!--REQUIRED PLUGIN CSS-->
     <link href="${plugins}/font-awesome/css/font-awesome.min.css" rel="stylesheet">

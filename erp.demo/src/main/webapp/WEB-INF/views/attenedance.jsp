@@ -17,7 +17,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Amp Demo</title>
     <!-- Favicon-->
-    <link rel="icon" href="../../favicon.png" type="image/x-icon">
+    <link rel="icon" href="${images}/favicon.png" type="image/x-icon">
 
     <!--REQUIRED PLUGIN CSS-->
     <link href="${plugins}/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -53,7 +53,7 @@
         <nav role="navigation" class="navbar topnavbar">
             <!-- START navbar header-->
           <div class="navbar-header">
-                <a href="index.html" class="navbar-brand">
+                <a href="${contextRoot}/admin" class="navbar-brand">
                     <div class="brand-logo">
 					<h3 style="color:#fff">Amp Demo</h3>
                       

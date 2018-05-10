@@ -1539,7 +1539,7 @@
        <div class="col-md-3" style="padding:0px;">
                                 <div class="user-card-wrapper">
                                     <div class="user-card">
-                                        <img class="img-responsive" src="http://time.com/5049671/terry-crews-interview-transcript-person-of-the-year-2017/" alt="" />
+                                        <img class="img-responsive" src="${images}/mail/nine.jpg" alt=""  style="height: :250px;background:url('7.jpg');"/>
                                         <div class="user-card-info">
                                             <h6>Micheal White</h6>
                                             <span>CO-FOUNDER / CEO</span>
@@ -1554,7 +1554,8 @@
 							     <div class="col-md-3" style="padding:0px;">
                                 <div class="user-card-wrapper">
                                     <div class="user-card">
-                                        <img class="img-responsive" src="../../resources/images/7.jpg" alt="" />
+                                        <img class="img-responsive" src="${images}/mail/1.jpg" alt="" />
+                                        
                                         <div class="user-card-info">
                                             <h6>Micheal White</h6>
                                             <span>CO-FOUNDER / CEO</span>

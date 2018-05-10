@@ -1,22 +1,22 @@
 package mylas.com.erp.demo.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.dao.DepartmentDao;
+
 import mylas.com.erp.demo.dao.ServicesDao;
-import mylas.com.erp.demo.dto.Employee;
+import mylas.com.erp.demo.service.Client;
+
 
 
 
@@ -28,6 +28,10 @@ public class PageController {
 	
 	@Autowired
 	ServicesDao servicesdao;
+	
+	
+	Client client = new Client();
+	
 		
 	@RequestMapping(value= "/admin", method=RequestMethod.GET)
 	public ModelAndView adminIndexPage() {
@@ -55,7 +59,7 @@ public class PageController {
 	}
 	
 	@RequestMapping(value="/admin/allemp/register")
-	public ModelAndView allEmpPage(@ModelAttribute("emp") Employee emp) {
+	public ModelAndView allEmpPage() {
 		ModelAndView mav = new ModelAndView("employees");
 		mav.addObject("services", servicesdao.list());
 		mav.addObject("title", "Employee Regester Page");
@@ -67,7 +71,7 @@ public class PageController {
 	
 	
 	@RequestMapping(value="/admin/empdep/register")
-	public ModelAndView empDepartmentPage(@ModelAttribute("emp") Employee emp) {
+	public ModelAndView empDepartmentPage() {
 		ModelAndView mav = new ModelAndView("departments");
 		mav.addObject("services", servicesdao.list());
 		mav.addObject("title", "Employee Departments Page");
@@ -76,7 +80,7 @@ public class PageController {
 	}
 	
 	@RequestMapping(value="/admin/empholidays/register")
-	public ModelAndView empHolidayPage(@ModelAttribute("emp") Employee emp) {
+	public ModelAndView empHolidayPage() {
 		ModelAndView mav = new ModelAndView("holidays");
 		mav.addObject("services", servicesdao.list());
 		mav.addObject("title", "Employee Holiday Page");
@@ -85,7 +89,7 @@ public class PageController {
 	}
 	
 	@RequestMapping(value="/admin/empleavereq/register")
-	public ModelAndView empLeaveReqPage(@ModelAttribute("emp") Employee emp) {
+	public ModelAndView empLeaveReqPage() {
 		ModelAndView mav = new ModelAndView("leaverequests");
 		mav.addObject("services", servicesdao.list());
 		mav.addObject("title", "Employee Holiday Page");
@@ -94,7 +98,7 @@ public class PageController {
 	}
 	
 	@RequestMapping(value="/admin/empatt/register")
-	public ModelAndView empAttenedancePage(@ModelAttribute("emp") Employee emp) {
+	public ModelAndView empAttenedancePage() {
 		ModelAndView mav = new ModelAndView("attenedance");
 		mav.addObject("services", servicesdao.list());
 		mav.addObject("title", "Employee Holiday Page");
@@ -103,7 +107,7 @@ public class PageController {
 	}
 	
 	@RequestMapping(value="/admin/empdesig/register")
-	public ModelAndView empDesignationPage(@ModelAttribute("emp") Employee emp) {
+	public ModelAndView empDesignationPage() {
 		ModelAndView mav = new ModelAndView("designations");
 		mav.addObject("services", servicesdao.list());
 		mav.addObject("title", "Employee Holiday Page");
@@ -120,26 +124,19 @@ public class PageController {
 	
 	@RequestMapping(value="/admin/allemp/register", method=RequestMethod.POST)
 	public ModelAndView saveEmpPage(HttpServletRequest request, HttpServletResponse response) {
-		Employee emp = new Employee();
-		emp.setFirstName(request.getParameter("firstname"));
-		emp.setLastName(request.getParameter("lastname"));
+		EmpDetails emp = new EmpDetails(request.getParameter("firstname"), request.getParameter("lastname"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+		/*client.getConnection(emp);*/
 		ModelAndView mav = new ModelAndView("newfile");
+		
 		mav.addObject("employee", emp);
 		return mav;		
 	}
-	
-	 
-	@RequestMapping(value= "/admin", method=RequestMethod.POST)
-	public ModelAndView regesterEmpIndexPage(
-			@RequestParam(name="firstname", required=false) String firstname,
-			@RequestParam(name="lastname", required=false) String lastname			
-			) {
-		ModelAndView mav = new ModelAndView("newfile");
-		mav.addObject("firstname", firstname);
-		mav.addObject("lastname", lastname);
-		return mav;
-	}
 
+
+		 
+/*
+ * Default Pages
+ */
 	@RequestMapping(value= {"/","/home","/index"})
 	public ModelAndView indexPage() {
 		ModelAndView mav = new ModelAndView("index");

@@ -1,18 +1,12 @@
 package mylas.com.erp.demo.dao;
 
-import java.util.List;
-
-import mylas.com.erp.demo.dto.Employee;
+import mylas.com.erp.demo.EmpDetails;
 
 public interface EmployeeDao {
+	
+	public void getConnection(EmpDetails emp);
+	public void getDetails(EmpDetails emp);
+	public void updateDetails(EmpDetails emp);
+	public void deleteDetails(EmpDetails emp);
 
-	public void save(Employee employee);
-	
-	public void getByID(Employee employee);
-	
-	public void update(Employee employee);
-	
-	public void delete(Employee employee);
-	
-	public List<Employee> getAll();
 }

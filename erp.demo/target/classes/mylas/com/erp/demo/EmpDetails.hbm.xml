@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 9 May, 2018 2:21:05 PM by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="mylasfyt_krishna" dynamic-insert="false" dynamic-update="false" mutable="true" name="mylas.com.erp.demo.EmpDetails" optimistic-lock="version" polymorphism="implicit" schema="krishna" select-before-update="false" table="emp_details">
+        <id name="empid" type="java.lang.Integer">
+            <column name="Empid"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="firstName" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="FirstName"/>
+        </property>
+        <property generated="never" lazy="false" name="lastName" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="LastName"/>
+        </property>
+        <property generated="never" lazy="false" name="email" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="Email"/>
+        </property>
+        <property generated="never" lazy="false" name="address1" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="Address1"/>
+        </property>
+        <property generated="never" lazy="false" name="address2" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="Address2"/>
+        </property>
+        <property generated="never" lazy="false" name="city" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="City"/>
+        </property>
+        <property generated="never" lazy="false" name="state1" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="state1"/>
+        </property>
+        <property generated="never" lazy="false" name="pin" optimistic-lock="true" type="string" unique="false">
+            <column length="6" name="Pin"/>
+        </property>
+        <property generated="never" lazy="false" name="mobile" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="Mobile"/>
+        </property>
+        <property generated="never" lazy="false" name="phone" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="Phone"/>
+        </property>
+        <property generated="never" lazy="false" name="panCard" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="PanCard"/>
+        </property>
+        <property generated="never" lazy="false" name="aadharCard" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="AadharCard"/>
+        </property>
+        <property generated="never" lazy="false" name="hireDate" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="HireDate"/>
+        </property>
+        <property generated="never" lazy="false" name="termDate" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="TermDate"/>
+        </property>
+        <property generated="never" lazy="false" name="termReason" optimistic-lock="true" type="string" unique="false">
+            <column name="TermReason"/>
+        </property>
+        <property generated="never" lazy="false" name="bdate" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="Bdate"/>
+        </property>
+        <property generated="never" lazy="false" name="marital" optimistic-lock="true" type="string" unique="false">
+            <column length="10" name="Marital"/>
+        </property>
+        <property generated="never" lazy="false" name="gender" optimistic-lock="true" type="string" unique="false">
+            <column length="6" name="Gender"/>
+        </property>
+        <property generated="never" lazy="false" name="title" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="Title"/>
+        </property>
+    </class>
+</hibernate-mapping>
