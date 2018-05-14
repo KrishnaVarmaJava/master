@@ -11,5 +11,7 @@
 		<property name="hibernate.search.autoregister_listeners">true</property>
 		<property name="hibernate.validator.apply_to_ddl">false</property>
 		<mapping class="mylas.com.erp.demo.EmpDetails" />
+		<mapping class="mylas.com.erp.demo.TblDesignation" />
+		<mapping class="mylas.com.erp.demo.TblDepartment" />
 	</session-factory>
 </hibernate-configuration>

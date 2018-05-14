@@ -6,6 +6,7 @@
 <spring:url var="js" value="/resources/js" />
 <spring:url var="images" value="/resources/images" />
 <spring:url var="plugins" value="/resources/plugins" />
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 
@@ -51,7 +52,9 @@
 						</div>
 					</div>
 				</div>
-				<form id="log_in" method="POST">
+				<form action="${contextRoot}/login" id="log_in" method="POST">
+					<p style="color:red">${loginerrmssg} ${errmsg}</p>
+					<p style="color:green;">${regmessage}</p>
 					<div class="input-group addon-line">
 						<span class="input-group-addon"> <i class="material-icons">person</i>
 						</span>
@@ -78,7 +81,7 @@
 							<c:if test="${userClickForgotPassword==true }">
 								<%@include file="forgot-password.jsp"%>
 							</c:if>
-							<a href="${contextRoot}forgot-password">Forgot Password?</a>
+							<a href="${contextRoot}/forgot-password">Forgot Password?</a>
 						</div>
 					</div>
 
@@ -90,10 +93,7 @@
 					</p>
 
 					<a class="btn btn-sm btn-default btn-block"
-						<c:if test="${userClickCreatNewAcc==true }">
-								<%@include file="register.jsp"%>
-							</c:if>
-						href="${contextRoot}register">Create an account</a>
+						href="${contextRoot}/register">Create an account</a>
 
 				</form>
 			</div>

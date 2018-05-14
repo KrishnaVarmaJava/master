@@ -1041,14 +1041,6 @@
 
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topbar">
 
-
-
-
-
-
-
-
-
 								<div></div>
 
 
@@ -1136,7 +1128,7 @@
 
 										</tr>
 									</thead>
-
+									<c:forEach items="${employees}" var="empl">
 									<tbody>
 
 
@@ -1144,8 +1136,8 @@
 											<td>
 												<div class="chip">
 													<img src="/erp.demo/resources/images/mail/one.jpg"
-														alt="Contact Person"> <span>${employee.getFirstName()}
-														${employee.getLastName()}</span>
+														alt="Contact Person"> <span>${empl.getFirstName()}
+														${empl.getLastName()}</span>
 													<div style="text-align: center">Web Designer</div>
 												</div>
 											</td>
@@ -1176,8 +1168,9 @@
 										</tr>
 
 
-
 									</tbody>
+
+</c:forEach>
 
 
 								</table>

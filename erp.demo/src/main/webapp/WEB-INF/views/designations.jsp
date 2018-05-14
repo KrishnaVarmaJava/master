@@ -1396,14 +1396,14 @@
                             <div class="body">
                         
 					
-			
+			<form action="${contextRoot}/admin/empdesig/register" method="post">
 			
 						 		 <div class="col-md-6">
 						      <div class="form-group">
                                                                 <div class="input-group addon-line">
                                                                     <div class="form-line">
 																	   <label>Designations Name</label>
-                                                                        <input type="text" class="form-control" placeholder="Designations Name">
+                                                                        <input type="text" name="designationname" id="designationname" class="form-control" placeholder="Designations Name">
                                                                     </div>
                                                                     </div>
                                                             </div>
@@ -1413,11 +1413,15 @@
 					
 						 <div class="clearfix"> </div>
 						 <div style="text-align:center;">
-					 <button type="button" class="btn btn-primary btn-rounded waves-effect">Create Designations</button>
+					 <button type="submit" class="btn btn-primary btn-rounded waves-effect">Create Designations</button>
 					 </div>
+					 
+					 </form>
 					</div>
 					
 					</div>
+					
+					
                 <div class="row clearfix">
                 
 				
@@ -1442,14 +1446,14 @@
                                     </thead>
 									<div class="clearfix"></div>
 								
-								
+									<c:forEach items="${designations}" var="desig">
                                     <tbody>
 									
 									
                                     <tr>
                                  
                                         <td>01</td>
-                                        <td>Web Development</td>
+                                        <td>${desig.getDesignation()}</td>
                                  <td>Web Development</td>
 									
 										<td>
@@ -1469,82 +1473,9 @@
                                    
                                     </tr>
 									
-									
-											
-                                    <tr>
-                                 
-                                        <td>02</td>
-                                        <td>Android Developer</td>
-                                  <td>Application Development</td>
-									
-										<td>
-										<ul class="tabelaction">
-                                    <li class="dropdown">
-                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            <i class="material-icons">more_vert</i>
-                                        </a>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="javascript:void(0);"><i class="material-icons">edit</i>Edit</a></li>
-                                            <li><a href="javascript:void(0);"><i class="material-icons">delete</i>Delete</a></li>
-                                       
-                                        </ul>
-                                    </li>
-                                </ul>
-								</td>
-                                   
-                                    </tr>
-									
-									
-											
-                                    <tr>
-                                 
-                                        <td>03</td>
-                                        <td>IOS Developer</td>
-                                     <td>Application Development</td>
-									
-										<td>
-										<ul class="tabelaction">
-                                    <li class="dropdown">
-                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            <i class="material-icons">more_vert</i>
-                                        </a>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="javascript:void(0);"><i class="material-icons">edit</i>Edit</a></li>
-                                            <li><a href="javascript:void(0);"><i class="material-icons">delete</i>Delete</a></li>
-                                       
-                                        </ul>
-                                    </li>
-                                </ul>
-								</td>
-                                   
-                                    </tr>
-									
-									      <tr>
-                                 
-                                        <td>04</td>
-                                        <td>UI Designer</td>
-                                      <td>Accounts Management</td>
-									
-										<td>
-										<ul class="tabelaction">
-                                    <li class="dropdown">
-                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                            <i class="material-icons">more_vert</i>
-                                        </a>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="javascript:void(0);"><i class="material-icons">edit</i>Edit</a></li>
-                                            <li><a href="javascript:void(0);"><i class="material-icons">delete</i>Delete</a></li>
-                                       
-                                        </ul>
-                                    </li>
-                                </ul>
-								</td>
-                                   
-                                    </tr>
-                                    
-                                    
-                                   
                                     </tbody>
+                                    
+                                    </c:forEach>
                                 </table>
                             </div>
                         </div>

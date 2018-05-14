@@ -63,6 +63,14 @@
 						</div>
 					</div>
 					<div class="input-group addon-line">
+						<span class="input-group-addon"> <i class="material-icons">person</i>
+						</span>
+						<div class="form-line">
+							<input type="text" class="form-control" name="empid"
+								placeholder="Admin ID" required>
+						</div>
+					</div>
+					<div class="input-group addon-line">
 						<span class="input-group-addon"> <i class="material-icons">lock</i>
 						</span>
 						<div class="form-line">
