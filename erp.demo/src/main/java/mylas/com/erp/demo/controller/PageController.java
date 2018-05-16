@@ -215,8 +215,6 @@ public class PageController {
 		mav.addObject("empID", id);
 		mav.addObject("employee",Edetails);
 		mav.addObject("services", servicesdao.list());
-		mav.addObject("title", "Employee Holiday Page");
-		mav.addObject("userClickReg", true);
 		return mav;		
 	}
 		 

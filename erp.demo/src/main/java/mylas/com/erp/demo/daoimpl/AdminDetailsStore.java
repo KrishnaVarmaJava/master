@@ -7,6 +7,7 @@ import mylas.com.erp.demo.AdminDetails;
 import mylas.com.erp.demo.dao.AdminDao;
 
 
+
 public class AdminDetailsStore implements AdminDao{
 	
 	private static List<AdminDetails> admins = new ArrayList<AdminDetails>();
@@ -24,9 +25,12 @@ public class AdminDetailsStore implements AdminDao{
 		admindetails.setRole(false);
 		admins.add(admindetails);
 	}
-	public List<AdminDetails> list() {
+	
+	public static List<AdminDetails> list() {
+		// TODO Auto-generated method stub
 		return admins;
 	}
+	
 	
 
 }

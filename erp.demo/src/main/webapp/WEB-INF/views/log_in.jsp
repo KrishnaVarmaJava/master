@@ -46,7 +46,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="login-logo">
-							<img src="${images}/logo-circle.png" alt=""
+							<img src="${images}/logo-single.png" alt=""
 								class="img-responsive img-circle align-center">
 							<p>Material Design Admin Template</p>
 						</div>
