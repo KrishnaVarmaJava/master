@@ -348,5 +348,10 @@ public class PageController {
 		ModelAndView mav = new ModelAndView("indvidtimesheet");
 		return mav;
 	}
+	@RequestMapping(value= "/test")
+	public ModelAndView testPage() {
+		ModelAndView mav = new ModelAndView("empindex");
+		return mav;
+	}
 
 }

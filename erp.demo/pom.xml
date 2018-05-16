@@ -9,9 +9,9 @@
 	<name>Mylas ERP Demo Application</name>
 	<description>			</description>
 
-<properties>
-<java.version>1.7</java.version>
-</properties>
+	<properties>
+		<java.version>1.7</java.version>
+	</properties>
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
@@ -53,6 +53,7 @@
 			<version>4.0.0</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/sqljdbc4 -->
 
 		<!-- Hibernate -->
@@ -77,17 +78,17 @@
 			<scope>test</scope>
 		</dependency>
 
-        <!-- jsr303 validation -->
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>5.1.3.Final</version>
-        </dependency>
+		<!-- jsr303 validation -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.1.3.Final</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<!-- Updated for the latest version of JAVA -->
