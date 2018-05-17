@@ -342,7 +342,7 @@ public class PageController {
 					session.setAttribute("empcompName", map.get("compName"));
 					session.setAttribute("empdesignation", map.get("designation"));
 					EmpServiceDaoImpl empService = new EmpServiceDaoImpl();
-					mav2.addObject("services", empservicesdao.list());	
+					mav2.addObject("services", mandao.list());	
 					return mav2;
 					
 				}else {
@@ -350,7 +350,6 @@ public class PageController {
 					return mav;
 				}
 				}
-			
 		} catch (NullPointerException e) {
 			
 			
