@@ -29,4 +29,18 @@ public class EmployeePageController {
 	/*
 	 * Test Comment
 	 */
+	@RequestMapping(value= "/employee/timesheet/register")
+	public ModelAndView indvidtimesheet() {
+		ModelAndView mav = new ModelAndView("indvidtimesheet");
+		mav.addObject("services", empservicesdao.list());	
+		return mav;
+	}
+	
+	@RequestMapping(value= "/employee/leave/empleaverequest")
+	public ModelAndView empLeaveRequest() {
+		ModelAndView mav = new ModelAndView("empleaverequests");
+		mav.addObject("services", empservicesdao.list());	
+		return mav;
+	}
+	
 }
