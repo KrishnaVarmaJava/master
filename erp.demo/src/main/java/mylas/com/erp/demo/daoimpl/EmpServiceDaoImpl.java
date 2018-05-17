@@ -18,6 +18,7 @@ public class EmpServiceDaoImpl implements EmpServicesDao{
 		empserv.setServiceID("leave");
 		empserv.setServiceName("Leave");
 		empserv.setServiceDescription("Employee Can Apply for Leave");
+		empserv.setServiceRole("employee");
 		services.add(empserv);
 		
 		empserv = new EmpServices();
@@ -25,6 +26,7 @@ public class EmpServiceDaoImpl implements EmpServicesDao{
 		empserv.setServiceID("timesheet");
 		empserv.setServiceName("TimeSheet");
 		empserv.setServiceDescription("Employee Can Apply for Leave");
+		empserv.setServiceRole("employee");
 		services.add(empserv);
 	}
 

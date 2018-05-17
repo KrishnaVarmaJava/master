@@ -21,7 +21,7 @@
                             <c:if test="${userClickReg==true }">
 								<%@include file="../adminindex.jsp"%>
 							</c:if>
-                               <a href="${contextRoot}/admin/${service.getServiceID()}/register" title="${service}">
+                               <a href="${contextRoot}/${service.getServiceRole()}/${service.getServiceID()}/register" title="${service}">
                                     <span>${service.getServiceName()}</span>
                                 </a>
                             </li>

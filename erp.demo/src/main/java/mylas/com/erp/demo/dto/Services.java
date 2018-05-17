@@ -2,10 +2,17 @@ package mylas.com.erp.demo.dto;
 
 public class Services {
 
+	String ServiceRole;
 	String ServiceID;
 	String ServiceName;
 	String ServiceDescription;
 	private boolean active = true;
+	public String getServiceRole() {
+		return ServiceRole;
+	}
+	public void setServiceRole(String serviceRole) {
+		ServiceRole = serviceRole;
+	}
 	public String getServiceID() {
 		return ServiceID;
 	}
@@ -18,11 +25,11 @@ public class Services {
 	public void setServiceName(String serviceName) {
 		ServiceName = serviceName;
 	}
-	public String getServiceSescription() {
+	public String getServiceDescription() {
 		return ServiceDescription;
 	}
-	public void setServiceSescription(String serviceSescription) {
-		ServiceDescription = serviceSescription;
+	public void setServiceDescription(String serviceDescription) {
+		ServiceDescription = serviceDescription;
 	}
 	public boolean isActive() {
 		return active;
@@ -30,22 +37,18 @@ public class Services {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	@Override
-	public String toString() {
-		return "Services [ServiceID=" + ServiceID + ", ServiceName=" + ServiceName + ", ServiceSescription="
-				+ ServiceDescription + ", active=" + active + "]";
-	}
-	public Services(String serviceID, String serviceName, String serviceSescription, boolean active) {
+	public Services(String serviceRole, String serviceID, String serviceName, String serviceDescription,
+			boolean active) {
 		super();
+		ServiceRole = serviceRole;
 		ServiceID = serviceID;
 		ServiceName = serviceName;
-		ServiceDescription = serviceSescription;
+		ServiceDescription = serviceDescription;
 		this.active = active;
 	}
 	public Services() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+		
 }

@@ -19,43 +19,50 @@ public class ServicesDaoImpl implements ServicesDao{
 		Services service = new Services();
 		service.setServiceID("regesteremp");
 		service.setServiceName("Regester Employees");
-		service.setServiceSescription("Regestration Of Employee");
+		service.setServiceDescription("Regestration Of Employee");
+		service.setServiceRole("admin");
 		services.add(service);
 		
 		service = new Services();
 		service.setServiceID("allemp");
 		service.setServiceName("All Employees");
-		service.setServiceSescription("List Of All the Employee");
+		service.setServiceDescription("List Of All the Employee");
+		service.setServiceRole("admin");
 		services.add(service);
 		
 		service = new Services();
 		service.setServiceID("empholidays");
 		service.setServiceName("Holidays");
-		service.setServiceSescription("Holidays for Employee");
+		service.setServiceDescription("Holidays for Employee");
+		service.setServiceRole("admin");
 		services.add(service);
 		
 		service = new Services();
 		service.setServiceID("empleavereq");
 		service.setServiceName("Leave Requests");
-		service.setServiceSescription("List Of Employee Leave Requests");
+		service.setServiceDescription("List Of Employee Leave Requests");
+		service.setServiceRole("admin");
 		services.add(service);
 		
 		service = new Services();
 		service.setServiceID("empatt");
 		service.setServiceName("Attenedance");
-		service.setServiceSescription("List Of Employee Attenedance");
+		service.setServiceDescription("List Of Employee Attenedance");
+		service.setServiceRole("admin");
 		services.add(service);
 		
 		service = new Services();
 		service.setServiceID("empdep");
 		service.setServiceName("Department");
-		service.setServiceSescription("List Of Departments");
+		service.setServiceDescription("List Of Departments");
+		service.setServiceRole("admin");
 		services.add(service);
 		
 		service = new Services();
 		service.setServiceID("empdesig");
 		service.setServiceName("Designation");
-		service.setServiceSescription("Employee Designation List");
+		service.setServiceDescription("Employee Designation List");
+		service.setServiceRole("admin");
 		services.add(service);
 		
 	}

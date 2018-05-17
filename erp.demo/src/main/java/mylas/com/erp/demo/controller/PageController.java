@@ -39,7 +39,7 @@ public class PageController {
 	
 	@Autowired
 	EmpServicesDao empservicesdao;
-	
+
 	Client client = new Client();
 	
 		
@@ -258,7 +258,6 @@ public class PageController {
 		return mav;
 	}
 	
-	
 	/**\
 	 * 
 	 * User Login and Other Operations
@@ -353,5 +352,12 @@ public class PageController {
 		ModelAndView mav = new ModelAndView("empindex");
 		return mav;
 	}
+	@RequestMapping(value= "/mytest")
+	public ModelAndView testmyPage() {
+		ModelAndView mav = new ModelAndView("empleaverequests");
+		return mav;
+	}
+	
+	
 
 }
