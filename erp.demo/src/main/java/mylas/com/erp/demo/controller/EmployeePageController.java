@@ -26,6 +26,13 @@ public class EmployeePageController {
 		return mav;
 	}
 	
+	@RequestMapping(value= "/employee/profile/register")
+	public ModelAndView empProfilePage() {
+		ModelAndView mav = new ModelAndView("useremployee");
+		mav.addObject("services", empservicesdao.list());	
+		return mav;
+	}
+	
 	/*
 	 * Test Comment
 	 */

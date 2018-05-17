@@ -277,7 +277,6 @@ public class PageController {
 		mav.addObject("loginoperations", new LoginOperations());
 		return mav;
 	}
-	
 	@RequestMapping(value= "/login", method=RequestMethod.POST)
 	public ModelAndView loginPageAction(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws UserBlockedException {
 		ModelAndView mav = new ModelAndView("log_in");
@@ -315,8 +314,24 @@ public class PageController {
 					return mav2;
 					
 				}
-				else if(map.get("role").equals(User.Role_User)) {
-					ModelAndView mav2 = new ModelAndView("useremployee");
+				else if(map.get("role").equals(User.Role_User) && map.get("usrmanrole").equals(User.Emp_Role)) {
+					ModelAndView mav2 = new ModelAndView("empindex");
+					session.setAttribute("empfname", map.get("fname"));
+					session.setAttribute("emplname", map.get("lname"));
+					session.setAttribute("empuname", map.get("uname"));
+					session.setAttribute("empemail", map.get("email"));
+					session.setAttribute("empeid", map.get("eid"));
+					session.setAttribute("empjdate", map.get("jdate"));
+					session.setAttribute("empphone", map.get("phone"));
+					session.setAttribute("empcompName", map.get("compName"));
+					session.setAttribute("empdesignation", map.get("designation"));
+					EmpServiceDaoImpl empService = new EmpServiceDaoImpl();
+					mav2.addObject("services", empservicesdao.list());	
+					return mav2;
+					
+				}
+				else if(map.get("role").equals(User.Role_User) && map.get("usrmanrole").equals(User.Man_Role)) {
+					ModelAndView mav2 = new ModelAndView("empindex");
 					session.setAttribute("empfname", map.get("fname"));
 					session.setAttribute("emplname", map.get("lname"));
 					session.setAttribute("empuname", map.get("uname"));

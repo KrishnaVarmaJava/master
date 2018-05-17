@@ -15,6 +15,14 @@ public class EmpServiceDaoImpl implements EmpServicesDao{
 	static {
 		EmpServices empserv = new EmpServices();
 		empserv.setActive(true);
+		empserv.setServiceID("profile");
+		empserv.setServiceName("View Profile");
+		empserv.setServiceDescription("Employee Can View Personal Details");
+		empserv.setServiceRole("employee");
+		services.add(empserv);
+		
+		empserv = new EmpServices();
+		empserv.setActive(true);
 		empserv.setServiceID("leave");
 		empserv.setServiceName("Leave");
 		empserv.setServiceDescription("Employee Can Apply for Leave");
