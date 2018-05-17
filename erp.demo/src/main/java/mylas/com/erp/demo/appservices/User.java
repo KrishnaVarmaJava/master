@@ -13,6 +13,8 @@ public interface User {
 	public static final boolean Role_Admin = false;
 	public static final boolean Role_User = true;
 	
+	public static final boolean Emp_Role = true;
+	public static final boolean Man_Role = false;
 	
 	public void Register(EmpDetails emp);
 	
