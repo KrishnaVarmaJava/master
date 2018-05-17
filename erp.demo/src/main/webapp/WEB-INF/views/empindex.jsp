@@ -46,28 +46,7 @@
 
 <body class="theme-indigo light layout-fixed">
 
-<%
-String fname=(String)session.getAttribute("empfname");
-String lname=(String)session.getAttribute("emplname");
-String uname=(String)session.getAttribute("empuname");
-String email=(String)session.getAttribute("empemail");
-String eid=(String)session.getAttribute("empeid");
-String jdate=(String)session.getAttribute("empjdate");
-String phone=(String)session.getAttribute("empphone");
-String compName=(String)session.getAttribute("empcompName");
-String designation=(String)session.getAttribute("empdesignation");
 
-session.setAttribute("jspfname", fname);
-session.setAttribute("jsplname", lname);
-session.setAttribute("jspuname", uname);
-session.setAttribute("jspemail", email);
-session.setAttribute("jspeid", eid);
-session.setAttribute("jspjdate", jdate);
-session.setAttribute("jspphone", phone);
-session.setAttribute("jspcompName", compName);
-session.setAttribute("jspdesignation", designation);
-
-%>
 <div class="wrapper">
 
     <!-- top navbar-->
