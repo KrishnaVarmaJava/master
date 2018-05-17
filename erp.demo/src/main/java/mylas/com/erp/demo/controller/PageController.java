@@ -20,6 +20,7 @@ import mylas.com.erp.demo.TblDesignation;
 import mylas.com.erp.demo.appservices.User;
 import mylas.com.erp.demo.appservices.UserServiceImpl;
 import mylas.com.erp.demo.dao.EmpServicesDao;
+import mylas.com.erp.demo.dao.ManagerServicesDao;
 import mylas.com.erp.demo.dao.ServicesDao;
 import mylas.com.erp.demo.daoimpl.EmpServiceDaoImpl;
 import mylas.com.erp.demo.exceptions.UserBlockedException;
@@ -39,6 +40,9 @@ public class PageController {
 	
 	@Autowired
 	EmpServicesDao empservicesdao;
+	
+	@Autowired
+	ManagerServicesDao mandao;
 
 	Client client = new Client();
 	
@@ -345,6 +349,7 @@ public class PageController {
 	@RequestMapping(value= "/testpage")
 	public ModelAndView testpage() {
 		ModelAndView mav = new ModelAndView("indvidtimesheet");
+		mav.addObject("services", mandao.list());	
 		return mav;
 	}
 	@RequestMapping(value= "/test")
@@ -357,7 +362,6 @@ public class PageController {
 		ModelAndView mav = new ModelAndView("empleaverequests");
 		return mav;
 	}
-	
-	
+		
 
 }
