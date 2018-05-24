@@ -13,5 +13,6 @@ public interface EmployeeDao {
 	public void updateDetails(EmpDetails emp);
 	public void deleteDetails(int id);
 	public EmpDetails getById(int id);
-
+	public EmpDetails getByUName(String empuname);
+	public List getEmpDetails();
 }

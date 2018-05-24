@@ -92,11 +92,12 @@
                     <h2>Employee</h2>
                 </div>
 				   <% 
-String name=(String)session.getAttribute("jspfname"); 
+String name=(String)session.getAttribute("empfname"); 
 out.print("Hello User: You have entered the name: "+name);
 
 %> 
-<c:out value="${sessionScope.jsplname}"></c:out>
+<c:out value="${sessionScope.emplname}"></c:out>
+${sessionScope.empeid}
    
 				
 				   <div class="col-md-12">

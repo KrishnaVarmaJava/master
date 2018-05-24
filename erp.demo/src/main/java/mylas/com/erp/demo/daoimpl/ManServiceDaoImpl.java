@@ -40,21 +40,21 @@ private static List<ManServices> services = new ArrayList<ManServices>();
 		services.add(service);
 		
 		service = new ManServices();
-		service.setServiceID("leave requests");
+		service.setServiceID("leaverequests");
 		service.setServiceName("Leave Requests");
 		service.setServiceDescription("Leave requests for Manager");
 		service.setServiceRole("manager");
 		services.add(service);
 		
 		service = new ManServices();
-		service.setServiceID("all employee");
+		service.setServiceID("allemployee");
 		service.setServiceName("All Employee");
 		service.setServiceDescription("Manager Leave Requests");
 		service.setServiceRole("manager");
 		services.add(service);
 		
 		service = new ManServices();
-		service.setServiceID("employee timesheets");
+		service.setServiceID("employeetimesheets");
 		service.setServiceName("Employee Timesheets");
 		service.setServiceDescription("List Of Employee TimeSheets");
 		service.setServiceRole("manager");

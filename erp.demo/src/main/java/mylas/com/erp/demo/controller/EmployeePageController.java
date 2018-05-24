@@ -41,9 +41,16 @@ public class EmployeePageController {
 	 * Employee Regestration Page Get Method
 	 */
 	@RequestMapping(value= "/employee/leave/register")
-	public ModelAndView empLeavePage() {
+	public ModelAndView empLeavePage(HttpSession session) {
 		ModelAndView mav = new ModelAndView("empleaverequests");
-		mav.addObject("services", empservicesdao.list());	
+		Client cl = new Client();
+		String empname = (String) session.getAttribute("empuname");
+		List<EmpDetails> emp1 = cl.getDetails();
+		List<TblEmpLeavereq> leavereq =  empleavereq.viewbyid(empname);
+		mav.addObject("employees", emp1);
+		mav.addObject("empleave", leavereq);
+		mav.addObject("services", empservicesdao.list());
+		
 		return mav;
 	}
 	
@@ -71,6 +78,15 @@ public class EmployeePageController {
 	
 	@RequestMapping(value= "/employee/leave/register", method=RequestMethod.POST)
 	public ModelAndView empLeaveRequestPage(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		
+		
+		ModelAndView mav = new ModelAndView("empleaverequests");
+		Client cl = new Client();
+		List<EmpDetails> emp1 = cl.getDetails();
+		List<TblEmpLeavereq> leavereq =  empleavereq.view();
+		mav.addObject("employees", emp1);
+		mav.addObject("empleave", leavereq);
+		
 		/**
 		 * Handling request from empleaverequests.jsp form with post action.
 		 */
@@ -93,27 +109,20 @@ public class EmployeePageController {
 		LocalDate Day2 = LocalDate.parse(todate);
 		
 		long daysNegative = ChronoUnit.DAYS.between(Day1, Day2);
-		Client cl = new Client();
-		List<EmpDetails> emp1 = cl.getDetails();
-		List<TblEmpLeavereq> leavereq =  empleavereq.view();
-		ModelAndView mav = new ModelAndView("empleaverequests");
-		TblEmpLeavereq empleave = new TblEmpLeavereq();
-		empleave.setLeavetype(request.getParameter("leavetype"));
-		empleave.setFromdate(request.getParameter("fromdate"));
-		empleave.setTodate(request.getParameter("todate"));
-		empleave.setId(1);
-		empleave.setCount((int)daysNegative);
-		empleave.setLeavereason(request.getParameter("leavereason"));
-		empleave.setManagerid(null);
-		empleave.setEmployeeid(null);
-		empleave.setStatus(null);
-		System.out.println(empleave.getLeavetype() + empleave.getFromdate() + empleave.getTodate() + empleave.getLeavereason()+ empleave.getManagerid());
-		empleavereq.save(empleave);
 		
 		
-		mav.addObject("employees", emp1);
-		mav.addObject("empleave", leavereq);	
+	
 		mav.addObject("services", empservicesdao.list());	
+		mav.addObject("employees", emp1);
+		mav.addObject("empleave", leavereq);
+		
+		TblEmpLeavereq empleave = new TblEmpLeavereq(request.getParameter("leavetype"), request.getParameter("fromdate"), request.getParameter("fromdate"), (int)daysNegative, request.getParameter("leavereason"), null, null, null);
+		empleave.setManagerid(null);
+		empleave.setEmployeeid((String) session.getAttribute("empuname"));
+		empleave.setStatus(null);
+		empleavereq.save(empleave);		
+		System.out.println("Req Sent to Save");
+		mav.addObject("Submitmsg", "Your Leave Request Has Been Submitted Sucessfully! Please Wait for your Manager Approval");
 		return mav;
 	}
 	

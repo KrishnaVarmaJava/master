@@ -8,5 +8,5 @@ public interface EmpLeaveRequestDao {
 
 	public void save(TblEmpLeavereq empleavereq);
 	public List<TblEmpLeavereq> view();
-	public List<TblEmpLeavereq> viewbyid();
+	public List<TblEmpLeavereq> viewbyid(String empid);
 }

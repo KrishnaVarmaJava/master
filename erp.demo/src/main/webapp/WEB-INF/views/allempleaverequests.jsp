@@ -74,26 +74,9 @@
 
 								<div class="col-md-6">
 									<div class="row pagetitle">
-										<span> Leave Request </span>
+										<span>All Leave Request </span>
 									</div>
 								</div>
-
-
-
-
-								<div class="col-md-6">
-									<div class="row pagetitle">
-										<span class="pull-right">
-											<button type="button"
-												class="btn btn-primary btn-rounded waves-effect">Add
-												Leave</button>
-										</span>
-									</div>
-								</div>
-
-
-								<div></div>
-
 
 							</div>
 
@@ -101,88 +84,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-12 card">
-					<div class="custom_title">
-						<h2>Add Leave Request</h2>
-					</div>
-					<p style="color: green;">${Submitmsg}</p>
-					<form action="${contextRoot}/employee/leave/register" method="post">
-						<hr class="custom_line">
-						<div class="body">
 
-							<div class="col-md-6">
-								<div class="form-group">
-									<div class="form-line">
-										<label>Leave Type</label> <select class="form-control"
-											size="1" name="leavetype" id="leavetype">
-											<option value="0">Please select</option>
-											<option value="LOP">Loss of Pay</option>
-											<option value="CL">Casual Leave 12 Days</option>
-											<option value="ML">Medical Leave</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<div class="input-group addon-line">
-										<div class="form-line">
-											<label>From </label> <input type="date" name="fromdate"
-												id="fromdate" class="form-control" placeholder="From Date">
-										</div>
-										<span class="input-group-addon"><i
-											class="material-icons">date_range </i></span>
-									</div>
-								</div>
-
-							</div>
-
-							<div class="col-md-6">
-								<div class="form-group">
-									<div class="input-group addon-line">
-										<div class="form-line">
-											<label>To </label> <input type="date" name="todate"
-												id="todate" class="form-control" placeholder="To Date">
-										</div>
-										<span class="input-group-addon"><i
-											class="material-icons">date_range </i></span>
-									</div>
-								</div>
-
-							</div>
-
-							<div class="col-md-6">
-								<div class="form-group">
-									<div class="form-line">
-										<label>Leave Reason </label>
-										<textarea name="leavereason" id="leavereason"
-											class="form-control" rows="3"></textarea>
-									</div>
-								</div>
-
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<div class="form-line">
-										<label>Manager</label> <select class="form-control" size="1"
-											name="manager" id="manager">
-											<option value="0">Please select</option>
-											<option value="Man1">Manager1</option>
-											<option value="Man2">Manager2</option>
-											<option value="Man3">Manager3</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-							<div style="text-align: center;">
-								<button type="submit"
-									class="btn btn-primary btn-rounded waves-effect">Send
-									Leave Request</button>
-							</div>
-						</div>
-					</form>
-				</div>
 
 				<div class="row clearfix">
 
@@ -269,6 +171,7 @@
 									</thead>
 									<div class="clearfix"></div>
 									<c:forEach items="${empleave}" var="empleaveslist">
+									
 										<tbody>
 
 
@@ -276,9 +179,8 @@
 												<td>
 													<div class="chip">
 														<img src="${images}/mail/one.jpg" alt="Contact Person">
-														<span>${sessionScope.empfname}
-															${sessionScope.emplname}</span>
-														<div style="text-align: center">${sessionScope.empdesignation}</div>
+														<span>${empleaveslist.getEmployeeid()}</span>
+														<div style="text-align: center"></div>
 													</div>
 												</td>
 												<td>${empleaveslist.getLeavetype()}</td>

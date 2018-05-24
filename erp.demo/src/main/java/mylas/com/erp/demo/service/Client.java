@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,6 +13,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import mylas.com.erp.demo.EmpDetails;
+import mylas.com.erp.demo.TblEmpLeavereq;
 import mylas.com.erp.demo.dao.EmployeeDao;
 
 public class Client implements EmployeeDao {
@@ -82,6 +84,34 @@ public class Client implements EmployeeDao {
 		user =  session.load(EmpDetails.class,
                 id);
 		return user;
+	}
+
+
+	@Override
+	public EmpDetails getByUName(String empuname) {
+		EmpDetails user;
+		buildSessionFactory();
+		Session session = fact.openSession();
+		user =  session.load(EmpDetails.class, empuname);
+		System.out.println(user.getFname());
+		return null;
+	}
+
+
+	@Override
+	public List getEmpDetails() {
+		String sqlquery = "select emp_details.fname, emp_details.lname, tbl_emp_leavereq.employeeid from emp_details, tbl_emp_leavereq where tbl_emp_leavereq.employeeid=emp_details.uname";
+		
+		Configuration con = new Configuration().configure("hibernate.cfg.xml");
+		SessionFactory fact = con.buildSessionFactory();
+		Session session = fact.openSession();
+		Transaction tx = session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(sqlquery);
+		List names = query.list();
+		for(Object name : names) {
+				System.out.println(name);
+		}
+		return null;
 	}
 	
 }
