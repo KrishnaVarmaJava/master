@@ -51,6 +51,7 @@ public class EmpLeaveRequestService implements EmpLeaveRequestDao {
 		Transaction tx = session.beginTransaction();
 		Query q = session.createQuery("from TblEmpLeavereq");
 		List<TblEmpLeavereq> empleave = q.list();
+		System.out.println("view Called");
 		return (empleave);
 	}
 

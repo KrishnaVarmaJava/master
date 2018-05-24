@@ -273,13 +273,13 @@ public class PageController {
 	
 	@RequestMapping(value= "/login")
 	public ModelAndView loginPageView() {
-		ModelAndView mav = new ModelAndView("log_in");
+		ModelAndView mav = new ModelAndView("newlogin");
 		mav.addObject("loginoperations", new LoginOperations());
 		return mav;
 	}
 	@RequestMapping(value= "/login", method=RequestMethod.POST)
 	public ModelAndView loginPageAction(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws UserBlockedException {
-		ModelAndView mav = new ModelAndView("log_in");
+		ModelAndView mav = new ModelAndView("newlogin");
 		LoginOperations loginop = new LoginOperations(request.getParameter("username"), request.getParameter("password"));
 		try {
 			List<EmpDetails> employee = userservice.Login(loginop.getLoginName(), loginop.getLoginPassword());

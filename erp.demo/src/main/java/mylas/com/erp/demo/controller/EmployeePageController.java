@@ -95,7 +95,8 @@ public class EmployeePageController {
 		long daysNegative = ChronoUnit.DAYS.between(Day1, Day2);
 		Client cl = new Client();
 		List<EmpDetails> emp1 = cl.getDetails();
-		
+		List<TblEmpLeavereq> leavereq =  empleavereq.view();
+		ModelAndView mav = new ModelAndView("empleaverequests");
 		TblEmpLeavereq empleave = new TblEmpLeavereq();
 		empleave.setLeavetype(request.getParameter("leavetype"));
 		empleave.setFromdate(request.getParameter("fromdate"));
@@ -109,15 +110,14 @@ public class EmployeePageController {
 		System.out.println(empleave.getLeavetype() + empleave.getFromdate() + empleave.getTodate() + empleave.getLeavereason()+ empleave.getManagerid());
 		empleavereq.save(empleave);
 		
-		List<TblEmpLeavereq> leavereq =  empleavereq.view();
-		ModelAndView mav = new ModelAndView("empleaverequests");
+		
 		mav.addObject("employees", emp1);
 		mav.addObject("empleave", leavereq);	
 		mav.addObject("services", empservicesdao.list());	
 		return mav;
 	}
 	
-	
+
 	
 
 	

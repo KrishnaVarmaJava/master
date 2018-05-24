@@ -253,6 +253,8 @@ Reason</th>
 								<c:set var="empleaves" scope="session" value="${empleave}"/>
 								<c:if test="${empleaves != null}" >
 								<c:forEach items="${empleave}" var="empleaveslist">
+								${empleaveslist.getLeavetype()}
+								${empleaveslist.getFromdate()}
                                     <tbody>
 									
 									
