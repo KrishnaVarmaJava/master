@@ -35,21 +35,18 @@ public class EmpLeaveRequestService implements EmpLeaveRequestDao {
 
 	@Override
 	public void save(TblEmpLeavereq empleave) {
-		/*buildSessionFactory();*/
 		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-		ServiceRegistry regObj = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
-		SessionFactory fact = con.buildSessionFactory(regObj);
+		SessionFactory fact = con.buildSessionFactory();
 		Session session = fact.openSession();
 		Transaction tx = session.beginTransaction();
-		
-		session.saveOrUpdate(empleave);
-		tx.commit();
-
+		session.save(empleave);
+		session.close();
 	}
 
 	@Override
 	public List<TblEmpLeavereq> view() {
-		/*buildSessionFactory();*/
+		Configuration con = new Configuration().configure("hibernate.cfg.xml");
+		SessionFactory fact = con.buildSessionFactory();
 		Session session = fact.openSession();
 		Transaction tx = session.beginTransaction();
 		Query q = session.createQuery("from TblEmpLeavereq");

@@ -1,3 +1,4 @@
+
 package mylas.com.erp.demo.controller;
 
 import java.text.ParseException;
@@ -104,7 +105,7 @@ public class EmployeePageController {
 		empleave.setLeavereason(request.getParameter("leavereason"));
 		empleave.setManagerid(null);
 		empleave.setEmployeeid(null);
-		empleave.setStatus(false);
+		empleave.setStatus(null);
 		System.out.println(empleave.getLeavetype() + empleave.getFromdate() + empleave.getTodate() + empleave.getLeavereason()+ empleave.getManagerid());
 		empleavereq.save(empleave);
 		

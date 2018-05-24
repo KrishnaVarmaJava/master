@@ -26,8 +26,6 @@ public class DepartmentService implements DepartmentDao {
 		Configuration con = new Configuration().configure("hibernate.cfg.xml");
 		
 		fact = con.buildSessionFactory();
-		ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
-		fact = con.buildSessionFactory(serviceRegistryObj);
 		return fact;
 
 	}
