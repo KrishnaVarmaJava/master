@@ -373,7 +373,7 @@ public class PageController {
 	}
 	@RequestMapping(value= "/mytest")
 	public ModelAndView testmyPage() {
-		ModelAndView mav = new ModelAndView("empleaverequests");
+		ModelAndView mav = new ModelAndView("defaultelements");
 		return mav;
 	}
 		
