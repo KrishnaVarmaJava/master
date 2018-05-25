@@ -25,8 +25,14 @@ public class ManagerPageController {
 	EmpLeaveRequestDao empleavereq;
 	
 	@RequestMapping(value= "/manager/leave/register")
-	public ModelAndView empLeavePage() {
+	public ModelAndView empLeavePage(HttpSession session) {
 		ModelAndView mav = new ModelAndView("empleaverequests");
+		Client cl = new Client();
+		String empname = (String) session.getAttribute("empuname");
+		List<EmpDetails> emp1 = cl.getDetails();
+		List<TblEmpLeavereq> leavereq =  empleavereq.viewbyid(empname);
+		mav.addObject("employees", emp1);
+		mav.addObject("empleave", leavereq);
 		mav.addObject("services", mandao.list());	
 		return mav;
 	}
@@ -60,5 +66,7 @@ public class ManagerPageController {
 		mav.addObject("services", mandao.list());	
 		return mav;
 	}
+	
+	
 	
 }

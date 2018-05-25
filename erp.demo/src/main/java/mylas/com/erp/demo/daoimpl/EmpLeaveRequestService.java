@@ -77,4 +77,35 @@ public class EmpLeaveRequestService implements EmpLeaveRequestDao {
 		
 	}
 
+	@Override
+	public void edit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public TblEmpLeavereq view(int id) {
+		Configuration con = new Configuration().configure("hibernate.cfg.xml");
+		SessionFactory fact = con.buildSessionFactory();
+		Session session = fact.openSession();
+		Transaction tx = session.beginTransaction();
+		TblEmpLeavereq empleave = session.load(TblEmpLeavereq.class, id);
+		return empleave;
+	}
+
+	@Override
+	public String delete(int id) {
+		Configuration con = new Configuration().configure("hibernate.cfg.xml");
+		SessionFactory fact = con.buildSessionFactory();
+		Session session = fact.openSession();
+		Transaction tx = session.beginTransaction();
+		TblEmpLeavereq empleave = session.load(TblEmpLeavereq.class, id);
+		session.delete(empleave);
+        System.out.println("Object Deleted successfully.....!!");
+        tx.commit();
+        session.close();
+        fact.close();
+        return "Deleted_Entry!";
+	}
+
 }

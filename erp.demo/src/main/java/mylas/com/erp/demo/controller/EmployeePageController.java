@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,7 +51,6 @@ public class EmployeePageController {
 		mav.addObject("employees", emp1);
 		mav.addObject("empleave", leavereq);
 		mav.addObject("services", empservicesdao.list());
-		
 		return mav;
 	}
 	
@@ -127,7 +127,32 @@ public class EmployeePageController {
 	}
 	
 
-	
-
+	/*
+	 * Employee Leave Request Edit and Delete Operations
+	 */
+	@RequestMapping(value= "/employee/leave/edit/{id}")
+	public ModelAndView empLeaveeditPage(HttpSession session,@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("empleavereqedit");
+		String empname = (String) session.getAttribute("empuname");
+		List<TblEmpLeavereq> leavereq =  empleavereq.viewbyid(empname);
+		TblEmpLeavereq leaveobj = empleavereq.view(id);
+		mav.addObject("empleave", leavereq);
+		mav.addObject("leaveobj", leaveobj);
+		mav.addObject("services", empservicesdao.list());
+		
+		return mav;
+	}
+	@RequestMapping(value= "/employee/leave/delete/{id}")
+	public ModelAndView empLeavedeletePage(HttpSession session,@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("redirect:/employee/leave/register");
+		String empname = (String) session.getAttribute("empuname");
+		List<TblEmpLeavereq> leavereq =  empleavereq.viewbyid(empname);
+		String DelMsg = empleavereq.delete(id);
+		mav.addObject("empleave", leavereq);
+		mav.addObject("DelMsg", DelMsg);
+		mav.addObject("services", empservicesdao.list());
+		
+		return mav;
+	}
 	
 }

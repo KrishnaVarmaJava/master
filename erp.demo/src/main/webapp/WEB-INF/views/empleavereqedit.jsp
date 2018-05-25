@@ -106,7 +106,7 @@
 						<h2>Add Leave Request</h2>
 					</div>
 					<p style="color: green;">${Submitmsg}</p>
-					<form action="${contextRoot}/${sessionScope.emprole}/leave/register" method="post">
+					<form action="${contextRoot}/employee/leave/register" method="post">
 						<hr class="custom_line">
 						<div class="body">
 
@@ -115,7 +115,7 @@
 									<div class="form-line">
 										<label>Leave Type</label> <select class="form-control"
 											size="1" name="leavetype" id="leavetype">
-											<option value="0">Please select</option>
+											<option value="0">${leaveobj.getLeavetype()}</option>
 											<option value="Loss of Pay">Loss of Pay</option>
 											<option value="Casual Leave">Casual Leave 12 Days</option>
 											<option value="Medical Leave">Medical Leave</option>
@@ -127,8 +127,9 @@
 								<div class="form-group">
 									<div class="input-group addon-line">
 										<div class="form-line">
-											<label>From </label> <input type="date" name="fromdate"
-												id="fromdate" class="form-control" placeholder="From Date">
+											<label>From </label> 
+											<input type="date" name="fromdate"
+												id="fromdate" class="form-control" placeholder="${leaveobj.getFromdate()}">
 										</div>
 										<span class="input-group-addon"><i
 											class="material-icons">date_range </i></span>
@@ -142,7 +143,7 @@
 									<div class="input-group addon-line">
 										<div class="form-line">
 											<label>To </label> <input type="date" name="todate"
-												id="todate" class="form-control" placeholder="To Date">
+												id="todate" class="form-control" placeholder="${leaveobj.getTodate()}">
 										</div>
 										<span class="input-group-addon"><i
 											class="material-icons">date_range </i></span>
@@ -156,7 +157,7 @@
 									<div class="form-line">
 										<label>Leave Reason </label>
 										<textarea name="leavereason" id="leavereason"
-											class="form-control" rows="3"></textarea>
+											class="form-control" rows="3" placeholder="${leaveobj.getLeavereason()}"></textarea>
 									</div>
 								</div>
 
@@ -269,7 +270,6 @@
 										</tr>
 									</thead>
 									<div class="clearfix"></div>
-									
 									<c:forEach items="${empleave}" var="empleaveslist">
 										<tbody>
 
@@ -317,7 +317,7 @@
 																<i class="material-icons">more_vert</i>
 														</a>
 															<ul class="dropdown-menu pull-right">
-																<li><a href="${contextRoot}/employee/leave/edit/${empleaveslist.getId()}"><i
+																<li><a href="${contextRoot}/employee/leave/edit"><i
 																		class="material-icons">edit</i>Edit</a></li>
 																<li><a href="${contextRoot}/employee/leave/delete/${empleaveslist.getId()}"><i
 																		class="material-icons">delete</i>Delete</a></li>

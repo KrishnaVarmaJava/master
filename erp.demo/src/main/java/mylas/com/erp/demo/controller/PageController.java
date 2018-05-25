@@ -306,6 +306,7 @@ public class PageController {
 					session.setAttribute("empphone", map.get("phone"));
 					session.setAttribute("empcompName", map.get("compName"));
 					session.setAttribute("empdesignation", map.get("designation"));
+					session.setAttribute("emprole", "admin");
 					mav2.addObject("title", "HomePage");
 					
 					mav2.addObject("services", servicesdao.list());
@@ -325,6 +326,7 @@ public class PageController {
 					session.setAttribute("empphone", map.get("phone"));
 					session.setAttribute("empcompName", map.get("compName"));
 					session.setAttribute("empdesignation", map.get("designation"));
+					session.setAttribute("emprole", "employee");
 					EmpServiceDaoImpl empService = new EmpServiceDaoImpl();
 					mav2.addObject("services", empservicesdao.list());	
 					return mav2;
@@ -341,6 +343,7 @@ public class PageController {
 					session.setAttribute("empphone", map.get("phone"));
 					session.setAttribute("empcompName", map.get("compName"));
 					session.setAttribute("empdesignation", map.get("designation"));
+					session.setAttribute("emprole", "manager");
 					EmpServiceDaoImpl empService = new EmpServiceDaoImpl();
 					mav2.addObject("services", mandao.list());	
 					return mav2;
