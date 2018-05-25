@@ -82,8 +82,9 @@ public class EmployeePageController {
 		
 		ModelAndView mav = new ModelAndView("empleaverequests");
 		Client cl = new Client();
+		String empname = (String) session.getAttribute("empuname");
 		List<EmpDetails> emp1 = cl.getDetails();
-		List<TblEmpLeavereq> leavereq =  empleavereq.view();
+		List<TblEmpLeavereq> leavereq =  empleavereq.viewbyid(empname);
 		mav.addObject("employees", emp1);
 		mav.addObject("empleave", leavereq);
 		
@@ -116,7 +117,7 @@ public class EmployeePageController {
 		mav.addObject("employees", emp1);
 		mav.addObject("empleave", leavereq);
 		
-		TblEmpLeavereq empleave = new TblEmpLeavereq(request.getParameter("leavetype"), request.getParameter("fromdate"), request.getParameter("fromdate"), (int)daysNegative, request.getParameter("leavereason"), null, null, null);
+		TblEmpLeavereq empleave = new TblEmpLeavereq((int)daysNegative,null, request.getParameter("fromdate"),request.getParameter("leavereason"), request.getParameter("leavetype"), null, null,  request.getParameter("todate"),null);
 		empleave.setManagerid(null);
 		empleave.setEmployeeid((String) session.getAttribute("empuname"));
 		empleave.setStatus(null);
@@ -130,7 +131,7 @@ public class EmployeePageController {
 	/*
 	 * Employee Leave Request Edit and Delete Operations
 	 */
-	@RequestMapping(value= "/employee/leave/edit/{id}")
+/*	@RequestMapping(value= "/employee/leave/edit/{id}")
 	public ModelAndView empLeaveeditPage(HttpSession session,@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView("empleavereqedit");
 		String empname = (String) session.getAttribute("empuname");
@@ -141,7 +142,7 @@ public class EmployeePageController {
 		mav.addObject("services", empservicesdao.list());
 		
 		return mav;
-	}
+	}*/
 	@RequestMapping(value= "/employee/leave/delete/{id}")
 	public ModelAndView empLeavedeletePage(HttpSession session,@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView("redirect:/employee/leave/register");

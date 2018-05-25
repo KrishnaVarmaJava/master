@@ -1,5 +1,4 @@
 package mylas.com.erp.demo;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,28 +14,30 @@ import javax.persistence.Table;
 public class TblEmpLeavereq implements java.io.Serializable {
 
 	private Integer id;
-	private String leavetype;
-	private String fromdate;
-	private String todate;
 	private Integer count;
-	private String leavereason;
-	private String managerid;
 	private String employeeid;
+	private String fromdate;
+	private String leavereason;
+	private String leavetype;
+	private String managerid;
 	private Boolean status;
+	private String todate;
+	private String reason;
 
 	public TblEmpLeavereq() {
 	}
 
-	public TblEmpLeavereq(String leavetype, String fromdate, String todate, Integer count, String leavereason,
-			String managerid, String employeeid, Boolean status) {
-		this.leavetype = leavetype;
-		this.fromdate = fromdate;
-		this.todate = todate;
+	public TblEmpLeavereq(Integer count, String employeeid, String fromdate, String leavereason, String leavetype,
+			String managerid, Boolean status, String todate, String reason) {
 		this.count = count;
-		this.leavereason = leavereason;
-		this.managerid = managerid;
 		this.employeeid = employeeid;
+		this.fromdate = fromdate;
+		this.leavereason = leavereason;
+		this.leavetype = leavetype;
+		this.managerid = managerid;
 		this.status = status;
+		this.todate = todate;
+		this.reason = reason;
 	}
 
 	@Id
@@ -51,33 +52,6 @@ public class TblEmpLeavereq implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "leavetype", length = 15)
-	public String getLeavetype() {
-		return this.leavetype;
-	}
-
-	public void setLeavetype(String leavetype) {
-		this.leavetype = leavetype;
-	}
-
-	@Column(name = "fromdate", length = 30)
-	public String getFromdate() {
-		return this.fromdate;
-	}
-
-	public void setFromdate(String fromdate) {
-		this.fromdate = fromdate;
-	}
-
-	@Column(name = "todate", length = 30)
-	public String getTodate() {
-		return this.todate;
-	}
-
-	public void setTodate(String todate) {
-		this.todate = todate;
-	}
-
 	@Column(name = "count")
 	public Integer getCount() {
 		return this.count;
@@ -85,24 +59,6 @@ public class TblEmpLeavereq implements java.io.Serializable {
 
 	public void setCount(Integer count) {
 		this.count = count;
-	}
-
-	@Column(name = "leavereason", length = 100)
-	public String getLeavereason() {
-		return this.leavereason;
-	}
-
-	public void setLeavereason(String leavereason) {
-		this.leavereason = leavereason;
-	}
-
-	@Column(name = "managerid", length = 50)
-	public String getManagerid() {
-		return this.managerid;
-	}
-
-	public void setManagerid(String managerid) {
-		this.managerid = managerid;
 	}
 
 	@Column(name = "employeeid", length = 50)
@@ -114,6 +70,42 @@ public class TblEmpLeavereq implements java.io.Serializable {
 		this.employeeid = employeeid;
 	}
 
+	@Column(name = "fromdate", length = 30)
+	public String getFromdate() {
+		return this.fromdate;
+	}
+
+	public void setFromdate(String fromdate) {
+		this.fromdate = fromdate;
+	}
+
+	@Column(name = "leavereason", length = 100)
+	public String getLeavereason() {
+		return this.leavereason;
+	}
+
+	public void setLeavereason(String leavereason) {
+		this.leavereason = leavereason;
+	}
+
+	@Column(name = "leavetype", length = 15)
+	public String getLeavetype() {
+		return this.leavetype;
+	}
+
+	public void setLeavetype(String leavetype) {
+		this.leavetype = leavetype;
+	}
+
+	@Column(name = "managerid", length = 50)
+	public String getManagerid() {
+		return this.managerid;
+	}
+
+	public void setManagerid(String managerid) {
+		this.managerid = managerid;
+	}
+
 	@Column(name = "status")
 	public Boolean getStatus() {
 		return this.status;
@@ -121,6 +113,24 @@ public class TblEmpLeavereq implements java.io.Serializable {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	@Column(name = "todate", length = 30)
+	public String getTodate() {
+		return this.todate;
+	}
+
+	public void setTodate(String todate) {
+		this.todate = todate;
+	}
+
+	@Column(name = "reason", length = 150)
+	public String getReason() {
+		return this.reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 
 }

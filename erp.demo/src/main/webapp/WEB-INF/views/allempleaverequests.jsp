@@ -146,6 +146,7 @@
 								</div>
 							</div>
 							<div class="body">
+							<p style="color: green;">${UMsg}</p>
 								<table class="tablesaw table-striped table-bordered table-hover">
 									<thead class="tableheding">
 										<tr>
@@ -164,14 +165,13 @@
 												Reason</th>
 											<th data-tablesaw-sortable-col data-tablesaw-priority="4">Status
 											</th>
-											<th data-tablesaw-sortable-col data-tablesaw-priority="1"
-												class="actiontabel">Action</th>
+											
 
 										</tr>
 									</thead>
 									<div class="clearfix"></div>
 									<c:forEach items="${empleave}" var="empleaveslist">
-									
+									<c:if test="${empleaveslist.getStatus() == null}">
 										<tbody>
 
 
@@ -188,6 +188,7 @@
 												<td>${empleaveslist.getTodate()}</td>
 												<td>${empleaveslist.getCount()}days</td>
 												<td>${empleaveslist.getLeavereason()}</td>
+			
 												<td>
 
 													<div class="btn-group">
@@ -198,38 +199,20 @@
 															Panding <span class="caret"></span>
 														</button>
 														<ul class="dropdown-menu bullet">
-															<li><a href="javascript:void(0);"><i
-																	class="material-icons">assistant_photo</i>New</a></li>
-															<li><a href="javascript:void(0);"><i
-																	class="material-icons">assistant_photo</i>Panding</a></li>
-															<li><a href="javascript:void(0);"><i
+														
+															<li><a  href="${contextRoot}/${sessionScope.emprole}/leave/approve/${empleaveslist.getId()}"><i
 																	class="material-icons">print</i>Approved</a></li>
-															<li><a href="javascript:void(0);"><i
+															<li><a href="${contextRoot}/${sessionScope.emprole}/leave/decline/${empleaveslist.getId()}"><i
 																	class="material-icons">favorite</i>Declined</a></li>
 														</ul>
 													</div>
 												</td>
-												<td>
-													<ul class="tabelaction">
-														<li class="dropdown"><a href="javascript:void(0);"
-															class="dropdown-toggle" data-toggle="dropdown"
-															role="button" aria-haspopup="true" aria-expanded="false">
-																<i class="material-icons">more_vert</i>
-														</a>
-															<ul class="dropdown-menu pull-right">
-																<li><a href="javascript:void(0);"><i
-																		class="material-icons">edit</i>Edit</a></li>
-																<li><a href="javascript:void(0);"><i
-																		class="material-icons">delete</i>Delete</a></li>
-
-															</ul></li>
-													</ul>
-												</td>
+										
 
 											</tr>
 
 										</tbody>
-										
+										</c:if>
 									</c:forEach>
 
 
@@ -257,6 +240,8 @@
 	<script src="${plugins}/jQuery-Storage-API/jquery.storageapi.js"></script>
 	<script src="${plugins}/jquery-slimscroll/jquery.slimscroll.js"></script>
 	<script src="${plugins}/node-waves/waves.js"></script>
+	
+
 
 	<!--THIS PAGE LEVEL JS-->
 	<script src="${plugins}/tablesaw/js/tablesaw.js"></script>
@@ -272,8 +257,23 @@
 
 
 
+<!-- 	<script type="text/javascript">
+	
+	$(document).ready(function(){
+    $("#de").click(function(){
 
-
+    	var abc = $("#reason").val();
+    	  
+    	 alert(abc);
+    	 
+    	var word = document.getElementById("reason").value;
+       alert(word);
+        
+    });
+});
+	
+	</script>
+ -->
 
 </body>
 

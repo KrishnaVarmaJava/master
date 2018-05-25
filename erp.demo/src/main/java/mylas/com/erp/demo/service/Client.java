@@ -93,7 +93,7 @@ public class Client implements EmployeeDao {
 		buildSessionFactory();
 		Session session = fact.openSession();
 		user =  session.load(EmpDetails.class, empuname);
-		System.out.println(user.getFname());
+		//System.out.println(user.getFname());
 		return null;
 	}
 
@@ -109,7 +109,7 @@ public class Client implements EmployeeDao {
 		SQLQuery query = session.createSQLQuery(sqlquery);
 		List names = query.list();
 		for(Object name : names) {
-				System.out.println(name);
+				//System.out.println(name);
 		}
 		return null;
 	}

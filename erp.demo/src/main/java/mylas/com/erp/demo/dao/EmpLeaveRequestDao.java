@@ -12,4 +12,5 @@ public interface EmpLeaveRequestDao {
 	public void edit();
 	public TblEmpLeavereq view(int id);
 	public String delete(int id);
+	public String update(int id,String reason,boolean status);
 }

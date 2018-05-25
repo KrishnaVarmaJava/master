@@ -108,4 +108,19 @@ public class EmpLeaveRequestService implements EmpLeaveRequestDao {
         return "Deleted_Entry!";
 	}
 
+	@Override
+	public String update(int id, String reason, boolean status) {
+		Configuration con = new Configuration().configure("hibernate.cfg.xml");
+		SessionFactory fact = con.buildSessionFactory();
+		Session session = fact.openSession();
+		Transaction tx2 = session.beginTransaction();
+		TblEmpLeavereq empleave = session.load(TblEmpLeavereq.class, id);
+		empleave.setReason(reason);
+		empleave.setStatus(status);
+		session.update(empleave);
+		tx2.commit();
+		System.out.println("updated table");
+		return "Request";
+	}
+
 }

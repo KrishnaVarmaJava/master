@@ -320,11 +320,10 @@
 																<i class="material-icons">more_vert</i>
 														</a>
 															<ul class="dropdown-menu pull-right">
-																<li><a href="${contextRoot}/${sessionScope.emprole}/leave/edit/${empleaveslist.getId()}"><i
-																		class="material-icons">edit</i>Edit</a></li>
+															<c:if test="${empleaveslist.getStatus() == null}">
 																<li><a href="${contextRoot}/${sessionScope.emprole}/leave/delete/${empleaveslist.getId()}"><i
 																		class="material-icons">delete</i>Delete</a></li>
-
+																</c:if>
 															</ul></li>
 													</ul>
 												</td>
