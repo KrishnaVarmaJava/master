@@ -106,6 +106,8 @@
 						<h2>Add Leave Request</h2>
 					</div>
 					<p style="color: green;">${Submitmsg}</p>
+					<p style="color: red;">${errmsg}</p>
+					
 					<form action="${contextRoot}/${sessionScope.emprole}/leave/register" method="post">
 						<hr class="custom_line">
 						<div class="body">
@@ -114,7 +116,7 @@
 								<div class="form-group">
 									<div class="form-line">
 										<label>Leave Type</label> <select class="form-control"
-											size="1" name="leavetype" id="leavetype">
+											size="1" name="leavetype" id="leavetype" required="required">
 											<option value="0">Please select</option>
 											<option value="Loss of Pay">Loss of Pay</option>
 											<option value="Casual Leave">Casual Leave 12 Days</option>
@@ -128,7 +130,7 @@
 									<div class="input-group addon-line">
 										<div class="form-line">
 											<label>From </label> <input type="date" name="fromdate"
-												id="fromdate" class="form-control" placeholder="From Date">
+												id="fromdate" class="form-control" placeholder="From Date" required="required">
 										</div>
 										<span class="input-group-addon"><i
 											class="material-icons">date_range </i></span>
@@ -142,7 +144,7 @@
 									<div class="input-group addon-line">
 										<div class="form-line">
 											<label>To </label> <input type="date" name="todate"
-												id="todate" class="form-control" placeholder="To Date">
+												id="todate" class="form-control" placeholder="To Date" required="required">
 										</div>
 										<span class="input-group-addon"><i
 											class="material-icons">date_range </i></span>
@@ -156,7 +158,7 @@
 									<div class="form-line">
 										<label>Leave Reason </label>
 										<textarea name="leavereason" id="leavereason"
-											class="form-control" rows="3"></textarea>
+											class="form-control" rows="3" required="required"></textarea>
 									</div>
 								</div>
 
@@ -165,7 +167,7 @@
 								<div class="form-group">
 									<div class="form-line">
 										<label>Manager</label> <select class="form-control" size="1"
-											name="manager" id="manager">
+											name="manager" id="manager" required="required">
 											<option value="0">Please select</option>
 											<option value="Man1">Manager1</option>
 											<option value="Man2">Manager2</option>
@@ -291,22 +293,23 @@
 												<td>
 
 													<div class="btn-group">
+													<c:if test="${empleaveslist.getStatus() == null}">
 														<button type="button"
 															class="btn btn-primary btn-outline btn-rounded waves-effect"
 															data-toggle="dropdown" aria-haspopup="true"
-															aria-expanded="false">
-															Panding <span class="caret"></span>
+															aria-expanded="false">Panding 
 														</button>
-														<ul class="dropdown-menu bullet">
-															<li><a href="javascript:void(0);"><i
-																	class="material-icons">assistant_photo</i>New</a></li>
-															<li><a href="javascript:void(0);"><i
-																	class="material-icons">assistant_photo</i>Panding</a></li>
-															<li><a href="javascript:void(0);"><i
-																	class="material-icons">print</i>Approved</a></li>
-															<li><a href="javascript:void(0);"><i
-																	class="material-icons">favorite</i>Declined</a></li>
-														</ul>
+														</c:if><c:if test="${empleaveslist.getStatus() == false}">
+																<button type="button"
+															class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
+															>Declined 
+														</button></c:if><c:if test="${empleaveslist.getStatus() == true}">
+																<button type="button"
+															class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect "
+															data-toggle="dropdown" aria-haspopup="true"
+															aria-expanded="false">Approved 
+														</button>
+												</c:if>
 													</div>
 												</td>
 												<td>
@@ -317,9 +320,9 @@
 																<i class="material-icons">more_vert</i>
 														</a>
 															<ul class="dropdown-menu pull-right">
-																<li><a href="${contextRoot}/employee/leave/edit/${empleaveslist.getId()}"><i
+																<li><a href="${contextRoot}/${sessionScope.emprole}/leave/edit/${empleaveslist.getId()}"><i
 																		class="material-icons">edit</i>Edit</a></li>
-																<li><a href="${contextRoot}/employee/leave/delete/${empleaveslist.getId()}"><i
+																<li><a href="${contextRoot}/${sessionScope.emprole}/leave/delete/${empleaveslist.getId()}"><i
 																		class="material-icons">delete</i>Delete</a></li>
 
 															</ul></li>

@@ -291,22 +291,23 @@
 												<td>
 
 													<div class="btn-group">
+														<c:if test="${empleaveslist.getStatus() == null}">
 														<button type="button"
 															class="btn btn-primary btn-outline btn-rounded waves-effect"
 															data-toggle="dropdown" aria-haspopup="true"
-															aria-expanded="false">
-															Panding <span class="caret"></span>
+															aria-expanded="false">Panding 
 														</button>
-														<ul class="dropdown-menu bullet">
-															<li><a href="javascript:void(0);"><i
-																	class="material-icons">assistant_photo</i>New</a></li>
-															<li><a href="javascript:void(0);"><i
-																	class="material-icons">assistant_photo</i>Panding</a></li>
-															<li><a href="javascript:void(0);"><i
-																	class="material-icons">print</i>Approved</a></li>
-															<li><a href="javascript:void(0);"><i
-																	class="material-icons">favorite</i>Declined</a></li>
-														</ul>
+														</c:if><c:if test="${empleaveslist.getStatus() == false}">
+																<button type="button"
+															class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
+															>Declined 
+														</button></c:if><c:if test="${empleaveslist.getStatus() == true}">
+																<button type="button"
+															class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect "
+															data-toggle="dropdown" aria-haspopup="true"
+															aria-expanded="false">Approved 
+														</button>
+												</c:if>
 													</div>
 												</td>
 												<td>
