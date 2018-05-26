@@ -16,52 +16,48 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "emp_details", schema = "krishna", catalog = "mylasfyt_krishna", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "uname"), @UniqueConstraint(columnNames = "eid") })
+		@UniqueConstraint(columnNames = "eid"), @UniqueConstraint(columnNames = "uname") })
 public class EmpDetails implements java.io.Serializable {
 
 	private Integer id;
-	private String fname;
-	private String lname;
-	private String uname;
-	private String email;
-	private String pswd;
-	private String cpswd;
-	private String eid;
-	private Date jdate;
-	private Integer phone;
 	private String compName;
+	private String cpswd;
 	private String designation;
-	private boolean role;
+	private String eid;
+	private String email;
+	private String fname;
+	private Date jdate;
+	private String lname;
 	private boolean loginStatus;
-	private Boolean usrmanrole;
+	private Integer phone;
+	private String pswd;
+	private String role;
+	private String uname;
 
 	public EmpDetails() {
 	}
 
-	public EmpDetails(String uname, String eid, boolean role, boolean loginStatus) {
-		this.uname = uname;
+	public EmpDetails(String eid, boolean loginStatus, String uname) {
 		this.eid = eid;
-		this.role = role;
 		this.loginStatus = loginStatus;
+		this.uname = uname;
 	}
 
-	public EmpDetails(String fname, String lname, String uname, String email, String pswd, String cpswd, String eid,
-			Date jdate, Integer phone, String compName, String designation, boolean role, boolean loginStatus,
-			Boolean usrmanrole) {
-		this.fname = fname;
-		this.lname = lname;
-		this.uname = uname;
-		this.email = email;
-		this.pswd = pswd;
-		this.cpswd = cpswd;
-		this.eid = eid;
-		this.jdate = jdate;
-		this.phone = phone;
+	public EmpDetails(String compName, String cpswd, String designation, String eid, String email, String fname,
+			Date jdate, String lname, boolean loginStatus, Integer phone, String pswd, String role, String uname) {
 		this.compName = compName;
+		this.cpswd = cpswd;
 		this.designation = designation;
-		this.role = role;
+		this.eid = eid;
+		this.email = email;
+		this.fname = fname;
+		this.jdate = jdate;
+		this.lname = lname;
 		this.loginStatus = loginStatus;
-		this.usrmanrole = usrmanrole;
+		this.phone = phone;
+		this.pswd = pswd;
+		this.role = role;
+		this.uname = uname;
 	}
 
 	@Id
@@ -76,49 +72,13 @@ public class EmpDetails implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "fname", length = 50)
-	public String getFname() {
-		return this.fname;
+	@Column(name = "compName", length = 50)
+	public String getCompName() {
+		return this.compName;
 	}
 
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-
-	@Column(name = "lname", length = 50)
-	public String getLname() {
-		return this.lname;
-	}
-
-	public void setLname(String lname) {
-		this.lname = lname;
-	}
-
-	@Column(name = "uname", unique = true, nullable = false, length = 50)
-	public String getUname() {
-		return this.uname;
-	}
-
-	public void setUname(String uname) {
-		this.uname = uname;
-	}
-
-	@Column(name = "email", length = 50)
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	@Column(name = "pswd", length = 50)
-	public String getPswd() {
-		return this.pswd;
-	}
-
-	public void setPswd(String pswd) {
-		this.pswd = pswd;
+	public void setCompName(String compName) {
+		this.compName = compName;
 	}
 
 	@Column(name = "cpswd", length = 50)
@@ -130,43 +90,6 @@ public class EmpDetails implements java.io.Serializable {
 		this.cpswd = cpswd;
 	}
 
-	@Column(name = "eid", unique = true, nullable = false, length = 50)
-	public String getEid() {
-		return this.eid;
-	}
-
-	public void setEid(String eid) {
-		this.eid = eid;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "jdate", length = 10)
-	public Date getJdate() {
-		return this.jdate;
-	}
-
-	public void setJdate(Date jdate) {
-		this.jdate = jdate;
-	}
-
-	@Column(name = "phone")
-	public Integer getPhone() {
-		return this.phone;
-	}
-
-	public void setPhone(Integer phone) {
-		this.phone = phone;
-	}
-
-	@Column(name = "compName", length = 50)
-	public String getCompName() {
-		return this.compName;
-	}
-
-	public void setCompName(String compName) {
-		this.compName = compName;
-	}
-
 	@Column(name = "designation", length = 50)
 	public String getDesignation() {
 		return this.designation;
@@ -176,13 +99,50 @@ public class EmpDetails implements java.io.Serializable {
 		this.designation = designation;
 	}
 
-	@Column(name = "role", nullable = false)
-	public boolean isRole() {
-		return this.role;
+	@Column(name = "eid", unique = true, nullable = false, length = 50)
+	public String getEid() {
+		return this.eid;
 	}
 
-	public void setRole(boolean role) {
-		this.role = role;
+	public void setEid(String eid) {
+		this.eid = eid;
+	}
+
+	@Column(name = "email", length = 50)
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Column(name = "fname", length = 50)
+	public String getFname() {
+		return this.fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "jdate", length = 23)
+	public Date getJdate() {
+		return this.jdate;
+	}
+
+	public void setJdate(Date jdate) {
+		this.jdate = jdate;
+	}
+
+	@Column(name = "lname", length = 50)
+	public String getLname() {
+		return this.lname;
+	}
+
+	public void setLname(String lname) {
+		this.lname = lname;
 	}
 
 	@Column(name = "login_status", nullable = false)
@@ -194,13 +154,40 @@ public class EmpDetails implements java.io.Serializable {
 		this.loginStatus = loginStatus;
 	}
 
-	@Column(name = "usrmanrole")
-	public Boolean getUsrmanrole() {
-		return this.usrmanrole;
+	@Column(name = "phone")
+	public Integer getPhone() {
+		return this.phone;
 	}
 
-	public void setUsrmanrole(Boolean usrmanrole) {
-		this.usrmanrole = usrmanrole;
+	public void setPhone(Integer phone) {
+		this.phone = phone;
+	}
+
+	@Column(name = "pswd", length = 50)
+	public String getPswd() {
+		return this.pswd;
+	}
+
+	public void setPswd(String pswd) {
+		this.pswd = pswd;
+	}
+
+	@Column(name = "role", length = 50)
+	public String getRole() {
+		return this.role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	@Column(name = "uname", unique = true, nullable = false, length = 50)
+	public String getUname() {
+		return this.uname;
+	}
+
+	public void setUname(String uname) {
+		this.uname = uname;
 	}
 
 }

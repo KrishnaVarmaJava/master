@@ -31,7 +31,7 @@ public class UserServiceImpl implements User {
 
 	@Override
 	public List<EmpDetails> Login(String loginName, String Password) throws UserBlockedException {
-		String sqlquery = "SELECT uname, fname, lname, phone, email, role, usrmanrole, login_status FROM emp_details WHERE uname='"+loginName+"' and pswd='"+Password+"'";
+		String sqlquery = "SELECT uname, fname, lname, phone, email, role, login_status FROM emp_details WHERE uname='"+loginName+"' and pswd='"+Password+"'";
 		
 		SessionFactory fact = cl.buildSessionFactory();;
 		Session session = fact.openSession();

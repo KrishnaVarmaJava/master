@@ -1,5 +1,6 @@
 package mylas.com.erp.demo.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -150,10 +151,11 @@ public class PageController {
 	
 	@RequestMapping(value="/admin/allemp/register", method=RequestMethod.POST)
 	public ModelAndView saveEmpPage(HttpServletRequest request, HttpServletResponse response) {
-		EmpDetails emp = new EmpDetails(request.getParameter("firstname"), request.getParameter("lastname"), request.getParameter("uname"), request.getParameter("email"), request.getParameter("pswd"), request.getParameter("cpswd"), request.getParameter("empid"), null, null, null, null, false, false, null);
+		
+		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"));
+		
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
-		emp.setUsrmanrole(null);
-		emp.setRole(UserServiceImpl.Role_User);
+		emp.setRole("USER_ROLE");
 		ModelAndView mav = new ModelAndView("employees");
 		mav.addObject("services", servicesdao.list());
 		mav.addObject("title", "Employee Regester Page");
@@ -249,10 +251,10 @@ public class PageController {
 	}
 	@RequestMapping(value= "/register", method=RequestMethod.POST)
 	public ModelAndView adminRegisterPage(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws UserBlockedException {
-		EmpDetails emp = new EmpDetails(null, null, request.getParameter("username"), request.getParameter("email"), request.getParameter("password"), request.getParameter("confirm"), request.getParameter("empid"), null, null, null, null, false, false, null);
+		EmpDetails emp = new EmpDetails(null, request.getParameter("confirm"), null, request.getParameter("empid"), request.getParameter("email"), null, null, null, false, null, request.getParameter("password"), null, request.getParameter("username"));
+		
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
-		emp.setUsrmanrole(null);
-		emp.setRole(UserServiceImpl.Role_Admin);
+		emp.setRole("ADMIN_ROLE");
 		emp.setFname("Admin");
 		emp.setLname("Admin");
 		client.getConnection(emp);
@@ -295,7 +297,7 @@ public class PageController {
 				 *Redirect to the appropriate page 
 				 */
 				
-				if(map.get("role").equals(User.Role_Admin)) {
+				if(map.get("role").equals("ADMIN_ROLE")) {
 					ModelAndView mav2 = new ModelAndView("index");
 					session.setAttribute("empfname", map.get("fname"));
 					session.setAttribute("emplname", map.get("lname"));
@@ -315,7 +317,7 @@ public class PageController {
 					return mav2;
 					
 				}
-				else if(map.get("role").equals(User.Role_User) && map.get("usrmanrole").equals(User.Emp_Role)) {
+				else if(map.get("role").equals("EMPLOYEE_ROLE")) {
 					ModelAndView mav2 = new ModelAndView("empindex");
 					session.setAttribute("empfname", map.get("fname"));
 					session.setAttribute("emplname", map.get("lname"));
@@ -327,12 +329,12 @@ public class PageController {
 					session.setAttribute("empcompName", map.get("compName"));
 					session.setAttribute("empdesignation", map.get("designation"));
 					session.setAttribute("emprole", "employee");
-					EmpServiceDaoImpl empService = new EmpServiceDaoImpl();
+					
 					mav2.addObject("services", empservicesdao.list());	
 					return mav2;
 					
 				}
-				else if(map.get("role").equals(User.Role_User) && map.get("usrmanrole").equals(User.Man_Role)) {
+				else if(map.get("role").equals("MANAGER_ROLE")) {
 					ModelAndView mav2 = new ModelAndView("empindex");
 					session.setAttribute("empfname", map.get("fname"));
 					session.setAttribute("emplname", map.get("lname"));
@@ -344,7 +346,7 @@ public class PageController {
 					session.setAttribute("empcompName", map.get("compName"));
 					session.setAttribute("empdesignation", map.get("designation"));
 					session.setAttribute("emprole", "manager");
-					EmpServiceDaoImpl empService = new EmpServiceDaoImpl();
+					
 					mav2.addObject("services", mandao.list());	
 					return mav2;
 					
