@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generated 28 May, 2018 11:38:15 AM by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
-    <class catalog="mylasfyt_krishna" dynamic-insert="false" dynamic-update="false" mutable="true" name="TblEmpAttendanceNew" optimistic-lock="version" polymorphism="implicit" schema="krishna" select-before-update="false" table="tbl_emp_attendance_new">
+    <class catalog="mylasfyt_krishna" dynamic-insert="false" dynamic-update="false" mutable="true" name="mylas.com.erp.demo.TblEmpAttendanceNew" optimistic-lock="version" polymorphism="implicit" schema="krishna" select-before-update="false" table="tbl_emp_attendance_new">
         <composite-id class="TblEmpAttendanceNewId" mapped="false" name="id" unsaved-value="undefined">
             <key-property name="managerid" type="string">
                 <column length="1" name="managerid"/>

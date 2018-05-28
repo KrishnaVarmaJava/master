@@ -1325,7 +1325,7 @@
 															<li><a href="javascript:void(0);"
 																class=" waves-effect waves-classic"><i
 																	class="material-icons">edit</i>Edit</a></li>
-															<li><a href="javascript:void(0);"
+															<li><a href="${contextRoot}//admin/allemp/delete/${empl.getId()}"
 																class=" waves-effect waves-classic"><i
 																	class="material-icons">delete</i>Delete</a></li>
 

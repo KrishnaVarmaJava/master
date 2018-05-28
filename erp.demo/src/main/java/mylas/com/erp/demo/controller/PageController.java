@@ -1,6 +1,5 @@
 package mylas.com.erp.demo.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblDepartment;
 import mylas.com.erp.demo.TblDesignation;
-import mylas.com.erp.demo.appservices.User;
+import mylas.com.erp.demo.TblEmpAttendanceNew;
+import mylas.com.erp.demo.TblEmpAttendanceNewId;
 import mylas.com.erp.demo.appservices.UserServiceImpl;
+import mylas.com.erp.demo.dao.EmpAttendenceDao;
 import mylas.com.erp.demo.dao.EmpServicesDao;
 import mylas.com.erp.demo.dao.ManagerServicesDao;
 import mylas.com.erp.demo.dao.ServicesDao;
-import mylas.com.erp.demo.daoimpl.EmpServiceDaoImpl;
+import mylas.com.erp.demo.daoimpl.EmpAttendanceDaoImpl;
 import mylas.com.erp.demo.exceptions.UserBlockedException;
 import mylas.com.erp.demo.operations.LoginOperations;
 import mylas.com.erp.demo.service.Client;
@@ -44,8 +45,11 @@ public class PageController {
 	
 	@Autowired
 	ManagerServicesDao mandao;
+	@Autowired
+	EmpAttendenceDao empattdao;
 
 	Client client = new Client();
+	EmpAttendanceDaoImpl attimpl=new EmpAttendanceDaoImpl();
 	
 		
 	@RequestMapping(value= "/admin", method=RequestMethod.GET)
@@ -158,13 +162,11 @@ public class PageController {
 		emp.setRole("USER_ROLE");
 		ModelAndView mav = new ModelAndView("employees");
 		mav.addObject("services", servicesdao.list());
-		mav.addObject("title", "Employee Regester Page");
-		mav.addObject("userClickReg", true);
 		client.getConnection(emp);
 		Client cl = new Client();
 		List<EmpDetails> emp1 = cl.getDetails();
 		mav.addObject("employees", emp1);
-		request.setAttribute("Sempl", emp1);
+		
 		mav.addObject("employee", emp);
 		cl.closeAllSessions();
 		return mav;		
@@ -188,7 +190,7 @@ public class PageController {
 		cl.closeAllSessions();
 		return mav;		
 	}
-	@RequestMapping(value="/admin/allemp/delete/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/allemp/delete/{id}")
 	public ModelAndView deleteEmpPage(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView("employees");
 		mav.addObject("services", servicesdao.list());
@@ -407,9 +409,12 @@ public class PageController {
 	@RequestMapping(value= "/test")
 	public ModelAndView testPage() {
 		ModelAndView mav = new ModelAndView("empindex");
-		/*EmpDetails emp = new EmpDetails(null, null, null, null, null, null, null, null, false, null, null, null, null);
-		client.updateDetails(emp, 15);*/
-		client.deleteDetails(15);
+		TblEmpAttendanceNewId id = new TblEmpAttendanceNewId(null, null, null, null, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true, true, true, true, true, true, true, true, true, true, true, true, true, true, null, null);
+		TblEmpAttendanceNew tbl=new TblEmpAttendanceNew(id);
+		
+		attimpl.save(tbl);
+		
+		
 		
 		return mav;
 	}
