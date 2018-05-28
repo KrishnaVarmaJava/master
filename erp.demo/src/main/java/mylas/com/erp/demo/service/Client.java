@@ -48,7 +48,7 @@ public class Client implements EmployeeDao {
 	public List<EmpDetails> getDetails() {
 		buildSessionFactory();
 		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+		session.beginTransaction();
 		Query q = session.createQuery("from EmpDetails");
 		List<EmpDetails> emp1 = q.list();
 		return (emp1);
@@ -62,8 +62,21 @@ public class Client implements EmployeeDao {
 	}
 
 	@Override
-	public void updateDetails(EmpDetails emp) {
+	public void updateDetails(EmpDetails empl,int id) {
 		// TODO Auto-generated method stub
+		Configuration con = new Configuration().configure("hibernate.cfg.xml");
+		SessionFactory fact = con.buildSessionFactory();
+		Session session = fact.openSession();
+		Transaction tx2 = session.beginTransaction();
+		EmpDetails emp = session.load(EmpDetails.class,id);
+	
+		 	
+		 	emp.setCompName(empl.getCompName());
+
+		 	session.update(emp);
+		 	tx2.commit();
+		 	System.out.println("updated table");
+		 	
 		
 	}
 
@@ -72,6 +85,17 @@ public class Client implements EmployeeDao {
 	@Override
 	public void deleteDetails(int id) {
 		// TODO Auto-generated method stub
+		Configuration con = new Configuration().configure("hibernate.cfg.xml");
+		SessionFactory fact = con.buildSessionFactory();
+		Session session = fact.openSession();
+		Transaction tx = session.beginTransaction();
+		EmpDetails empdel = session.load(EmpDetails.class, id);
+		session.delete(empdel);
+        System.out.println("Object Deleted successfully.....!!");
+        tx.commit();
+        session.close();
+        fact.close();
+       // return "Deleted_Entry!";
 		
 	}
 
@@ -89,29 +113,16 @@ public class Client implements EmployeeDao {
 
 	@Override
 	public EmpDetails getByUName(String empuname) {
-		EmpDetails user;
 		buildSessionFactory();
 		Session session = fact.openSession();
-		user =  session.load(EmpDetails.class, empuname);
+		session.load(EmpDetails.class, empuname);
 		//System.out.println(user.getFname());
 		return null;
 	}
 
 
-	@Override
-	public List getEmpDetails() {
-		String sqlquery = "select emp_details.fname, emp_details.lname, tbl_emp_leavereq.employeeid from emp_details, tbl_emp_leavereq where tbl_emp_leavereq.employeeid=emp_details.uname";
-		
-		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-		SessionFactory fact = con.buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
-		SQLQuery query = session.createSQLQuery(sqlquery);
-		List names = query.list();
-		for(Object name : names) {
-				//System.out.println(name);
-		}
-		return null;
-	}
+	
+
+	
 	
 }

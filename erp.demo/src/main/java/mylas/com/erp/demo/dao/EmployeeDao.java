@@ -10,9 +10,9 @@ public interface EmployeeDao {
 	
 	public void getConnection(EmpDetails emp);
 	public List<EmpDetails> getDetails();
-	public void updateDetails(EmpDetails emp);
+	public void updateDetails(EmpDetails emp, int id);
 	public void deleteDetails(int id);
 	public EmpDetails getById(int id);
 	public EmpDetails getByUName(String empuname);
-	public List getEmpDetails();
+	
 }

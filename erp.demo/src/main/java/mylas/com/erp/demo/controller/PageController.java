@@ -169,7 +169,40 @@ public class PageController {
 		cl.closeAllSessions();
 		return mav;		
 	}
-
+	@RequestMapping(value="/admin/allemp/update/{id}", method=RequestMethod.POST)
+	public ModelAndView updateEmpPage(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") int id) {
+		
+		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"));
+		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
+		emp.setRole("USER_ROLE");
+		ModelAndView mav = new ModelAndView("employees");
+		mav.addObject("services", servicesdao.list());
+		mav.addObject("title", "Employee Regester Page");
+		mav.addObject("userClickReg", true);
+		client.updateDetails(emp, id);
+		Client cl = new Client();
+		List<EmpDetails> emp1 = cl.getDetails();
+		mav.addObject("employees", emp1);
+		request.setAttribute("Sempl", emp1);
+		mav.addObject("employee", emp);
+		cl.closeAllSessions();
+		return mav;		
+	}
+	@RequestMapping(value="/admin/allemp/delete/{id}", method=RequestMethod.POST)
+	public ModelAndView deleteEmpPage(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("employees");
+		mav.addObject("services", servicesdao.list());
+		mav.addObject("title", "Employee Regester Page");
+		client.deleteDetails(id);
+		Client cl = new Client();
+		List<EmpDetails> emp1 = cl.getDetails();
+		mav.addObject("employees", emp1);
+		request.setAttribute("Sempl", emp1);
+		
+		cl.closeAllSessions();
+		return mav;
+		
+	}
 
 	@RequestMapping(value="/admin/empdep/register", method=RequestMethod.POST)
 	public ModelAndView addEmpDepartmentPage(HttpServletRequest request, HttpServletResponse response) {
@@ -374,6 +407,10 @@ public class PageController {
 	@RequestMapping(value= "/test")
 	public ModelAndView testPage() {
 		ModelAndView mav = new ModelAndView("empindex");
+		/*EmpDetails emp = new EmpDetails(null, null, null, null, null, null, null, null, false, null, null, null, null);
+		client.updateDetails(emp, 15);*/
+		client.deleteDetails(15);
+		
 		return mav;
 	}
 	@RequestMapping(value= "/mytest")

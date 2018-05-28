@@ -14,6 +14,9 @@
 		<mapping class="mylas.com.erp.demo.TblDesignation" />
 		<mapping class="mylas.com.erp.demo.TblDepartment" />
 		<mapping class="mylas.com.erp.demo.TblEmpLeavereq" />
+		<mapping class="mylas.com.erp.demo.TblEmpAttendanceNew" />
+		<mapping class="mylas.com.erp.demo.TblEmpAttendanceNewId" />
+		
 		<!-- <mapping resource="mylas/com/erp/demo/TblEmpLeavereq.hbm.xml"/> -->
 	</session-factory>
 </hibernate-configuration>

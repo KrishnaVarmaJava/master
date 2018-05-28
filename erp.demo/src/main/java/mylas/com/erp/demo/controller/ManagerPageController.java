@@ -128,7 +128,6 @@ public class ManagerPageController {
 		ModelAndView mav = new ModelAndView("allempleaverequests");
 		
 		Client cl = new Client();
-		cl.getEmpDetails();
 		String empname = (String) session.getAttribute("empuname");
 		List<EmpDetails> emp1 = cl.getDetails();
 		List<TblEmpLeavereq> leavereq =  empleavereq.view();
