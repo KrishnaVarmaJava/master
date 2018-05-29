@@ -17,13 +17,6 @@ public class ServicesDaoImpl implements ServicesDao{
 	static {
 		
 		Services service = new Services();
-		service.setServiceID("regesteremp");
-		service.setServiceName("Regester Employees");
-		service.setServiceDescription("Regestration Of Employee");
-		service.setServiceRole("admin");
-		services.add(service);
-		
-		service = new Services();
 		service.setServiceID("allemp");
 		service.setServiceName("All Employees");
 		service.setServiceDescription("List Of All the Employee");

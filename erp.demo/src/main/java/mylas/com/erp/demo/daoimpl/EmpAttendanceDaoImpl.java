@@ -1,13 +1,18 @@
 package mylas.com.erp.demo.daoimpl;
 
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 
+import mylas.com.erp.demo.TblDepartment;
 import mylas.com.erp.demo.TblEmpAttendanceNew;
-import mylas.com.erp.demo.TblEmpAttendanceNewId;
+import mylas.com.erp.demo.TblEmpLeavereq;
 import mylas.com.erp.demo.dao.EmpAttendenceDao;
 
 @Repository("empattdao")
@@ -45,9 +50,8 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 		Session session = fact.openSession();
 		Transaction tx2 = session.beginTransaction();
 		TblEmpAttendanceNew emp = session.load(TblEmpAttendanceNew.class,id);
-		TblEmpAttendanceNewId empid = new TblEmpAttendanceNewId(); 
-		empid.setStatas(status);
-		 	emp.setId(empid);
+		
+		emp.setStatas(status);
 		 	session.update(emp);
 		 	tx2.commit();
 		 	System.out.println("updated table");
@@ -62,19 +66,43 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 		Transaction tx = session.beginTransaction();
 		TblEmpAttendanceNew empdel = session.load(TblEmpAttendanceNew.class, id);
 		session.delete(empdel);
-        System.out.println("Object Deleted successfully.....!!");
         tx.commit();
+        System.out.println("Object Deleted successfully.....!!");
         session.close();
         fact.close();
     
 	}
 
 	@Override
-	public void listAll(TblEmpAttendanceNew tbl) {
-		buildSessionFactory();
+	public List<TblEmpAttendanceNew> getDetails() {
+		// TODO Auto-generated method stub
+		Configuration con = new Configuration().configure("hibernate.cfg.xml");
+		SessionFactory fact = con.buildSessionFactory();
 		Session session = fact.openSession();
 		Transaction tx = session.beginTransaction();
-		tx.commit();
+		Query q = session.createQuery("from TblEmpAttendanceNew");
+		List<TblEmpAttendanceNew> empatt = q.list();
+		System.out.println("view Called");
+		return empatt;
+	
 	}
+
+	@Override
+	public List<TblEmpAttendanceNew> viewbyid(String empid) {
+		String sqlquery = "SELECT * FROM tbl_emp_attendance_new WHERE empid ='"+empid+"'";
+		Configuration con = new Configuration().configure("hibernate.cfg.xml");
+		SessionFactory fact = con.buildSessionFactory();
+		Session session = fact.openSession();
+		Transaction tx = session.beginTransaction();
+		List<TblEmpAttendanceNew> map = null;
+
+			SQLQuery query = session.createSQLQuery(sqlquery);
+			query.addEntity(TblEmpAttendanceNew.class);
+			List<TblEmpAttendanceNew> EmpAtt = query.list();
+			
+		return EmpAtt;
+	}
+
+
 
 }

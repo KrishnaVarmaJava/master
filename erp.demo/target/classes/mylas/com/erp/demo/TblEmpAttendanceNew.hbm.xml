@@ -1,119 +1,121 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 28 May, 2018 11:38:15 AM by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 28 May, 2018 6:56:41 PM by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class catalog="mylasfyt_krishna" dynamic-insert="false" dynamic-update="false" mutable="true" name="mylas.com.erp.demo.TblEmpAttendanceNew" optimistic-lock="version" polymorphism="implicit" schema="krishna" select-before-update="false" table="tbl_emp_attendance_new">
-        <composite-id class="TblEmpAttendanceNewId" mapped="false" name="id" unsaved-value="undefined">
-            <key-property name="managerid" type="string">
-                <column length="1" name="managerid"/>
-            </key-property>
-            <key-property name="empid" type="string">
-                <column length="1" name="empid"/>
-            </key-property>
-            <key-property name="month" type="string">
-                <column length="1" name="month"/>
-            </key-property>
-            <key-property name="year" type="java.lang.Integer">
-                <column name="year"/>
-            </key-property>
-            <key-property name="day1" type="java.lang.Boolean">
-                <column name="day1"/>
-            </key-property>
-            <key-property name="day2" type="java.lang.Boolean">
-                <column name="day2"/>
-            </key-property>
-            <key-property name="day3" type="java.lang.Boolean">
-                <column name="day3"/>
-            </key-property>
-            <key-property name="day4" type="java.lang.Boolean">
-                <column name="day4"/>
-            </key-property>
-            <key-property name="day5" type="java.lang.Boolean">
-                <column name="day5"/>
-            </key-property>
-            <key-property name="day6" type="java.lang.Boolean">
-                <column name="day6"/>
-            </key-property>
-            <key-property name="day7" type="java.lang.Boolean">
-                <column name="day7"/>
-            </key-property>
-            <key-property name="day8" type="java.lang.Boolean">
-                <column name="day8"/>
-            </key-property>
-            <key-property name="day9" type="java.lang.Boolean">
-                <column name="day9"/>
-            </key-property>
-            <key-property name="day10" type="java.lang.Boolean">
-                <column name="day10"/>
-            </key-property>
-            <key-property name="day11" type="java.lang.Boolean">
-                <column name="day11"/>
-            </key-property>
-            <key-property name="day12" type="java.lang.Boolean">
-                <column name="day12"/>
-            </key-property>
-            <key-property name="day13" type="java.lang.Boolean">
-                <column name="day13"/>
-            </key-property>
-            <key-property name="day14" type="java.lang.Boolean">
-                <column name="day14"/>
-            </key-property>
-            <key-property name="day15" type="java.lang.Boolean">
-                <column name="day15"/>
-            </key-property>
-            <key-property name="day16" type="java.lang.Boolean">
-                <column name="day16"/>
-            </key-property>
-            <key-property name="day17" type="java.lang.Boolean">
-                <column name="day17"/>
-            </key-property>
-            <key-property name="day18" type="java.lang.Boolean">
-                <column name="day18"/>
-            </key-property>
-            <key-property name="day19" type="java.lang.Boolean">
-                <column name="day19"/>
-            </key-property>
-            <key-property name="day20" type="java.lang.Boolean">
-                <column name="day20"/>
-            </key-property>
-            <key-property name="day21" type="java.lang.Boolean">
-                <column name="day21"/>
-            </key-property>
-            <key-property name="day22" type="java.lang.Boolean">
-                <column name="day22"/>
-            </key-property>
-            <key-property name="day23" type="java.lang.Boolean">
-                <column name="day23"/>
-            </key-property>
-            <key-property name="day24" type="java.lang.Boolean">
-                <column name="day24"/>
-            </key-property>
-            <key-property name="day25" type="java.lang.Boolean">
-                <column name="day25"/>
-            </key-property>
-            <key-property name="day26" type="java.lang.Boolean">
-                <column name="day26"/>
-            </key-property>
-            <key-property name="day27" type="java.lang.Boolean">
-                <column name="day27"/>
-            </key-property>
-            <key-property name="day28" type="java.lang.Boolean">
-                <column name="day28"/>
-            </key-property>
-            <key-property name="day29" type="java.lang.Boolean">
-                <column name="day29"/>
-            </key-property>
-            <key-property name="day30" type="java.lang.Boolean">
-                <column name="day30"/>
-            </key-property>
-            <key-property name="day31" type="java.lang.Boolean">
-                <column name="day31"/>
-            </key-property>
-            <key-property name="statas" type="java.lang.Boolean">
-                <column name="statas"/>
-            </key-property>
-            <key-property name="reasion" type="string">
-                <column length="1" name="reasion"/>
-            </key-property>
-        </composite-id>
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="managerid" optimistic-lock="true" type="string" unique="false">
+            <column length="1" name="managerid"/>
+        </property>
+        <property generated="never" lazy="false" name="empid" optimistic-lock="true" type="string" unique="false">
+            <column length="1" name="empid"/>
+        </property>
+        <property generated="never" lazy="false" name="month" optimistic-lock="true" type="string" unique="false">
+            <column length="1" name="month"/>
+        </property>
+        <property generated="never" lazy="false" name="year" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="year"/>
+        </property>
+        <property generated="never" lazy="false" name="day1" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day1"/>
+        </property>
+        <property generated="never" lazy="false" name="day2" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day2"/>
+        </property>
+        <property generated="never" lazy="false" name="day3" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day3"/>
+        </property>
+        <property generated="never" lazy="false" name="day4" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day4"/>
+        </property>
+        <property generated="never" lazy="false" name="day5" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day5"/>
+        </property>
+        <property generated="never" lazy="false" name="day6" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day6"/>
+        </property>
+        <property generated="never" lazy="false" name="day7" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day7"/>
+        </property>
+        <property generated="never" lazy="false" name="day8" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day8"/>
+        </property>
+        <property generated="never" lazy="false" name="day9" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day9"/>
+        </property>
+        <property generated="never" lazy="false" name="day10" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day10"/>
+        </property>
+        <property generated="never" lazy="false" name="day11" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day11"/>
+        </property>
+        <property generated="never" lazy="false" name="day12" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day12"/>
+        </property>
+        <property generated="never" lazy="false" name="day13" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day13"/>
+        </property>
+        <property generated="never" lazy="false" name="day14" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day14"/>
+        </property>
+        <property generated="never" lazy="false" name="day15" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day15"/>
+        </property>
+        <property generated="never" lazy="false" name="day16" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day16"/>
+        </property>
+        <property generated="never" lazy="false" name="day17" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day17"/>
+        </property>
+        <property generated="never" lazy="false" name="day18" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day18"/>
+        </property>
+        <property generated="never" lazy="false" name="day19" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day19"/>
+        </property>
+        <property generated="never" lazy="false" name="day20" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day20"/>
+        </property>
+        <property generated="never" lazy="false" name="day21" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day21"/>
+        </property>
+        <property generated="never" lazy="false" name="day22" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day22"/>
+        </property>
+        <property generated="never" lazy="false" name="day23" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day23"/>
+        </property>
+        <property generated="never" lazy="false" name="day24" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day24"/>
+        </property>
+        <property generated="never" lazy="false" name="day25" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day25"/>
+        </property>
+        <property generated="never" lazy="false" name="day26" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day26"/>
+        </property>
+        <property generated="never" lazy="false" name="day27" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day27"/>
+        </property>
+        <property generated="never" lazy="false" name="day28" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day28"/>
+        </property>
+        <property generated="never" lazy="false" name="day29" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day29"/>
+        </property>
+        <property generated="never" lazy="false" name="day30" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day30"/>
+        </property>
+        <property generated="never" lazy="false" name="day31" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="day31"/>
+        </property>
+        <property generated="never" lazy="false" name="statas" optimistic-lock="true" type="java.lang.Boolean" unique="false">
+            <column name="statas"/>
+        </property>
+        <property generated="never" lazy="false" name="reasion" optimistic-lock="true" type="string" unique="false">
+            <column length="1" name="reasion"/>
+        </property>
     </class>
 </hibernate-mapping>

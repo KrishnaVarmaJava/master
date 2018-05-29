@@ -18,7 +18,6 @@ import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblDepartment;
 import mylas.com.erp.demo.TblDesignation;
 import mylas.com.erp.demo.TblEmpAttendanceNew;
-import mylas.com.erp.demo.TblEmpAttendanceNewId;
 import mylas.com.erp.demo.appservices.UserServiceImpl;
 import mylas.com.erp.demo.dao.EmpAttendenceDao;
 import mylas.com.erp.demo.dao.EmpServicesDao;
@@ -402,25 +401,27 @@ public class PageController {
 	}
 	@RequestMapping(value= "/testpage")
 	public ModelAndView testpage() {
-		ModelAndView mav = new ModelAndView("indvidtimesheet");
+		ModelAndView mav = new ModelAndView("emptimesheet");
 		mav.addObject("services", mandao.list());	
 		return mav;
 	}
 	@RequestMapping(value= "/test")
 	public ModelAndView testPage() {
 		ModelAndView mav = new ModelAndView("empindex");
-		TblEmpAttendanceNewId id = new TblEmpAttendanceNewId(null, null, null, null, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true, true, true, true, true, true, true, true, true, true, true, true, true, true, null, null);
-		TblEmpAttendanceNew tbl=new TblEmpAttendanceNew(id);
+		//TblEmpAttendanceNew tbl = new TblEmpAttendanceNew(null, null, null, null, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true, true, true, true, true, true, true, true, true, true, true, true, true, true, null, null);
 		
-		attimpl.save(tbl);
 		
+		//attimpl.save(tbl);
+		//attimpl.update(false,4);
+		//attimpl.delete(4);
+		attimpl.getDetails();
 		
 		
 		return mav;
 	}
 	@RequestMapping(value= "/mytest")
 	public ModelAndView testmyPage() {
-		ModelAndView mav = new ModelAndView("defaultelements");
+		ModelAndView mav = new ModelAndView("indvidtimesheet");
 		return mav;
 	}
 		
