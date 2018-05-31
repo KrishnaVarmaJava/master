@@ -91,13 +91,9 @@
                 <div class="page-header">
                     <h2>Employee</h2>
                 </div>
-				   <% 
-String name=(String)session.getAttribute("empfname"); 
-out.print("Hello User: You have entered the name: "+name);
 
-%> 
-<c:out value="${sessionScope.emplname}"></c:out>
-${sessionScope.empeid}
+<c:out value="${User.getFname()} ${User.getLname()}"></c:out>
+
    
 				
 				   <div class="col-md-12">
@@ -106,8 +102,8 @@ ${sessionScope.empeid}
                                     <div class="user-card">
                                         <img class="img-responsive" src="${images}/mail/1.jpg" alt="" />
                                         <div class="user-card-info">
-                                            <h6>${sessionScope.empfname} ${sessionScope.emplname}</h6>
-                                            <span>${sessionScope.empdesignation}</span>
+                                            <h6>${User.getFname()} ${User.getLname()}</h6>
+                                            <span>${User.getDesignation()}</span>
                                             <div class="user-card-socials">
                                                 <a href="#" title=""><i class="fa fa-twitter"></i></a>
                                                 <a href="#" title=""><i class="fa fa-facebook"></i></a>
@@ -122,32 +118,32 @@ ${sessionScope.empeid}
 		 <tr>
 		 <td>Username</td>
 		 <td>:</td>
-		 <td>${sessionScope.empuname}</td>
+		 <td>${User.getUname()}</td>
 		 </tr>
 		  <tr>
 		 <td>Email:</td>
 		  <td>:</td>
-		 <td>${sessionScope.empemail}</td>
+		 <td>${User.getEmail()}</td>
 		 </tr>
 		  <tr>
 		 <td>Employee ID:</td>
 		  <td>:</td>
-		 <td>${sessionScope.empeid}</td>
+		 <td>${User.getUname()}</td>
 		 </tr>
 		   <tr>
 		 <td>Joining Date:</td>
 		  <td>:</td>
-		 <td>${sessionScope.empjdate}</td>
+		 <td>${User.getJdate()}</td>
 		 </tr>
 		  <tr>
 		 <td>Phone:</td>
 		  <td>:</td>
-		 <td>${sessionScope.empphone}</td>
+		 <td>${User.getPhone()}</td>
 		 </tr>
 		  <tr>
 		 <td>Company:</td>
 		  <td>:</td>
-		 <td>${sessionScope.empcompName}</td>
+		 <td>${User.getCompName()}</td>
 		 </tr>
 		  </table>
 		  </div>

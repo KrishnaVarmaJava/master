@@ -8,6 +8,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,9 @@ import mylas.com.erp.demo.service.Client;
 
 public class UserServiceImpl implements User {
 
-	
+
 	Client cl = new Client();
-	
+
 	@Override
 	public void Register(EmpDetails emp) {
 		cl.getConnection(emp);
@@ -32,8 +33,10 @@ public class UserServiceImpl implements User {
 	@Override
 	public List<EmpDetails> Login(String loginName, String Password) throws UserBlockedException {
 		String sqlquery = "SELECT uname, fname, lname, phone, email, role, login_status FROM emp_details WHERE uname='"+loginName+"' and pswd='"+Password+"'";
-		
-		SessionFactory fact = cl.buildSessionFactory();;
+
+		Configuration con = new Configuration().configure("hibernate.cfg.xml");
+
+		SessionFactory fact = con.buildSessionFactory();
 		Session session = fact.openSession();
 		Transaction tx = session.beginTransaction();
 		Map map = null;
@@ -45,20 +48,20 @@ public class UserServiceImpl implements User {
 				map = (Map) usr;
 			}
 			if(map.get("login_status").equals(User.Login_Status_Blocked)) {
-				
+
 				throw new UserBlockedException("Your Account has been Blocked. Contact the Admin");					
 			}else {
 				return user;
 			}
-			
-			
-			
+
+
+
 		} catch (NullPointerException e) {
 			// TODO Auto-generated catch block
 			return null;
 		}
-		
-		
+
+
 	}
 
 	@Override

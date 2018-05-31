@@ -48,6 +48,10 @@
     .wdth td{
     min-width:80px;
     }
+    .selected {
+    background:red;
+	}
+}
     </style>
 </head>
 <body class="theme-indigo light layout-fixed">
@@ -108,7 +112,12 @@
 					
 
                         <!-- Table Kitchen Sink -->
-                        <form action="${contextRoot}/${sessionScope.emprole}/timesheet/register" method="post">
+                       
+
+
+
+                        
+                        <form action="${contextRoot}/${sessionScope.emprole}/timesheet/register" method="post" onsubmit="return validate()" >
                         <div class="card">
                         		
                             <div class="body">
@@ -191,12 +200,36 @@
                                       
 
 											<td>
-										 <select class="form-control" size="1" name="day${loop.index}" id="day${loop.index}" required>
+										 <select class="form-control"  size="1" name="day${loop.index}"  id="day${loop.index}" required>
                                             <option value="0">Please select</option>
                                             <option value="1">Present</option>
                                             <option value="2">Absent Or Leave</option>
                                             <option value="3">WeekEnd Or Holiday</option>
 </select>
+
+
+<% String str="day${loop.index}"; %>
+				 <script>
+                 
+                 
+                        function validate() {
+                            //alert("hai");
+                        	// var opt= document.getElementById("day${loop.index}").value; // or in jQuery use: select = this;
+                        	 var opt=document.getElementById("day${loop.index}").value;
+                        	 var name=document.getElementsByName("day${loop.index}");
+                                if (opt==0) {
+                              alert("plese select the option");
+                             // document.getElementById("day${loop.index}").focus();
+                            
+
+                             $("name").addClass("selected");
+                             alert("ffg");
+                              document.getElementById("day${loop.index}").style.backgroundColor = "lightblue";
+                              return false;
+                            } 
+                             
+                        }
+                        </script>
 </td></c:forEach>
 											  
                                     </tr>
@@ -205,7 +238,7 @@
                                     </tbody>
                                    </table>
                                     <div class="pull-right" style="margin-bottom: 10px;margin-top:10px;">
-                                   <button type="submit"  class="btn btn-primary" >Submit</button>
+                                   <button type="submit"  class="btn btn-primary"  >Submit123</button>
                                 </div>
                                    </div>
                                    <div class="clearfix"></div>

@@ -8,11 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblDepartment;
@@ -51,9 +54,16 @@ public class PageController {
 	EmpAttendanceDaoImpl attimpl=new EmpAttendanceDaoImpl();
 	
 		
-	@RequestMapping(value= "/admin", method=RequestMethod.GET)
+	@RequestMapping(value= "/admin")
 	public ModelAndView adminIndexPage() {
 		ModelAndView mav = new ModelAndView("index");
+	/*	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+	 
+	String name = user.getUname();*/
 		mav.addObject("title", "HomePage");
 		
 		mav.addObject("services", servicesdao.list());
@@ -61,7 +71,25 @@ public class PageController {
 		mav.addObject("userClickHome", true);
 		return mav;
 	}
-	
+/*	@RequestMapping(value= "/adminindex", method=RequestMethod.GET)
+	public ModelAndView AdminIndexPage() {
+		ModelAndView mav = new ModelAndView("empindex");
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+	 
+		String role = user.getRole();
+		System.out.println(user.getRole());
+		mav.addObject("title", "HomePage");
+		mav.addObject("Role",role);
+		mav.addObject("services", servicesdao.list());
+		mav.addObject("empservices", empservicesdao.list());
+		mav.addObject("manservices", mandao.list());
+		mav.addObject("userClickHome", true);
+		return mav;
+	}*/
 	
 	/*
 	 * Slide Bar Page Handlers Start
@@ -233,19 +261,7 @@ public class PageController {
 		return mav;		
 	}
 	
-/*	@RequestMapping(value="/admin/allemp/register/employee")
-	public ModelAndView empDetailsPage(@PathVariable("id") int id) {
-		ModelAndView mav = new ModelAndView("employee");
-		EmpDetails Edetails = null;
-		Client cl = new Client();
-		Edetails = cl.getById(id);
-		mav.addObject("empID", id);
-		mav.addObject("employee",Edetails);
-		mav.addObject("services", servicesdao.list());
-		mav.addObject("title", "Employee Holiday Page");
-		mav.addObject("userClickReg", true);
-		return mav;		
-	}*/
+
 	@RequestMapping(value="/admin/allemp/register/{id}/employeedetails")
 	public ModelAndView eachEmpDetailsPage(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView("employeedetails");
@@ -263,10 +279,20 @@ public class PageController {
  */
 	@RequestMapping(value= {"/","/home","/index"})
 	public ModelAndView indexPage() {
-		ModelAndView mav = new ModelAndView("index");
-		mav.addObject("services", servicesdao.list());
+		ModelAndView mav = new ModelAndView("empindex");
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+	 
+		String role = user.getRole();
+		System.out.println(user.getRole());
 		mav.addObject("title", "HomePage");
-		mav.addObject("userClickHome", true);
+		mav.addObject("Role",role);
+		mav.addObject("services", servicesdao.list());
+		mav.addObject("empservices", empservicesdao.list());
+		mav.addObject("manservices", mandao.list());
 		return mav;
 	}
 	@RequestMapping(value= "/forgot-password")
@@ -313,92 +339,7 @@ public class PageController {
 		mav.addObject("loginoperations", new LoginOperations());
 		return mav;
 	}
-	@RequestMapping(value= "/login", method=RequestMethod.POST)
-	public ModelAndView loginPageAction(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws UserBlockedException {
-		ModelAndView mav = new ModelAndView("newlogin");
-		LoginOperations loginop = new LoginOperations(request.getParameter("username"), request.getParameter("password"));
-		try {
-			List<EmpDetails> employee = userservice.Login(loginop.getLoginName(), loginop.getLoginPassword());
-			Map map = null;
-			for(Object usr : employee) {
-				map = (Map) usr;
-			}
-			if(employee == null) {
-				mav.addObject("loginerrmssg", "Login Failed! Please Enter Valid Credentials");
-			}
-			else {
-				/*
-				 *Redirect to the appropriate page 
-				 */
-				
-				if(map.get("role").equals("ADMIN_ROLE")) {
-					ModelAndView mav2 = new ModelAndView("index");
-					session.setAttribute("empfname", map.get("fname"));
-					session.setAttribute("emplname", map.get("lname"));
-					session.setAttribute("empuname", map.get("uname"));
-					session.setAttribute("empemail", map.get("email"));
-					session.setAttribute("empeid", map.get("eid"));
-					session.setAttribute("empjdate", map.get("jdate"));
-					session.setAttribute("empphone", map.get("phone"));
-					session.setAttribute("empcompName", map.get("compName"));
-					session.setAttribute("empdesignation", map.get("designation"));
-					session.setAttribute("emprole", "admin");
-					mav2.addObject("title", "HomePage");
-					
-					mav2.addObject("services", servicesdao.list());
-					
-					mav2.addObject("userClickHome", true);
-					return mav2;
-					
-				}
-				else if(map.get("role").equals("EMPLOYEE_ROLE")) {
-					ModelAndView mav2 = new ModelAndView("empindex");
-					session.setAttribute("empfname", map.get("fname"));
-					session.setAttribute("emplname", map.get("lname"));
-					session.setAttribute("empuname", map.get("uname"));
-					session.setAttribute("empemail", map.get("email"));
-					session.setAttribute("empeid", map.get("eid"));
-					session.setAttribute("empjdate", map.get("jdate"));
-					session.setAttribute("empphone", map.get("phone"));
-					session.setAttribute("empcompName", map.get("compName"));
-					session.setAttribute("empdesignation", map.get("designation"));
-					session.setAttribute("emprole", "employee");
-					
-					mav2.addObject("services", empservicesdao.list());	
-					return mav2;
-					
-				}
-				else if(map.get("role").equals("MANAGER_ROLE")) {
-					ModelAndView mav2 = new ModelAndView("empindex");
-					session.setAttribute("empfname", map.get("fname"));
-					session.setAttribute("emplname", map.get("lname"));
-					session.setAttribute("empuname", map.get("uname"));
-					session.setAttribute("empemail", map.get("email"));
-					session.setAttribute("empeid", map.get("eid"));
-					session.setAttribute("empjdate", map.get("jdate"));
-					session.setAttribute("empphone", map.get("phone"));
-					session.setAttribute("empcompName", map.get("compName"));
-					session.setAttribute("empdesignation", map.get("designation"));
-					session.setAttribute("emprole", "manager");
-					
-					mav2.addObject("services", mandao.list());	
-					return mav2;
-					
-				}else {
-					mav.addObject("errmsg", "No Such Role Found!!!");
-					return mav;
-				}
-				}
-		} catch (NullPointerException e) {
-			
-			
-				mav.addObject("errmsg", "Invalid User! Please Regester Yourself then Login.");
-				return mav;
 	
-			
-			}
-		return mav;
-	}
 	@RequestMapping(value= "/testpage")
 	public ModelAndView testpage() {
 		ModelAndView mav = new ModelAndView("emptimesheet");

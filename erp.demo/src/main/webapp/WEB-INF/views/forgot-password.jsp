@@ -6,6 +6,7 @@
 <spring:url var="js" value="/resources/js" />
 <spring:url var="images" value="/resources/images" />
 <spring:url var="plugins" value="/resources/plugins" />
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 
@@ -61,7 +62,7 @@
                     <button class="btn btn-block btn-primary waves-effect" type="submit">RESET PASSWORD</button>
 
                     <div class="m-t-25 m-b--5 align-center">
-                        <a href="log_in.html">You already have an account?</a>
+                        <a href="${contextRoot}/login">You already have an account?</a>
                     </div>
                 </form>
             </div>

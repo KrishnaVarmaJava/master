@@ -49,7 +49,15 @@
                 </div>
         <div class="card" style="margin-top:30px;">
             <div class="body">
-             				<form action="${contextRoot}/login" id="log_in" method="POST">
+             				
+             				<c:if test="${not empty error}">
+			<div class="error">${error}</div>
+		</c:if>
+		<c:if test="${not empty msg}">
+			<div class="msg">${msg}</div>
+		</c:if>
+             				
+             				<form name='loginForm' action="${contextRoot}/login" id="log_in" method="POST">
 					<p style="color:red">${loginerrmssg} ${errmsg}</p>
 					<p style="color:green;">${regmessage}</p>
 					<div class="input-group addon-line">
@@ -91,7 +99,8 @@
 
 					<a class="btn btn-sm btn-default btn-block"
 						href="${contextRoot}/register">Create an account</a>
-
+<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
 				</form>
              
             </div>

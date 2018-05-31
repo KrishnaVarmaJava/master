@@ -12,6 +12,9 @@
 	<context:component-scan
 		base-package="mylas.com.erp.demo.daoimpl" />
 
+	<context:component-scan
+		base-package="mylas.com.erp.demo.operations"/>
+
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -25,4 +28,8 @@
 	<mvc:resources location="/resources/"
 		mapping="/resources/**" />
 
+
+<!-- 	<bean name="SecurityConfig"
+		class="mylas.com.erp.demo.configuration.SecurityConfig">
+	</bean> -->
 </beans>

@@ -44,9 +44,9 @@ public class ManagerPageController {
 		ModelAndView mav = new ModelAndView("empleaverequests");
 		Client cl = new Client();
 		String empname = (String) session.getAttribute("empuname");
-		List<EmpDetails> emp1 = cl.getDetails();
-		List<TblEmpLeavereq> leavereq =  empleavereq.viewbyid(empname);
-		mav.addObject("employees", emp1);
+		/*List<EmpDetails> emp1 = cl.getDetails();*/
+		List<TblEmpLeavereq> leavereq =  empleavereq.view();
+		/*mav.addObject("employees", emp1);*/
 		mav.addObject("empleave", leavereq);
 		mav.addObject("services", mandao.list());	
 		return mav;
