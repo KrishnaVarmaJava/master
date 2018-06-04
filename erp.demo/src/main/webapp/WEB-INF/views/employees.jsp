@@ -380,7 +380,7 @@
 								</c:forEach>
 							
 
-
+</table>
 
 
 
