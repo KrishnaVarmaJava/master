@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,13 +17,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblDepartment;
 import mylas.com.erp.demo.TblDesignation;
 import mylas.com.erp.demo.TblEmpAttendanceNew;
+import mylas.com.erp.demo.TblEmpLeavereq;
 import mylas.com.erp.demo.appservices.UserServiceImpl;
 import mylas.com.erp.demo.dao.EmpAttendenceDao;
+import mylas.com.erp.demo.dao.EmpLeaveRequestDao;
 import mylas.com.erp.demo.dao.EmpServicesDao;
 import mylas.com.erp.demo.dao.ManagerServicesDao;
 import mylas.com.erp.demo.dao.ServicesDao;
@@ -48,7 +52,10 @@ public class PageController {
 	@Autowired
 	ManagerServicesDao mandao;
 	@Autowired
-	EmpAttendenceDao empattdao;
+	EmpLeaveRequestDao empleavereq;
+	
+	@Autowired
+	EmpAttendanceDaoImpl empattreq;
 
 	Client client = new Client();
 	EmpAttendanceDaoImpl attimpl=new EmpAttendanceDaoImpl();
@@ -85,7 +92,7 @@ public class PageController {
 		mav.addObject("title", "HomePage");
 		mav.addObject("Role",role);
 		mav.addObject("services", servicesdao.list());
-		mav.addObject("empservices", empservicesdao.list());
+		mav.addObject("services", servicesdao.list());
 		mav.addObject("manservices", mandao.list());
 		mav.addObject("userClickHome", true);
 		return mav;
@@ -111,8 +118,10 @@ public class PageController {
 		mav.addObject("title", "Employee Regester Page");
 		mav.addObject("userClickReg", true);
 		Client cl = new Client();
+		String mesg = "hi";
 		List<EmpDetails> emp1 = cl.getDetails();
 		mav.addObject("employees", emp1);
+		mav.addObject("dupmsg", mesg);
 		cl.closeAllSessions();
 		return mav;		
 	}
@@ -143,7 +152,20 @@ public class PageController {
 	
 	@RequestMapping(value="/admin/empleavereq/register")
 	public ModelAndView empLeaveReqPage() {
-		ModelAndView mav = new ModelAndView("leaverequests");
+		ModelAndView mav = new ModelAndView("allempleaverequests");
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+		
+		String role = user.getRole();
+		mav.addObject("Role",role);
+		Client cl = new Client();
+		List<EmpDetails> emp1 = cl.getDetails();
+		List<TblEmpLeavereq> leavereq =  empleavereq.view();
+		mav.addObject("employees", emp1);
+		mav.addObject("empleave", leavereq);
 		mav.addObject("services", servicesdao.list());
 		mav.addObject("title", "Employee Holiday Page");
 		mav.addObject("userClickReg", true);
@@ -152,10 +174,22 @@ public class PageController {
 	
 	@RequestMapping(value="/admin/empatt/register")
 	public ModelAndView empAttenedancePage() {
-		ModelAndView mav = new ModelAndView("attenedance");
+		ModelAndView mav = new ModelAndView("allemptimesheetrequests");
 		mav.addObject("services", servicesdao.list());
-		mav.addObject("title", "Employee Holiday Page");
-		mav.addObject("userClickReg", true);
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+		
+		String role = user.getRole();
+		mav.addObject("Role",role);
+		Client cl = new Client();
+		List<EmpDetails> emp1 = cl.getDetails();
+		List<TblEmpAttendanceNew> attendances =  empattreq.getDetails();
+		
+		mav.addObject("employees", emp1);
+		mav.addObject("attendancelist",attendances);
 		return mav;		
 	}
 	
@@ -181,7 +215,7 @@ public class PageController {
 	 */
 	
 	@RequestMapping(value="/admin/allemp/register", method=RequestMethod.POST)
-	public ModelAndView saveEmpPage(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView saveEmpPage(HttpServletRequest request, HttpServletResponse response) throws ConstraintViolationException{
 		
 		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"));
 		
@@ -189,7 +223,13 @@ public class PageController {
 		emp.setRole("USER_ROLE");
 		ModelAndView mav = new ModelAndView("employees");
 		mav.addObject("services", servicesdao.list());
-		client.getConnection(emp);
+		System.out.println("before getconn");
+		String mesg = "hi";
+		mesg = client.getConnection(emp);
+		
+		mav.addObject("dupmsg", mesg);
+		
+		System.out.println("after getconn");
 		Client cl = new Client();
 		List<EmpDetails> emp1 = cl.getDetails();
 		mav.addObject("employees", emp1);
@@ -219,16 +259,9 @@ public class PageController {
 	}
 	@RequestMapping(value="/admin/allemp/delete/{id}")
 	public ModelAndView deleteEmpPage(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") int id) {
-		ModelAndView mav = new ModelAndView("employees");
-		mav.addObject("services", servicesdao.list());
-		mav.addObject("title", "Employee Regester Page");
-		client.deleteDetails(id);
-		Client cl = new Client();
-		List<EmpDetails> emp1 = cl.getDetails();
-		mav.addObject("employees", emp1);
-		request.setAttribute("Sempl", emp1);
+		ModelAndView mav = new ModelAndView("redirect:/admin/allemp/register");
 		
-		cl.closeAllSessions();
+		client.deleteDetails(id);
 		return mav;
 		
 	}

@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
 
 import mylas.com.erp.demo.EmpDetails;
@@ -15,42 +16,55 @@ import mylas.com.erp.demo.dao.EmployeeDao;
 @Repository("userDetails")
 public class Client implements EmployeeDao {
 
-	static Session session;
-	static SessionFactory fact;
+	
 
 
-	public void getConnection(EmpDetails emp) {
+	public String getConnection(EmpDetails emp) {
 		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-
-		fact = con.buildSessionFactory();
+		Integer num = 0;
+		SessionFactory fact = con.buildSessionFactory();
 		Session session = fact.openSession();
 		Transaction tx = session.beginTransaction();
-		Integer num = (Integer) session.save(emp);
+		try {
+		num = (Integer) session.save(emp);
+		tx.commit();
 		if(num!=0) {
 			System.out.println("Table Updated");
+			session.close();
+			return "Employee Saved";
 		}else {
 			System.out.println("Table Faied to Update");
+			session.close();
 		}
-		tx.commit();
+		
+		}catch(ConstraintViolationException e) {
+			System.out.println("Duplicate Entry");
+			session.close();
+			return "This is a Duplicate Entry";
+		}
+		session.close();
+		return null;
 	}
 
 	@Override
 	public List<EmpDetails> getDetails() {
 		Configuration con = new Configuration().configure("hibernate.cfg.xml");
 
-		fact = con.buildSessionFactory();
+		SessionFactory fact = con.buildSessionFactory();
 		Session session = fact.openSession();
 		session.beginTransaction();
 		Query q = session.createQuery("from EmpDetails");
 		List<EmpDetails> emp1 = q.list();
+		session.close();
 		return (emp1);
+		
 
 	}
 
 	public void closeAllSessions() {
 		Configuration con = new Configuration().configure("hibernate.cfg.xml");
 
-		fact = con.buildSessionFactory();
+		SessionFactory fact = con.buildSessionFactory();
 		Session session = fact.openSession();
 		session.close();
 	}
@@ -70,7 +84,7 @@ public class Client implements EmployeeDao {
 		session.update(emp);
 		tx2.commit();
 		System.out.println("updated table");
-
+		session.close();
 
 	}
 
@@ -99,10 +113,11 @@ public class Client implements EmployeeDao {
 		EmpDetails user;
 		Configuration con = new Configuration().configure("hibernate.cfg.xml");
 
-		fact = con.buildSessionFactory();
+		SessionFactory fact = con.buildSessionFactory();
 		Session session = fact.openSession();
 		user =  session.load(EmpDetails.class,
 				id);
+		session.close();
 		return user;
 	}
 
@@ -125,6 +140,7 @@ public class Client implements EmployeeDao {
 			 return user;	
 			}
 		}
+		session.close();
 		return null;
 		
 	}

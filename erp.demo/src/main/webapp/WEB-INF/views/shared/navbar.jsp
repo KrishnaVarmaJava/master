@@ -41,6 +41,8 @@
                             <em class="material-icons">fullscreen</em>
                         </a>
                     </li>
+                 
+                    
                     <!-- Notifications -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
@@ -242,6 +244,22 @@
                         </ul>
                     </li>
                     <!-- #END# Task -->
+                    
+                           <!-- login -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">person</i>
+                          
+                        </a>
+                        <ul class="dropdown-menu">
+                     
+                             <li class="header">NOTIFICATIONS</li>
+                            <li class="header">NOTIFICATIONS</li>
+                         
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
+                    
                     <li>
                         <a href="#" data-toggle-state="offsidebar-open" data-no-persist="true">
                             <em class="material-icons">more_vert</em>

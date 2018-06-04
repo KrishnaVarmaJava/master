@@ -84,8 +84,6 @@
 					</div>
 				</div>
 
-
-
 				<div class="row clearfix">
 
 
@@ -199,10 +197,22 @@
 															Panding <span class="caret"></span>
 														</button>
 														<ul class="dropdown-menu bullet">
+														<c:if test="${Role.equals('ADMIN_ROLE')}">
+															<c:set var="role" value="admin"/>
+														</c:if>
+						
+														<c:if test="${Role.equals('MANAGER_ROLE')}">
+															<c:set var="role" value="manager"/>
+														</c:if>
 														
-															<li><a  href="${contextRoot}/${sessionScope.emprole}/leave/approve/${empleaveslist.getId()}"><i
+														<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
+																<c:set var="role" value="employee"/>
+														</c:if>
+														
+														
+															<li><a  href="${contextRoot}/${role}/leave/approve/${empleaveslist.getId()}"><i
 																	class="material-icons">print</i>Approved</a></li>
-															<li><a href="${contextRoot}/${sessionScope.emprole}/leave/decline/${empleaveslist.getId()}"><i
+															<li><a href="${contextRoot}/${role}/leave/decline/${empleaveslist.getId()}"><i
 																	class="material-icons">favorite</i>Declined</a></li>
 														</ul>
 													</div>

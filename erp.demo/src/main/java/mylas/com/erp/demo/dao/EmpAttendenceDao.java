@@ -9,7 +9,7 @@ import mylas.com.erp.demo.TblEmpLeavereq;
 public interface EmpAttendenceDao {
 	public void save(TblEmpAttendanceNew tbl);
 	public void update(Boolean status,int id);
-	public void delete(int id);
+	public String delete(int id);
 	public List<TblEmpAttendanceNew> viewbyid(String empid);
 	public List<TblEmpAttendanceNew> getDetails();
 

@@ -8,38 +8,39 @@
 			<!-- START sidebar nav-->
 			<ul class="nav menu">
 				<!-- Iterates over all sidebar items-->
-				<li class="nav-heading "><span>MAIN NAVIGATION</span></li>
-				<li><a href="#dashboard" title="Dashboard"
+				<li class="nav-heading "><span>MAIN NAVIGATION </span></li>
+				
+				<li>
+				<a href="#dashboard" title="Dashboard"
 					data-toggle="collapse" class="menu-toggle"> <em
 						class="material-icons">dashboard</em> <span>Employee
-							Details</span>
+							Details </span>
 				</a>
 					<ul id="dashboard" class="nav sidebar-subnav collapse">
 						<li class="sidebar-subnav-header">Dashboard</li> 
-						<c:if test="${Role.equals('ADMIN_ROLE')}">
+					<li>	
+					<c:if test="${Role.equals('ADMIN_ROLE')}">
 							<c:forEach items="${services}" var="service">
-								<li><a
-									href="${contextRoot}/${service.getServiceRole()}/${service.getServiceID()}/register"
+								<a href="${contextRoot}/${service.getServiceRole()}/${service.getServiceID()}/register"
 									title="${service}"> <span>${service.getServiceName()}</span>
-								</a></li>
+								</a>
 							</c:forEach>
 						</c:if>
-						<c:if test="${Role.equals('MANAGER_ROLE')}">
+						</li>
+						<li><c:if test="${Role.equals('MANAGER_ROLE')}">
 							<c:forEach items="${manservices}" var="service">
-								<li><a
-									href="${contextRoot}/${service.getServiceRole()}/${service.getServiceID()}/register"
+								<a href="${contextRoot}/${service.getServiceRole()}/${service.getServiceID()}/register"
 									title="${service}"> <span>${service.getServiceName()}</span>
-								</a></li>
+								</a>
 							</c:forEach>
-						</c:if>
-						<c:if test="${Role == 'EMPLOYEE_ROLE'}">
+						</c:if></li>
+						<li><c:if test="${Role.equals('EMPLOYEE_ROLE')}">
 							<c:forEach items="${empservices}" var="service">
-								<li><a
-									href="${contextRoot}/${service.getServiceRole()}/${service.getServiceID()}/register"
+								<a href="${contextRoot}/${service.getServiceRole()}/${service.getServiceID()}/register"
 									title="${service}"> <span>${service.getServiceName()}</span>
-								</a></li>
+								</a>
 							</c:forEach>
-						</c:if>
+						</c:if></li>
 					</ul></li>
 				<li><a href="#layout" title="Layouts" data-toggle="collapse"
 					class="menu-toggle"> <em class="material-icons">computer</em> <span>Layouts</span>

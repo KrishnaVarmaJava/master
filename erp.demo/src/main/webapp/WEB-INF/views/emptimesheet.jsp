@@ -112,12 +112,22 @@
 					
 
                         <!-- Table Kitchen Sink -->
-                       
+                     <c:if test="${Role.equals('ADMIN_ROLE')}">
+															<c:set var="role" value="admin"/>
+														</c:if>
+						
+														<c:if test="${Role.equals('MANAGER_ROLE')}">
+															<c:set var="role" value="manager"/>
+														</c:if>
+														
+														<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
+																<c:set var="role" value="employee"/>
+														</c:if>
 
 
 
                         
-                        <form action="${contextRoot}/${sessionScope.emprole}/timesheet/register" method="post" onsubmit="return validate()" >
+                        <form action="${contextRoot}/${role}/timesheet/register" method="post" onsubmit="return validate()" >
                         <div class="card">
                         		
                             <div class="body">
@@ -173,7 +183,7 @@
 										
 									
                                          <tr>
-                                        <th><a href="${contextRoot}/employee/profile/register">${sessionScope.empfname} ${sessionScope.emplname}</a></th>
+                                        <th><a href="${contextRoot}/${role}/profile/register">${User.getFname()} ${User.getLname()}</a></th>
                                      
                                         <td> <select class="form-control" size="1" name="year" id="year" required>
                                             <option value="0">Please select</option>
@@ -238,7 +248,7 @@
                                     </tbody>
                                    </table>
                                     <div class="pull-right" style="margin-bottom: 10px;margin-top:10px;">
-                                   <button type="submit"  class="btn btn-primary"  >Submit123</button>
+                                   <button type="submit"  class="btn btn-primary"  >Submit</button>
                                 </div>
                                    </div>
                                    <div class="clearfix"></div>
@@ -632,7 +642,7 @@
 														</a>
 															<ul class="dropdown-menu pull-right">
 															<c:if test="${attlist.getStatas() == null}">
-																<li><a href="${contextRoot}/${sessionScope.emprole}/timesheet/delete/${attlist.getId()}"><i
+																<li><a href="${contextRoot}/${role}/timesheet/delete/${attlist.getId()}"><i
 																		class="material-icons">delete</i>Delete</a></li>
 																</c:if>
 															</ul></li>

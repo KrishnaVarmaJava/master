@@ -1077,6 +1077,15 @@
 						<div class="col-md-12 card">
 							<div class="custom_title">
 								<h2>Add Employee</h2>
+							<c:if test="${dupmsg.equals('Employee Saved')}">
+								<h4 style="color: green;">${dupmsg}</h4>
+							</c:if>
+							<c:if test="${dupmsg.equals('This is a Duplicate Entry')}">
+								<h4 style="color: red;">${dupmsg}</h4>
+							</c:if>
+							<c:if test="${empty dupmsg}">
+								<h4 style="color: red;">Employee Save Failed</h4>
+							</c:if>
 							</div>
 
 							<hr class="custom_line">
@@ -1325,7 +1334,7 @@
 															<li><a href="javascript:void(0);"
 																class=" waves-effect waves-classic"><i
 																	class="material-icons">edit</i>Edit</a></li>
-															<li><a href="${contextRoot}//admin/allemp/delete/${empl.getId()}"
+															<li><a href="${contextRoot}/admin/allemp/delete/${empl.getId()}"
 																class=" waves-effect waves-classic"><i
 																	class="material-icons">delete</i>Delete</a></li>
 

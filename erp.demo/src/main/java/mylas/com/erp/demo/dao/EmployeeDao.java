@@ -8,7 +8,7 @@ import mylas.com.erp.demo.EmpDetails;
 
 public interface EmployeeDao {
 	
-	public void getConnection(EmpDetails emp);
+	public String getConnection(EmpDetails emp);
 	public List<EmpDetails> getDetails();
 	public void updateDetails(EmpDetails emp, int id);
 	public void deleteDetails(int id);

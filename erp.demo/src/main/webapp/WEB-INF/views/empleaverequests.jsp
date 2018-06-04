@@ -107,8 +107,18 @@
 					</div>
 					<p style="color: green;">${Submitmsg}</p>
 					<p style="color: red;">${errmsg}</p>
-					
-					<form action="${contextRoot}/${sessionScope.emprole}/leave/register" method="post">
+					<c:if test="${Role.equals('ADMIN_ROLE')}">
+															<c:set var="role" value="admin"/>
+														</c:if>
+						
+														<c:if test="${Role.equals('MANAGER_ROLE')}">
+															<c:set var="role" value="manager"/>
+														</c:if>
+														
+														<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
+																<c:set var="role" value="employee"/>
+														</c:if>
+					<form action="${contextRoot}/${role}/leave/register" method="post">
 						<hr class="custom_line">
 						<div class="body">
 
@@ -280,9 +290,9 @@
 												<td>
 													<div class="chip">
 														<img src="${images}/mail/one.jpg" alt="Contact Person">
-														<span>${sessionScope.empfname}
-															${sessionScope.emplname}</span>
-														<div style="text-align: center">${sessionScope.empdesignation}</div>
+														<span>${User.getFname()}
+															${User.getLname()}</span>
+														<div style="text-align: center">${User.getEid()}</div>
 													</div>
 												</td>
 												<td>${empleaveslist.getLeavetype()}</td>
@@ -321,7 +331,7 @@
 														</a>
 															<ul class="dropdown-menu pull-right">
 															<c:if test="${empleaveslist.getStatus() == null}">
-																<li><a href="${contextRoot}/${sessionScope.emprole}/leave/delete/${empleaveslist.getId()}"><i
+																<li><a href="${contextRoot}/${role}/leave/delete/${empleaveslist.getId()}"><i
 																		class="material-icons">delete</i>Delete</a></li>
 																</c:if>
 															</ul></li>

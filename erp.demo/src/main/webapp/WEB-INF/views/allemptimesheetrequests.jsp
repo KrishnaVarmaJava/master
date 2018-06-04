@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+`<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -153,6 +153,7 @@
                                <table class="tablesaw table-striped table-hover table-bordered" data-tablesaw-mode="swipe" data-tablesaw-minimap>
                                     <thead class="tableheding">
                                     <tr>
+                                    	<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">Month</th>
                                         <th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">Month</th>
                                         <th data-tablesaw-sortable-col data-tablesaw-priority="3">1</th>
                                         <th data-tablesaw-sortable-col data-tablesaw-priority="2">2</th>
@@ -204,6 +205,7 @@
                         		 
 									
                                          <tr>
+                                         <th><a href="javascript:void(0)">${attlist.getEmpid()}</a></th>
                                         <th><a href="javascript:void(0)">${attlist.getMonth()} ${attlist.getYear()}</a></th>
                                      <c:if test="${attlist.getDay1() == 1}">
                                         <td><i class="${green}" ></i></td>
@@ -496,10 +498,20 @@
 															Panding <span class="caret"></span>
 														</button>
 														<ul class="dropdown-menu bullet">
+														<c:if test="${Role.equals('ADMIN_ROLE')}">
+															<c:set var="role" value="admin"/>
+														</c:if>
+						
+														<c:if test="${Role.equals('MANAGER_ROLE')}">
+															<c:set var="role" value="manager"/>
+														</c:if>
 														
-															<li><a  href="${contextRoot}/${sessionScope.emprole}/attendance/approve/${attlist.getId()}"><i
+														<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
+																<c:set var="role" value="employee"/>
+														</c:if>
+															<li><a  href="${contextRoot}/${role}/attendance/approve/${attlist.getId()}"><i
 																	class="material-icons">print</i>Approved</a></li>
-															<li><a href="${contextRoot}/${sessionScope.emprole}/attendance/decline/${attlist.getId()}"><i
+															<li><a href="${contextRoot}/${role}/attendance/decline/${attlist.getId()}"><i
 																	class="material-icons">favorite</i>Declined</a></li>
 														</ul>
 													</div>

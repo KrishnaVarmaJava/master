@@ -1604,7 +1604,7 @@ $("#addnewemp").css("display","none");
 
 
 $("#addnew").click(function(){
-alert("You entered p1!");
+
 $("#addnewemp").css("display","block");
 $("#addnewemp").addClass("animated bounce");
 $("this").css("display","none")

@@ -59,7 +59,7 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 	}
 
 	@Override
-	public void delete(int id) {
+	public String delete(int id) {
 		buildSessionFactory();
 		
 		Session session = fact.openSession();
@@ -70,6 +70,7 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
         System.out.println("Object Deleted successfully.....!!");
         session.close();
         fact.close();
+        return "Object Deleted successfully.....!!";
     
 	}
 
