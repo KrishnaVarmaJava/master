@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -14,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>404 | Material Design Admin - Fusion</title>
+    <title>500 | Material Design Admin - Fusion</title>
     <!-- Favicon-->
     <link rel="icon" href="../../favicon.png" type="image/x-icon">
 
@@ -32,21 +33,16 @@
     <link href="../../${css}/style.css" rel="stylesheet">
 </head>
 
-<body class="error error_four">
+<body class="error error_five">
     <div class="error-box">
-        <img src="../../${images}/404.png" class="img-responsive center-block" alt="404">
-        <div class="error-message">
-            Oops! Page Not Found
+        <img src="../../${images}/error500.gif" class="img-responsive center-block height150" alt="404">
+        <div class="error-message p-t-0">
+            OOOPS!!!! 500
+            <p>Something went wrong.</p>
         </div>
+        <p class="text-muted font-13">Don't worry though, we know and are fixing it. Please try again later.</p>
         <div class="error-bottom">
-<<<<<<< HEAD
-            <a href="../../index.html" class="btn btn-primary">Hey, Take Me Home</a>
-=======
-            <a href="${contextRoot}/index.html" class="btn btn-primary">Hey, Take Me Home</a>
->>>>>>> branch 'master' of https://github.com/KrishnaVarmaJava/master.git
-            <div class="report-error">
-                or <a href="#">Report Issue</a>
-            </div>
+            <a href="../../index.html" class="btn btn-danger btn-outline">Return To Dashboard</a>
         </div>
     </div>
 

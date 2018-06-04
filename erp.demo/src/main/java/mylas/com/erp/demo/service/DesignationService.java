@@ -8,7 +8,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblDesignation;
 import mylas.com.erp.demo.dao.DesignationDao;
 
@@ -62,8 +61,17 @@ public class DesignationService implements DesignationDao {
 	}
 
 	@Override
-	public void deleteDetails(TblDesignation tbldesg) {
+	public void deleteDetails(int id) {
 		// TODO Auto-generated method stub
+		buildSessionFactory();
+		Session session = fact.openSession();
+		Transaction tx = session.beginTransaction();
+		TblDesignation desdel = session.load(TblDesignation.class, id);
+		session.delete(desdel);
+		System.out.println("Object Deleted successfully.....!!");
+		tx.commit();
+		session.close();
+		fact.close();
 		
 	}
 

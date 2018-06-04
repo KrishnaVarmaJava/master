@@ -73,7 +73,7 @@
     <![endif]-->
 </head>
 
-<body class="theme-indigo light layout-fixed">
+<body class="theme-indigo light ">
 	<div class="wrapper">
 		<div class="page-loader-wrapper">
 			<div class="loader">

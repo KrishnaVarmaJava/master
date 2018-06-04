@@ -47,6 +47,17 @@
 
 <body class="theme-indigo light layout-fixed">
 <div class="wrapper">
+<c:if test="${Role.equals('ADMIN_ROLE')}">
+			<c:set var="role" value="admin" />
+		</c:if>
+
+		<c:if test="${Role.equals('MANAGER_ROLE')}">
+			<c:set var="role" value="manager" />
+		</c:if>
+
+		<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
+			<c:set var="role" value="employee" />
+		</c:if>
 
     <!-- top navbar-->
     <header class="topnavbar-wrapper">
@@ -1462,9 +1473,9 @@
                                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <i class="material-icons">more_vert</i>
                                         </a>
-                                        <ul class="dropdown-menu pull-right">
+                                        <ul class="dropdown-menu pull-right">b
                                             <li><a href="javascript:void(0);"><i class="material-icons">edit</i>Edit</a></li>
-                                            <li><a href="javascript:void(0);"><i class="material-icons">delete</i>Delete</a></li>
+                                            <li><a href="${contextRoot}/${role}/designations/delete/${desig.getDesignationId()}"><i class="material-icons">delete</i>Delete</a></li>
                                        
                                         </ul>
                                     </li>
