@@ -17,23 +17,23 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Lock Screen | Material Design Admin - Fusion</title>
     <!-- Favicon-->
-    <link rel="icon" href="../../favicon.png" type="image/x-icon">
+    <link rel="icon" href="${images}/favicon.png" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
-    <link href="../../${plugins}/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="${plugins}/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Waves Effect Css -->
-    <link href="../../${plugins}/node-waves/waves.css" rel="stylesheet" />
+    <link href="${plugins}/node-waves/waves.css" rel="stylesheet" />
 
     <!-- Animation Css -->
-    <link href="../../${plugins}/animate-css/animate.css" rel="stylesheet" />
+    <link href="${plugins}/animate-css/animate.css" rel="stylesheet" />
 
     <!-- Custom Css -->
-    <link href="../../assets/${css}/style.css" rel="stylesheet">
+    <link href="${css}/style.css" rel="stylesheet">
 </head>
 
 <body class="forgot-pass">
@@ -41,7 +41,7 @@
     <div class="card">
         <div class="bg-blue padding-20 b-t-radius">
             <div class="avatar">
-                <img src="../../${images}/mail/seven.jpg" class="border-trans">
+                <img src="${images}/mail/seven.jpg" class="border-trans">
             </div>
         </div>
         <div class="body">
@@ -66,17 +66,17 @@
 </div>
 
     <!-- CORE PLUGIN JS -->
-    <script src="../../${plugins}/jquery/jquery.min.js"></script>
-    <script src="../../${plugins}/bootstrap/js/bootstrap.js"></script>
-    <script src="../../${plugins}/node-waves/waves.js"></script>
-    <script src="../../${plugins}/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script src="${plugins}/jquery/jquery.min.js"></script>
+    <script src="${plugins}/bootstrap/js/bootstrap.js"></script>
+    <script src="${plugins}/node-waves/waves.js"></script>
+    <script src="${plugins}/jquery-slimscroll/jquery.slimscroll.js"></script>
 
     <!--THIS PAGE LEVEL JS-->
-    <script src="../../${plugins}/jquery-validation/jquery.validate.js"></script>
-    <script src="../../${js}/pages/examples/login.js"></script>
+    <script src="${plugins}/jquery-validation/jquery.validate.js"></script>
+    <script src="${js}/pages/examples/login.js"></script>
 
     <!-- LAYOUT JS -->
-    <script src="../../${js}/demo.js"></script>
+    <script src="${js}/demo.js"></script>
 
 </body>
 
