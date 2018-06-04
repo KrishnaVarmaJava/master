@@ -398,6 +398,12 @@ public class PageController {
 		ModelAndView mav = new ModelAndView("indvidtimesheet");
 		return mav;
 	}
+	
+	@RequestMapping(value= "/403")
+	public ModelAndView error403Page() {
+		ModelAndView mav = new ModelAndView("403");
+		return mav;
+	}
 		
 
 }
