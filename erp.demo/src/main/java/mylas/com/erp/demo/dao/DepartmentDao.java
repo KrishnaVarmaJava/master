@@ -13,5 +13,5 @@ public interface DepartmentDao {
 	public void saveDepartment(TblDepartment tbl);
 	public List<TblDepartment> getDetails();
 	public void updateDetails(TblDepartment tbl);
-	public void deleteDetails(TblDepartment tbl);
+	public void deleteDetails(int id);
 }

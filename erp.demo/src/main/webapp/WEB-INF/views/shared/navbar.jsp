@@ -253,8 +253,8 @@
                         </a>
                         <ul class="dropdown-menu">
                      
-                             <li class="header">NOTIFICATIONS</li>
-                            <li class="header">NOTIFICATIONS</li>
+                             <li class="header"><a href="${contextRoot}/logout">Log Out</a></li>
+                            <li class="header">Sign Out</li>
                          
                         </ul>
                     </li>
@@ -278,5 +278,11 @@
                 <button type="submit" class="hidden btn btn-info">Submit</button>
             </form>
             <!-- #END# Search form-->
+
         </nav>
         <!-- END Top Navbar-->
+        
+        
+        
+
+        

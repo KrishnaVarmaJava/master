@@ -122,7 +122,6 @@
                 <!--row-->
         </div>
 			<div class="md-overlay custom-overlay"></div>
-			<a href="#">Log Out</a>
     </section>
     <!-- FOOTER-->
     <footer>
