@@ -14,7 +14,6 @@ public interface DesignationDao {
 	public void updateDetails(TblDesignation tbldesg);
 
 	
-
 	public void deleteDetails(int id);
 
 }

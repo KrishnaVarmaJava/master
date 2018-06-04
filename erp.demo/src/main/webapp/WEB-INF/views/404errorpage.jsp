@@ -38,6 +38,14 @@
         <div class="error-message">
             Oops! Page Not Found
         </div>
+
+        <div class="error-bottom">
+
+            <a href="${images}/index.html" class="btn btn-primary">Hey, Take Me Home</a>
+
+            <a href="${contextRoot}/index.html" class="btn btn-primary">Hey, Take Me Home</a>
+
+
         <div class="error-bottom">
             <a href="${contextRoot}/" class="btn btn-primary">Hey, Take Me Home</a>
             <div class="report-error">

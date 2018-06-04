@@ -121,16 +121,17 @@
 
 							<hr class="custom_line">
 							<div class="body">
+                            
 
-								<form action="${contextRoot}/admin/allemp/register"
-									method="post">
+
+								<form action="${contextRoot}/admin/allemp/register" method="post" onsubmit="return Validate()" name="form">
 									<div class="col-md-6">
 										<div class="form-group">
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>First Name</label> <input type="text"
 														name="firstname" id="firstname" class="form-control"
-														placeholder="First Name">
+														placeholder="First Name" required="required">
 												</div>
 											</div>
 										</div>
@@ -141,7 +142,7 @@
 												<div class="form-line">
 													<label>Last Name </label> <input type="text"
 														name="lastname" id="lastname" class="form-control"
-														placeholder="Last Name ">
+														placeholder="Last Name " required="required">
 												</div>
 											</div>
 										</div>
@@ -151,7 +152,7 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Username</label> <input type="text" name="uname"
-														id="uname" class="form-control" placeholder="Username ">
+														id="uname" class="form-control" placeholder="Username" required="required">
 												</div>
 											</div>
 										</div>
@@ -161,7 +162,7 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Email</label> <input type="email" name="email"
-														id="email" class="form-control" placeholder="Email ">
+														id="email" class="form-control" placeholder="Email" required="required">
 												</div>
 											</div>
 										</div>
@@ -171,7 +172,7 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Password </label> <input type="password" name="pswd"
-														id="pswd" class="form-control" placeholder="Password  ">
+														id="pswd" class="form-control" placeholder="Password"  required="required">
 												</div>
 											</div>
 										</div>
@@ -182,7 +183,7 @@
 												<div class="form-line">
 													<label>Confirm Password </label> <input type="password"
 														name="cpswd" id="cpswd" class="form-control"
-														placeholder="Confirm Password   ">
+														placeholder="Confirm Password" required="required">
 												</div>
 											</div>
 										</div>
@@ -193,7 +194,7 @@
 												<div class="form-line">
 													<label>Employee ID </label> <input type="text" name="empid"
 														id="empid" class="form-control"
-														placeholder="Employee ID   ">
+														placeholder="Employee ID" required="required">
 												</div>
 											</div>
 										</div>
@@ -215,7 +216,7 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Phone </label> <input type="text" name="phone"
-														id="phone" class="form-control" placeholder="Phone">
+														id="phone" class="form-control" placeholder="Phone" required="required">
 												</div>
 											</div>
 										</div>
@@ -447,8 +448,41 @@ function showdiv()
 $("#gi").css("display","block");
 $("#list").css("display","none");
 }
+function Validate() {
+    var password = document.getElementById("pswd").value;
+    var confirmPassword = document.getElementById("cpswd").value;
+    if (password != confirmPassword) {
+        alert("Passwords do not match.");
+        return false;
+    }
+
+    var a = document.form.phone.value;
+    if(a=="")
+    {
+    alert("Please Enter Your Mobile Number");
+    document.form.phone.focus();
+    return false;
+    }
+     if(isNaN(a)||a.indexOf(" ")!=-1)
+               {
+                  alert("Enter numeric value")
+                  return false;
+    } 
+    if(isNaN(a))
+    {
+    alert("Enter the valid Mobile Number(Like : 9566137117)");
+    document.form.phone.focus();
+    return false;
+    }
+    if((a.length <10) || a.length >10)
+    {
+    alert(" Your Mobile Number must be 1 to 10 Integers");
+    return false;
+    }
+}
 
 </script>
+
 </body>
 
 </html>

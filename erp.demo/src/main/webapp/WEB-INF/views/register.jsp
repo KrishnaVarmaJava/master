@@ -45,6 +45,10 @@
 						</div>
 					</div>
 				</div>
+
+				<script src="${js}/pages/register.js"></script>
+				<form id="register" method="POST" onsubmit="return Validate()">
+
 				<p style="color: red;">${regmessage}</p>
 				<form id="register" method="POST">
 					<div class="msg">Create an account</div>
@@ -76,7 +80,7 @@
 						<span class="input-group-addon"> <i class="material-icons">lock</i>
 						</span>
 						<div class="form-line">
-							<input type="password" class="form-control" name="password"
+							<input type="password" class="form-control" name="password" id="password"
 								minlength="6" placeholder="Password" required>
 						</div>
 					</div>
@@ -84,7 +88,7 @@
 						<span class="input-group-addon"> <i class="material-icons">lock</i>
 						</span>
 						<div class="form-line">
-							<input type="password" class="form-control" name="confirm"
+							<input type="password" class="form-control" name="confirm" id="confirm"
 								minlength="6" placeholder="Confirm Password" required>
 						</div>
 					</div>
