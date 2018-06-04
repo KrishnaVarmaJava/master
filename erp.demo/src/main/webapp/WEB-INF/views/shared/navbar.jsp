@@ -253,8 +253,8 @@
                         </a>
                         <ul class="dropdown-menu">
                      
-                             <li class="header">NOTIFICATIONS</li>
-                            <li class="header">NOTIFICATIONS</li>
+                             <!--  li class="header">NOTIFICATIONS</li>-->
+                            <li class="header"><a href="">SIGN OUT</a></li>
                          
                         </ul>
                     </li>

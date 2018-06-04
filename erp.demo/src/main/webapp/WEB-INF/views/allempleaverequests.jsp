@@ -168,6 +168,7 @@
 										</tr>
 									</thead>
 									<div class="clearfix"></div>
+									
 									<c:forEach items="${empleave}" var="empleaveslist">
 									<c:if test="${empleaveslist.getStatus() == null}">
 										<tbody>

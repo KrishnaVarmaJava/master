@@ -10,6 +10,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblDepartment;
 import mylas.com.erp.demo.dao.DepartmentDao;
 
@@ -70,5 +71,8 @@ public class DepartmentService implements DepartmentDao {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
 
 }

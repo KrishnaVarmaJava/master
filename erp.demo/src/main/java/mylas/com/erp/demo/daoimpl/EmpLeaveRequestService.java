@@ -76,6 +76,45 @@ public class EmpLeaveRequestService implements EmpLeaveRequestDao {
 		return leaves;
 		
 	}
+	public List<TblEmpLeavereq> viewbyManagerid(String mgrid){
+	String sqlquery = "SELECT * FROM tbl_emp_leavereq WHERE managerid ='"+mgrid+"'";
+	
+	Configuration con = new Configuration().configure("hibernate.cfg.xml");
+	SessionFactory fact = con.buildSessionFactory();
+	Session session = fact.openSession();
+	Transaction tx = session.beginTransaction();
+	List<TblEmpLeavereq> map = null;
+
+		SQLQuery query = session.createSQLQuery(sqlquery);
+		query.addEntity(TblEmpLeavereq.class);
+		List<TblEmpLeavereq> leaves = query.list();
+		for(TblEmpLeavereq leave : leaves) {
+			System.out.println("Inside For");
+		System.out.println(leave);
+		}
+	return leaves;
+	
+}
+	public List<TblEmpLeavereq> viewbyStatusid(Boolean statusid){
+	String sqlquery = "SELECT * FROM tbl_emp_leavereq WHERE status ='"+statusid+"'";
+	
+	Configuration con = new Configuration().configure("hibernate.cfg.xml");
+	SessionFactory fact = con.buildSessionFactory();
+	Session session = fact.openSession();
+	Transaction tx = session.beginTransaction();
+	List<TblEmpLeavereq> map = null;
+
+		SQLQuery query = session.createSQLQuery(sqlquery);
+		query.addEntity(TblEmpLeavereq.class);
+		List<TblEmpLeavereq> leaves = query.list();
+		System.out.println("list according to status");
+		for(TblEmpLeavereq leave : leaves) {
+			System.out.println("Inside For");
+		System.out.println(leave);
+		}
+	return leaves;
+	
+}
 
 	@Override
 	public void edit() {

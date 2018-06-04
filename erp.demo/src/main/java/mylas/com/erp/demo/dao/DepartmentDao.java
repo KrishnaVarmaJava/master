@@ -2,6 +2,7 @@ package mylas.com.erp.demo.dao;
 
 import java.util.List;
 
+import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblDepartment;
 
 

@@ -1,7 +1,6 @@
 package mylas.com.erp.demo.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,10 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblDepartment;
@@ -25,12 +21,12 @@ import mylas.com.erp.demo.TblDesignation;
 import mylas.com.erp.demo.TblEmpAttendanceNew;
 import mylas.com.erp.demo.TblEmpLeavereq;
 import mylas.com.erp.demo.appservices.UserServiceImpl;
-import mylas.com.erp.demo.dao.EmpAttendenceDao;
 import mylas.com.erp.demo.dao.EmpLeaveRequestDao;
 import mylas.com.erp.demo.dao.EmpServicesDao;
 import mylas.com.erp.demo.dao.ManagerServicesDao;
 import mylas.com.erp.demo.dao.ServicesDao;
 import mylas.com.erp.demo.daoimpl.EmpAttendanceDaoImpl;
+import mylas.com.erp.demo.daoimpl.EmpLeaveRequestService;
 import mylas.com.erp.demo.exceptions.UserBlockedException;
 import mylas.com.erp.demo.operations.LoginOperations;
 import mylas.com.erp.demo.service.Client;
@@ -60,7 +56,7 @@ public class PageController {
 	Client client = new Client();
 	EmpAttendanceDaoImpl attimpl=new EmpAttendanceDaoImpl();
 	
-		
+	EmpLeaveRequestService ers = new EmpLeaveRequestService();	
 	@RequestMapping(value= "/admin")
 	public ModelAndView adminIndexPage() {
 		ModelAndView mav = new ModelAndView("index");
@@ -389,7 +385,7 @@ public class PageController {
 		//attimpl.update(false,4);
 		//attimpl.delete(4);
 		attimpl.getDetails();
-		
+		ers.viewbyStatusid(false);
 		
 		return mav;
 	}

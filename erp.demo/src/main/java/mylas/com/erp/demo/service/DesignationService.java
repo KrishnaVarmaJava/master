@@ -6,11 +6,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
-import mylas.com.erp.demo.TblDepartment;
+import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblDesignation;
 import mylas.com.erp.demo.dao.DesignationDao;
 
@@ -68,5 +66,7 @@ public class DesignationService implements DesignationDao {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }
