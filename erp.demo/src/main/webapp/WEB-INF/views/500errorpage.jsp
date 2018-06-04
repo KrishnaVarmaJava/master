@@ -80,7 +80,7 @@
         </div>
         <p class="text-muted font-13">Don't worry though, we know and are fixing it. Please try again later.</p>
         <div class="error-bottom">
-            <a href="index.html" class="btn btn-danger btn-outline">Return To Dashboard</a>
+            <a href="${contextRoot}/" class="btn btn-danger btn-outline">Return To Dashboard</a>
         </div>
     </div>
 

@@ -62,45 +62,7 @@ public class PageController {
 	Client client = new Client();
 	EmpAttendanceDaoImpl attimpl=new EmpAttendanceDaoImpl();
 	DesignationService desser=new DesignationService();
-		EmpLeaveRequestService ers = new EmpLeaveRequestService();	
-	@RequestMapping(value= "/admin")
-	public ModelAndView adminIndexPage() {
-		ModelAndView mav = new ModelAndView("index");
-	/*	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		EmpDetails user=null;
-		if (principal instanceof EmpDetails) {
-		user = ((EmpDetails)principal);
-		}
-	 
-	String name = user.getUname();*/
-		mav.addObject("title", "HomePage");
-		
-		mav.addObject("services", servicesdao.list());
-		
-		mav.addObject("userClickHome", true);
-		return mav;
-	}
-/*	@RequestMapping(value= "/adminindex", method=RequestMethod.GET)
-	public ModelAndView AdminIndexPage() {
-		ModelAndView mav = new ModelAndView("empindex");
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		EmpDetails user=null;
-		if (principal instanceof EmpDetails) {
-		user = ((EmpDetails)principal);
-		}
-	 
-		String role = user.getRole();
-		System.out.println(user.getRole());
-		mav.addObject("title", "HomePage");
-		mav.addObject("Role",role);
-		mav.addObject("services", servicesdao.list());
-		mav.addObject("services", servicesdao.list());
-		mav.addObject("manservices", mandao.list());
-		mav.addObject("userClickHome", true);
-		return mav;
-	}*/
-
-
+	EmpLeaveRequestService ers = new EmpLeaveRequestService();	
 
 	
 	/*
@@ -392,10 +354,16 @@ public class PageController {
 		emp.setRole("ADMIN_ROLE");
 		emp.setFname("Admin");
 		emp.setLname("Admin");
-		client.getConnection(emp);
-		ModelAndView mav = new ModelAndView("log_in");
+		String msg = client.getConnection(emp);
+		ModelAndView mav;
+		if(msg.contains("Duplicate Entry")) {
+			mav = new ModelAndView("register");	
+		}else {
+			mav = new ModelAndView("newlogin");
+		}
+		
 		mav.addObject("title", "Register Page");
-		mav.addObject("regmessage","Regesterd Successfully! Please Login.");
+		mav.addObject("regmessage",msg);
 		return mav;
 	}
 	
@@ -412,6 +380,21 @@ public class PageController {
 	public ModelAndView loginPageView(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout) {
 		ModelAndView mav = new ModelAndView("newlogin");
+		if (error != null) {
+			mav.addObject("error", "Invalid username and password!");
+		}
+
+		if (logout != null) {
+			mav.addObject("msg", "You've been logged out successfully.");
+		}
+		mav.addObject("loginoperations", new LoginOperations());
+		return mav;
+	}
+	
+	@RequestMapping(value= "/signin")
+	public ModelAndView signinPageView(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout) {
+		ModelAndView mav = new ModelAndView("lockscreen");
 		if (error != null) {
 			mav.addObject("error", "Invalid username and password!");
 		}

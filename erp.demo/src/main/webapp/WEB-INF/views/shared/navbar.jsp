@@ -253,13 +253,9 @@
                         </a>
                         <ul class="dropdown-menu">
                      
-<<<<<<< HEAD
                              <!--  li class="header">NOTIFICATIONS</li>-->
-                            <li class="header"><a href="">SIGN OUT</a></li>
-=======
                              <li class="header"><a href="${contextRoot}/logout">Log Out</a></li>
-                            <li class="header">Sign Out</li>
->>>>>>> branch 'master' of https://github.com/KrishnaVarmaJava/master.git
+                            <li class="header"><a href="${contextRoot}/signout">Sign Out</a></li>
                          
                         </ul>
                     </li>

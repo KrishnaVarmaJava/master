@@ -6,6 +6,7 @@
 <spring:url var="js" value="/resources/js" />
 <spring:url var="images" value="/resources/images" />
 <spring:url var="plugins" value="/resources/plugins" />
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" /> 
 <!DOCTYPE html>
 <html>
 
@@ -44,6 +45,7 @@
 						</div>
 					</div>
 				</div>
+				<p style="color: red;">${regmessage}</p>
 				<form id="register" method="POST">
 					<div class="msg">Create an account</div>
 					<div class="input-group addon-line">
@@ -97,7 +99,7 @@
 						type="submit">REGISTER NOW</button>
 
 					<div class="m-t-25 m-b--5 align-center">
-						<a href="log_in.html">You already have an account?</a>
+						<a href="${contextRoot}/login">You already have an account?</a>
 					</div>
 				</form>
 			</div>
