@@ -9,11 +9,13 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.springframework.stereotype.Repository;
 
+import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblDepartment;
 import mylas.com.erp.demo.dao.DepartmentDao;
 
-
+/*@Repository("deptdao")*/
 public class DepartmentService implements DepartmentDao {
 	
 
@@ -66,8 +68,17 @@ public class DepartmentService implements DepartmentDao {
 	}
 
 	@Override
-	public void deleteDetails(TblDepartment tbl) {
-		// TODO Auto-generated method stub
+	public void deleteDetails(int id) {
+		// TODO Auto-generated method stubConfiguration con = new Configuration().configure("hibernate.cfg.xml");
+		buildSessionFactory();
+		Session session = fact.openSession();
+		Transaction tx = session.beginTransaction();
+		TblDepartment deptdel = session.load(TblDepartment.class, id);
+		session.delete(deptdel);
+		System.out.println("Object Deleted successfully.....!!");
+		tx.commit();
+		session.close();
+		fact.close();
 		
 	}
 

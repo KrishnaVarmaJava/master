@@ -1,7 +1,6 @@
 package mylas.com.erp.demo.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +8,9 @@ import javax.servlet.http.HttpSession;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,15 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-
 import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblDepartment;
 import mylas.com.erp.demo.TblDesignation;
 import mylas.com.erp.demo.TblEmpAttendanceNew;
 import mylas.com.erp.demo.TblEmpLeavereq;
 import mylas.com.erp.demo.appservices.UserServiceImpl;
-import mylas.com.erp.demo.dao.EmpAttendenceDao;
+import mylas.com.erp.demo.dao.DepartmentDao;
 import mylas.com.erp.demo.dao.EmpLeaveRequestDao;
 import mylas.com.erp.demo.dao.EmpServicesDao;
 import mylas.com.erp.demo.dao.ManagerServicesDao;
@@ -56,47 +55,15 @@ public class PageController {
 	
 	@Autowired
 	EmpAttendanceDaoImpl empattreq;
-
+	
+	/*@Autowired
+	DepartmentDao deptdao;*/
+	DepartmentService deptdao =new DepartmentService();
 	Client client = new Client();
 	EmpAttendanceDaoImpl attimpl=new EmpAttendanceDaoImpl();
+	DesignationService desser=new DesignationService();
 	
-		
-	@RequestMapping(value= "/admin")
-	public ModelAndView adminIndexPage() {
-		ModelAndView mav = new ModelAndView("index");
-	/*	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		EmpDetails user=null;
-		if (principal instanceof EmpDetails) {
-		user = ((EmpDetails)principal);
-		}
-	 
-	String name = user.getUname();*/
-		mav.addObject("title", "HomePage");
-		
-		mav.addObject("services", servicesdao.list());
-		
-		mav.addObject("userClickHome", true);
-		return mav;
-	}
-/*	@RequestMapping(value= "/adminindex", method=RequestMethod.GET)
-	public ModelAndView AdminIndexPage() {
-		ModelAndView mav = new ModelAndView("empindex");
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		EmpDetails user=null;
-		if (principal instanceof EmpDetails) {
-		user = ((EmpDetails)principal);
-		}
-	 
-		String role = user.getRole();
-		System.out.println(user.getRole());
-		mav.addObject("title", "HomePage");
-		mav.addObject("Role",role);
-		mav.addObject("services", servicesdao.list());
-		mav.addObject("services", servicesdao.list());
-		mav.addObject("manservices", mandao.list());
-		mav.addObject("userClickHome", true);
-		return mav;
-	}*/
+
 	
 	/*
 	 * Slide Bar Page Handlers Start
@@ -115,6 +82,14 @@ public class PageController {
 	public ModelAndView allEmpPage() {
 		ModelAndView mav = new ModelAndView("employees");
 		mav.addObject("services", servicesdao.list());
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+		
+		String role = user.getRole();
+		mav.addObject("Role",role);
 		mav.addObject("title", "Employee Regester Page");
 		mav.addObject("userClickReg", true);
 		Client cl = new Client();
@@ -122,6 +97,7 @@ public class PageController {
 		List<EmpDetails> emp1 = cl.getDetails();
 		mav.addObject("employees", emp1);
 		mav.addObject("dupmsg", mesg);
+		mav.addObject(user);
 		cl.closeAllSessions();
 		return mav;		
 	}
@@ -132,12 +108,20 @@ public class PageController {
 	@RequestMapping(value="/admin/empdep/register")
 	public ModelAndView empDepartmentPage() {
 		ModelAndView mav = new ModelAndView("departments");
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+		
+		String role = user.getRole();
+		mav.addObject("Role",role);
+		mav.addObject("User", user);
 		DepartmentService depdetails = new DepartmentService();
 		List<TblDepartment> depts = depdetails.getDetails();
 		mav.addObject("departments", depts);
 		mav.addObject("services", servicesdao.list());
-		mav.addObject("title", "Employee Departments Page");
-		mav.addObject("userClickReg", true);
+	
 		return mav;		
 	}
 	
@@ -202,8 +186,15 @@ public class PageController {
 		List<TblDesignation> depts = depdetails.getDetails();
 		mav.addObject("designations", depts);
 		mav.addObject("services", servicesdao.list());
-		mav.addObject("title", "Employee Holiday Page");
-		mav.addObject("userClickReg", true);
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+		
+		String role = user.getRole();
+		mav.addObject("Role",role);
+		
 		return mav;		
 	}
 	/*
@@ -270,13 +261,20 @@ public class PageController {
 	public ModelAndView addEmpDepartmentPage(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("departments");
 		TblDepartment tbldep = new TblDepartment(request.getParameter("departmentname"));
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+		
+		String role = user.getRole();
+		mav.addObject("Role",role);
 		DepartmentService depserv = new DepartmentService();
 		depserv.saveDepartment(tbldep);
 		List<TblDepartment> depts = depserv.getDetails();
 		mav.addObject("departments", depts);
 		mav.addObject("services", servicesdao.list());
-		mav.addObject("title", "Employee Departments Page");
-		mav.addObject("userClickReg", true);
+		mav.addObject("User", user);
 		return mav;		
 	}
 	
@@ -289,8 +287,14 @@ public class PageController {
 		List<TblDesignation> depts = depdetails.getDetails();
 		mav.addObject("designations", depts);
 		mav.addObject("services", servicesdao.list());
-		mav.addObject("title", "Employee Holiday Page");
-		mav.addObject("userClickReg", true);
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+		
+		String role = user.getRole();
+		mav.addObject("Role",role);
 		return mav;		
 	}
 	
@@ -367,10 +371,45 @@ public class PageController {
 	UserServiceImpl userservice = new UserServiceImpl();
 	
 	@RequestMapping(value= "/login")
-	public ModelAndView loginPageView() {
+	public ModelAndView loginPageView(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout) {
 		ModelAndView mav = new ModelAndView("newlogin");
+		if (error != null) {
+			mav.addObject("error", "Invalid username and password!");
+		}
+
+		if (logout != null) {
+			mav.addObject("msg", "You've been logged out successfully.");
+		}
 		mav.addObject("loginoperations", new LoginOperations());
 		return mav;
+	}
+	
+	@RequestMapping(value= "/logout")
+	public ModelAndView logoutPageView(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("redirect:/login?logout");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    if (auth != null){    
+	        new SecurityContextLogoutHandler().logout(request, response, auth);
+	    }
+		return mav;
+	}
+	@RequestMapping(value="/admin/departments/delete/{id}")
+	public ModelAndView deleteAdminDepartments(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("redirect:/admin/empdep/register");
+		
+		deptdao.deleteDetails(id);
+		return mav;
+		
+	}
+
+	@RequestMapping(value="/admin/designations/delete/{id}")
+	public ModelAndView deleteAdminDesignations(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("redirect:/admin/empdesig/register");
+		
+		desser.deleteDetails(id);
+		return mav;
+		
 	}
 	
 	@RequestMapping(value= "/testpage")
@@ -398,10 +437,21 @@ public class PageController {
 		ModelAndView mav = new ModelAndView("indvidtimesheet");
 		return mav;
 	}
-	
+
 	@RequestMapping(value= "/403")
-	public ModelAndView error403Page() {
-		ModelAndView mav = new ModelAndView("403");
+	public ModelAndView Page403() {
+		ModelAndView mav = new ModelAndView("403errorpage");
+		return mav;
+	}
+	@RequestMapping(value= "/error/404")
+	public ModelAndView Page404() {
+		ModelAndView mav = new ModelAndView("404errorpage");
+		return mav;
+	}
+	@RequestMapping(value= "/error/500")
+	public ModelAndView Page500() {
+		ModelAndView mav = new ModelAndView("500errorpage");
+
 		return mav;
 	}
 		

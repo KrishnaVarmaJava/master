@@ -51,10 +51,10 @@
             <div class="body">
              				
              				<c:if test="${not empty error}">
-			<div class="error">${error}</div>
+			<div class="error" style="color: red;">${error}</div>
 		</c:if>
 		<c:if test="${not empty msg}">
-			<div class="msg">${msg}</div>
+			<div class="msg" style="color: green;">${msg}</div>
 		</c:if>
              				
              				<form name='loginForm' action="${contextRoot}/login" id="log_in" method="POST">
