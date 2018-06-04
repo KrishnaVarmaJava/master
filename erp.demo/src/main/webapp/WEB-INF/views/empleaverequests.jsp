@@ -118,7 +118,8 @@
 														<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
 																<c:set var="role" value="employee"/>
 														</c:if>
-					<form action="${contextRoot}/${role}/leave/register" method="post">
+					<script src="${js}/pages/empleaverequests.js"></script>
+					<form action="${contextRoot}/${role}/leave/register" method="post" onsubmit="return Validatedate()">
 						<hr class="custom_line">
 						<div class="body">
 
