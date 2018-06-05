@@ -115,22 +115,21 @@ public class Client implements EmployeeDao {
 
 		SessionFactory fact = con.buildSessionFactory();
 		Session session = fact.openSession();
-		user =  session.load(EmpDetails.class,
-				id);
-		session.close();
+		Transaction tx = session.beginTransaction();
+		user =  session.load(EmpDetails.class, id);
+		
+		tx.commit();
 		return user;
+		
 	}
 
 
 	@Override
 	public EmpDetails getByUName(String empuname) {
-		System.out.println("in getbyname method");
 		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-		System.out.println("cfg file");
 		SessionFactory fact = con.buildSessionFactory();
-		System.out.println("built session");
 		Session session = fact.openSession();
-		System.out.println("open sesion");
+		Transaction tx = session.beginTransaction();
 		Query q = session.createQuery("from EmpDetails");
 		List<EmpDetails> emp1 = q.list();
 		System.out.println("load session");
@@ -141,6 +140,7 @@ public class Client implements EmployeeDao {
 			}
 		}
 		session.close();
+		tx.commit();
 		return null;
 		
 	}

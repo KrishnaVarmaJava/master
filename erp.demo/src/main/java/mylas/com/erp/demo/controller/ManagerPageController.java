@@ -126,10 +126,18 @@ public class ManagerPageController {
 	@RequestMapping(value="/manager/allemp/register/{id}/employeedetails")
 	public ModelAndView eachEmpDetailsPage(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView("employeedetails");
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+		String role = user.getRole();
 		EmpDetails Edetails = null;
 		Client cl = new Client();
 		Edetails = cl.getById(id);
+		System.out.println(Edetails);
 		mav.addObject("empID", id);
+		mav.addObject("Role",role);
 		mav.addObject("employee",Edetails);
 		mav.addObject("manservices", mandao.list());
 		return mav;		
