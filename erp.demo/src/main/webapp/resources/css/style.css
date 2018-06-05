@@ -8472,6 +8472,7 @@ fieldset[disabled] .form-control {
 ****************************************************/
 
 .login-page {
+	background:url('../images/bg/bg1.png');
     background-color: #03A9F4 ;
     padding-left: 0;
     max-width: 360px;

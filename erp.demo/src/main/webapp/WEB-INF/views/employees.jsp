@@ -341,9 +341,8 @@
 														href="<%=request.getContextPath()%>/admin/allemp/register/${empl.getId()}/employeedetails">
 														<img src="/erp.demo/resources/images/mail/one.jpg"
 														alt="Contact Person">
-														<div class="hideOverflow profiletitlewidth">${empl.getFname()}
-															${empl.getLname()}</div>
-														<div class="clearfix"></div>
+														<div class="profiletitlewidth hideOverflow ">${empl.getFname()} ${empl.getLname()}</div>
+												
 														<div class="userprofile_sub" style="text-align: center">${empl.getDesignation()}</div>
 
 													</a>

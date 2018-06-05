@@ -1,23 +1,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+
+
 <aside class="aside">
 	<!-- START Sidebar (left)-->
 	<div class="aside-inner">
-		<nav data-sidebar-anyclick-close="" class="sidebar">
+	    <nav data-sidebar-anyclick-close="" class="sidebar">
 			<!-- START sidebar nav-->
 			<ul class="nav menu">
 				<!-- Iterates over all sidebar items-->
-				<li class="nav-heading "><span>MAIN NAVIGATION </span></li>
-				
-				<li>
+				  <li class="nav-heading ">
+                        <span>MAIN NAVIGATION</span>
+                    </li>
+                    <li>
 				<a href="#dashboard" title="Dashboard"
 					data-toggle="collapse" class="menu-toggle"> <em
 						class="material-icons">dashboard</em> <span>Employee
 							Details </span>
 				</a>
+				
 					<ul id="dashboard" class="nav sidebar-subnav collapse">
-						<li class="sidebar-subnav-header">Dashboard</li> 
+						
 					<li>	
 					<c:if test="${Role.equals('ADMIN_ROLE')}">
 							<c:forEach items="${services}" var="service">
@@ -41,7 +45,10 @@
 								</a>
 							</c:forEach>
 						</c:if></li>
-					</ul></li>
+					</ul>
+					
+					</li>
+					
 				<li><a href="#layout" title="Layouts" data-toggle="collapse"
 					class="menu-toggle"> <em class="material-icons">computer</em> <span>Layouts</span>
 				</a>
