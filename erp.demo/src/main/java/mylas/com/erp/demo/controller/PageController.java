@@ -135,7 +135,7 @@ public class PageController {
 		return mav;		
 	}
 	
-	@RequestMapping(value="/admin/empleavereq/register")
+	@RequestMapping(value="/admin/leaverequests/register")
 	public ModelAndView empLeaveReqPage() {
 		ModelAndView mav = new ModelAndView("allempleaverequests");
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -156,7 +156,7 @@ public class PageController {
 		return mav;		
 	}
 	
-	@RequestMapping(value="/admin/empatt/register")
+	@RequestMapping(value="/admin/employeetimesheets/register")
 	public ModelAndView empAttenedancePage() {
 		ModelAndView mav = new ModelAndView("allemptimesheetrequests");
 		mav.addObject("services", servicesdao.list());
@@ -171,7 +171,7 @@ public class PageController {
 		Client cl = new Client();
 		List<EmpDetails> emp1 = cl.getDetails();
 		List<TblEmpAttendanceNew> attendances =  empattreq.getDetails();
-		
+		mav.addObject("User",user);
 		mav.addObject("employees", emp1);
 		mav.addObject("attendancelist",attendances);
 		return mav;		
@@ -464,6 +464,50 @@ public class PageController {
 		//attimpl.delete(4);
 		attimpl.getDetails();
 		ers.viewbyStatusid(false);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value= "/admin/attendance/approve/{id}")
+	public ModelAndView empTimesheetApprovePage(HttpSession session,@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("redirect:/admin/employeetimesheets/register");
+		String reason = "Approved";
+		boolean status = true;
+		empattreq.update(status, id);		
+		return mav;
+	}
+	@RequestMapping(value= "/admin/attendance/decline/{id}")
+	public ModelAndView empTimesheetdeclinePage(HttpSession session,@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("redirect:/admin/employeetimesheets/register");
+		String reason = "Decline";
+		boolean status = false;
+		empattreq.update(status, id);
+		return mav;
+	}
+	@RequestMapping(value= "/admin/leave/approve/{id}")
+	public ModelAndView empLeaveApprovePage(HttpSession session,@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("redirect:/admin/leaverequests/register");
+		
+		List<TblEmpLeavereq> leavereq =  empleavereq.view();
+		String reason = "Approved";
+		boolean status = true;
+		String UMsg = empleavereq.update(id,reason,status);
+		mav.addObject("empleave", leavereq);
+		mav.addObject("UMsg", UMsg+" "+reason);
+		mav.addObject("manservices", mandao.list());	
+		
+		return mav;
+	}
+	@RequestMapping(value= "/admin/leave/decline/{id}")
+	public ModelAndView empLeavedeclinePage(HttpSession session,@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("redirect:/admin/leaverequests/register");
+		List<TblEmpLeavereq> leavereq =  empleavereq.view();
+		String reason = "Decline";
+		boolean status = false;
+		String UMsg = empleavereq.update(id,reason,status);
+		mav.addObject("empleave", leavereq);
+		mav.addObject("UMsg", UMsg+" "+reason);
+		mav.addObject("manservices", mandao.list());	
 		
 		return mav;
 	}

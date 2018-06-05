@@ -118,8 +118,8 @@
 														<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
 																<c:set var="role" value="employee"/>
 														</c:if>
-					<script src="${js}/pages/empleaverequests.js"></script>
-					<form action="${contextRoot}/${role}/leave/register" method="post" onsubmit="return Validatedate()">
+					
+					<form action="${contextRoot}/${role}/leave/register" method="post" onsubmit="return Validate()" name="form">
 						<hr class="custom_line">
 						<div class="body">
 
@@ -371,7 +371,36 @@
 	<script src="${js}/layout.js"></script>
 
 
+<script type="text/javascript">
+function Validate() {
+    var startDate = document.getElementById("fromdate").value;
+    var endDate = document.getElementById("todate").value;
+    var leave=document.getElementById("leavetype").value;
+    var manager=document.getElementById("manager").value;
+   
+ 
+    if ((Date.parse(endDate) <= Date.parse(startDate))) {
+        alert("To date should be greater than From date");
+            fromdate.focus();
+        return false;
+    } 
+if(leave==0)
+	{
+	alert("please select leavetype");
+	 document.form.leavetype.focus();
 
+	return false;
+	}
+	
+	if(manager==0)
+	{
+		alert("please select Manager");
+		 document.form.manager.focus();
+		
+		}
+}
+
+</script>
 
 
 

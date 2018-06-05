@@ -31,15 +31,15 @@ public class ServicesDaoImpl implements ServicesDao{
 		services.add(service);
 		
 		service = new Services();
-		service.setServiceID("empleavereq");
+		service.setServiceID("leaverequests");
 		service.setServiceName("Leave Requests");
 		service.setServiceDescription("List Of Employee Leave Requests");
 		service.setServiceRole("admin");
 		services.add(service);
 		
 		service = new Services();
-		service.setServiceID("empatt");
-		service.setServiceName("Attenedance");
+		service.setServiceID("employeetimesheets");
+		service.setServiceName("Employee Timesheets");
 		service.setServiceDescription("List Of Employee Attenedance");
 		service.setServiceRole("admin");
 		services.add(service);

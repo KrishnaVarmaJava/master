@@ -197,8 +197,8 @@
 								
 								<c:forEach var="attlist" items="${attendancelist}">
 								<c:set var="user" value="${User.getEid()}"/>
-								<c:if test="${empleaveslist.getEmployeeid() != user}">
-								<c:if test="${attlist.getStatas() == null}">
+								<c:if test="${attlist.getEmpid() != user}">
+								<%-- <c:if test="${attlist.getStatas() == null}"> --%>
                                     <tbody>
 									<c:set var="green" value="icon-display  fa fa-check attenedance_check_green"/>
 									<c:set var="red" value="icon-display  fa fa-close  attenedance_check_red"/>
@@ -493,12 +493,27 @@
                                     												<td>
 
 													<div class="btn-group">
+														
+														<c:if test="${attlist.getStatas() == null}">
 														<button type="button"
 															class="btn btn-primary btn-outline btn-rounded waves-effect"
 															data-toggle="dropdown" aria-haspopup="true"
-															aria-expanded="false">
-															Panding <span class="caret"></span>
+															aria-expanded="false">Panding 
 														</button>
+														</c:if><c:if test="${attlist.getStatas() == false}">
+																<button type="button"
+															class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
+															>Declined 
+														</button></c:if><c:if test="${attlist.getStatas() == true}">
+																<button type="button"
+															class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect "
+															aria-haspopup="true"
+															aria-expanded="false">Approved 
+														</button>
+												</c:if>
+												<c:set var="eid" value="${User.getEid()}"></c:set>
+												<c:if test="${attlist.getManagerid() == eid}">
+												<c:if test="${attlist.getStatas() == null}">
 														<ul class="dropdown-menu bullet">
 														<c:if test="${Role.equals('ADMIN_ROLE')}">
 															<c:set var="role" value="admin"/>
@@ -516,14 +531,15 @@
 															<li><a href="${contextRoot}/${role}/attendance/decline/${attlist.getId()}"><i
 																	class="material-icons">favorite</i>Declined</a></li>
 														</ul>
-													</div>
+														</c:if></c:if>
+																											</div>
 												</td>
                                     
 									  </tr>
                
                                    </tbody>
                                    </c:if>
-                                </c:if>
+                                <%-- </c:if> --%>
                                 </c:forEach>
                                 </table>
                                 

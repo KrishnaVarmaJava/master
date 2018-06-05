@@ -139,7 +139,6 @@ public class Client implements EmployeeDao {
 			 return user;	
 			}
 		}
-		session.close();
 		tx.commit();
 		return null;
 		

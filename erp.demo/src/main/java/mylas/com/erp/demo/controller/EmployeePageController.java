@@ -146,10 +146,7 @@ public class EmployeePageController {
 		ModelAndView mav = new ModelAndView("empleaverequests");
 		Client cl = new Client();
 		
-		List<EmpDetails> emp1 = cl.getDetails();
-		List<TblEmpLeavereq> leavereq =  empleavereq.viewbyid(user.getEid());
-		mav.addObject("employees", emp1);
-		mav.addObject("empleave", leavereq);
+		
 		mav.addObject("Role",role);
 		/**
 		 * Handling request from empleaverequests.jsp form with post action.
@@ -176,9 +173,7 @@ public class EmployeePageController {
 
 
 
-		mav.addObject("empservices", empservicesdao.list());	
-		mav.addObject("employees", emp1);
-		mav.addObject("empleave", leavereq);
+		
 
 		TblEmpLeavereq empleave = new TblEmpLeavereq((int)daysNegative,null, request.getParameter("fromdate"),request.getParameter("leavereason"), request.getParameter("leavetype"), null, null,  request.getParameter("todate"),null);
 		empleave.setManagerid(user.getManagerid());
@@ -186,6 +181,13 @@ public class EmployeePageController {
 		empleave.setStatus(null);
 		empleavereq.save(empleave);		
 		System.out.println("Req Sent to Save");
+		List<EmpDetails> emp1 = cl.getDetails();
+		List<TblEmpLeavereq> leavereq =  empleavereq.viewbyid(user.getEid());
+		mav.addObject("employees", emp1);
+		mav.addObject("empleave", leavereq);
+		mav.addObject("empservices", empservicesdao.list());	
+		mav.addObject("employees", emp1);
+		mav.addObject("empleave", leavereq);
 		mav.addObject("Submitmsg", "Your Leave Request Has Been Submitted Sucessfully! Please Wait for your Manager Approval");
 		mav.addObject("Role",role);
 		return mav;

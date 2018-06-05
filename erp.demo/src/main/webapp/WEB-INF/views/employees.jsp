@@ -183,7 +183,7 @@
 												<div class="form-line">
 													<label>Password </label> <input type="password" name="pswd"
 														id="pswd" class="form-control" placeholder="Password"
-														required="required">
+														pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="required">>
 												</div>
 											</div>
 										</div>
@@ -502,36 +502,95 @@ $("#list").css("display","none");
 function Validate() {
     var password = document.getElementById("pswd").value;
     var confirmPassword = document.getElementById("cpswd").value;
+  	     var designation= document.getElementById("designation").value;
+  	     var phone=document.getElementById("phone").value;
     if (password != confirmPassword) {
         alert("Passwords do not match.");
+        document.form.pswd.focus();
         return false;
     }
 
-    var a = document.form.phone.value;
-    if(a=="")
+  
+    if(phone=="")
     {
     alert("Please Enter Your Mobile Number");
     document.form.phone.focus();
     return false;
     }
-     if(isNaN(a)||a.indexOf(" ")!=-1)
+     if(isNaN(phone)||phone.indexOf(" ")!=-1)
                {
-                  alert("Enter numeric value")
+                  alert("Enter numeric value");
+                  document.form.phone.focus();
                   return false;
     } 
-    if(isNaN(a))
+    if(isNaN(phone))
     {
     alert("Enter the valid Mobile Number(Like : 9566137117)");
     document.form.phone.focus();
     return false;
     }
-    if((a.length <10) || a.length >10)
+    if((phone.length <10) || phone.length >10)
     {
     alert(" Your Mobile Number must be 1 to 10 Integers");
+    document.form.phone.focus();
     return false;
-    }
-}
+    }  
+    if(designation==0)
+    	{
+    	alert("please select designation");
+    	document.form.designation.focus();
+    	return false;
+    	
+    	}
+    
+    
+    
+    var myInput = document.getElementById("pswd");
+    var letter = document.getElementById("letter");
+    var capital = document.getElementById("capital");
+    var number = document.getElementById("number");
+    var length = document.getElementById("length");
 
+
+    // Validate lowercase letters
+    var lowerCaseLetters = /[a-z]/g;
+    if(myInput.value.match(lowerCaseLetters)) { 
+     letter.classList.remove("invalid");
+     letter.classList.add("valid");
+    } else {
+     letter.classList.remove("valid");
+     letter.classList.add("invalid");
+    }
+    //Validate capital letters
+    var upperCaseLetters = /[A-Z]/g;
+    if(myInput.value.match(upperCaseLetters)) { 
+      capital.classList.remove("invalid");
+      capital.classList.add("valid");
+    } else {
+      capital.classList.remove("valid");
+      capital.classList.add("invalid");
+    }
+
+    // Validate numbers
+    var numbers = /[0-9]/g;
+    if(myInput.value.match(numbers)) { 
+      number.classList.remove("invalid");
+      number.classList.add("valid");
+    } else {
+      number.classList.remove("valid");
+      number.classList.add("invalid");
+    }
+
+    // Validate length
+    if(myInput.value.length >= 8) {
+      length.classList.remove("invalid");
+      length.classList.add("valid");
+    } else {
+      length.classList.remove("valid");
+      length.classList.add("invalid");
+    }
+
+}
 </script>
 
 </body>
