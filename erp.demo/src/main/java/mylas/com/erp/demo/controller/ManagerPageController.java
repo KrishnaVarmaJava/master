@@ -104,7 +104,7 @@ public class ManagerPageController {
 		}
 		emp.setManagerid(user.getEid());
 		ModelAndView mav = new ModelAndView("employees");
-		mav.addObject("manservices", mandao.list());	
+		mav.addObject("manservices", mandao.list());
 		System.out.println("before getconn");
 		String mesg = "hi";
 		mesg = client.getConnection(emp);
@@ -114,10 +114,24 @@ public class ManagerPageController {
 		System.out.println("after getconn");
 		Client cl = new Client();
 		List<EmpDetails> emp1 = cl.getDetails();
+		String role = user.getRole();
+		mav.addObject("Role",role);
 		mav.addObject("employees", emp1);
 		mav.addObject("User",user);
 		mav.addObject("employee", emp);
 		cl.closeAllSessions();
+		return mav;		
+	}
+	
+	@RequestMapping(value="/manager/allemp/register/{id}/employeedetails")
+	public ModelAndView eachEmpDetailsPage(@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("employeedetails");
+		EmpDetails Edetails = null;
+		Client cl = new Client();
+		Edetails = cl.getById(id);
+		mav.addObject("empID", id);
+		mav.addObject("employee",Edetails);
+		mav.addObject("manservices", mandao.list());
 		return mav;		
 	}
 	

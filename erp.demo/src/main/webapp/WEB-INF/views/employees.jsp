@@ -51,7 +51,7 @@
 <body class="theme-indigo light layout-fixed">
 	<div class="wrapper">
 
-	<!-- top navbar-->
+		<!-- top navbar-->
 		<header class="topnavbar-wrapper">
 
 			<%@include file="shared/navbar.jsp"%>
@@ -60,7 +60,7 @@
 		<%@include file="shared/slidebar.jsp"%>
 		<!-- offsidebar-->
 		<%@include file="shared/offslidebar.jsp"%>
-			<!-- Main section-->
+		<!-- Main section-->
 		<section>
 			<!-- Page content-->
 			<div class="content-wrapper">
@@ -105,26 +105,34 @@
 
 						</div>
 
+						<c:if test="${Role.equals('ADMIN_ROLE')}">
+							<c:set var="role" value="admin" />
+						</c:if>
+
+						<c:if test="${Role.equals('MANAGER_ROLE')}">
+							<c:set var="role" value="manager" />
+						</c:if>
 						<div class="col-md-12 card">
 							<div class="custom_title">
 								<h2>Add Employee</h2>
-							<c:if test="${dupmsg.equals('Employee Saved')}">
-								<h4 style="color: green;">${dupmsg}</h4>
-							</c:if>
-							<c:if test="${dupmsg.equals('This is a Duplicate Entry')}">
-								<h4 style="color: red;">${dupmsg}</h4>
-							</c:if>
-							<c:if test="${empty dupmsg}">
-								<h4 style="color: red;">Employee Save Failed</h4>
-							</c:if>
+								<c:if test="${dupmsg.equals('Employee Saved')}">
+									<h4 style="color: green;">${dupmsg}</h4>
+								</c:if>
+								<c:if test="${dupmsg.equals('This is a Duplicate Entry')}">
+									<h4 style="color: red;">${dupmsg}</h4>
+								</c:if>
+								<c:if test="${empty dupmsg}">
+									<h4 style="color: red;">Employee Save Failed</h4>
+								</c:if>
 							</div>
 
 							<hr class="custom_line">
 							<div class="body">
-                            
 
 
-								<form action="${contextRoot}/admin/allemp/register" method="post" onsubmit="return Validate()" name="form">
+
+								<form action="${contextRoot}/${role}/allemp/register"
+									method="post" onsubmit="return Validate()" name="form">
 									<div class="col-md-6">
 										<div class="form-group">
 											<div class="input-group addon-line">
@@ -152,7 +160,8 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Username</label> <input type="text" name="uname"
-														id="uname" class="form-control" placeholder="Username" required="required">
+														id="uname" class="form-control" placeholder="Username"
+														required="required">
 												</div>
 											</div>
 										</div>
@@ -162,7 +171,8 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Email</label> <input type="email" name="email"
-														id="email" class="form-control" placeholder="Email" required="required">
+														id="email" class="form-control" placeholder="Email"
+														required="required">
 												</div>
 											</div>
 										</div>
@@ -172,7 +182,8 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Password </label> <input type="password" name="pswd"
-														id="pswd" class="form-control" placeholder="Password"  required="required">
+														id="pswd" class="form-control" placeholder="Password"
+														required="required">
 												</div>
 											</div>
 										</div>
@@ -193,8 +204,8 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Employee ID </label> <input type="text" name="empid"
-														id="empid" class="form-control"
-														placeholder="Employee ID" required="required">
+														id="empid" class="form-control" placeholder="Employee ID"
+														required="required">
 												</div>
 											</div>
 										</div>
@@ -216,7 +227,8 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Phone </label> <input type="text" name="phone"
-														id="phone" class="form-control" placeholder="Phone" required="required">
+														id="phone" class="form-control" placeholder="Phone"
+														required="required">
 												</div>
 											</div>
 										</div>
@@ -320,114 +332,153 @@
 											Phone</th>
 										<th data-tablesaw-sortable-col="" data-tablesaw-priority="4">Company
 										</th>
-
+<c:if test="${Role.equals('ADMIN_ROLE')}">
 										<th data-tablesaw-sortable-col="" data-tablesaw-priority="1"
-											class="actiontabel">Action</th>
+											class="actiontabel">Action</th></c:if>
 
 									</tr>
 								</thead>
-
-								<c:forEach items="${employees}" var="empl">
-								<c:if test="${empl.getManagerid() == User.getEid() }"></c:if>
-
-
-									<tbody>
+								<tbody>
+									<c:set var="manager" value="${User.getEid()}" />
+									<c:forEach items="${employees}" var="empl">
+										<c:if test="${empl.getManagerid() ==  manager}">
 
 
-										<tr>
-											<td>
-												<div class="chip">
-													<a
-														href="<%=request.getContextPath()%>/admin/allemp/register/${empl.getId()}/employeedetails">
-														<img src="/erp.demo/resources/images/mail/one.jpg"
-														alt="Contact Person">
-														<div class="profiletitlewidth hideOverflow ">${empl.getFname()} ${empl.getLname()}</div>
+
+
+
+											<tr>
+												<td>
+													<div class="chip">
+														<a
+															href="<%=request.getContextPath()%>/${role}/allemp/register/${empl.getId()}/employeedetails">
+															<img src="/erp.demo/resources/images/mail/one.jpg"
+															alt="Contact Person">
+															<div class="profiletitlewidth hideOverflow ">${empl.getFname()}
+																${empl.getLname()}</div>
+
+															<div class="userprofile_sub" style="text-align: center">${empl.getDesignation()}</div>
+
+														</a>
+
+													</div>
+												</td>
+												<td>${empl.getEid()}</td>
+												<td>${empl.getUname()}</td>
+												<td>${empl.getEmail()}</td>
+												<td>${empl.getJdate()}</td>
+												<td>${empl.getPhone()}</td>
+												<td>${empl.getCompName()}</td>
+												<td>
 												
-														<div class="userprofile_sub" style="text-align: center">${empl.getDesignation()}</div>
+													<ul class="tabelaction">
+													<c:if test="${Role.equals('ADMIN_ROLE')}">
+														<li class="dropdown"><a href="javascript:void(0);"
+															class="dropdown-toggle" data-toggle="dropdown"
+															role="button" aria-haspopup="true" aria-expanded="false">
+																<i class="material-icons">more_vert</i>
+														</a>
+															<ul class="dropdown-menu pull-right">
+																<li><a href="javascript:void(0);"
+																	class=" waves-effect waves-classic"><i
+																		class="material-icons">edit</i>Edit</a></li>
+																<li><a
+																	href="${contextRoot}/admin/allemp/delete/${empl.getId()}"
+																	class=" waves-effect waves-classic"><i
+																		class="material-icons">delete</i>Delete</a></li>
 
-													</a>
-
-												</div>
-											</td>
-											<td>${empl.getEid()}</td>
-											<td>${empl.getUname()}</td>
-											<td>${empl.getEmail()}</td>
-											<td>${empl.getJdate()}</td>
-											<td>${empl.getPhone()}</td>
-											<td>${empl.getCompName()}</td>
-											<td>
-												<ul class="tabelaction">
-													<li class="dropdown"><a href="javascript:void(0);"
-														class="dropdown-toggle" data-toggle="dropdown"
-														role="button" aria-haspopup="true" aria-expanded="false">
-															<i class="material-icons">more_vert</i>
-													</a>
-														<ul class="dropdown-menu pull-right">
-															<li><a href="javascript:void(0);"
-																class=" waves-effect waves-classic"><i
-																	class="material-icons">edit</i>Edit</a></li>
-															<li><a href="${contextRoot}/admin/allemp/delete/${empl.getId()}"
-																class=" waves-effect waves-classic"><i
-																	class="material-icons">delete</i>Delete</a></li>
-
-														</ul></li>
-												</ul>
-											</td>
-										</tr>
-
-
-									</tbody>
-
-								</c:forEach>
-							
-
-</table>
+															</ul></li>
+													</c:if>
+													</ul>
+												</td>
+											</tr>
 
 
 
+										</c:if>
+									</c:forEach>
+									<c:if test="${Role.equals('ADMIN_ROLE')}">
+									<c:forEach items="${employees}" var="empl">
+										<c:if test="${empl.getManagerid() !=  manager}">
+										
+											<tr style="background: gray; color: #FFF;">
+												<td>
+													<div class="chip">
+														<a
+															href="<%=request.getContextPath()%>/admin/allemp/register/${empl.getId()}/employeedetails">
+															<img src="/erp.demo/resources/images/mail/one.jpg"
+															alt="Contact Person">
+															<div class="profiletitlewidth hideOverflow ">${empl.getFname()}
+																${empl.getLname()}</div>
+
+															<div class="userprofile_sub" style="text-align: center">${empl.getDesignation()}</div>
+
+														</a>
+
+													</div>
+												</td>
+												<td>${empl.getEid()}</td>
+												<td>${empl.getUname()}</td>
+												<td>${empl.getEmail()}</td>
+												<td>${empl.getJdate()}</td>
+												<td>${empl.getPhone()}</td>
+												<td>${empl.getCompName()}</td>
+												<td>
+													<ul class="tabelaction">
+													<c:if test="${Role.equals('ADMIN_ROLE')}">
+														<li class="dropdown"><a href="javascript:void(0);"
+															class="dropdown-toggle" data-toggle="dropdown"
+															role="button" aria-haspopup="true" aria-expanded="false">
+																<i class="material-icons">more_vert</i>
+														</a>
+															<ul class="dropdown-menu pull-right">
+																<li><a href="javascript:void(0);"
+																	class=" waves-effect waves-classic"><i
+																		class="material-icons">edit</i>Edit</a></li>
+																<li><a
+																	href="${contextRoot}/admin/allemp/delete/${empl.getId()}"
+																	class=" waves-effect waves-classic"><i
+																		class="material-icons">delete</i>Delete</a></li>
+
+															</ul></li>
+													</c:if>
+													</ul>
+												</td>
+											</tr>
+
+										</c:if>
+									</c:forEach>
+									</c:if>
+								</tbody>
+							</table>
+		</section>
+		<!-- FOOTER-->
+		<footer>
+			<span>&copy; 2018 - <b class="col-blue">Amp</b></span>
+		</footer>
+	</div>
 
 
 
 
+	<!-- CORE PLUGIN JS -->
+	<script src="${plugins}/jquery/jquery.min.js"></script>
+	<script src="${plugins}/bootstrap/js/bootstrap.js"></script>
+	<script src="${plugins}/modernizr/modernizr.custom.js"></script>
+	<script src="${plugins}/screenfull/dist/screenfull.js"></script>
+	<script src="${plugins}/jQuery-Storage-API/jquery.storageapi.js"></script>
+	<script src="${plugins}/jquery-slimscroll/jquery.slimscroll.js"></script>
+	<script src="${plugins}/node-waves/waves.js"></script>
 
+	<!--THIS PAGE LEVEL JS-->
+	<script src="${plugins}/tablesaw/js/tablesaw.js"></script>
+	<script src="${plugins}/tablesaw/js/tablesaw-init.js"></script>
 
+	<!-- LAYOUT JS -->
+	<script src="${js}/demo.js"></script>
+	<script src="${js}/layout.js"></script>
 
-
-
-
-
-
-
-
-
-								</section>
-								<!-- FOOTER-->
-								<footer>
-									<span>&copy; 2018 - <b class="col-blue">Amp</b></span>
-								</footer>
-								</div>
-
-
-
-
-								<!-- CORE PLUGIN JS -->
-								<script src="${plugins}/jquery/jquery.min.js"></script>
-								<script src="${plugins}/bootstrap/js/bootstrap.js"></script>
-								<script src="${plugins}/modernizr/modernizr.custom.js"></script>
-								<script src="${plugins}/screenfull/dist/screenfull.js"></script>
-								<script src="${plugins}/jQuery-Storage-API/jquery.storageapi.js"></script>
-								<script src="${plugins}/jquery-slimscroll/jquery.slimscroll.js"></script>
-								<script src="${plugins}/node-waves/waves.js"></script>
-
-								<!--THIS PAGE LEVEL JS-->
-								<script src="${plugins}/tablesaw/js/tablesaw.js"></script>
-								<script src="${plugins}/tablesaw/js/tablesaw-init.js"></script>
-
-								<!-- LAYOUT JS -->
-								<script src="${js}/demo.js"></script>
-								<script src="${js}/layout.js"></script>
-
-								<script>
+	<script>
 $(document).ready(function(){
 
 showdiv();

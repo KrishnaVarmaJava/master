@@ -228,6 +228,8 @@ public class PageController {
 		System.out.println("after getconn");
 		Client cl = new Client();
 		List<EmpDetails> emp1 = cl.getDetails();
+		String role = user.getRole();
+		mav.addObject("Role",role);
 		mav.addObject("employees", emp1);
 		mav.addObject("User",user);
 		mav.addObject("employee", emp);
