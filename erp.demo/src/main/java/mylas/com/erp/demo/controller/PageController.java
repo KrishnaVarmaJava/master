@@ -309,6 +309,13 @@ public class PageController {
 	@RequestMapping(value="/admin/allemp/register/{id}/employeedetails")
 	public ModelAndView eachEmpDetailsPage(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView("employeedetails");
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+		String role = user.getRole();
+		mav.addObject("Role",role);
 		EmpDetails Edetails = null;
 		Client cl = new Client();
 		Edetails = cl.getById(id);

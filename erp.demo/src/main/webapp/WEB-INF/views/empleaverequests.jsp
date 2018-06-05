@@ -174,19 +174,6 @@
 								</div>
 
 							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<div class="form-line">
-										<label>Manager</label> <select class="form-control" size="1"
-											name="manager" id="manager" required="required">
-											<option value="0">Please select</option>
-											<option value="Man1">Manager1</option>
-											<option value="Man2">Manager2</option>
-											<option value="Man3">Manager3</option>
-										</select>
-									</div>
-								</div>
-							</div>
 							<div class="clearfix"></div>
 							<div style="text-align: center;">
 								<button type="submit"

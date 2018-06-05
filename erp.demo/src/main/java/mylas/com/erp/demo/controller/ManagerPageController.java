@@ -94,7 +94,7 @@ public class ManagerPageController {
 		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null);
 		
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
-		emp.setRole("USER_ROLE");
+		emp.setRole("EMPLOYEE_ROLE");
 		
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -198,7 +198,7 @@ public class ManagerPageController {
 		TblEmpLeavereq empleave = new TblEmpLeavereq((int)daysNegative,null, request.getParameter("fromdate"),request.getParameter("leavereason"), request.getParameter("leavetype"), null, null,  request.getParameter("todate"),null);
 		
 		
-		empleave.setManagerid(null);
+		empleave.setManagerid(user.getManagerid());
 		empleave.setEmployeeid(user.getEid());
 		empleave.setStatus(null);
 		try {
@@ -263,6 +263,7 @@ public class ManagerPageController {
 		
 		TblEmpAttendanceNew attedance = new TblEmpAttendanceNew(null, null, null, null, Integer.parseInt(request.getParameter("day1")), Integer.parseInt(request.getParameter("day2")), Integer.parseInt(request.getParameter("day3")), Integer.parseInt(request.getParameter("day4")), Integer.parseInt(request.getParameter("day5")), Integer.parseInt(request.getParameter("day6")), Integer.parseInt(request.getParameter("day7")), Integer.parseInt(request.getParameter("day8")), Integer.parseInt(request.getParameter("day9")), Integer.parseInt(request.getParameter("day10")), Integer.parseInt(request.getParameter("day11")), Integer.parseInt(request.getParameter("day12")), Integer.parseInt(request.getParameter("day13")), Integer.parseInt(request.getParameter("day14")), Integer.parseInt(request.getParameter("day15")), Integer.parseInt(request.getParameter("day16")), Integer.parseInt(request.getParameter("day17")), Integer.parseInt(request.getParameter("day18")), Integer.parseInt(request.getParameter("day19")), Integer.parseInt(request.getParameter("day20")), Integer.parseInt(request.getParameter("day21")), Integer.parseInt(request.getParameter("day22")), Integer.parseInt(request.getParameter("day23")), Integer.parseInt(request.getParameter("day24")), Integer.parseInt(request.getParameter("day25")), Integer.parseInt(request.getParameter("day26")), Integer.parseInt(request.getParameter("day27")), Integer.parseInt(request.getParameter("day28")), Integer.parseInt(request.getParameter("day29")), Integer.parseInt(request.getParameter("day30")), Integer.parseInt(request.getParameter("day31")), null, null);
 		attedance.setEmpid(user.getEid());
+		attedance.setManagerid(user.getManagerid());
 		attedance.setStatas(null);
 		attedance.setMonth(request.getParameter("month"));
 		attedance.setYear(Integer.parseInt(request.getParameter("year")));

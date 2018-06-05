@@ -196,6 +196,8 @@
 									<div class="clearfix"></div>
 								
 								<c:forEach var="attlist" items="${attendancelist}">
+								<c:set var="user" value="${User.getEid()}"/>
+								<c:if test="${empleaveslist.getEmployeeid() != user}">
 								<c:if test="${attlist.getStatas() == null}">
                                     <tbody>
 									<c:set var="green" value="icon-display  fa fa-check attenedance_check_green"/>
@@ -521,7 +523,8 @@
                
                                    </tbody>
                                    </c:if>
-                                    </c:forEach>
+                                </c:if>
+                                </c:forEach>
                                 </table>
                                 
                             </div>

@@ -170,6 +170,8 @@
 									<div class="clearfix"></div>
 									
 									<c:forEach items="${empleave}" var="empleaveslist">
+									<c:set var="user" value="${User.getEid()}"/>
+									<c:if test="${empleaveslist.getEmployeeid() != user}">
 										<tbody>
 											<tr>
 												<td>
@@ -238,7 +240,7 @@
 											</tr>
 
 										</tbody>
-										
+										</c:if>
 									</c:forEach>
 
 

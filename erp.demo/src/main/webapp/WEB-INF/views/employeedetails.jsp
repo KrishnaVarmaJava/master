@@ -12,68 +12,38 @@
 <html>
 
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-	name="viewport">
-<title>Amp Demo</title>
-<!-- Favicon-->
-<link rel="icon" href="${images}favicon.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Amp Demo</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../favicon.png" type="image/x-icon">
 
-<!--REQUIRED PLUGIN CSS-->
-<link href="${plugins}/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<link href="${plugins}/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="${plugins}/node-waves/waves.css" rel="stylesheet" />
-<link href="${plugins}/animate-css/animate.css" rel="stylesheet" />
-<link href="${plugins}/spinkit/spinkit.css" rel="stylesheet">
+    <!--REQUIRED PLUGIN CSS-->
+    <link href="${plugins}/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${plugins}/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="${plugins}/node-waves/waves.css" rel="stylesheet" />
+    <link href="${plugins}/animate-css/animate.css" rel="stylesheet" />
+    <link href="${plugins}/spinkit/spinkit.css" rel="stylesheet">
 
-<!--REQUIRED THEME CSS -->
-<link href="${css}/style.css" rel="stylesheet">
-<link href="${css}/layout.css" rel="stylesheet">
-<link href="${css}/themes/main_theme.css" rel="stylesheet" />
+    <!--THIS PAGE LEVEL CSS-->
+    <link href="${plugins}/tablesaw/css/tablesaw.min.css" rel="stylesheet">
+	  <link href="${plugins}/nifty-modal/component.css" rel="stylesheet" />
+	
 
-<!--THIS PAGE LEVEL CSS-->
-<link href="${plugins}/unslider/css/unslider.css" rel="stylesheet" />
-<link href="${plugins}/chartist/css/chartist.min.css" rel="stylesheet">
-<!--Chat Css-->
-<link href="${plugins}/wchat/assets/css/style-light.css"
-	rel="stylesheet">
-<link href="${plugins}/wchat/assets/css/mobile.css" rel="stylesheet"
-	id="style">
+    <!--REQUIRED THEME CSS -->
+    <link href="${css}/style.css" rel="stylesheet">
+    <link href="${css}/layout.css" rel="stylesheet">
+    <link href="${css}/themes/main_theme.css" rel="stylesheet" />
+		 <link href="${css}/custom_style.css" rel="stylesheet">
 
-<!-- EMOJI ONE JS -->
-<link rel="stylesheet"
-	href="${plugins}/wchat/smiley/assets/sprites/emojione.sprites.css" />
-<script src="${plugins}/wchat/smiley/js/emojione.min.js"></script>
-
-<script type="text/javascript">
-        // #################################################
-        // # Optional
-
-        // default is PNG but you may also use SVG
-        emojione.imageType = 'png';
-        emojione.sprites = false;
-
-        // default is ignore ASCII smileys like :) but you can easily turn them on
-        emojione.ascii = true;
-
-        // if you want to host the images somewhere else
-        // you can easily change the default paths
-        emojione.imagePathPNG = '${plugins}/wchat/smiley/assets/png/';
-        emojione.imagePathSVG = '${plugins}/wchat/smiley/assets/svg/';
-
-        // #################################################
-    </script>
-<!--#End# Chat Css-->
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 
 <body class="theme-indigo light layout-fixed">
 	<div class="wrapper">
@@ -183,16 +153,15 @@
 	<script type="text/javascript" src="${plugins}/wchat/chatjs/custom.js"></script>
 	<!-- #End# Chat js-->
 
-	<script src="assets/js/pages/charts/jquery-knob.js"></script>
-	<script src="assets/js/pages/index_2.js"></script>
+
 
 	<!-- LAYOUT JS -->
-	<script src="assets/js/demo.js"></script>
-	<script src="assets/js/layout.js"></script>
 
-	<script>
+<!-- LAYOUT JS -->
+<script src="${js}/demo.js"></script>
+<script src="${js}/layout.js"></script>
 
-    </script>
+
 	<style>
 .empdt td {
 	border-bottom: 1px solid #fff !important;
@@ -200,6 +169,7 @@
 	padding: 21px !important;
 }
 </style>
+
 </body>
 
 </html>

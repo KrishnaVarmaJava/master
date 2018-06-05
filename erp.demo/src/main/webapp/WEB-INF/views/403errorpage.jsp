@@ -15,11 +15,9 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>404 | Material Design Admin - Fusion</title>
-<<<<<<< HEAD
+
+
     <!-- Favicon-->
-=======
-    <!-- Favicon-->
->>>>>>> branch 'master' of https://github.com/KrishnaVarmaJava/master.git
     <link rel="icon" href="${images}/favicon.png" type="image/x-icon">
 
     <!-- Google Fonts -->
