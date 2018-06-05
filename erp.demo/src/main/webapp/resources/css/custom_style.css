@@ -129,7 +129,8 @@ background:none;
 
 .profiletitlewidth
 {
-	width: 42px;
+	    width: 120px;
+    display: inline;
 	
 	}
 .colorred

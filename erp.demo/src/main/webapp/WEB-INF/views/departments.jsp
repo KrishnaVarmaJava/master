@@ -42,9 +42,7 @@
 <link href="${css}/layout.css" rel="stylesheet">
 <link href="${css}/themes/main_theme.css" rel="stylesheet" />
 <link href="${css}/custom_style.css" rel="stylesheet">
-<link
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
-	rel="stylesheet">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -63,7 +61,17 @@
 
 <body class="theme-indigo light layout-fixed">
 	<div class="wrapper">
+<!-- top navbar-->
+<!-- top navbar-->
+		<header class="topnavbar-wrapper">
 
+			<%@include file="shared/navbar.jsp"%>
+		</header>
+		<!-- sidebar-->
+		<%@include file="shared/slidebar.jsp"%>
+		<!-- offsidebar-->
+		<%@include file="shared/offslidebar.jsp"%>
+			<!-- Main section-->
 		<c:if test="${Role.equals('ADMIN_ROLE')}">
 			<c:set var="role" value="admin" />
 		</c:if>
@@ -76,16 +84,7 @@
 			<c:set var="role" value="employee" />
 		</c:if>
 
-		<!-- top navbar-->
-		<header class="topnavbar-wrapper">
-
-			<%@include file="shared/navbar.jsp"%>
-		</header>
-		<!-- sidebar-->
-		<%@include file="shared/slidebar.jsp"%>
-		<!-- offsidebar-->
-		<%@include file="shared/offslidebar.jsp"%>
-		<!-- Main section-->
+		
 		<section>
 			<!-- Page content-->
 			<div class="content-wrapper">

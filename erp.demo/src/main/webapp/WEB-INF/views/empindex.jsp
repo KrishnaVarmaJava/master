@@ -49,26 +49,16 @@
 
 <div class="wrapper">
 
-    <!-- top navbar-->
-    <header class="topnavbar-wrapper">
-        <nav role="navigation" class="navbar topnavbar">
-            <!-- START navbar header-->
-            <%@include file="shared/navbar.jsp" %>
-<!-- END Top Navbar-->
-    </header>
-    <!-- sidebar-->
-    <aside class="aside">
-        <!-- START Sidebar (left)-->
-       <%@include file="shared/slidebar.jsp" %>
-               <!-- #END# Sidebar (left)-->
-    </aside>
-    <!-- offsidebar-->
-    <aside class="offsidebar hide">
-        <!-- START Off Sidebar (right)-->
-        <%@include file="shared/offslidebar.jsp" %>
-        <!-- #END# Off Sidebar (right)-->
-    </aside>
-    <!-- Main section-->
+	<!-- top navbar-->
+		<header class="topnavbar-wrapper">
+
+			<%@include file="shared/navbar.jsp"%>
+		</header>
+		<!-- sidebar-->
+		<%@include file="shared/slidebar.jsp"%>
+		<!-- offsidebar-->
+		<%@include file="shared/offslidebar.jsp"%>
+			<!-- Main section-->
     <section>
         <!-- Page content-->
         <div class="content-wrapper">
