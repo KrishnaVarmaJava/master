@@ -46,7 +46,7 @@
 					</div>
 				</div>
 
-				<script src="${js}/pages/register.js"></script>
+				
 				<form id="register" method="POST" onsubmit="return Validate()">
 
 				<p style="color: red;">${regmessage}</p>
@@ -81,7 +81,7 @@
 						</span>
 						<div class="form-line">
 							<input type="password" class="form-control" name="password" id="password"
-								minlength="6" placeholder="Password" required>
+								minlength="8" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
 						</div>
 					</div>
 					<div class="input-group addon-line">
@@ -89,7 +89,7 @@
 						</span>
 						<div class="form-line">
 							<input type="password" class="form-control" name="confirm" id="confirm"
-								minlength="6" placeholder="Confirm Password" required>
+								minlength="8" placeholder="Confirm Password" required>
 						</div>
 					</div>
 					<div class="form-group">
@@ -122,7 +122,64 @@
 
 	<!-- LAYOUT JS -->
 	<script src="${js}/demo.js"></script>
+<script type="text/javascript">
 
+function Validate() {
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirm").value;
+    if (password != confirmPassword) {
+        alert("Passwords do not match.");
+        return false;
+    }
+   
+    var myInput = document.getElementById("password");
+    var letter = document.getElementById("letter");
+    var capital = document.getElementById("capital");
+    var number = document.getElementById("number");
+    var length = document.getElementById("length");
+
+
+    // Validate lowercase letters
+    var lowerCaseLetters = /[a-z]/g;
+    if(myInput.value.match(lowerCaseLetters)) { 
+     letter.classList.remove("invalid");
+     letter.classList.add("valid");
+    } else {
+     letter.classList.remove("valid");
+     letter.classList.add("invalid");
+    }
+    //Validate capital letters
+    var upperCaseLetters = /[A-Z]/g;
+    if(myInput.value.match(upperCaseLetters)) { 
+      capital.classList.remove("invalid");
+      capital.classList.add("valid");
+    } else {
+      capital.classList.remove("valid");
+      capital.classList.add("invalid");
+    }
+
+    // Validate numbers
+    var numbers = /[0-9]/g;
+    if(myInput.value.match(numbers)) { 
+      number.classList.remove("invalid");
+      number.classList.add("valid");
+    } else {
+      number.classList.remove("valid");
+      number.classList.add("invalid");
+    }
+
+    // Validate length
+    if(myInput.value.length >= 8) {
+      length.classList.remove("invalid");
+      length.classList.add("valid");
+    } else {
+      length.classList.remove("valid");
+      length.classList.add("invalid");
+    }
+
+}
+
+</script>
 </body>
 
 </html>

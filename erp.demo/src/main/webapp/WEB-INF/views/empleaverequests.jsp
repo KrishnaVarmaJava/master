@@ -376,12 +376,12 @@ function Validate() {
     var startDate = document.getElementById("fromdate").value;
     var endDate = document.getElementById("todate").value;
     var leave=document.getElementById("leavetype").value;
-    var manager=document.getElementById("manager").value;
+   
    
  
     if ((Date.parse(endDate) <= Date.parse(startDate))) {
         alert("To date should be greater than From date");
-            fromdate.focus();
+        fromdate.focus();
         return false;
     } 
 if(leave==0)
@@ -391,13 +391,7 @@ if(leave==0)
 
 	return false;
 	}
-	
-	if(manager==0)
-	{
-		alert("please select Manager");
-		 document.form.manager.focus();
-		
-		}
+
 }
 
 </script>
