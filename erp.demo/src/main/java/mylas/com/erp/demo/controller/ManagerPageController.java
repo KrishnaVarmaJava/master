@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblEmpAttendanceNew;
 import mylas.com.erp.demo.TblEmpLeavereq;
+import mylas.com.erp.demo.appservices.UserServiceImpl;
 import mylas.com.erp.demo.dao.EmpLeaveRequestDao;
 import mylas.com.erp.demo.dao.ManagerServicesDao;
 import mylas.com.erp.demo.daoimpl.EmpAttendanceDaoImpl;
@@ -39,6 +41,8 @@ public class ManagerPageController {
 	
 	@Autowired
 	EmpAttendanceDaoImpl empattreq;
+	
+	Client client = new Client();
 	
 	@RequestMapping(value= "/manager/leave/register")
 	public ModelAndView empLeavePage(HttpSession session) {
@@ -58,6 +62,63 @@ public class ManagerPageController {
 		mav.addObject("empleave", leavereq);
 		mav.addObject("manservices", mandao.list());	
 		return mav;
+	}
+	
+	@RequestMapping(value="/manager/allemp/register")
+	public ModelAndView allEmpPage() {
+		ModelAndView mav = new ModelAndView("employees");
+		mav.addObject("manservices", mandao.list());	
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+		
+		String role = user.getRole();
+		mav.addObject("Role",role);
+		mav.addObject("User",user);
+		mav.addObject("title", "Employee Regester Page");
+		mav.addObject("userClickReg", true);
+		Client cl = new Client();
+		String mesg = "hi";
+		List<EmpDetails> emp1 = cl.getDetails();
+		mav.addObject("employees", emp1);
+		mav.addObject("dupmsg", mesg);
+		mav.addObject("User",user);
+		cl.closeAllSessions();
+		return mav;		
+	}
+	@RequestMapping(value="/manager/allemp/register", method=RequestMethod.POST)
+	public ModelAndView saveEmpPage(HttpServletRequest request, HttpServletResponse response) throws ConstraintViolationException{
+		
+		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null);
+		
+		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
+		emp.setRole("USER_ROLE");
+		
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+		emp.setManagerid(user.getEid());
+		ModelAndView mav = new ModelAndView("employees");
+		mav.addObject("manservices", mandao.list());	
+		System.out.println("before getconn");
+		String mesg = "hi";
+		mesg = client.getConnection(emp);
+		
+		mav.addObject("dupmsg", mesg);
+		
+		System.out.println("after getconn");
+		Client cl = new Client();
+		List<EmpDetails> emp1 = cl.getDetails();
+		mav.addObject("employees", emp1);
+		mav.addObject("User",user);
+		mav.addObject("employee", emp);
+		cl.closeAllSessions();
+		return mav;		
 	}
 	
 	/*
@@ -207,7 +268,7 @@ public class ManagerPageController {
 		List<TblEmpLeavereq> leavereq =  empleavereq.view();
 		mav.addObject("employees", emp1);
 		mav.addObject("empleave", leavereq);
-		
+		mav.addObject("User",user);
 		mav.addObject("manservices", mandao.list());	
 		return mav;
 	}

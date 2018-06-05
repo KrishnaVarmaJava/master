@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 26 May, 2018 3:17:31 PM by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 5 Jun, 2018 11:10:55 AM by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
-    <class catalog="mylasfyt_krishna" dynamic-insert="false" dynamic-update="false" mutable="true" name="mylas.com.erp.demo.EmpDetails" optimistic-lock="version" polymorphism="implicit" schema="krishna" select-before-update="false" table="emp_details">
+    <class catalog="mylasfyt_krishna" dynamic-insert="false" dynamic-update="false" mutable="true" name="model.EmpDetails" optimistic-lock="version" polymorphism="implicit" schema="krishna" select-before-update="false" table="emp_details">
         <id name="id" type="java.lang.Integer">
             <column name="id"/>
             <generator class="identity"/>
@@ -44,6 +44,9 @@
         </property>
         <property generated="never" lazy="false" name="uname" optimistic-lock="true" type="string" unique="false">
             <column length="50" name="uname" not-null="true" unique="true"/>
+        </property>
+        <property generated="never" lazy="false" name="managerid" optimistic-lock="true" type="string" unique="false">
+            <column length="15" name="managerid"/>
         </property>
     </class>
 </hibernate-mapping>

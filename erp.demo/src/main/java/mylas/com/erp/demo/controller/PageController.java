@@ -90,6 +90,7 @@ public class PageController {
 		
 		String role = user.getRole();
 		mav.addObject("Role",role);
+		mav.addObject("User",user);
 		mav.addObject("title", "Employee Regester Page");
 		mav.addObject("userClickReg", true);
 		Client cl = new Client();
@@ -151,8 +152,7 @@ public class PageController {
 		mav.addObject("employees", emp1);
 		mav.addObject("empleave", leavereq);
 		mav.addObject("services", servicesdao.list());
-		mav.addObject("title", "Employee Holiday Page");
-		mav.addObject("userClickReg", true);
+		mav.addObject("User",user);
 		return mav;		
 	}
 	
@@ -207,11 +207,16 @@ public class PageController {
 	
 	@RequestMapping(value="/admin/allemp/register", method=RequestMethod.POST)
 	public ModelAndView saveEmpPage(HttpServletRequest request, HttpServletResponse response) throws ConstraintViolationException{
-		
-		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"));
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null);
 		
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
-		emp.setRole("USER_ROLE");
+		emp.setRole("MANAGER_ROLE");
+		emp.setManagerid(user.getEid());
 		ModelAndView mav = new ModelAndView("employees");
 		mav.addObject("services", servicesdao.list());
 		System.out.println("before getconn");
@@ -224,7 +229,7 @@ public class PageController {
 		Client cl = new Client();
 		List<EmpDetails> emp1 = cl.getDetails();
 		mav.addObject("employees", emp1);
-		
+		mav.addObject("User",user);
 		mav.addObject("employee", emp);
 		cl.closeAllSessions();
 		return mav;		
@@ -232,7 +237,7 @@ public class PageController {
 	@RequestMapping(value="/admin/allemp/update/{id}", method=RequestMethod.POST)
 	public ModelAndView updateEmpPage(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") int id) {
 		
-		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"));
+		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null);
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
 		emp.setRole("USER_ROLE");
 		ModelAndView mav = new ModelAndView("employees");
@@ -348,7 +353,7 @@ public class PageController {
 	}
 	@RequestMapping(value= "/register", method=RequestMethod.POST)
 	public ModelAndView adminRegisterPage(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws UserBlockedException {
-		EmpDetails emp = new EmpDetails(null, request.getParameter("confirm"), null, request.getParameter("empid"), request.getParameter("email"), null, null, null, false, null, request.getParameter("password"), null, request.getParameter("username"));
+		EmpDetails emp = new EmpDetails(null, request.getParameter("confirm"), null, request.getParameter("empid"), request.getParameter("email"), null, null, null, false, null, request.getParameter("password"), null, request.getParameter("username"),null);
 		
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
 		emp.setRole("ADMIN_ROLE");

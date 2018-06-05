@@ -328,7 +328,6 @@
 								</thead>
 
 								<c:forEach items="${employees}" var="empl">
-								<c:if test="${empl.getManagerid() == User.getEid() }"></c:if>
 
 
 									<tbody>

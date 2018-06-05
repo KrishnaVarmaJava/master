@@ -170,10 +170,7 @@
 									<div class="clearfix"></div>
 									
 									<c:forEach items="${empleave}" var="empleaveslist">
-									<c:if test="${empleaveslist.getStatus() == null}">
 										<tbody>
-
-
 											<tr>
 												<td>
 													<div class="chip">
@@ -184,19 +181,35 @@
 												</td>
 												<td>${empleaveslist.getLeavetype()}</td>
 												<td>${empleaveslist.getFromdate()}</td>
-												<td>${empleaveslist.getTodate()}</td>
+												<td>${empleaveslist.getTodate()}$</td>
 												<td>${empleaveslist.getCount()}days</td>
 												<td>${empleaveslist.getLeavereason()}</td>
 			
 												<td>
 
 													<div class="btn-group">
+													
+														<c:if test="${empleaveslist.getStatus() == null}">
 														<button type="button"
 															class="btn btn-primary btn-outline btn-rounded waves-effect"
 															data-toggle="dropdown" aria-haspopup="true"
-															aria-expanded="false">
-															Panding <span class="caret"></span>
+															aria-expanded="false">Panding 
 														</button>
+														</c:if><c:if test="${empleaveslist.getStatus() == false}">
+																<button type="button"
+															class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
+															>Declined 
+														</button></c:if><c:if test="${empleaveslist.getStatus() == true}">
+																<button type="button"
+															class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect "
+															aria-haspopup="true"
+															aria-expanded="false">Approved 
+														</button>
+												</c:if>
+												<c:set var="eid" value="${User.getEid()}"></c:set>
+												<c:if test="${empleaveslist.getManagerid() == eid}">
+												<c:if test="${empleaveslist.getStatus() == null}">
+														
 														<ul class="dropdown-menu bullet">
 														<c:if test="${Role.equals('ADMIN_ROLE')}">
 															<c:set var="role" value="admin"/>
@@ -215,7 +228,9 @@
 																	class="material-icons">print</i>Approved</a></li>
 															<li><a href="${contextRoot}/${role}/leave/decline/${empleaveslist.getId()}"><i
 																	class="material-icons">favorite</i>Declined</a></li>
+																	
 														</ul>
+														</c:if></c:if>
 													</div>
 												</td>
 										
@@ -223,7 +238,7 @@
 											</tr>
 
 										</tbody>
-										</c:if>
+										
 									</c:forEach>
 
 

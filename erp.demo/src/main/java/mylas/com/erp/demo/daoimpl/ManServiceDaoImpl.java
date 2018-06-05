@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import mylas.com.erp.demo.dao.ManagerServicesDao;
 import mylas.com.erp.demo.dto.EmpServices;
 import mylas.com.erp.demo.dto.ManServices;
+import mylas.com.erp.demo.dto.Services;
 
 @Repository("mandao")
 public class ManServiceDaoImpl implements ManagerServicesDao{
@@ -18,6 +19,14 @@ private static List<ManServices> services = new ArrayList<ManServices>();
 	static {
 		
 		ManServices service = new ManServices();
+		service.setServiceID("allemp");
+		service.setServiceName("All Employees");
+		service.setServiceDescription("List Of All the Employee");
+		service.setServiceRole("manager");
+		services.add(service); 
+		
+		
+		service = new ManServices();
 		service.setServiceID("profile");
 		service.setServiceName("Profile");
 		service.setServiceDescription("Apply for a Leave");

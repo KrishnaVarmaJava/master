@@ -1,4 +1,5 @@
 package mylas.com.erp.demo;
+// Generated 5 Jun, 2018 11:10:55 AM by Hibernate Tools 5.2.8.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -33,6 +34,7 @@ public class EmpDetails implements java.io.Serializable {
 	private String pswd;
 	private String role;
 	private String uname;
+	private String managerid;
 
 	public EmpDetails() {
 	}
@@ -44,7 +46,8 @@ public class EmpDetails implements java.io.Serializable {
 	}
 
 	public EmpDetails(String compName, String cpswd, String designation, String eid, String email, String fname,
-			Date jdate, String lname, boolean loginStatus, Integer phone, String pswd, String role, String uname) {
+			Date jdate, String lname, boolean loginStatus, Integer phone, String pswd, String role, String uname,
+			String managerid) {
 		this.compName = compName;
 		this.cpswd = cpswd;
 		this.designation = designation;
@@ -58,6 +61,7 @@ public class EmpDetails implements java.io.Serializable {
 		this.pswd = pswd;
 		this.role = role;
 		this.uname = uname;
+		this.managerid = managerid;
 	}
 
 	@Id
@@ -188,6 +192,15 @@ public class EmpDetails implements java.io.Serializable {
 
 	public void setUname(String uname) {
 		this.uname = uname;
+	}
+
+	@Column(name = "managerid", length = 15)
+	public String getManagerid() {
+		return this.managerid;
+	}
+
+	public void setManagerid(String managerid) {
+		this.managerid = managerid;
 	}
 
 }
