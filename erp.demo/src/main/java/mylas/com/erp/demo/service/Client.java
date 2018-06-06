@@ -132,9 +132,7 @@ public class Client implements EmployeeDao {
 		Transaction tx = session.beginTransaction();
 		Query q = session.createQuery("from EmpDetails");
 		List<EmpDetails> emp1 = q.list();
-		System.out.println("load session");
 		for(EmpDetails user : emp1) {
-			System.out.println(user.getUname());
 			if(user.getUname().equals(empuname)) {
 			 return user;	
 			}

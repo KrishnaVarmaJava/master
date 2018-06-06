@@ -1,15 +1,11 @@
 package mylas.com.erp.demo;
-// Generated 5 Jun, 2018 11:10:55 AM by Hibernate Tools 5.2.8.Final
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 /**
@@ -27,14 +23,15 @@ public class EmpDetails implements java.io.Serializable {
 	private String eid;
 	private String email;
 	private String fname;
-	private Date jdate;
+	private String jdate;
 	private String lname;
 	private boolean loginStatus;
-	private Integer phone;
+	private String phone;
 	private String pswd;
 	private String role;
 	private String uname;
 	private String managerid;
+	private String department;
 
 	public EmpDetails() {
 	}
@@ -46,8 +43,8 @@ public class EmpDetails implements java.io.Serializable {
 	}
 
 	public EmpDetails(String compName, String cpswd, String designation, String eid, String email, String fname,
-			Date jdate, String lname, boolean loginStatus, Integer phone, String pswd, String role, String uname,
-			String managerid) {
+			String jdate, String lname, boolean loginStatus, String phone, String pswd, String role, String uname,
+			String managerid, String department) {
 		this.compName = compName;
 		this.cpswd = cpswd;
 		this.designation = designation;
@@ -62,6 +59,7 @@ public class EmpDetails implements java.io.Serializable {
 		this.role = role;
 		this.uname = uname;
 		this.managerid = managerid;
+		this.department = department;
 	}
 
 	@Id
@@ -130,13 +128,12 @@ public class EmpDetails implements java.io.Serializable {
 		this.fname = fname;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "jdate", length = 23)
-	public Date getJdate() {
+	@Column(name = "jdate", length = 20)
+	public String getJdate() {
 		return this.jdate;
 	}
 
-	public void setJdate(Date jdate) {
+	public void setJdate(String jdate) {
 		this.jdate = jdate;
 	}
 
@@ -158,12 +155,12 @@ public class EmpDetails implements java.io.Serializable {
 		this.loginStatus = loginStatus;
 	}
 
-	@Column(name = "phone")
-	public Integer getPhone() {
+	@Column(name = "phone", length = 10)
+	public String getPhone() {
 		return this.phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -201,6 +198,15 @@ public class EmpDetails implements java.io.Serializable {
 
 	public void setManagerid(String managerid) {
 		this.managerid = managerid;
+	}
+
+	@Column(name = "department", length = 15)
+	public String getDepartment() {
+		return this.department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 
 }

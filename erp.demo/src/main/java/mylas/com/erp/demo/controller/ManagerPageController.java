@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import mylas.com.erp.demo.EmpDetails;
+import mylas.com.erp.demo.TblDesignation;
 import mylas.com.erp.demo.TblEmpAttendanceNew;
 import mylas.com.erp.demo.TblEmpLeavereq;
 import mylas.com.erp.demo.appservices.UserServiceImpl;
@@ -29,6 +30,7 @@ import mylas.com.erp.demo.dao.EmpLeaveRequestDao;
 import mylas.com.erp.demo.dao.ManagerServicesDao;
 import mylas.com.erp.demo.daoimpl.EmpAttendanceDaoImpl;
 import mylas.com.erp.demo.service.Client;
+import mylas.com.erp.demo.service.DesignationService;
 
 @Controller
 public class ManagerPageController {
@@ -42,6 +44,7 @@ public class ManagerPageController {
 	@Autowired
 	EmpAttendanceDaoImpl empattreq;
 	
+	DesignationService depdetails = new DesignationService();
 	Client client = new Client();
 	
 	@RequestMapping(value= "/manager/leave/register")
@@ -73,7 +76,8 @@ public class ManagerPageController {
 		if (principal instanceof EmpDetails) {
 		user = ((EmpDetails)principal);
 		}
-		
+		List<TblDesignation> depts = depdetails.getDetails();
+		mav.addObject("designations", depts);
 		String role = user.getRole();
 		mav.addObject("Role",role);
 		mav.addObject("User",user);
@@ -91,7 +95,7 @@ public class ManagerPageController {
 	@RequestMapping(value="/manager/allemp/register", method=RequestMethod.POST)
 	public ModelAndView saveEmpPage(HttpServletRequest request, HttpServletResponse response) throws ConstraintViolationException{
 		
-		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null);
+		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null,null);
 		
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
 		emp.setRole("EMPLOYEE_ROLE");
@@ -103,6 +107,11 @@ public class ManagerPageController {
 		user = ((EmpDetails)principal);
 		}
 		emp.setManagerid(user.getEid());
+		emp.setJdate(request.getParameter("joindate"));
+		emp.setPhone((request.getParameter("phone")));
+		emp.setCompName(request.getParameter("company"));
+		emp.setDepartment(user.getDepartment());
+		emp.setDesignation(request.getParameter("designation"));
 		ModelAndView mav = new ModelAndView("employees");
 		mav.addObject("manservices", mandao.list());
 		System.out.println("before getconn");
@@ -110,7 +119,8 @@ public class ManagerPageController {
 		mesg = client.getConnection(emp);
 		
 		mav.addObject("dupmsg", mesg);
-		
+		List<TblDesignation> depts = depdetails.getDetails();
+		mav.addObject("designations", depts);
 		System.out.println("after getconn");
 		Client cl = new Client();
 		List<EmpDetails> emp1 = cl.getDetails();

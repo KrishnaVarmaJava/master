@@ -21,18 +21,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 	Client userDetails = new Client();
 
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		System.out.println("in auth method");
 		  String username = authentication.getName();
 	      String password = (String) authentication.getCredentials();
-	      System.out.println(username);
-	      System.out.println(password);
 	        EmpDetails user = new EmpDetails();
-	        System.out.println("user Created");
 	        user= userDetails.getByUName(username);
-	        System.out.println("Client Called");
-	 
-	        System.out.println(user);
-	        System.out.println(user);
+	        
 	        
 	        if (user == null || !user.getUname().equalsIgnoreCase(username)) {
 	            throw new BadCredentialsException("Username not found.");
@@ -44,7 +37,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 	        
 	        ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 	        authorities.add(new SimpleGrantedAuthority(user.getRole()));
-	        System.out.println(authorities);
 	        return new UsernamePasswordAuthenticationToken(user, password, authorities);
 	}
 

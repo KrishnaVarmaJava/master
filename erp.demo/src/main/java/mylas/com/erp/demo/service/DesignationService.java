@@ -48,9 +48,6 @@ public class DesignationService implements DesignationDao {
 		Transaction tx = session.beginTransaction();
 		Query q = session.createQuery("from TblDesignation");
 		List<TblDesignation> emp1 = q.list();
-		for(TblDesignation emp2:emp1) {
-			System.out.println(emp2.getDesignation());
-		}
 		return (emp1);
 	}
 

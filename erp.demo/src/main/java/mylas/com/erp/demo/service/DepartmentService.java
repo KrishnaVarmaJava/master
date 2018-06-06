@@ -55,9 +55,6 @@ public class DepartmentService implements DepartmentDao {
 		Transaction tx = session.beginTransaction();
 		Query q = session.createQuery("from TblDepartment");
 		List<TblDepartment> emp1 = q.list();
-		for(TblDepartment emp2:emp1) {
-			System.out.println(emp2.getDepartment());
-		}
 		return (emp1);
 	}
 

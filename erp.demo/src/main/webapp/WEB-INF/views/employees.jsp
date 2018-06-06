@@ -214,7 +214,7 @@
 										<div class="form-group">
 											<div class="input-group addon-line">
 												<div class="form-line">
-													<label>Joining Date </label> <input type="date"
+													<label>Joining Date </label> <input type="date" name="joindate"
 														class="form-control" placeholder="Joining Date">
 												</div>
 												<span class="input-group-addon"><i
@@ -233,28 +233,46 @@
 											</div>
 										</div>
 									</div>
+									<c:if test="${Role.equals('ADMIN_ROLE')}">
 									<div class="col-md-6">
 										<div class="form-group">
 											<div class="form-line">
-												<label>Company</label> <select class="form-control" size="1">
+												<label>Company</label> <input type="text" name="company"
+														id="company" class="form-control" placeholder="Company"
+														required="required">
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="form-line">
+												<label>Department</label> <select class="form-control"
+													size="1" name="department" id="department">
 													<option value="0">Please select</option>
-													<option value="1">Mylas</option>
+													<c:forEach items="${departments}" var="deper">
+													<option value="${deper.getDepartment()}">${deper.getDepartment()}</option>
+													</c:forEach>
 												</select>
 											</div>
 										</div>
 									</div>
-									<div class="clearfix"></div>
+									</c:if>
+									<c:if test="${Role.equals('MANAGER_ROLE')}">									
 									<div class="col-md-6">
 										<div class="form-group">
 											<div class="form-line">
 												<label>Designation</label> <select class="form-control"
-													size="1">
+													size="1" name="designation" id="designation">
 													<option value="0">Please select</option>
-													<option value="1">Developer</option>
+													<c:forEach items="${designations}" var="desig">
+													<c:if test="${desig.getDesignation()!='Manager'}">
+													<option value="${desig.getDesignation()}">${desig.getDesignation()}</option></c:if>
+													</c:forEach>
 												</select>
 											</div>
 										</div>
 									</div>
+									</c:if>
 									<div class="clearfix"></div>
 									<div class="form-actions">
 										<div style="text-align: center;">
@@ -272,7 +290,7 @@
 
 					<div class="row clearfix"></div>
 
-					<!-- lakshmi -->
+
 					<div class="card" style="padding: 5px;">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
 							<div class="col-md-2 padding_col">

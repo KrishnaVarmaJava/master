@@ -43,7 +43,6 @@
         <div class="error-bottom">
             <a href="${images}/index.html" class="btn btn-primary">Hey, Take Me Home</a>
 
-            <a href="index.html" class="btn btn-primary">Hey, Take Me Home</a>
             <div class="report-error">
                 or <a href="#">Report Issue</a>
             </div>

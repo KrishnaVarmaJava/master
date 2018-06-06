@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 5 Jun, 2018 11:10:55 AM by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6 Jun, 2018 3:13:47 PM by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
-    <class catalog="mylasfyt_krishna" dynamic-insert="false" dynamic-update="false" mutable="true" name="model.EmpDetails" optimistic-lock="version" polymorphism="implicit" schema="krishna" select-before-update="false" table="emp_details">
+    <class catalog="mylasfyt_krishna" dynamic-insert="false" dynamic-update="false" mutable="true" name="EmpDetails" optimistic-lock="version" polymorphism="implicit" schema="krishna" select-before-update="false" table="emp_details">
         <id name="id" type="java.lang.Integer">
             <column name="id"/>
             <generator class="identity"/>
@@ -24,8 +24,8 @@
         <property generated="never" lazy="false" name="fname" optimistic-lock="true" type="string" unique="false">
             <column length="50" name="fname"/>
         </property>
-        <property generated="never" lazy="false" name="jdate" optimistic-lock="true" type="timestamp" unique="false">
-            <column length="23" name="jdate"/>
+        <property generated="never" lazy="false" name="jdate" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="jdate"/>
         </property>
         <property generated="never" lazy="false" name="lname" optimistic-lock="true" type="string" unique="false">
             <column length="50" name="lname"/>
@@ -33,8 +33,8 @@
         <property generated="never" lazy="false" name="loginStatus" optimistic-lock="true" type="boolean" unique="false">
             <column name="login_status" not-null="true"/>
         </property>
-        <property generated="never" lazy="false" name="phone" optimistic-lock="true" type="java.lang.Integer" unique="false">
-            <column name="phone"/>
+        <property generated="never" lazy="false" name="phone" optimistic-lock="true" type="string" unique="false">
+            <column length="10" name="phone"/>
         </property>
         <property generated="never" lazy="false" name="pswd" optimistic-lock="true" type="string" unique="false">
             <column length="50" name="pswd"/>
@@ -47,6 +47,9 @@
         </property>
         <property generated="never" lazy="false" name="managerid" optimistic-lock="true" type="string" unique="false">
             <column length="15" name="managerid"/>
+        </property>
+        <property generated="never" lazy="false" name="department" optimistic-lock="true" type="string" unique="false">
+            <column length="15" name="department"/>
         </property>
     </class>
 </hibernate-mapping>

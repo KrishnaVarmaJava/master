@@ -1,5 +1,8 @@
 package mylas.com.erp.demo.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +66,8 @@ public class PageController {
 	EmpAttendanceDaoImpl attimpl=new EmpAttendanceDaoImpl();
 	DesignationService desser=new DesignationService();
 	EmpLeaveRequestService ers = new EmpLeaveRequestService();	
+	DesignationService depdetails = new DesignationService();
+	DepartmentService desdetails = new DepartmentService();
 
 	
 	/*
@@ -98,6 +103,10 @@ public class PageController {
 		List<EmpDetails> emp1 = cl.getDetails();
 		mav.addObject("employees", emp1);
 		mav.addObject("dupmsg", mesg);
+		//Departments
+		List<TblDepartment> dests = desdetails.getDetails();
+		mav.addObject("departments", dests);
+		
 		mav.addObject(user);
 		cl.closeAllSessions();
 		return mav;		
@@ -118,8 +127,8 @@ public class PageController {
 		String role = user.getRole();
 		mav.addObject("Role",role);
 		mav.addObject("User", user);
-		DepartmentService depdetails = new DepartmentService();
-		List<TblDepartment> depts = depdetails.getDetails();
+		
+		List<TblDepartment> depts = desdetails.getDetails();
 		mav.addObject("departments", depts);
 		mav.addObject("services", servicesdao.list());
 	
@@ -182,7 +191,7 @@ public class PageController {
 	@RequestMapping(value="/admin/empdesig/register")
 	public ModelAndView empDesignationPage() {
 		ModelAndView mav = new ModelAndView("designations");
-		DesignationService depdetails = new DesignationService();
+		
 		List<TblDesignation> depts = depdetails.getDetails();
 		mav.addObject("designations", depts);
 		mav.addObject("services", servicesdao.list());
@@ -212,20 +221,35 @@ public class PageController {
 		if (principal instanceof EmpDetails) {
 		user = ((EmpDetails)principal);
 		}
-		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null);
+		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null, null);
 		
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
 		emp.setRole("MANAGER_ROLE");
 		emp.setManagerid(user.getEid());
+		emp.setJdate(request.getParameter("joindate"));
+		
+		
+		emp.setPhone(request.getParameter("phone"));
+		emp.setCompName(request.getParameter("company"));
+		emp.setDepartment(request.getParameter("department"));
+		emp.setDesignation("Manager");
+		
+	
 		ModelAndView mav = new ModelAndView("employees");
 		mav.addObject("services", servicesdao.list());
-		System.out.println("before getconn");
 		String mesg = "hi";
+		
+	
+		
+		
 		mesg = client.getConnection(emp);
-		
+	
 		mav.addObject("dupmsg", mesg);
+			
+		//Departments
+		List<TblDepartment> dests = desdetails.getDetails();
+		mav.addObject("departments", dests);
 		
-		System.out.println("after getconn");
 		Client cl = new Client();
 		List<EmpDetails> emp1 = cl.getDetails();
 		String role = user.getRole();
@@ -239,7 +263,7 @@ public class PageController {
 	@RequestMapping(value="/admin/allemp/update/{id}", method=RequestMethod.POST)
 	public ModelAndView updateEmpPage(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") int id) {
 		
-		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null);
+		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null, null);
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
 		emp.setRole("USER_ROLE");
 		ModelAndView mav = new ModelAndView("employees");
@@ -362,7 +386,7 @@ public class PageController {
 	}
 	@RequestMapping(value= "/register", method=RequestMethod.POST)
 	public ModelAndView adminRegisterPage(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws UserBlockedException {
-		EmpDetails emp = new EmpDetails(null, request.getParameter("confirm"), null, request.getParameter("empid"), request.getParameter("email"), null, null, null, false, null, request.getParameter("password"), null, request.getParameter("username"),null);
+		EmpDetails emp = new EmpDetails(null, request.getParameter("confirm"), null, request.getParameter("empid"), request.getParameter("email"), null, null, null, false, null, request.getParameter("password"), null, request.getParameter("username"),null,null);
 		
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
 		emp.setRole("ADMIN_ROLE");
