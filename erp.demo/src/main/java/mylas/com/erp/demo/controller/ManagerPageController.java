@@ -121,7 +121,7 @@ public class ManagerPageController {
 		mav.addObject("manservices", mandao.list());
 		System.out.println("before getconn");
 		String mesg = "hi";
-		mesg = client.getConnection(emp);
+	/*	mesg = client.getConnection(emp);*/
 
 		mav.addObject("dupmsg", mesg);
 		List<TblDesignation> depts = depdetails.getDetails();

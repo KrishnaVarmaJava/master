@@ -183,7 +183,7 @@
 												<div class="form-line">
 													<label>Password </label> <input type="password" name="pswd"
 														id="pswd" class="form-control" placeholder="Password"
-														pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="required">>
+														pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="required">
 												</div>
 											</div>
 										</div>
@@ -226,7 +226,7 @@
 										<div class="form-group">
 											<div class="input-group addon-line">
 												<div class="form-line">
-													<label>Phone </label> <input type="text" name="phone"
+													<label>Phone </label> <input type="number" name="phone"
 														id="phone" class="form-control" placeholder="Phone"
 														required="required">
 												</div>
@@ -247,8 +247,8 @@
 										<div class="form-group">
 											<div class="form-line">
 												<label>Department</label> <select class="form-control"
-													size="1" name="department" id="department">
-													<option value="0">Please select</option>
+													size="1" name="department" id="department" required="required">
+													<option value="">Please select</option>
 													<c:forEach items="${departments}" var="deper">
 													<option value="${deper.getDepartment()}">${deper.getDepartment()}</option>
 													</c:forEach>
@@ -520,94 +520,22 @@ $("#list").css("display","none");
 function Validate() {
     var password = document.getElementById("pswd").value;
     var confirmPassword = document.getElementById("cpswd").value;
-  	     var designation= document.getElementById("designation").value;
   	     var phone=document.getElementById("phone").value;
     if (password != confirmPassword) {
         alert("Passwords do not match.");
-        document.form.pswd.focus();
-        return false;
+       pswd.focus();
+        return false; 
     }
 
   
-    if(phone=="")
+   
+    if((phone.length <10) || phone.length >10 )
     {
-    alert("Please Enter Your Mobile Number");
-    document.form.phone.focus();
+    alert(" Your Mobile Number must ");
+    phone.focus();
     return false;
-    }
-     if(isNaN(phone)||phone.indexOf(" ")!=-1)
-               {
-                  alert("Enter numeric value");
-                  document.form.phone.focus();
-                  return false;
-    } 
-    if(isNaN(phone))
-    {
-    alert("Enter the valid Mobile Number(Like : 9566137117)");
-    document.form.phone.focus();
-    return false;
-    }
-    if((phone.length <10) || phone.length >10)
-    {
-    alert(" Your Mobile Number must be 1 to 10 Integers");
-    document.form.phone.focus();
-    return false;
-    }  
-    if(designation==0)
-    	{
-    	alert("please select designation");
-    	document.form.designation.focus();
-    	return false;
-    	
-    	}
-    
-    
-    
-    var myInput = document.getElementById("pswd");
-    var letter = document.getElementById("letter");
-    var capital = document.getElementById("capital");
-    var number = document.getElementById("number");
-    var length = document.getElementById("length");
-
-
-    // Validate lowercase letters
-    var lowerCaseLetters = /[a-z]/g;
-    if(myInput.value.match(lowerCaseLetters)) { 
-     letter.classList.remove("invalid");
-     letter.classList.add("valid");
-    } else {
-     letter.classList.remove("valid");
-     letter.classList.add("invalid");
-    }
-    //Validate capital letters
-    var upperCaseLetters = /[A-Z]/g;
-    if(myInput.value.match(upperCaseLetters)) { 
-      capital.classList.remove("invalid");
-      capital.classList.add("valid");
-    } else {
-      capital.classList.remove("valid");
-      capital.classList.add("invalid");
-    }
-
-    // Validate numbers
-    var numbers = /[0-9]/g;
-    if(myInput.value.match(numbers)) { 
-      number.classList.remove("invalid");
-      number.classList.add("valid");
-    } else {
-      number.classList.remove("valid");
-      number.classList.add("invalid");
-    }
-
-    // Validate length
-    if(myInput.value.length >= 8) {
-      length.classList.remove("invalid");
-      length.classList.add("valid");
-    } else {
-      length.classList.remove("valid");
-      length.classList.add("invalid");
-    }
-
+    }      
+   
 }
 </script>
 

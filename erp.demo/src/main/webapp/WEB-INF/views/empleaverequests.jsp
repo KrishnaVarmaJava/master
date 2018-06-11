@@ -128,7 +128,7 @@
 									<div class="form-line">
 										<label>Leave Type</label> <select class="form-control"
 											size="1" name="leavetype" id="leavetype" required="required">
-											<option value="0">Please select</option>
+											<option value="">Please select</option>
 											<option value="Loss of Pay">Loss of Pay</option>
 											<option value="Casual Leave">Casual Leave 12 Days</option>
 											<option value="Medical Leave">Medical Leave</option>
@@ -383,14 +383,6 @@ function Validate() {
         alert("To date should be greater than From date");
         fromdate.focus();
         return false;
-    } 
-if(leave==0)
-	{
-	alert("please select leavetype");
-	 document.form.leavetype.focus();
-
-	return false;
-	}
 
 }
 
