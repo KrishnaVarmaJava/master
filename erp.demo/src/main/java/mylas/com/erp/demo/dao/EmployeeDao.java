@@ -14,5 +14,10 @@ public interface EmployeeDao {
 	public void deleteDetails(int id);
 	public EmpDetails getById(int id);
 	public EmpDetails getByUName(String empuname);
+	public List<EmpDetails> getByManid(String managerid);
+	public List<EmpDetails> getByManIdAndTransManId(String managerid,String transmanid);
+	public String TransferManager(int id,String mantrans);
+	public String ChangeManager(int id);
+	
 	
 }

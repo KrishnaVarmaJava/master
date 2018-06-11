@@ -32,6 +32,7 @@ public class EmpDetails implements java.io.Serializable {
 	private String uname;
 	private String managerid;
 	private String department;
+	private String mantrans;
 
 	public EmpDetails() {
 	}
@@ -44,7 +45,7 @@ public class EmpDetails implements java.io.Serializable {
 
 	public EmpDetails(String compName, String cpswd, String designation, String eid, String email, String fname,
 			String jdate, String lname, boolean loginStatus, String phone, String pswd, String role, String uname,
-			String managerid, String department) {
+			String managerid, String department, String mantrans) {
 		this.compName = compName;
 		this.cpswd = cpswd;
 		this.designation = designation;
@@ -60,6 +61,7 @@ public class EmpDetails implements java.io.Serializable {
 		this.uname = uname;
 		this.managerid = managerid;
 		this.department = department;
+		this.mantrans = mantrans;
 	}
 
 	@Id
@@ -128,7 +130,7 @@ public class EmpDetails implements java.io.Serializable {
 		this.fname = fname;
 	}
 
-	@Column(name = "jdate", length = 20)
+	@Column(name = "jdate", length = 50)
 	public String getJdate() {
 		return this.jdate;
 	}
@@ -191,7 +193,7 @@ public class EmpDetails implements java.io.Serializable {
 		this.uname = uname;
 	}
 
-	@Column(name = "managerid", length = 15)
+	@Column(name = "managerid", length = 50)
 	public String getManagerid() {
 		return this.managerid;
 	}
@@ -200,13 +202,22 @@ public class EmpDetails implements java.io.Serializable {
 		this.managerid = managerid;
 	}
 
-	@Column(name = "department", length = 15)
+	@Column(name = "department", length = 50)
 	public String getDepartment() {
 		return this.department;
 	}
 
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+
+	@Column(name = "mantrans", length = 50)
+	public String getMantrans() {
+		return this.mantrans;
+	}
+
+	public void setMantrans(String mantrans) {
+		this.mantrans = mantrans;
 	}
 
 }

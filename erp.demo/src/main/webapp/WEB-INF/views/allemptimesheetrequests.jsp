@@ -196,7 +196,9 @@
 									<div class="clearfix"></div>
 								
 								<c:forEach var="attlist" items="${attendancelist}">
+								<c:if test="${User.getRole().equals('MANAGER_ROLE')}">
 								<c:set var="user" value="${User.getEid()}"/>
+								<c:if test="${attlist.getManagerid() == user || attlist.getMantrans() == user}">
 								<c:if test="${attlist.getEmpid() != user}">
 								<%-- <c:if test="${attlist.getStatas() == null}"> --%>
                                     <tbody>
@@ -512,7 +514,7 @@
 														</button>
 												</c:if>
 												<c:set var="eid" value="${User.getEid()}"></c:set>
-												<c:if test="${attlist.getManagerid() == eid}">
+												<c:if test="${attlist.getManagerid() == eid || attlist.getMantrans() == user}">
 												<c:if test="${attlist.getStatas() == null}">
 														<ul class="dropdown-menu bullet">
 														<c:if test="${Role.equals('ADMIN_ROLE')}">
@@ -539,7 +541,350 @@
                
                                    </tbody>
                                    </c:if>
-                                <%-- </c:if> --%>
+                                </c:if>
+                               </c:if>
+                               <c:if test="${User.getRole().equals('ADMIN_ROLE')}">
+                                                                   <tbody>
+									<c:set var="green" value="icon-display  fa fa-check attenedance_check_green"/>
+									<c:set var="red" value="icon-display  fa fa-close  attenedance_check_red"/>
+									<c:set var="gray" value="icon-display  fa fa-bullseye attenedance_check_darkgrey"/>
+									
+                        		 
+									
+                                         <tr>
+                                         <th><a href="javascript:void(0)">${attlist.getEmpid()}</a></th>
+                                        <th><a href="javascript:void(0)">${attlist.getMonth()} ${attlist.getYear()}</a></th>
+                                     <c:if test="${attlist.getDay1() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay1() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay1() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                            <c:if test="${attlist.getDay2() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay2() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay2() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                           <c:if test="${attlist.getDay3() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay3() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay3() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                         
+                                         <c:if test="${attlist.getDay4() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay4() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay4() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                         
+                                            <c:if test="${attlist.getDay5() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay5() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay5() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                            <c:if test="${attlist.getDay6() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay6() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay6() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                    <c:if test="${attlist.getDay7() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay7() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay7() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                          <c:if test="${attlist.getDay8() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay8() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay8() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+										      <c:if test="${attlist.getDay9() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay9() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay9() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+										   <c:if test="${attlist.getDay10() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay10() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay10() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                              <c:if test="${attlist.getDay11() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay11() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay11() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                            <c:if test="${attlist.getDay12() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay12() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay12() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                     <c:if test="${attlist.getDay13() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay13() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay13() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                              <c:if test="${attlist.getDay14() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay14() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay14() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                             <c:if test="${attlist.getDay15() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay15() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay15() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                          <c:if test="${attlist.getDay16() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay16() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay16() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                              <c:if test="${attlist.getDay17() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay17() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay17() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                    <c:if test="${attlist.getDay18() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay18() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay18() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+										        <c:if test="${attlist.getDay19() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay19() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay19() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+										          <c:if test="${attlist.getDay20() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay20() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay20() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                             <c:if test="${attlist.getDay21() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay21() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay21() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                         <c:if test="${attlist.getDay22() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay22() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay22() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                            <c:if test="${attlist.getDay23() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay23() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay23() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                             <c:if test="${attlist.getDay24() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay24() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay24() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                            <c:if test="${attlist.getDay25() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay25() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay25() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                             <c:if test="${attlist.getDay26() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay26() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay26() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                            <c:if test="${attlist.getDay27() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay27() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay27() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                             <c:if test="${attlist.getDay28() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay28() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay28() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+										       <c:if test="${attlist.getDay29() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay29() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay29() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+										        <c:if test="${attlist.getDay30() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay30() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay30() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                          <c:if test="${attlist.getDay31() == 1}">
+                                        <td><i class="${green}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay31() == 2}">
+                                        <td><i class="${red}" ></i></td>
+                                        </c:if>
+                                        <c:if test="${attlist.getDay31() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
+                                    												<td>
+
+													<div class="btn-group">
+														
+														<c:if test="${attlist.getStatas() == null}">
+														<button type="button"
+															class="btn btn-primary btn-outline btn-rounded waves-effect"
+															data-toggle="dropdown" aria-haspopup="true"
+															aria-expanded="false">Panding 
+														</button>
+														</c:if><c:if test="${attlist.getStatas() == false}">
+																<button type="button"
+															class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
+															>Declined 
+														</button></c:if><c:if test="${attlist.getStatas() == true}">
+																<button type="button"
+															class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect "
+															aria-haspopup="true"
+															aria-expanded="false">Approved 
+														</button>
+												</c:if>
+												<c:set var="eid" value="${User.getEid()}"></c:set>
+												<c:if test="${attlist.getManagerid() == eid||attlist.getMantrans() == user}">
+												<c:if test="${attlist.getStatas() == null}">
+														<ul class="dropdown-menu bullet">
+														<c:if test="${Role.equals('ADMIN_ROLE')}">
+															<c:set var="role" value="admin"/>
+														</c:if>
+						
+														<c:if test="${Role.equals('MANAGER_ROLE')}">
+															<c:set var="role" value="manager"/>
+														</c:if>
+														
+														<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
+																<c:set var="role" value="employee"/>
+														</c:if>
+															<li><a  href="${contextRoot}/${role}/attendance/approve/${attlist.getId()}"><i
+																	class="material-icons">print</i>Approved</a></li>
+															<li><a href="${contextRoot}/${role}/attendance/decline/${attlist.getId()}"><i
+																	class="material-icons">favorite</i>Declined</a></li>
+														</ul>
+														</c:if></c:if>
+																											</div>
+												</td>
+                                    
+									  </tr>
+               
+                                   </tbody>
+                               
+                               </c:if>
                                 </c:forEach>
                                 </table>
                                 

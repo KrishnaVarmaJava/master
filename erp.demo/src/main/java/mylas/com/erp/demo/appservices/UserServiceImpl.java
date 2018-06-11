@@ -21,6 +21,7 @@ import mylas.com.erp.demo.service.Client;
 
 public class UserServiceImpl implements User {
 
+	
 
 	Client cl = new Client();
 
@@ -33,17 +34,15 @@ public class UserServiceImpl implements User {
 	@Override
 	public List<EmpDetails> Login(String loginName, String Password) throws UserBlockedException {
 		String sqlquery = "SELECT uname, fname, lname, phone, email, role, login_status FROM emp_details WHERE uname='"+loginName+"' and pswd='"+Password+"'";
-
-		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-
-		SessionFactory fact = con.buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+	
+		session.beginTransaction();
 		Map map = null;
 		try {
 			SQLQuery query = session.createSQLQuery(sqlquery);
 			query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 			List<EmpDetails> user = query.list();
+			session.getTransaction().commit();
 			for(Object usr : user) {
 				map = (Map) usr;
 			}

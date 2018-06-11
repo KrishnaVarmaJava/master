@@ -11,6 +11,8 @@ public interface EmpAttendenceDao {
 	public void update(Boolean status,int id);
 	public String delete(int id);
 	public List<TblEmpAttendanceNew> viewbyid(String empid);
+	public List<TblEmpAttendanceNew> viewbymanagerid(String manpid);
 	public List<TblEmpAttendanceNew> getDetails();
-
+	public String updatetransManager(int id,String tramsmanid);
+	public String ChangeManager(int id);
 }

@@ -16,150 +16,138 @@ import org.springframework.stereotype.Repository;
 
 import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblEmpLeavereq;
+import mylas.com.erp.demo.appservices.GetSession;
 import mylas.com.erp.demo.dao.EmpLeaveRequestDao;
 
 
 @Repository("empleavereq")
 public class EmpLeaveRequestService implements EmpLeaveRequestDao {
 
-	Session session;
-	SessionFactory fact;
 
-	//public static SessionFactory buildSessionFactory() {
-	static {
 
-		Configuration con = new Configuration().configure("hibernate.cfg.xml");		
-
-		ServiceRegistry regObj = new StandardServiceRegistryBuilder().applySettings(con.getProperties()).build();
-		SessionFactory fact = con.buildSessionFactory(regObj);
-		/*return fact;*/
-
-	}
 
 	@Override
 	public void save(TblEmpLeavereq empleave) {
-		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-		SessionFactory fact = con.buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		session.save(empleave);
 		System.out.println("Request Saved");
-		session.close();
+		session.getTransaction().commit();
 	}
 
 	@Override
 	public List<TblEmpLeavereq> view() {
-		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-		SessionFactory fact = con.buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		Query q = session.createQuery("from TblEmpLeavereq");
 		List<TblEmpLeavereq> empleave = q.list();
 		System.out.println("view Called");
+		session.getTransaction().commit();
 		return (empleave);
 	}
 
 	@Override
 	public List<TblEmpLeavereq> viewbyid(String empid) {
 		String sqlquery = "SELECT * FROM tbl_emp_leavereq WHERE employeeid ='"+empid+"'";
-		
-		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-		SessionFactory fact = con.buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		List<TblEmpLeavereq> map = null;
-
-			SQLQuery query = session.createSQLQuery(sqlquery);
-			query.addEntity(TblEmpLeavereq.class);
-			List<TblEmpLeavereq> leaves = query.list();
-			
+		SQLQuery query = session.createSQLQuery(sqlquery);
+		query.addEntity(TblEmpLeavereq.class);
+		List<TblEmpLeavereq> leaves = query.list();
+		session.getTransaction().commit();
 		return leaves;
-		
+
 	}
 	public List<TblEmpLeavereq> viewbyManagerid(String mgrid){
-	String sqlquery = "SELECT * FROM tbl_emp_leavereq WHERE managerid ='"+mgrid+"'";
-	
-	Configuration con = new Configuration().configure("hibernate.cfg.xml");
-	SessionFactory fact = con.buildSessionFactory();
-	Session session = fact.openSession();
-	Transaction tx = session.beginTransaction();
-	List<TblEmpLeavereq> map = null;
+		String sqlquery = "SELECT * FROM tbl_emp_leavereq WHERE managerid ='"+mgrid+"'";
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<TblEmpLeavereq> map = null;
 
 		SQLQuery query = session.createSQLQuery(sqlquery);
 		query.addEntity(TblEmpLeavereq.class);
 		List<TblEmpLeavereq> leaves = query.list();
-		for(TblEmpLeavereq leave : leaves) {
-			System.out.println("Inside For");
-		System.out.println(leave);
-		}
-	return leaves;
-	
-}
+		session.getTransaction().commit();
+		return leaves;
+
+	}
 	public List<TblEmpLeavereq> viewbyStatusid(Boolean statusid){
-	String sqlquery = "SELECT * FROM tbl_emp_leavereq WHERE status ='"+statusid+"'";
-	
-	Configuration con = new Configuration().configure("hibernate.cfg.xml");
-	SessionFactory fact = con.buildSessionFactory();
-	Session session = fact.openSession();
-	Transaction tx = session.beginTransaction();
-	List<TblEmpLeavereq> map = null;
+		String sqlquery = "SELECT * FROM tbl_emp_leavereq WHERE status ='"+statusid+"'";
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List<TblEmpLeavereq> map = null;
 
 		SQLQuery query = session.createSQLQuery(sqlquery);
 		query.addEntity(TblEmpLeavereq.class);
 		List<TblEmpLeavereq> leaves = query.list();
 		System.out.println("list according to status");
-		for(TblEmpLeavereq leave : leaves) {
-			System.out.println("Inside For");
-		System.out.println(leave);
-		}
-	return leaves;
-	
-}
+		session.getTransaction().commit();
+		return leaves;
+
+	}
 
 	@Override
 	public void edit() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public TblEmpLeavereq view(int id) {
-		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-		SessionFactory fact = con.buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		TblEmpLeavereq empleave = session.load(TblEmpLeavereq.class, id);
+		session.getTransaction().commit();
 		return empleave;
 	}
 
 	@Override
 	public String delete(int id) {
-		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-		SessionFactory fact = con.buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		TblEmpLeavereq empleave = session.load(TblEmpLeavereq.class, id);
 		session.delete(empleave);
-        System.out.println("Object Deleted successfully.....!!");
-        tx.commit();
-        session.close();
-        fact.close();
-        return "Deleted_Entry!";
+		System.out.println("Object Deleted successfully.....!!");
+		session.getTransaction().commit();
+		return "Deleted_Entry!";
 	}
 
 	@Override
 	public String update(int id, String reason, boolean status) {
-		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-		SessionFactory fact = con.buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx2 = session.beginTransaction();
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		TblEmpLeavereq empleave = session.load(TblEmpLeavereq.class, id);
 		empleave.setReason(reason);
 		empleave.setStatus(status);
 		session.update(empleave);
-		tx2.commit();
+		session.getTransaction().commit();
 		System.out.println("updated table");
 		return "Request";
+	}
+
+	@Override
+	public String updatetransManager(int id,String transmanid) {
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		TblEmpLeavereq employe = session.load(TblEmpLeavereq.class, id);
+		employe.setMantrans(transmanid);
+		try {
+			session.update(employe);session.getTransaction().commit();return "Updated";
+		}catch(Exception e){session.getTransaction().commit();return "error occured while updating";}
+
+	}
+
+	@Override
+	public String ChangeManager(int id) {
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		TblEmpLeavereq employe = session.load(TblEmpLeavereq.class, id);
+		employe.setMantrans(null);
+		try {
+			session.update(employe);session.getTransaction().commit();return "Updated";
+		}catch(Exception e){session.getTransaction().commit();return "error occured while updating";}
+
 	}
 
 }

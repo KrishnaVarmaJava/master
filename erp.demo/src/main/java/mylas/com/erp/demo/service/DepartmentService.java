@@ -13,48 +13,33 @@ import org.springframework.stereotype.Repository;
 
 import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblDepartment;
+import mylas.com.erp.demo.appservices.GetSession;
 import mylas.com.erp.demo.dao.DepartmentDao;
 
 /*@Repository("deptdao")*/
 public class DepartmentService implements DepartmentDao {
-	
 
 
-	static Session session;
-	static SessionFactory fact;
-
-	private static SessionFactory buildSessionFactory() {
-		
-		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-		
-		fact = con.buildSessionFactory();
-		return fact;
-
-	}
 	
 	
 	@Override
 	public void saveDepartment(TblDepartment tbl) {
-		buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+
 		Integer num = (Integer) session.save(tbl);
-		if(num!=0) {
-			System.out.println("Table Updated");
-		}else {
-			System.out.println("Table Faied to Update");
-		}
-		tx.commit();
+		session.getTransaction().commit();
 		
 	}
 
 	@Override
 	public List<TblDepartment> getDetails() {
-		buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+
 		Query q = session.createQuery("from TblDepartment");
 		List<TblDepartment> emp1 = q.list();
+		session.getTransaction().commit();
 		return (emp1);
 	}
 
@@ -66,16 +51,14 @@ public class DepartmentService implements DepartmentDao {
 
 	@Override
 	public void deleteDetails(int id) {
-		// TODO Auto-generated method stubConfiguration con = new Configuration().configure("hibernate.cfg.xml");
-		buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+
 		TblDepartment deptdel = session.load(TblDepartment.class, id);
 		session.delete(deptdel);
 		System.out.println("Object Deleted successfully.....!!");
-		tx.commit();
-		session.close();
-		fact.close();
+		session.getTransaction().commit();
+	
 		
 	}
 

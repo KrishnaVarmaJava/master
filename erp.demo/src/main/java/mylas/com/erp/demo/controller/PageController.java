@@ -1,8 +1,5 @@
 package mylas.com.erp.demo.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,13 +23,16 @@ import mylas.com.erp.demo.TblDepartment;
 import mylas.com.erp.demo.TblDesignation;
 import mylas.com.erp.demo.TblEmpAttendanceNew;
 import mylas.com.erp.demo.TblEmpLeavereq;
+import mylas.com.erp.demo.TblManRoleTransfer;
 import mylas.com.erp.demo.appservices.UserServiceImpl;
 import mylas.com.erp.demo.dao.EmpLeaveRequestDao;
 import mylas.com.erp.demo.dao.EmpServicesDao;
 import mylas.com.erp.demo.dao.ManagerServicesDao;
+import mylas.com.erp.demo.dao.RoleTrasforDao;
 import mylas.com.erp.demo.dao.ServicesDao;
 import mylas.com.erp.demo.daoimpl.EmpAttendanceDaoImpl;
 import mylas.com.erp.demo.daoimpl.EmpLeaveRequestService;
+import mylas.com.erp.demo.daoimpl.RoletransfoeDaoImpl;
 import mylas.com.erp.demo.exceptions.UserBlockedException;
 import mylas.com.erp.demo.operations.LoginOperations;
 import mylas.com.erp.demo.service.Client;
@@ -59,10 +59,14 @@ public class PageController {
 	@Autowired
 	EmpAttendanceDaoImpl empattreq;
 	
+	@Autowired
+	RoleTrasforDao roleTransfer;
+	
 	/*@Autowired
 	DepartmentDao deptdao;*/
 	DepartmentService deptdao =new DepartmentService();
 	Client client = new Client();
+	List<EmpDetails> emp1 = client.getDetails();
 	EmpAttendanceDaoImpl attimpl=new EmpAttendanceDaoImpl();
 	DesignationService desser=new DesignationService();
 	EmpLeaveRequestService ers = new EmpLeaveRequestService();	
@@ -98,9 +102,7 @@ public class PageController {
 		mav.addObject("User",user);
 		mav.addObject("title", "Employee Regester Page");
 		mav.addObject("userClickReg", true);
-		Client cl = new Client();
 		String mesg = "hi";
-		List<EmpDetails> emp1 = cl.getDetails();
 		mav.addObject("employees", emp1);
 		mav.addObject("dupmsg", mesg);
 		//Departments
@@ -108,7 +110,6 @@ public class PageController {
 		mav.addObject("departments", dests);
 		
 		mav.addObject(user);
-		cl.closeAllSessions();
 		return mav;		
 	}
 	
@@ -155,8 +156,7 @@ public class PageController {
 		
 		String role = user.getRole();
 		mav.addObject("Role",role);
-		Client cl = new Client();
-		List<EmpDetails> emp1 = cl.getDetails();
+		
 		List<TblEmpLeavereq> leavereq =  empleavereq.view();
 		mav.addObject("employees", emp1);
 		mav.addObject("empleave", leavereq);
@@ -177,8 +177,6 @@ public class PageController {
 		
 		String role = user.getRole();
 		mav.addObject("Role",role);
-		Client cl = new Client();
-		List<EmpDetails> emp1 = cl.getDetails();
 		List<TblEmpAttendanceNew> attendances =  empattreq.getDetails();
 		mav.addObject("User",user);
 		mav.addObject("employees", emp1);
@@ -221,7 +219,7 @@ public class PageController {
 		if (principal instanceof EmpDetails) {
 		user = ((EmpDetails)principal);
 		}
-		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null, null);
+		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null, null,null);
 		
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
 		emp.setRole("MANAGER_ROLE");
@@ -250,20 +248,19 @@ public class PageController {
 		List<TblDepartment> dests = desdetails.getDetails();
 		mav.addObject("departments", dests);
 		
-		Client cl = new Client();
-		List<EmpDetails> emp1 = cl.getDetails();
+		
 		String role = user.getRole();
 		mav.addObject("Role",role);
 		mav.addObject("employees", emp1);
 		mav.addObject("User",user);
 		mav.addObject("employee", emp);
-		cl.closeAllSessions();
+		
 		return mav;		
 	}
 	@RequestMapping(value="/admin/allemp/update/{id}", method=RequestMethod.POST)
 	public ModelAndView updateEmpPage(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") int id) {
 		
-		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null, null);
+		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null, null,null);
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
 		emp.setRole("USER_ROLE");
 		ModelAndView mav = new ModelAndView("employees");
@@ -271,12 +268,9 @@ public class PageController {
 		mav.addObject("title", "Employee Regester Page");
 		mav.addObject("userClickReg", true);
 		client.updateDetails(emp, id);
-		Client cl = new Client();
-		List<EmpDetails> emp1 = cl.getDetails();
 		mav.addObject("employees", emp1);
 		request.setAttribute("Sempl", emp1);
 		mav.addObject("employee", emp);
-		cl.closeAllSessions();
 		return mav;		
 	}
 	@RequestMapping(value="/admin/allemp/delete/{id}")
@@ -341,8 +335,7 @@ public class PageController {
 		String role = user.getRole();
 		mav.addObject("Role",role);
 		EmpDetails Edetails = null;
-		Client cl = new Client();
-		Edetails = cl.getById(id);
+		Edetails = client.getById(id);
 		mav.addObject("empID", id);
 		mav.addObject("employee",Edetails);
 		mav.addObject("services", servicesdao.list());
@@ -362,12 +355,15 @@ public class PageController {
 		}
 	 
 		String role = user.getRole();
-		System.out.println(user.getRole());
+		List<TblManRoleTransfer> transferrole = roleTransfer.viewAll();
+		mav.addObject("TransferRoleList", transferrole);
 		mav.addObject("title", "HomePage");
 		mav.addObject("Role",role);
+		mav.addObject("User",user);
 		mav.addObject("services", servicesdao.list());
 		mav.addObject("empservices", empservicesdao.list());
 		mav.addObject("manservices", mandao.list());
+		mav.addObject("employees", emp1);
 		return mav;
 	}
 	@RequestMapping(value= "/forgot-password")
@@ -386,7 +382,7 @@ public class PageController {
 	}
 	@RequestMapping(value= "/register", method=RequestMethod.POST)
 	public ModelAndView adminRegisterPage(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws UserBlockedException {
-		EmpDetails emp = new EmpDetails(null, request.getParameter("confirm"), null, request.getParameter("empid"), request.getParameter("email"), null, null, null, false, null, request.getParameter("password"), null, request.getParameter("username"),null,null);
+		EmpDetails emp = new EmpDetails(null, request.getParameter("confirm"), null, request.getParameter("empid"), request.getParameter("email"), null, null, null, false, null, request.getParameter("password"), null, request.getParameter("username"),null,null,null);
 		
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
 		emp.setRole("ADMIN_ROLE");
@@ -479,15 +475,18 @@ public class PageController {
 	}
 	@RequestMapping(value= "/test")
 	public ModelAndView testPage() {
+		
 		ModelAndView mav = new ModelAndView("empindex");
-		//TblEmpAttendanceNew tbl = new TblEmpAttendanceNew(null, null, null, null, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true, true, true, true, true, true, true, true, true, true, true, true, true, true, null, null);
+		/*//TblEmpAttendanceNew tbl = new TblEmpAttendanceNew(null, null, null, null, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,true, true, true, true, true, true, true, true, true, true, true, true, true, true, null, null);
 		
 		
 		//attimpl.save(tbl);
 		//attimpl.update(false,4);
 		//attimpl.delete(4);
 		attimpl.getDetails();
-		ers.viewbyStatusid(false);
+		ers.viewbyStatusid(false);*/
+		RoletransfoeDaoImpl impl=new RoletransfoeDaoImpl();
+		impl.viewAll();
 		
 		return mav;
 	}
@@ -537,9 +536,23 @@ public class PageController {
 	}
 	@RequestMapping(value= "/mytest")
 	public ModelAndView testmyPage() {
-		ModelAndView mav = new ModelAndView("indvidtimesheet");
+		ModelAndView mav = new ModelAndView("500");
+		System.out.println("inside mytest");
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+		user = ((EmpDetails)principal);
+		}
+	 
+		String role = user.getRole();
+		mav.addObject("Role",role);
+		mav.addObject("employees", emp1);
+		
+		
 		return mav;
 	}
+	
+	
 
 	@RequestMapping(value= "/403")
 	public ModelAndView Page403() {

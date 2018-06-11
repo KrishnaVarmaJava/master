@@ -24,12 +24,13 @@ public class TblEmpLeavereq implements java.io.Serializable {
 	private Boolean status;
 	private String todate;
 	private String reason;
+	private String mantrans;
 
 	public TblEmpLeavereq() {
 	}
 
 	public TblEmpLeavereq(Integer count, String employeeid, String fromdate, String leavereason, String leavetype,
-			String managerid, Boolean status, String todate, String reason) {
+			String managerid, Boolean status, String todate, String reason, String mantrans) {
 		this.count = count;
 		this.employeeid = employeeid;
 		this.fromdate = fromdate;
@@ -39,6 +40,7 @@ public class TblEmpLeavereq implements java.io.Serializable {
 		this.status = status;
 		this.todate = todate;
 		this.reason = reason;
+		this.mantrans = mantrans;
 	}
 
 	@Id
@@ -132,6 +134,15 @@ public class TblEmpLeavereq implements java.io.Serializable {
 
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+
+	@Column(name = "mantrans", length = 50)
+	public String getMantrans() {
+		return this.mantrans;
+	}
+
+	public void setMantrans(String mantrans) {
+		this.mantrans = mantrans;
 	}
 
 }

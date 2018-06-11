@@ -51,6 +51,7 @@ public class TblEmpAttendanceNew implements java.io.Serializable {
 	private Integer day31;
 	private Boolean statas;
 	private String reasion;
+	private String mantrans;
 
 	public TblEmpAttendanceNew() {
 	}
@@ -60,7 +61,7 @@ public class TblEmpAttendanceNew implements java.io.Serializable {
 			Integer day10, Integer day11, Integer day12, Integer day13, Integer day14, Integer day15, Integer day16,
 			Integer day17, Integer day18, Integer day19, Integer day20, Integer day21, Integer day22, Integer day23,
 			Integer day24, Integer day25, Integer day26, Integer day27, Integer day28, Integer day29, Integer day30,
-			Integer day31, Boolean statas, String reasion) {
+			Integer day31, Boolean statas, String reasion, String mantrans) {
 		this.managerid = managerid;
 		this.empid = empid;
 		this.month = month;
@@ -98,6 +99,7 @@ public class TblEmpAttendanceNew implements java.io.Serializable {
 		this.day31 = day31;
 		this.statas = statas;
 		this.reasion = reasion;
+		this.mantrans = mantrans;
 	}
 
 	@Id
@@ -112,7 +114,7 @@ public class TblEmpAttendanceNew implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "managerid", length = 1)
+	@Column(name = "managerid", length = 15)
 	public String getManagerid() {
 		return this.managerid;
 	}
@@ -121,7 +123,7 @@ public class TblEmpAttendanceNew implements java.io.Serializable {
 		this.managerid = managerid;
 	}
 
-	@Column(name = "empid", length = 1)
+	@Column(name = "empid", length = 15)
 	public String getEmpid() {
 		return this.empid;
 	}
@@ -130,7 +132,7 @@ public class TblEmpAttendanceNew implements java.io.Serializable {
 		this.empid = empid;
 	}
 
-	@Column(name = "month", length = 1)
+	@Column(name = "month", length = 15)
 	public String getMonth() {
 		return this.month;
 	}
@@ -436,13 +438,22 @@ public class TblEmpAttendanceNew implements java.io.Serializable {
 		this.statas = statas;
 	}
 
-	@Column(name = "reasion", length = 1)
+	@Column(name = "reasion", length = 50)
 	public String getReasion() {
 		return this.reasion;
 	}
 
 	public void setReasion(String reasion) {
 		this.reasion = reasion;
+	}
+
+	@Column(name = "mantrans", length = 50)
+	public String getMantrans() {
+		return this.mantrans;
+	}
+
+	public void setMantrans(String mantrans) {
+		this.mantrans = mantrans;
 	}
 
 }

@@ -15,4 +15,6 @@ public interface EmpLeaveRequestDao {
 	public TblEmpLeavereq view(int id);
 	public String delete(int id);
 	public String update(int id,String reason,boolean status);
+	public String updatetransManager(int id,String transmanid);
+	public String ChangeManager(int id);
 }

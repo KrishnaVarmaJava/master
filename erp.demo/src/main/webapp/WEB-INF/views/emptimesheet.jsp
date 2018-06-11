@@ -186,13 +186,13 @@
                                         <th><a href="${contextRoot}/${role}/profile/register">${User.getFname()} ${User.getLname()}</a></th>
                                      
                                         <td> <select class="form-control" size="1" name="year" id="year" required>
-                                            <option value="0">Please select</option>
+                                            <option value="">Please select</option>
                                             <option value="2018">2018</option>
                                             <option value="2019">2019</option>
                                             <option value="2020">2020</option>
                                         </select></td>
-                                          <td> <select class="form-control" size="1" name="month" id="month" required>
-                                            <option value="0">Please select</option>
+                                          <td> <select class="form-control" size="1" name="month" id="month" onchange="return validate()" required>
+                                            <option value="">Please select</option>
                                             <option value="January">January</option>
                                             <option value="February">February</option>
                                             <option value="March">March</option>
@@ -211,35 +211,14 @@
 
 											<td>
 										 <select class="form-control"  size="1" name="day${loop.index}"  id="day${loop.index}" required>
-                                            <option value="0">Please select</option>
+                                            <option value="">Please select</option>
                                             <option value="1">Present</option>
                                             <option value="2">Absent Or Leave</option>
                                             <option value="3">WeekEnd Or Holiday</option>
 </select>
 
 
-<% String str="day${loop.index}"; %>
-				 <script>
-                 
-                 
-                        function validate() {
-                            //alert("hai");
-                        	// var opt= document.getElementById("day${loop.index}").value; // or in jQuery use: select = this;
-                        	 var opt=document.getElementById("day${loop.index}").value;
-                        	 var name=document.getElementsByName("day${loop.index}");
-                                if (opt==0) {
-                              alert("plese select the option");
-                             // document.getElementById("day${loop.index}").focus();
-                            
 
-                             $("name").addClass("selected");
-                             alert("ffg");
-                              document.getElementById("day${loop.index}").style.backgroundColor = "lightblue";
-                              return false;
-                            } 
-                             
-                        }
-                        </script>
 </td></c:forEach>
 											  
                                     </tr>
@@ -692,7 +671,43 @@
 <!-- LAYOUT JS -->
 <script src="${js}/demo.js"></script>
 <script src="${js}/layout.js"></script>
+<script>            
+  function validate() {
+   
+   var opt1 = document.getElementById("month").value;
+   var opt2 = document.getElementById("year").value;
 
+   if (opt1 == "January" || opt1 == "March" || opt1=="May" || opt1=="July" || opt1=="August" || opt1=="October" || opt1=="December") {
+    var name="31";
+    window.location.replace("${contextRoot}/employee/timesheet/register/"+name); 
+
+    return false;
+
+   }
+   if(opt1=="April" || opt1=="June" || opt1=="September" || opt1=="November"){
+    var name="30";
+    window.location.replace("${contextRoot}/employee/timesheet/register/"+name); 
+
+    return false;
+   }
+    if(opt1=="February" && opt2 % 4 == 0)
+    {
+     
+     var name="29";
+     window.location.replace("${contextRoot}/employee/timesheet/register/"+name); 
+     
+    }
+   
+     if(opt1=="February" && opt2 % 4 != 0)
+    {
+    var name="28";
+    window.location.replace("${contextRoot}/employee/timesheet/register/"+name); 
+    }
+    
+   
+
+  }
+ </script>
 
 
 

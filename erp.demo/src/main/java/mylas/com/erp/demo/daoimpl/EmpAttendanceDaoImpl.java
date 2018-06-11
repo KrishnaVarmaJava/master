@@ -10,98 +10,119 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 
+import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblDepartment;
 import mylas.com.erp.demo.TblEmpAttendanceNew;
 import mylas.com.erp.demo.TblEmpLeavereq;
+import mylas.com.erp.demo.appservices.GetSession;
 import mylas.com.erp.demo.dao.EmpAttendenceDao;
 
 @Repository("empattdao")
 public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 
-	
 
-	static Session session;
-	static SessionFactory fact;
 
-	private static SessionFactory buildSessionFactory() {
-		
-		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-		
-		fact = con.buildSessionFactory();
-		return fact;
-
-	}
 
 	@Override
 	public void save(TblEmpAttendanceNew tbl) {
-		buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		session.save(tbl);
-		
-		tx.commit();
+
+		session.getTransaction().commit();
 		System.out.println("Table Saved");
-		
+
 	}
 
 	@Override
 	public void update(Boolean status, int id) {
-		buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx2 = session.beginTransaction();
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		TblEmpAttendanceNew emp = session.load(TblEmpAttendanceNew.class,id);
-		
+
 		emp.setStatas(status);
-		 	session.update(emp);
-		 	tx2.commit();
-		 	System.out.println("updated table");
-		 	
+		session.update(emp);
+		session.getTransaction().commit();
+		System.out.println("updated table");
+
 	}
 
 	@Override
 	public String delete(int id) {
-		buildSessionFactory();
-		
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+
+
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		TblEmpAttendanceNew empdel = session.load(TblEmpAttendanceNew.class, id);
 		session.delete(empdel);
-        tx.commit();
-        System.out.println("Object Deleted successfully.....!!");
-        session.close();
-        fact.close();
-        return "Object Deleted successfully.....!!";
-    
+		session.getTransaction().commit();
+		System.out.println("Object Deleted successfully.....!!");
+
+		return "Object Deleted successfully.....!!";
+
 	}
 
 	@Override
 	public List<TblEmpAttendanceNew> getDetails() {
-		// TODO Auto-generated method stub
-		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-		SessionFactory fact = con.buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		Query q = session.createQuery("from TblEmpAttendanceNew");
 		List<TblEmpAttendanceNew> empatt = q.list();
 		System.out.println("view Called");
+		session.getTransaction().commit();
 		return empatt;
-	
+
 	}
 
 	@Override
 	public List<TblEmpAttendanceNew> viewbyid(String empid) {
 		String sqlquery = "SELECT * FROM tbl_emp_attendance_new WHERE empid ='"+empid+"'";
-		Configuration con = new Configuration().configure("hibernate.cfg.xml");
-		SessionFactory fact = con.buildSessionFactory();
-		Session session = fact.openSession();
-		Transaction tx = session.beginTransaction();
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
 		List<TblEmpAttendanceNew> map = null;
 
-			SQLQuery query = session.createSQLQuery(sqlquery);
-			query.addEntity(TblEmpAttendanceNew.class);
-			List<TblEmpAttendanceNew> EmpAtt = query.list();
-			
+		SQLQuery query = session.createSQLQuery(sqlquery);
+		query.addEntity(TblEmpAttendanceNew.class);
+		List<TblEmpAttendanceNew> EmpAtt = query.list();
+		session.getTransaction().commit();	
 		return EmpAtt;
+	}
+
+	@Override
+	public List<TblEmpAttendanceNew> viewbymanagerid(String manpid) {
+		String sqlquery = "SELECT * FROM tbl_emp_attendance_new WHERE managerid ='"+manpid+"'";
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		SQLQuery query = session.createSQLQuery(sqlquery);
+		query.addEntity(TblEmpAttendanceNew.class);
+		List<TblEmpAttendanceNew> emps = query.list();
+		session.getTransaction().commit();
+		return emps;
+	}
+
+	@Override
+	public String updatetransManager(int id, String transmanid) {
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		TblEmpAttendanceNew employe = session.load(TblEmpAttendanceNew.class, id);
+		employe.setMantrans(transmanid);
+		try {
+			session.update(employe);session.getTransaction().commit();return "Updated";
+		}catch(Exception e){session.getTransaction().commit();return "error occured while updating";}
+
+	}
+
+	@Override
+	public String ChangeManager(int id) {
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		TblEmpAttendanceNew employe = session.load(TblEmpAttendanceNew.class, id);
+		employe.setMantrans(null);
+		try {
+			session.update(employe);session.getTransaction().commit();return "Updated";
+		}catch(Exception e){session.getTransaction().commit();return "error occured while updating";}
+
 	}
 
 
