@@ -99,6 +99,36 @@ public class EmployeePageController {
 		mav.addObject("User", user);
 		return mav;
 	}
+	
+	@RequestMapping(value= "/employee/timesheet/register/{id}")
+	 public ModelAndView indvidtimesheets(HttpSession session,@PathVariable("id") String id) {
+	  
+	  ModelAndView mav = new ModelAndView("emptimesheet");
+	  
+	  int l=id.length();
+	  int root=Integer.parseInt(id.substring(0,2));
+	  String month=id.substring(2,(l-4));
+	  String year=id.substring((l-4),l);
+	  
+	  mav.addObject("root",root);
+	  mav.addObject("month",month);
+	  mav.addObject("year",year);
+	  
+	  Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	  EmpDetails user=null;
+	  if (principal instanceof EmpDetails) {
+	  user = ((EmpDetails)principal);
+	  }
+	  
+	  String role = user.getRole();
+	  List<TblEmpAttendanceNew> attendances =  empattreq.viewbyid(user.getEid());
+	  mav.addObject("attendancelist",attendances);
+	  mav.addObject("empservices", empservicesdao.list());
+	  mav.addObject("Role",role);
+	  mav.addObject("User", user);
+	  
+	  return mav;
+	 }
 
 	@RequestMapping(value= "/employee/timesheet/register", method=RequestMethod.POST)
 	public ModelAndView indvidtimesheetsubmit(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
@@ -111,13 +141,25 @@ public class EmployeePageController {
 	 
 		String role = user.getRole();
 		
-		TblEmpAttendanceNew attedance = new TblEmpAttendanceNew(null, null, null, null, Integer.parseInt(request.getParameter("day1")), Integer.parseInt(request.getParameter("day2")), Integer.parseInt(request.getParameter("day3")), Integer.parseInt(request.getParameter("day4")), Integer.parseInt(request.getParameter("day5")), Integer.parseInt(request.getParameter("day6")), Integer.parseInt(request.getParameter("day7")), Integer.parseInt(request.getParameter("day8")), Integer.parseInt(request.getParameter("day9")), Integer.parseInt(request.getParameter("day10")), Integer.parseInt(request.getParameter("day11")), Integer.parseInt(request.getParameter("day12")), Integer.parseInt(request.getParameter("day13")), Integer.parseInt(request.getParameter("day14")), Integer.parseInt(request.getParameter("day15")), Integer.parseInt(request.getParameter("day16")), Integer.parseInt(request.getParameter("day17")), Integer.parseInt(request.getParameter("day18")), Integer.parseInt(request.getParameter("day19")), Integer.parseInt(request.getParameter("day20")), Integer.parseInt(request.getParameter("day21")), Integer.parseInt(request.getParameter("day22")), Integer.parseInt(request.getParameter("day23")), Integer.parseInt(request.getParameter("day24")), Integer.parseInt(request.getParameter("day25")), Integer.parseInt(request.getParameter("day26")), Integer.parseInt(request.getParameter("day27")), Integer.parseInt(request.getParameter("day28")), Integer.parseInt(request.getParameter("day29")), Integer.parseInt(request.getParameter("day30")), Integer.parseInt(request.getParameter("day31")), null, null,null);
+		TblEmpAttendanceNew attedance = new TblEmpAttendanceNew(null, null, null, null, Integer.parseInt(request.getParameter("day1")), Integer.parseInt(request.getParameter("day2")), Integer.parseInt(request.getParameter("day3")), Integer.parseInt(request.getParameter("day4")), Integer.parseInt(request.getParameter("day5")), Integer.parseInt(request.getParameter("day6")), Integer.parseInt(request.getParameter("day7")), Integer.parseInt(request.getParameter("day8")), Integer.parseInt(request.getParameter("day9")), Integer.parseInt(request.getParameter("day10")), Integer.parseInt(request.getParameter("day11")), Integer.parseInt(request.getParameter("day12")), Integer.parseInt(request.getParameter("day13")), Integer.parseInt(request.getParameter("day14")), Integer.parseInt(request.getParameter("day15")), Integer.parseInt(request.getParameter("day16")), Integer.parseInt(request.getParameter("day17")), Integer.parseInt(request.getParameter("day18")), Integer.parseInt(request.getParameter("day19")), Integer.parseInt(request.getParameter("day20")), Integer.parseInt(request.getParameter("day21")), Integer.parseInt(request.getParameter("day22")), Integer.parseInt(request.getParameter("day23")), Integer.parseInt(request.getParameter("day24")), Integer.parseInt(request.getParameter("day25")), Integer.parseInt(request.getParameter("day26")), Integer.parseInt(request.getParameter("day27")), Integer.parseInt(request.getParameter("day28")), null, null, null, null, null,null);
+		
 		attedance.setEmpid(user.getEid());
 		attedance.setStatas(null);
 		attedance.setManagerid(user.getManagerid());
 		attedance.setMonth(request.getParameter("month"));
 		attedance.setYear(Integer.parseInt(request.getParameter("year")));
+		if(attedance.getYear().equals("January")||attedance.getYear().equals("March")||attedance.getYear().equals("May")||attedance.getYear().equals("July")||attedance.getYear().equals("August")||attedance.getYear().equals("October")||attedance.getYear().equals("December")) {
+			attedance.setDay29(Integer.parseInt(request.getParameter("day29")));
+			attedance.setDay30(Integer.parseInt(request.getParameter("day30")));
+			attedance.setDay31(Integer.parseInt(request.getParameter("day31")));
+		}else if(attedance.getYear().equals("April")||attedance.getYear().equals("June")||attedance.getYear().equals("September")||attedance.getYear().equals("November")) {
+			attedance.setDay29(Integer.parseInt(request.getParameter("day29")));
+			attedance.setDay30(Integer.parseInt(request.getParameter("day30")));
+		}else if(attedance.getYear().equals("Febraury") && (attedance.getYear()%4==0)) {
+			attedance.setDay29(Integer.parseInt(request.getParameter("day29")));
+		}
 		empattreq.save(attedance);
+		System.out.println("save");
 		List<TblEmpAttendanceNew> attendances =  empattreq.viewbyid(user.getEid());
 		mav.addObject("attendancelist",attendances);
 		mav.addObject("empservices", empservicesdao.list());	

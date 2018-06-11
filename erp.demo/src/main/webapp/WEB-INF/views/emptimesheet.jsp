@@ -127,7 +127,7 @@
 
 
                         
-                        <form action="${contextRoot}/${role}/timesheet/register" method="post" onsubmit="return validate()" >
+                        <form action="${contextRoot}/${role}/timesheet/register" method="post">
                         <div class="card">
                         		
                             <div class="body">
@@ -137,42 +137,10 @@
                                         <th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">Employee</th>
 										 <th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">Year</th>
 										  <th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">Month</th>
-				
-                                        <th data-tablesaw-sortable-col data-tablesaw-priority="3">1</th>
-                                        <th data-tablesaw-sortable-col data-tablesaw-priority="2">2</th>
-                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">3 </th>
-										 
-                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">4</th>
-										   <th data-tablesaw-sortable-col data-tablesaw-priority="2">5</th>
-                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">6</th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="1">7 </th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="1">8 </th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="1">9 </th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="1">10 </th>
-										           <th data-tablesaw-sortable-col data-tablesaw-priority="3">11</th>
-                                        <th data-tablesaw-sortable-col data-tablesaw-priority="2">12</th>
-                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">13 </th>
-										 
-                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">14</th>
-										   <th data-tablesaw-sortable-col data-tablesaw-priority="2">15</th>
-                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">16</th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="1">17 </th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="1">18 </th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="1">19 </th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="1">20 </th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="3">21</th>
-                                        <th data-tablesaw-sortable-col data-tablesaw-priority="2">22</th>
-                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">23 </th>
-										 
-                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">24</th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="2">25</th>
-                                        <th data-tablesaw-sortable-col data-tablesaw-priority="4">26</th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="1">27 </th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="1">28 </th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="1">29 </th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="1">30 </th>
-										<th data-tablesaw-sortable-col data-tablesaw-priority="1">31 </th>
-                                      
+				<c:if test="${root!=null}"> <c:forEach begin="1" end="${root}" varStatus="loop">
+                                        <th data-tablesaw-sortable-col data-tablesaw-priority="3">${loop.index}</th>
+                                        
+                                     </c:forEach> </c:if>
                                     </tr>
                                     </thead>
 									
@@ -206,7 +174,7 @@
                                             <option value="November">November</option>
                                             <option value="December">December</option>
                                         </select></td>
-                                        <c:forEach begin="1" end="31" varStatus="loop">
+                                        <c:forEach begin="1" end="${root}" varStatus="loop">
                                       
 
 											<td>
@@ -571,6 +539,8 @@
                                         </c:if>
                                         <c:if test="${attlist.getDay29() == 3}">
                                         <td><i class="${gray}" ></i></td>
+                                        </c:if> <c:if test="${attlist.getDay29() == null}">
+                                        <td><i class="${gray}" ></i></td>
                                         </c:if>
 										        <c:if test="${attlist.getDay30() == 1}">
                                         <td><i class="${green}" ></i></td>
@@ -581,6 +551,9 @@
                                         <c:if test="${attlist.getDay30() == 3}">
                                         <td><i class="${gray}" ></i></td>
                                         </c:if>
+                                        <c:if test="${attlist.getDay30() == null}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
                                           <c:if test="${attlist.getDay31() == 1}">
                                         <td><i class="${green}" ></i></td>
                                         </c:if>
@@ -588,6 +561,8 @@
                                         <td><i class="${red}" ></i></td>
                                         </c:if>
                                         <c:if test="${attlist.getDay31() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if><c:if test="${attlist.getDay31() == null}">
                                         <td><i class="${gray}" ></i></td>
                                         </c:if>
                                     
@@ -678,38 +653,53 @@
    var opt2 = document.getElementById("year").value;
 
    if (opt1 == "January" || opt1 == "March" || opt1=="May" || opt1=="July" || opt1=="August" || opt1=="October" || opt1=="December") {
-    var name="31";
-    window.location.replace("${contextRoot}/employee/timesheet/register/"+name); 
+    var name1="31";
+    var name2= name1.concat(opt1);
+    var name=name2.concat(opt2);
+    window.location.replace("${contextRoot}/${role}/timesheet/register/"+name ); 
 
     return false;
 
    }
    if(opt1=="April" || opt1=="June" || opt1=="September" || opt1=="November"){
-    var name="30";
-    window.location.replace("${contextRoot}/employee/timesheet/register/"+name); 
+    var name1="30";
+    var name2= name1.concat(opt1);
+    var name=name2.concat(opt2);
+    window.location.replace("${contextRoot}/${role}/timesheet/register/"+name); 
 
     return false;
    }
     if(opt1=="February" && opt2 % 4 == 0)
     {
-     
-     var name="29";
-     window.location.replace("${contextRoot}/employee/timesheet/register/"+name); 
+     var name1="29";
+     var name2= name1.concat(opt1);
+     var name=name2.concat(opt2);
+     window.location.replace("${contextRoot}/${role}/timesheet/register/"+name); 
      
     }
    
      if(opt1=="February" && opt2 % 4 != 0)
     {
-    var name="28";
-    window.location.replace("${contextRoot}/employee/timesheet/register/"+name); 
+    var name1="28";
+    var name2= name1.concat(opt1);
+    var name=name2.concat(opt2);
+    window.location.replace("${contextRoot}/${role}/timesheet/register/"+name); 
     }
     
    
 
   }
  </script>
-
-
+<c:if test="${root != null }">
+ <script>
+            
+            alert("${month}"+"${year}");
+            
+            document.getElementById("month").value = "${month}";
+            document.getElementById("year").value = "${year}";
+            
+            </script>
+</c:if>
 
 
 

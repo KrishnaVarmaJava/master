@@ -31,7 +31,6 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 		session.save(tbl);
 
 		session.getTransaction().commit();
-		System.out.println("Table Saved");
 
 	}
 
@@ -44,7 +43,6 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 		emp.setStatas(status);
 		session.update(emp);
 		session.getTransaction().commit();
-		System.out.println("updated table");
 
 	}
 
@@ -69,7 +67,6 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 		session.beginTransaction();
 		Query q = session.createQuery("from TblEmpAttendanceNew");
 		List<TblEmpAttendanceNew> empatt = q.list();
-		System.out.println("view Called");
 		session.getTransaction().commit();
 		return empatt;
 
