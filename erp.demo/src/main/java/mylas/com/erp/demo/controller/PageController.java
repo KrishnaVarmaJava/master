@@ -240,9 +240,7 @@ public class PageController {
 	
 		
 		
-		mesg = client.getConnection(emp);
-	
-		mav.addObject("dupmsg", mesg);
+		
 			
 		//Departments
 		List<TblDepartment> dests = desdetails.getDetails();
@@ -252,6 +250,9 @@ public class PageController {
 		String role = user.getRole();
 		mav.addObject("Role",role);
 		mav.addObject("employees", emp1);
+		mesg = client.getConnection(emp);
+		
+		mav.addObject("dupmsg", mesg);
 		mav.addObject("User",user);
 		mav.addObject("employee", emp);
 		

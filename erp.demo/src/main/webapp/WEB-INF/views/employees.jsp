@@ -520,7 +520,7 @@ $("#list").css("display","none");
 function Validate() {
     var password = document.getElementById("pswd").value;
     var confirmPassword = document.getElementById("cpswd").value;
-  	     var phone=document.getElementById("phone").value;
+  	     var ph=document.getElementById("phone").value;
     if (password != confirmPassword) {
         alert("Passwords do not match.");
        pswd.focus();
@@ -529,7 +529,7 @@ function Validate() {
 
   
    
-    if((phone.length <10) || phone.length >10 )
+    if((ph.length <10) || ph.length >10 )
     {
     alert(" Your Mobile Number must ");
     phone.focus();

@@ -474,6 +474,9 @@
                                         <c:if test="${attlist.getDay29() == 3}">
                                         <td><i class="${gray}" ></i></td>
                                         </c:if>
+                                         <c:if test="${attlist.getDay29() == null}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if>
 										        <c:if test="${attlist.getDay30() == 1}">
                                         <td><i class="${green}" ></i></td>
                                         </c:if>
@@ -481,6 +484,8 @@
                                         <td><i class="${red}" ></i></td>
                                         </c:if>
                                         <c:if test="${attlist.getDay30() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if> <c:if test="${attlist.getDay30() == null}">
                                         <td><i class="${gray}" ></i></td>
                                         </c:if>
                                           <c:if test="${attlist.getDay31() == 1}">
@@ -490,6 +495,8 @@
                                         <td><i class="${red}" ></i></td>
                                         </c:if>
                                         <c:if test="${attlist.getDay31() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if> <c:if test="${attlist.getDay31() == null}">
                                         <td><i class="${gray}" ></i></td>
                                         </c:if>
                                     												<td>

@@ -45,7 +45,7 @@ public class ManagerPageController {
 
 	@Autowired
 	EmpAttendanceDaoImpl empattreq;
-	
+
 	@Autowired
 	RoleTrasforDao roleTransfer;
 
@@ -121,10 +121,11 @@ public class ManagerPageController {
 		mav.addObject("manservices", mandao.list());
 		System.out.println("before getconn");
 		String mesg = "hi";
-	/*	mesg = client.getConnection(emp);*/
+
 
 		mav.addObject("dupmsg", mesg);
 		List<TblDesignation> depts = depdetails.getDetails();
+		mesg = client.getConnection(emp);
 		mav.addObject("designations", depts);
 		System.out.println("after getconn");
 		String role = user.getRole();
@@ -132,6 +133,7 @@ public class ManagerPageController {
 		mav.addObject("employees", emp1);
 		mav.addObject("User",user);
 		mav.addObject("employee", emp);
+
 		return mav;		
 	}
 
@@ -257,34 +259,34 @@ public class ManagerPageController {
 		return mav;
 	}
 	@RequestMapping(value= "/manager/timesheet/register/{id}")
-	 public ModelAndView indvidtimesheets(HttpSession session,@PathVariable("id") String id) {
-	  
-	  ModelAndView mav = new ModelAndView("emptimesheet");
-	  
-	  int l=id.length();
-	  int root=Integer.parseInt(id.substring(0,2));
-	  String month=id.substring(2,(l-4));
-	  String year=id.substring((l-4),l);
-	  
-	  mav.addObject("root",root);
-	  mav.addObject("month",month);
-	  mav.addObject("year",year);
-	  
-	  Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	  EmpDetails user=null;
-	  if (principal instanceof EmpDetails) {
-	  user = ((EmpDetails)principal);
-	  }
-	  
-	  String role = user.getRole();
-	  List<TblEmpAttendanceNew> attendances =  empattreq.viewbyid(user.getEid());
-	  mav.addObject("attendancelist",attendances);
-	  mav.addObject("empservices", mandao.list());
-	  mav.addObject("Role",role);
-	  mav.addObject("User", user);
-	  
-	  return mav;
-	 }
+	public ModelAndView indvidtimesheets(HttpSession session,@PathVariable("id") String id) {
+
+		ModelAndView mav = new ModelAndView("emptimesheet");
+
+		int l=id.length();
+		int root=Integer.parseInt(id.substring(0,2));
+		String month=id.substring(2,(l-4));
+		String year=id.substring((l-4),l);
+
+		mav.addObject("root",root);
+		mav.addObject("month",month);
+		mav.addObject("year",year);
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+			user = ((EmpDetails)principal);
+		}
+
+		String role = user.getRole();
+		List<TblEmpAttendanceNew> attendances =  empattreq.viewbyid(user.getEid());
+		mav.addObject("attendancelist",attendances);
+		mav.addObject("empservices", mandao.list());
+		mav.addObject("Role",role);
+		mav.addObject("User", user);
+
+		return mav;
+	}
 	@RequestMapping(value= "/manager/timesheet/register", method=RequestMethod.POST)
 	public ModelAndView timesheetSave(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("emptimesheet");
@@ -321,8 +323,8 @@ public class ManagerPageController {
 		mav.addObject("employees", emp1);
 		return mav;
 	}
-	
-	
+
+
 
 	@RequestMapping(value= "manager/leaverequests/register")
 	public ModelAndView allleaverequests(HttpSession session) {
@@ -441,7 +443,7 @@ public class ManagerPageController {
 	@RequestMapping(value= "/manager/roletransfer",method=RequestMethod.POST)
 	public ModelAndView testmyPagePost(HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("redirect:/");
-		
+
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		EmpDetails user=null;
 		if (principal instanceof EmpDetails) {
@@ -456,7 +458,7 @@ public class ManagerPageController {
 		roletransfor.setTodate(request.getParameter("todate"));
 		roletransfor.setFrommanid(user.getEid());
 		roletransfor.setTomanid(request.getParameter("managerId"));
-		
+
 		String msg = roleTransfer.save(roletransfor);
 		if(msg.equals("Saved")) {
 			//update emptable
@@ -475,10 +477,10 @@ public class ManagerPageController {
 				empattreq.updatetransManager(employee.getId(), roletransfor.getTomanid());
 			}
 		}
-		
+
 		String role = user.getRole();
 		mav.addObject("Role",role);
-		
+
 		mav.addObject("employees", emp1);
 
 		mav.addObject("manservices", mandao.list());	
