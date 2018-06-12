@@ -67,7 +67,7 @@
 
 									</div>
 									<form action="${contextRoot}/manager/roletransfer"
-										method="post" onsubmit="return validate()" name="form">
+										method="post" onsubmit="return validate1()" name="form">
 										<div style="padding: 10px;" id="sidebarform">
 											<div class="form-group">
 												<div class="input-group addon-line">
@@ -93,7 +93,7 @@
 													<div class="form-line">
 														<label>From Date </label> <input type="date"
 															class="form-control" placeholder="From Date"
-															name="fromdate" id="fromdate">
+															name="fromdate" id="manfromdate">
 													</div>
 													<span class="input-group-addon"><i
 														class="material-icons">date_range </i></span>
@@ -105,7 +105,7 @@
 													<div class="form-line">
 														<label>To Date </label> <input type="date"
 															class="form-control" placeholder="To Date" name="todate"
-															id="todate">
+															id="mantodate">
 													</div>
 													<span class="input-group-addon"><i
 														class="material-icons">date_range </i></span>
@@ -158,9 +158,9 @@ ${transferRoleList.getFrommanid()}
 
 	});
 
-	function validate() {
-		var startDate = document.getElementById("fromdate").value;
-		var endDate = document.getElementById("todate").value;
+	function validate1() {
+		var startDate = document.getElementById("manfromdate").value;
+		var endDate = document.getElementById("mantodate").value;
 		var opt = document.getElementById("managerid").value;
 
 		if ((Date.parse(endDate) <= Date.parse(startDate))) {

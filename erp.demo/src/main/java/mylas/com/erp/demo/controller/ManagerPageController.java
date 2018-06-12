@@ -51,7 +51,7 @@ public class ManagerPageController {
 
 	DesignationService depdetails = new DesignationService();
 	Client client = new Client();
-	List<EmpDetails> emp1 = client.getDetails();
+	
 
 	@RequestMapping(value= "/manager/leave/register")
 	public ModelAndView empLeavePage(HttpSession session) {
@@ -67,6 +67,7 @@ public class ManagerPageController {
 		Client cl = new Client();
 
 		List<TblEmpLeavereq> leavereq =  empleavereq.viewbyid(user.getEid());
+		List<EmpDetails> emp1 = client.getDetails();
 		mav.addObject("User", user);
 		mav.addObject("empleave", leavereq);
 		mav.addObject("manservices", mandao.list());
@@ -126,6 +127,7 @@ public class ManagerPageController {
 		mav.addObject("dupmsg", mesg);
 		List<TblDesignation> depts = depdetails.getDetails();
 		mesg = client.getConnection(emp);
+		List<EmpDetails> emp1 = client.getDetails();
 		mav.addObject("designations", depts);
 		System.out.println("after getconn");
 		String role = user.getRole();
@@ -149,6 +151,7 @@ public class ManagerPageController {
 		EmpDetails Edetails = null;
 		Client cl = new Client();
 		Edetails = cl.getById(id);
+		List<EmpDetails> emp1 = client.getDetails();
 		System.out.println(Edetails);
 		mav.addObject("empID", id);
 		mav.addObject("Role",role);
@@ -197,7 +200,7 @@ public class ManagerPageController {
 		LocalDate Day2 = LocalDate.parse(todate);
 
 		long daysNegative = ChronoUnit.DAYS.between(Day1, Day2);
-
+		List<EmpDetails> emp1 = client.getDetails();
 
 		mav.addObject("User", user);
 		mav.addObject("manservices", mandao.list());	
@@ -252,6 +255,7 @@ public class ManagerPageController {
 		mav.addObject("Role",role);
 
 		List<TblEmpAttendanceNew> attendances =  empattreq.viewbyid(user.getEid());
+		List<EmpDetails> emp1 = client.getDetails();
 		mav.addObject("attendancelist",attendances);
 		mav.addObject("manservices", mandao.list());	
 		mav.addObject("User", user);
@@ -320,6 +324,7 @@ public class ManagerPageController {
 		mav.addObject("attendancelist",attendances);
 		mav.addObject("manservices", mandao.list());
 		mav.addObject("User", user);
+		List<EmpDetails> emp1 = client.getDetails();
 		mav.addObject("employees", emp1);
 		return mav;
 	}
@@ -338,6 +343,7 @@ public class ManagerPageController {
 		String role = user.getRole();
 		mav.addObject("Role",role);
 		List<TblEmpLeavereq> leavereq =  empleavereq.view();
+		List<EmpDetails> emp1 = client.getDetails();
 		mav.addObject("employees", emp1);
 		mav.addObject("empleave", leavereq);
 		mav.addObject("User",user);
@@ -358,7 +364,7 @@ public class ManagerPageController {
 		String role = user.getRole();
 		mav.addObject("Role",role);
 		List<TblEmpAttendanceNew> attendances =  empattreq.getDetails();
-
+		List<EmpDetails> emp1 = client.getDetails();
 		mav.addObject("employees", emp1);
 		mav.addObject("attendancelist",attendances);
 		mav.addObject("User",user);
@@ -379,6 +385,7 @@ public class ManagerPageController {
 		mav.addObject("empleave", leavereq);
 		mav.addObject("DelMsg", DelMsg);
 		mav.addObject("manservices", mandao.list());	
+		List<EmpDetails> emp1 = client.getDetails();
 		mav.addObject("employees", emp1);
 		return mav;
 	}
@@ -480,7 +487,7 @@ public class ManagerPageController {
 
 		String role = user.getRole();
 		mav.addObject("Role",role);
-
+		List<EmpDetails> emp1 = client.getDetails();
 		mav.addObject("employees", emp1);
 
 		mav.addObject("manservices", mandao.list());	

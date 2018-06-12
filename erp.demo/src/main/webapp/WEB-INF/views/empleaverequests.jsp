@@ -52,7 +52,6 @@
 
 		<!-- top navbar-->
 		<header class="topnavbar-wrapper">
-
 			<%@include file="shared/navbar.jsp"%>
 		</header>
 		<!-- sidebar-->
@@ -375,19 +374,14 @@
 function Validate() {
     var startDate = document.getElementById("fromdate").value;
     var endDate = document.getElementById("todate").value;
-    var leave=document.getElementById("leavetype").value;
-   
-   
  
-    if ((Date.parse(endDate) <= Date.parse(startDate))) {
+    if (Date.parse(endDate) <= Date.parse(startDate)) {
         alert("To date should be greater than From date");
         fromdate.focus();
         return false;
-
 }
-
+}
 </script>
-
 
 
 </body>

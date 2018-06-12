@@ -90,8 +90,7 @@ public class Client implements EmployeeDao {
 		EmpDetails user;
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		user =  session.load(EmpDetails.class, id);
-		
+		user =  session.get(EmpDetails.class, id);
 		session.getTransaction().commit();
 		return user;
 		

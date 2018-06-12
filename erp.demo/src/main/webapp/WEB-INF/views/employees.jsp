@@ -53,7 +53,6 @@
 
 		<!-- top navbar-->
 		<header class="topnavbar-wrapper">
-
 			<%@include file="shared/navbar.jsp"%>
 		</header>
 		<!-- sidebar-->
@@ -262,7 +261,7 @@
 										<div class="form-group">
 											<div class="form-line">
 												<label>Designation</label> <select class="form-control"
-													size="1" name="designation" id="designation">
+													size="1" name="designation" id="designation" required="required">
 													<option value="0">Please select</option>
 													<c:forEach items="${designations}" var="desig">
 													<c:if test="${desig.getDesignation()!='Manager'}">
