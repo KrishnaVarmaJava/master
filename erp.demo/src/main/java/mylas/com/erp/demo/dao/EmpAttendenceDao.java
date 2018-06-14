@@ -15,4 +15,5 @@ public interface EmpAttendenceDao {
 	public List<TblEmpAttendanceNew> getDetails();
 	public String updatetransManager(int id,String tramsmanid);
 	public String ChangeManager(int id);
+	public int countEmployee(String managerid);
 }

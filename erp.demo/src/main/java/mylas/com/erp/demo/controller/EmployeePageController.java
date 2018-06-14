@@ -8,11 +8,15 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,10 +27,10 @@ import org.springframework.web.servlet.ModelAndView;
 import mylas.com.erp.demo.EmpDetails;
 import mylas.com.erp.demo.TblEmpAttendanceNew;
 import mylas.com.erp.demo.TblEmpLeavereq;
+import mylas.com.erp.demo.appservices.EmailSender;
 import mylas.com.erp.demo.dao.EmpLeaveRequestDao;
 import mylas.com.erp.demo.dao.EmpServicesDao;
 import mylas.com.erp.demo.daoimpl.EmpAttendanceDaoImpl;
-import mylas.com.erp.demo.daoimpl.EmpLeaveRequestService;
 import mylas.com.erp.demo.service.Client;
 
 /*
@@ -44,6 +48,12 @@ public class EmployeePageController {
 
 	@Autowired
 	EmpAttendanceDaoImpl empattreq;
+
+	EmailSender emailsender = new EmailSender();
+
+	static String emailToRecipient, emailSubject, emailMessage;
+
+
 	/*
 	 * Employee Regestration Page Get Method
 	 */
@@ -52,7 +62,7 @@ public class EmployeePageController {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		EmpDetails user=null;
 		if (principal instanceof EmpDetails) {
-		user = ((EmpDetails)principal);
+			user = ((EmpDetails)principal);
 		}
 		String role = user.getRole();
 		ModelAndView mav = new ModelAndView("empleaverequests");
@@ -69,7 +79,7 @@ public class EmployeePageController {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		EmpDetails user=null;
 		if (principal instanceof EmpDetails) {
-		user = ((EmpDetails)principal);
+			user = ((EmpDetails)principal);
 		}
 		String role = user.getRole();
 		ModelAndView mav = new ModelAndView("useremployee");
@@ -88,9 +98,9 @@ public class EmployeePageController {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		EmpDetails user=null;
 		if (principal instanceof EmpDetails) {
-		user = ((EmpDetails)principal);
+			user = ((EmpDetails)principal);
 		}
-	 
+
 		String role = user.getRole();
 		List<TblEmpAttendanceNew> attendances =  empattreq.viewbyid(user.getEid());
 		mav.addObject("attendancelist",attendances);
@@ -99,55 +109,66 @@ public class EmployeePageController {
 		mav.addObject("User", user);
 		return mav;
 	}
-	
+
 	@RequestMapping(value= "/employee/timesheet/register/{id}")
-	 public ModelAndView indvidtimesheets(HttpSession session,@PathVariable("id") String id) {
-	  
-	  ModelAndView mav = new ModelAndView("emptimesheet");
-	  
-	  int l=id.length();
-	  int root=Integer.parseInt(id.substring(0,2));
-	  String month=id.substring(2,(l-4));
-	  String year=id.substring((l-4),l);
-	  
-	  mav.addObject("root",root);
-	  mav.addObject("month",month);
-	  mav.addObject("year",year);
-	  
-	  Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	  EmpDetails user=null;
-	  if (principal instanceof EmpDetails) {
-	  user = ((EmpDetails)principal);
-	  }
-	  
-	  String role = user.getRole();
-	  List<TblEmpAttendanceNew> attendances =  empattreq.viewbyid(user.getEid());
-	  mav.addObject("attendancelist",attendances);
-	  mav.addObject("empservices", empservicesdao.list());
-	  mav.addObject("Role",role);
-	  mav.addObject("User", user);
-	  
-	  return mav;
-	 }
+	public ModelAndView indvidtimesheets(HttpSession session,@PathVariable("id") String id) {
+
+		ModelAndView mav = new ModelAndView("emptimesheet");
+
+		int l=id.length();
+		int root=Integer.parseInt(id.substring(0,2));
+		String month=id.substring(2,(l-4));
+		String year=id.substring((l-4),l);
+
+		mav.addObject("root",root);
+		mav.addObject("month",month);
+		mav.addObject("year",year);
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+			user = ((EmpDetails)principal);
+		}
+
+		String role = user.getRole();
+		List<TblEmpAttendanceNew> attendances =  empattreq.viewbyid(user.getEid());
+		mav.addObject("attendancelist",attendances);
+		mav.addObject("empservices", empservicesdao.list());
+		mav.addObject("Role",role);
+		mav.addObject("User", user);
+
+		return mav;
+	}
 
 	@RequestMapping(value= "/employee/timesheet/register", method=RequestMethod.POST)
 	public ModelAndView indvidtimesheetsubmit(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		ModelAndView mav = new ModelAndView("emptimesheet");
+
+
+
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		EmpDetails user=null;
 		if (principal instanceof EmpDetails) {
-		user = ((EmpDetails)principal);
+			user = ((EmpDetails)principal);
 		}
-	 
+
 		String role = user.getRole();
-		
+
 		TblEmpAttendanceNew attedance = new TblEmpAttendanceNew(null, null, null, null, Integer.parseInt(request.getParameter("day1")), Integer.parseInt(request.getParameter("day2")), Integer.parseInt(request.getParameter("day3")), Integer.parseInt(request.getParameter("day4")), Integer.parseInt(request.getParameter("day5")), Integer.parseInt(request.getParameter("day6")), Integer.parseInt(request.getParameter("day7")), Integer.parseInt(request.getParameter("day8")), Integer.parseInt(request.getParameter("day9")), Integer.parseInt(request.getParameter("day10")), Integer.parseInt(request.getParameter("day11")), Integer.parseInt(request.getParameter("day12")), Integer.parseInt(request.getParameter("day13")), Integer.parseInt(request.getParameter("day14")), Integer.parseInt(request.getParameter("day15")), Integer.parseInt(request.getParameter("day16")), Integer.parseInt(request.getParameter("day17")), Integer.parseInt(request.getParameter("day18")), Integer.parseInt(request.getParameter("day19")), Integer.parseInt(request.getParameter("day20")), Integer.parseInt(request.getParameter("day21")), Integer.parseInt(request.getParameter("day22")), Integer.parseInt(request.getParameter("day23")), Integer.parseInt(request.getParameter("day24")), Integer.parseInt(request.getParameter("day25")), Integer.parseInt(request.getParameter("day26")), Integer.parseInt(request.getParameter("day27")), Integer.parseInt(request.getParameter("day28")), null, null, null, null, null,null);
-		
+
 		attedance.setEmpid(user.getEid());
 		attedance.setStatas(null);
 		attedance.setManagerid(user.getManagerid());
 		attedance.setMonth(request.getParameter("month"));
 		attedance.setYear(Integer.parseInt(request.getParameter("year")));
+		emailSubject = "New Time Sheet For:"+attedance.getMonth()+" "+attedance.getYear()+"";
+		emailMessage = "A new Time Sheet For Approval has Been Sent to :"+attedance.getManagerid()+"On: "+new Date();
+		emailToRecipient = "krishnavarma.java@gmail.com";
+		System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+		emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", emailToRecipient, emailMessage, emailSubject);
+		
+		
+		System.out.println("\nMessage Send Successfully.... Hurrey!\n");
 		if(attedance.getYear().equals("January")||attedance.getYear().equals("March")||attedance.getYear().equals("May")||attedance.getYear().equals("July")||attedance.getYear().equals("August")||attedance.getYear().equals("October")||attedance.getYear().equals("December")) {
 			attedance.setDay29(Integer.parseInt(request.getParameter("day29")));
 			attedance.setDay30(Integer.parseInt(request.getParameter("day30")));
@@ -178,19 +199,25 @@ public class EmployeePageController {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		EmpDetails user=null;
 		if (principal instanceof EmpDetails) {
-		user = ((EmpDetails)principal);
+			user = ((EmpDetails)principal);
 		}
-	 
+
 		String role = user.getRole();
 
 		ModelAndView mav = new ModelAndView("empleaverequests");
 		Client cl = new Client();
-		
-		
+
+
 		mav.addObject("Role",role);
+		/*
+		 * Message Handling
+		 */
+
+
 		/**
 		 * Handling request from empleaverequests.jsp form with post action.
 		 */
+
 
 		String fromdate = request.getParameter("fromdate");
 		String[] date = fromdate.split("-");
@@ -213,7 +240,7 @@ public class EmployeePageController {
 
 
 
-		
+
 
 		TblEmpLeavereq empleave = new TblEmpLeavereq((int)daysNegative,null, request.getParameter("fromdate"),request.getParameter("leavereason"), request.getParameter("leavetype"), null, null,  request.getParameter("todate"),null,null);
 		empleave.setManagerid(user.getManagerid());
@@ -221,6 +248,13 @@ public class EmployeePageController {
 		empleave.setStatus(null);
 		empleavereq.save(empleave);		
 		System.out.println("Req Sent to Save");
+
+		emailSubject = "New Leave Request has sent by"+empleave.getEmployeeid()+ "From: "+empleave.getFromdate()+"To: "+empleave.getTodate()+"";
+		emailMessage = "A new Time Sheet For Approval has Been Sent to :"+empleave.getManagerid()+"On: "+new Date();
+		emailToRecipient = "kaparapu.praveen@gmail.com";
+		System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+		emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", "krishnavarma.java@gmail.com", emailMessage, emailSubject);
+
 		List<EmpDetails> emp1 = cl.getDetails();
 		List<TblEmpLeavereq> leavereq =  empleavereq.viewbyid(user.getEid());
 		mav.addObject("employees", emp1);
@@ -237,7 +271,7 @@ public class EmployeePageController {
 	/*
 	 * Employee Leave Request Edit and Delete Operations
 	 */
-	
+
 
 	@RequestMapping(value= "/employee/leave/delete/{id}")
 	public ModelAndView empLeavedeletePage(HttpSession session,@PathVariable("id") int id) {

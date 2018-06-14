@@ -2,18 +2,14 @@ package mylas.com.erp.demo.daoimpl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import mylas.com.erp.demo.EmpDetails;
-import mylas.com.erp.demo.TblDepartment;
 import mylas.com.erp.demo.TblEmpAttendanceNew;
-import mylas.com.erp.demo.TblEmpLeavereq;
 import mylas.com.erp.demo.appservices.GetSession;
 import mylas.com.erp.demo.dao.EmpAttendenceDao;
 
@@ -120,6 +116,18 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 			session.update(employe);session.getTransaction().commit();return "Updated";
 		}catch(Exception e){session.getTransaction().commit();return "error occured while updating";}
 
+	}
+
+	@Override
+	public int countEmployee(String managerid) {
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		Criteria crit = session.createCriteria(TblEmpAttendanceNew.class);
+		crit.add( Restrictions.isNull("statas"));
+		crit.add(Restrictions.ilike("managerid", managerid));
+		List<TblEmpAttendanceNew> emps = crit.list();		
+		session.getTransaction().commit();
+		return emps.size();
 	}
 
 

@@ -43,7 +43,7 @@ import mylas.com.erp.demo.service.DesignationService;
 
 
 @Controller
-public class PageController {
+public class PageController<JavaMailSender> {
 	
 	@Autowired
 	ServicesDao servicesdao;
@@ -357,6 +357,12 @@ public class PageController {
 	 
 		String role = user.getRole();
 		List<TblManRoleTransfer> transferrole = roleTransfer.viewAll();
+		List<TblEmpLeavereq> allempleave = empleavereq.view();
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+		List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+		mav.addObject("empattendances",empattendances);
+		mav.addObject("allempleave", allempleave);
+		mav.addObject("count",count);
 		mav.addObject("TransferRoleList", transferrole);
 		mav.addObject("title", "HomePage");
 		mav.addObject("Role",role);

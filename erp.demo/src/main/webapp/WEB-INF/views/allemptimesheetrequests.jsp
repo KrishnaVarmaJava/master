@@ -45,9 +45,27 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <style>
+    
+    .hideOverflow {
+    overflow: hidden;
+    white-space: nowrap;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    display: block;
+    }
+    .table-bordered tbody tr td, .table-bordered tbody tr th {
+    padding: 7px;
+    border: 1px solid #eee;
+
+}
+    
+    </style>
 </head>
 
-<body class="theme-indigo light layout-fixed">
+<body class="theme-indigo light layout-fixed aside-collapsed">
 	<div class="wrapper">
 
 		<!-- top navbar-->
@@ -149,11 +167,11 @@
 						</div>
 						                        <div class="card">
                         		 
-                            <div class="body">
-                               <table class="tablesaw table-striped table-hover table-bordered" data-tablesaw-mode="swipe" data-tablesaw-minimap>
+                            <div class="body" style="overflow: hidden; overflow-x: scroll;">
+                               <table class="tablesaw table-striped table-hover table-bordered">
                                     <thead class="tableheding">
                                     <tr>
-                                    	<th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">Month</th>
+                                    	<th  data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">EMP ID</th>
                                         <th data-tablesaw-sortable-col data-tablesaw-sortable-default-col data-tablesaw-priority="persist">Month</th>
                                         <th data-tablesaw-sortable-col data-tablesaw-priority="3">1</th>
                                         <th data-tablesaw-sortable-col data-tablesaw-priority="2">2</th>
@@ -209,8 +227,8 @@
                         		 
 									
                                          <tr>
-                                         <th><a href="javascript:void(0)">${attlist.getEmpid()}</a></th>
-                                        <th><a href="javascript:void(0)">${attlist.getMonth()} ${attlist.getYear()}</a></th>
+                                         <th><a class="hideOverflow" href="javascript:void(0)">${attlist.getEmpid()}</a></th>
+                                        <th><a class="hideOverflow" href="javascript:void(0)">${attlist.getMonth()} ${attlist.getYear()}</a></th>
                                      <c:if test="${attlist.getDay1() == 1}">
                                         <td><i class="${green}" ></i></td>
                                         </c:if>
@@ -559,8 +577,8 @@
                         		 
 									
                                          <tr>
-                                         <th><a href="javascript:void(0)">${attlist.getEmpid()}</a></th>
-                                        <th><a href="javascript:void(0)">${attlist.getMonth()} ${attlist.getYear()}</a></th>
+                                         <th><a  style=" width: 60px;" class="hideOverflow" href="javascript:void(0)">${attlist.getEmpid()}</a></th>
+                                        <th><a style=" font-size: 14px;" classs="hideOverflow" href="javascript:void(0)">${attlist.getMonth()} ${attlist.getYear()}</a></th>
                                      <c:if test="${attlist.getDay1() == 1}">
                                         <td><i class="${green}" ></i></td>
                                         </c:if>

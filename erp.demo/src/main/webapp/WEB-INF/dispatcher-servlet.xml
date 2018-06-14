@@ -13,7 +13,7 @@
 		base-package="mylas.com.erp.demo.*" />
 
 	<context:component-scan
-		base-package="mylas.com.erp.demo.operations"/>
+		base-package="mylas.com.erp.demo.operations" />
 
 
 	<bean id="viewResolver"
@@ -28,8 +28,12 @@
 	<mvc:resources location="/resources/"
 		mapping="/resources/**" />
 
-
-<!-- 	<bean name="SecurityConfig"
-		class="mylas.com.erp.demo.configuration.SecurityConfig">
-	</bean> -->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">error</prop>
+			</props>
+		</property>
+	</bean>
 </beans>

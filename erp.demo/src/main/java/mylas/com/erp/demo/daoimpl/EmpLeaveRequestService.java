@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.service.ServiceRegistry;
 import org.springframework.stereotype.Repository;
 
@@ -148,6 +149,18 @@ public class EmpLeaveRequestService implements EmpLeaveRequestDao {
 			session.update(employe);session.getTransaction().commit();return "Updated";
 		}catch(Exception e){session.getTransaction().commit();return "error occured while updating";}
 
+	}
+
+	@Override
+	public int countEmployee(String manid) {
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		  session.beginTransaction();
+		  Criteria crit = session.createCriteria(TblEmpLeavereq.class);
+		  crit.add( Restrictions.isNull("status"));
+		  crit.add(Restrictions.ilike("managerid", manid));
+		  List<TblEmpLeavereq> emps = crit.list();
+		  session.getTransaction().commit();
+		return emps.size();
 	}
 
 }

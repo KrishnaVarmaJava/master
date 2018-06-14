@@ -26,6 +26,7 @@ import mylas.com.erp.demo.TblDesignation;
 import mylas.com.erp.demo.TblEmpAttendanceNew;
 import mylas.com.erp.demo.TblEmpLeavereq;
 import mylas.com.erp.demo.TblManRoleTransfer;
+import mylas.com.erp.demo.appservices.EmailSender;
 import mylas.com.erp.demo.appservices.UserServiceImpl;
 import mylas.com.erp.demo.dao.EmpLeaveRequestDao;
 import mylas.com.erp.demo.dao.ManagerServicesDao;
@@ -51,7 +52,10 @@ public class ManagerPageController {
 
 	DesignationService depdetails = new DesignationService();
 	Client client = new Client();
-	
+	EmailSender emailsender = new EmailSender();
+
+	static String emailToRecipient, emailSubject, emailMessage;
+
 
 	@RequestMapping(value= "/manager/leave/register")
 	public ModelAndView empLeavePage(HttpSession session) {
@@ -65,13 +69,19 @@ public class ManagerPageController {
 		String role = user.getRole();
 		mav.addObject("Role",role);
 		Client cl = new Client();
-
+		List<TblEmpLeavereq> allempleave = empleavereq.view();
 		List<TblEmpLeavereq> leavereq =  empleavereq.viewbyid(user.getEid());
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
 		List<EmpDetails> emp1 = client.getDetails();
+		List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+		mav.addObject("empattendances",empattendances);
+		mav.addObject("allempleave", allempleave);
+		mav.addObject("count",count);
 		mav.addObject("User", user);
 		mav.addObject("empleave", leavereq);
 		mav.addObject("manservices", mandao.list());
 		mav.addObject("employees", emp1);
+		mav.addObject("count",count);
 		return mav;
 	}
 
@@ -92,6 +102,12 @@ public class ManagerPageController {
 		Client cl = new Client();
 		String mesg = "hi";
 		List<EmpDetails> emp1 = cl.getDetails();
+		List<TblEmpLeavereq> allempleave = empleavereq.view();
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+		List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+		mav.addObject("empattendances",empattendances);
+		mav.addObject("allempleave", allempleave);
+		mav.addObject("count",count);
 		mav.addObject("employees", emp1);
 		mav.addObject("dupmsg", mesg);
 		mav.addObject("User",user);
@@ -128,8 +144,13 @@ public class ManagerPageController {
 		List<TblDesignation> depts = depdetails.getDetails();
 		mesg = client.getConnection(emp);
 		List<EmpDetails> emp1 = client.getDetails();
+		List<TblEmpLeavereq> allempleave = empleavereq.view();
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+		List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+		mav.addObject("empattendances",empattendances);
+		mav.addObject("allempleave", allempleave);
+		mav.addObject("count",count);
 		mav.addObject("designations", depts);
-		System.out.println("after getconn");
 		String role = user.getRole();
 		mav.addObject("Role",role);
 		mav.addObject("employees", emp1);
@@ -152,7 +173,12 @@ public class ManagerPageController {
 		Client cl = new Client();
 		Edetails = cl.getById(id);
 		List<EmpDetails> emp1 = client.getDetails();
-		System.out.println(Edetails);
+		List<TblEmpLeavereq> allempleave = empleavereq.view();
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+		List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+		mav.addObject("empattendances",empattendances);
+		mav.addObject("allempleave", allempleave);
+		mav.addObject("count",count);
 		mav.addObject("empID", id);
 		mav.addObject("Role",role);
 		mav.addObject("employee",Edetails);
@@ -218,6 +244,17 @@ public class ManagerPageController {
 			mav.addObject("empleave", leavereq);
 			System.out.println("Req Sent to Save");
 			mav.addObject("Submitmsg", "Your Leave Request Has Been Submitted Sucessfully! Please Wait for your Manager Approval");
+			emailSubject = "New Leave Request has sent by"+empleave.getEmployeeid()+ "From: "+empleave.getFromdate()+"To: "+empleave.getTodate()+"";
+			emailMessage = "A new Time Sheet For Approval has Been Sent to :"+empleave.getManagerid()+"On: "+new Date();
+			emailToRecipient = "kaparapu.praveen@gmail.com";
+			System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+			emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", "krishnavarma.java@gmail.com", emailMessage, emailSubject);
+			List<TblEmpLeavereq> allempleave = empleavereq.view();
+			int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+			List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+			mav.addObject("empattendances",empattendances);
+			mav.addObject("allempleave", allempleave);
+			mav.addObject("count",count);
 			return mav;
 		}catch(DateTimeParseException e){
 			mav.addObject("errmsg", "Please enter the required fields");
@@ -239,6 +276,12 @@ public class ManagerPageController {
 		mav.addObject("Role",role);
 		mav.addObject("User", user);
 		mav.addObject("manservices", mandao.list());	
+		List<TblEmpLeavereq> allempleave = empleavereq.view();
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+		List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+		mav.addObject("empattendances",empattendances);
+		mav.addObject("allempleave", allempleave);
+		mav.addObject("count",count);
 		return mav;
 	}
 
@@ -256,6 +299,12 @@ public class ManagerPageController {
 
 		List<TblEmpAttendanceNew> attendances =  empattreq.viewbyid(user.getEid());
 		List<EmpDetails> emp1 = client.getDetails();
+		List<TblEmpLeavereq> allempleave = empleavereq.view();
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+		List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+		mav.addObject("empattendances",empattendances);
+		mav.addObject("allempleave", allempleave);
+		mav.addObject("count",count);
 		mav.addObject("attendancelist",attendances);
 		mav.addObject("manservices", mandao.list());	
 		mav.addObject("User", user);
@@ -284,6 +333,12 @@ public class ManagerPageController {
 
 		String role = user.getRole();
 		List<TblEmpAttendanceNew> attendances =  empattreq.viewbyid(user.getEid());
+		List<TblEmpLeavereq> allempleave = empleavereq.view();
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+		List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+		mav.addObject("empattendances",empattendances);
+		mav.addObject("allempleave", allempleave);
+		mav.addObject("count",count);
 		mav.addObject("attendancelist",attendances);
 		mav.addObject("empservices", mandao.list());
 		mav.addObject("Role",role);
@@ -319,8 +374,19 @@ public class ManagerPageController {
 		}else if(attedance.getYear().equals("Febraury") && (attedance.getYear()%4==0)) {
 			attedance.setDay29(Integer.parseInt(request.getParameter("day29")));
 		}
+		emailSubject = "New Time Sheet For:"+attedance.getMonth()+" "+attedance.getYear()+"";
+		emailMessage = "A new Time Sheet For Approval has Been Sent to :"+attedance.getManagerid()+"On: "+new Date();
+		emailToRecipient = "krishnavarma.java@gmail.com";
+		System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+		emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", emailToRecipient, emailMessage, emailSubject);
 		empattreq.save(attedance);
 		List<TblEmpAttendanceNew> attendances =  empattreq.viewbyid(user.getEid());
+		List<TblEmpLeavereq> allempleave = empleavereq.view();
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+		List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+		mav.addObject("empattendances",empattendances);
+		mav.addObject("allempleave", allempleave);
+		mav.addObject("count",count);
 		mav.addObject("attendancelist",attendances);
 		mav.addObject("manservices", mandao.list());
 		mav.addObject("User", user);
@@ -344,10 +410,13 @@ public class ManagerPageController {
 		mav.addObject("Role",role);
 		List<TblEmpLeavereq> leavereq =  empleavereq.view();
 		List<EmpDetails> emp1 = client.getDetails();
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
 		mav.addObject("employees", emp1);
+		mav.addObject("allempleave", leavereq);
 		mav.addObject("empleave", leavereq);
 		mav.addObject("User",user);
 		mav.addObject("manservices", mandao.list());	
+		mav.addObject("count",count);
 		return mav;
 	}
 
@@ -365,8 +434,13 @@ public class ManagerPageController {
 		mav.addObject("Role",role);
 		List<TblEmpAttendanceNew> attendances =  empattreq.getDetails();
 		List<EmpDetails> emp1 = client.getDetails();
+		List<TblEmpLeavereq> allempleave = empleavereq.view();
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+		mav.addObject("allempleave", allempleave);
+		mav.addObject("count",count);
 		mav.addObject("employees", emp1);
 		mav.addObject("attendancelist",attendances);
+		mav.addObject("empattendances",attendances);	
 		mav.addObject("User",user);
 		mav.addObject("manservices", mandao.list());	
 		return mav;
@@ -382,6 +456,10 @@ public class ManagerPageController {
 		}
 		List<TblEmpLeavereq> leavereq =  empleavereq.viewbyid(user.getEid());
 		String DelMsg = empleavereq.delete(id);
+		List<TblEmpLeavereq> allempleave = empleavereq.view();
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+		mav.addObject("allempleave", allempleave);
+		mav.addObject("count",count);
 		mav.addObject("empleave", leavereq);
 		mav.addObject("DelMsg", DelMsg);
 		mav.addObject("manservices", mandao.list());	
@@ -402,6 +480,7 @@ public class ManagerPageController {
 		String reason = "Approved";
 		boolean status = true;
 		String UMsg = empleavereq.update(id,reason,status);
+		
 		mav.addObject("empleave", leavereq);
 		mav.addObject("UMsg", UMsg+" "+reason);
 		mav.addObject("manservices", mandao.list());	

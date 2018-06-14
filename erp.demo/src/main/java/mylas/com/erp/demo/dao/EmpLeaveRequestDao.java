@@ -17,4 +17,5 @@ public interface EmpLeaveRequestDao {
 	public String update(int id,String reason,boolean status);
 	public String updatetransManager(int id,String transmanid);
 	public String ChangeManager(int id);
+	public int countEmployee(String manid);
 }
