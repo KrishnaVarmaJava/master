@@ -18,6 +18,7 @@ public interface EmployeeDao {
 	public List<EmpDetails> getByManIdAndTransManId(String managerid,String transmanid);
 	public String TransferManager(int id,String mantrans);
 	public String ChangeManager(int id);
-	
-	
+	public String ChangeTransManager(int id,String tomanagerid);
+	 public void updateEditDetails(int id,String firstname,String lastname,String uname,String empid,String pswd,String cpswd,String joindate,String phone,String company,String department,String lastworkingday);
+	 public List<EmpDetails> viewSearch(String username, String department, String designation);
 }

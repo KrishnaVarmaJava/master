@@ -37,7 +37,7 @@ public class Client implements EmployeeDao {
 		
 		}catch(ConstraintViolationException e) {
 			System.out.println("Duplicate Entry");
-			session.getTransaction().commit();return "This is a Duplicate Entry";
+			return "This is a Duplicate Entry";
 		}
 		return null;
 	}
@@ -162,6 +162,66 @@ public class Client implements EmployeeDao {
 		
 	}
 
+	@Override
+	public String ChangeTransManager(int id, String tomanagerid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	 public void updateEditDetails(int id, String firstname, String lastname, String uname, String empid, String pswd,
+	   String cpswd, String joindate, String phone, String company, String department,String lastworkingday) {
+	  // TODO Auto-generated method stub
+	  Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+	  session.beginTransaction();
+	  EmpDetails  empdt = session.load(EmpDetails .class, id);
+	  empdt.setFname(firstname);empdt.setLname(lastname);empdt.setUname(uname);empdt.setEid(empid);empdt.setPswd(pswd);
+	  empdt.setCpswd(cpswd);empdt.setJdate(joindate);empdt.setPhone(phone);empdt.setCompName(company);empdt.setDepartment(department);empdt.setLastworkingday(lastworkingday);
+	  session.saveOrUpdate(empdt);
+	  System.out.println("updated");
+	  session.getTransaction().commit();
+	  
+	 }
+
+	@Override
+	public List<EmpDetails> viewSearch(String username, String department, String designation) {
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		  session.beginTransaction();
+		
+			Query q = null;
+			if(username!="" && department!="" && designation!="") {
+				 q = session.createQuery("from EmpDetails where eid='"+username+"'AND department='"+department+"'AND designation='"+designation+"'");
+			}
+			
+			 else if(username!="" && department!="")
+				{
+				 q = session.createQuery("from EmpDetails where eid='"+username+"'AND department='"+department+"'");	
+				}
+			 else if(username!="" && designation!="")
+				{	
+				 q = session.createQuery("from EmpDetails where eid='"+username+"'AND designation='"+designation+"'");
+				}	
+				 else if(department!="" && designation!="")
+				 {
+						q = session.createQuery("from EmpDetails where department='"+department+"'AND designation='"+designation+"'");
+				 }
+			else  if(username!="")
+			{ 
+			 q = session.createQuery("from EmpDetails where eid='"+username+"'");	
+			}
+			else if(department!="") {
+				 q = session.createQuery("from EmpDetails where department='"+department+"'");
+			}
+			else if(designation!="") {
+			 q = session.createQuery("from EmpDetails where designation='"+designation+"'");
+			}
+			List<EmpDetails> empleave = q.list();
+		
+			session.getTransaction().commit();
+			return (empleave);		
+		}
+	}
+
 	
 
 
@@ -169,4 +229,4 @@ public class Client implements EmployeeDao {
 
 
 
-}
+

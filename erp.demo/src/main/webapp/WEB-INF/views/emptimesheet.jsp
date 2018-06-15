@@ -94,7 +94,11 @@
 				<span > Attendance Sheet </span>
 				 </div>
 				  </div>
-			 
+			 <div class="col-md-6">
+									<div class="row pagetitle">
+										<span class="pull-right">
+											<button type="button" id="addnew"
+												class="btn btn-primary btn-rounded waves-effect">Submit New Time Sheet</button>
 			
                 </div>
 			
@@ -108,7 +112,13 @@
 				
 		
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                    
+                    <div class="col-md-12 card" id="addnewemp">
+				<button type="button" class="close" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<div class="custom_title">
+						<h2>Time Sheet</h2>
+					</div>
 					
 
                         <!-- Table Kitchen Sink -->
@@ -179,7 +189,6 @@
 
 											<td>
 										 <select class="form-control"  size="1" name="day${loop.index}"  id="day${loop.index}" required>
-                                            <option value="">Please select</option>
                                             <option value="1">Present</option>
                                             <option value="2">Absent Or Leave</option>
                                             <option value="3">WeekEnd Or Holiday</option>
@@ -268,6 +277,7 @@
 									<div class="clearfix"></div>
 								
 								<c:forEach var="attlist" items="${attendancelist}">
+								${attlist.getMonth()} ${attlist.getYear()}
                                     <tbody>
 									<c:set var="green" value="icon-display  fa fa-check attenedance_check_green"/>
 									<c:set var="red" value="icon-display  fa fa-close  attenedance_check_red"/>
@@ -572,7 +582,7 @@
 														<button type="button"
 															class="btn btn-primary btn-outline btn-rounded waves-effect"
 															data-toggle="dropdown" aria-haspopup="true"
-															aria-expanded="false">Panding 
+															aria-expanded="false">Pending 
 														</button>
 														</c:if><c:if test="${attlist.getStatas() == false}">
 																<button type="button"
@@ -697,9 +707,89 @@
             
             document.getElementById("month").value = "${month}";
             document.getElementById("year").value = "${year}";
+
+            var opt1 = document.getElementById("month").value;
+            var opt2 = document.getElementById("year").value;
+            if(opt1 == "January"){
+             var month = 0;
+             var days = 31;
+            }if(opt1=="February" && opt2 % 4 == 0){
+             var month = 1;
+             var days = 29;
+            }if(opt1=="February" && opt2 % 4 != 0){
+             var month = 1;
+             var days = 28;
+            }if(opt1 == "March"){
+             var month = 2;
+             var days = 31;
+            }if(opt1 == "April"){
+             var month = 3;
+             var days = 30;
+            }if(opt1 == "May"){
+             var month = 4;
+             var days = 31;
+            }if(opt1 == "June"){
+             var month = 5;
+             var days = 30;
+            }if(opt1 == "July"){
+             var month = 6;
+             var days = 31;
+            }if(opt1 == "August"){
+             var month = 7;
+             var days = 31;
+            }if(opt1 == "September"){
+             var month = 8;
+             var days = 30;
+            }if(opt1 == "October"){
+             var month = 9;
+             var days = 31;
+            }if(opt1 == "November"){
+             var month = 10;
+             var days = 30;
+            }if(opt1 == "December"){
+             var month = 11;
+             var days = 31;
+            }
             
+            for(i=1;i<=days;i++){
+            var date = new Date(opt2, month, i);
+            switch (date.getDay()) {
+            case 6:
+             document.getElementById("day"+i).value = "3";
+              
+                break; 
+            case 0:
+             document.getElementById("day"+i).value = "3";
+                break; 
+            default: 
+                text = "Looking forward to the Weekend";
+          }
+            }
             </script>
+    
 </c:if>
+
+<c:if test="${root == null }">        	<script>
+		$(document).ready(function() {
+
+			$("#addnewemp").css("display", "none");
+
+			$("#addnew").click(function() {
+
+				$("#addnewemp").css("display", "block");
+				$("#addnewemp").addClass("animated bounce");
+				$("this").css("display", "none")
+
+			});
+
+			$(".close").click(function() {
+				$("#addnewemp").css("display", "none");
+				$("#addnewemp").addClass("animated");
+
+			});
+
+		});
+	</script></c:if>
 
 
 

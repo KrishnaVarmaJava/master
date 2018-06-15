@@ -16,7 +16,7 @@ import mylas.com.erp.demo.TblDepartment;
 import mylas.com.erp.demo.appservices.GetSession;
 import mylas.com.erp.demo.dao.DepartmentDao;
 
-/*@Repository("deptdao")*/
+@Repository("deptdao")
 public class DepartmentService implements DepartmentDao {
 
 
@@ -61,6 +61,28 @@ public class DepartmentService implements DepartmentDao {
 	
 		
 	}
+	
+	@Override
+	 public TblDepartment getById(int id) {
+	  Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+	  session.beginTransaction();
+
+	  TblDepartment deptdel = session.get(TblDepartment.class, id);
+	  session.getTransaction().commit();
+	  return deptdel;
+	 }
+	
+	@Override
+	 public void updateDetails(int id,String newDep) {
+	  Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+	  session.beginTransaction();
+	  TblDepartment deptdel = session.load(TblDepartment.class, id);
+	  deptdel.setDepartment(newDep);
+	  session.saveOrUpdate(deptdel);
+	  session.getTransaction().commit();
+	 }
+
+
 
 
 

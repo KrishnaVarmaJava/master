@@ -66,10 +66,6 @@
 				<div class="container-fluid">
 
 					<div class="row clearfix">
-
-
-
-
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topbar">
 
 							<div class="col-md-9">
@@ -77,23 +73,10 @@
 									<span> Employee </span>
 								</div>
 							</div>
-
-
-
-
 							<div class="col-md-3">
 								<div class="row pagetitle pull-right">
-									<div style="display: inline-flex; float: left;">
-										<span class=""><button id="detailview" type="button"
-												class="waves-effect emp_top_btn">
-												<i class="icon-display material-icons"> view_module</i>
-											</button> </span> <span class="" style="padding-right: 12px;"><button
-												type="button" id="listview" class="waves-effect emp_top_btn">
-												<i class="icon-display material-icons"> view_list</i>
-											</button> </span>
-									</div>
 									<span>
-										<button type="button"
+										<button type="button" id="addnew"
 											class="btn btn-primary btn-rounded waves-effect">Add
 											Employee</button>
 									</span>
@@ -111,7 +94,10 @@
 						<c:if test="${Role.equals('MANAGER_ROLE')}">
 							<c:set var="role" value="manager" />
 						</c:if>
-						<div class="col-md-12 card">
+						<div class="col-md-12 card" id="addnewemp">
+							<button type="button" class="close" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 							<div class="custom_title">
 								<h2>Add Employee</h2>
 								<c:if test="${dupmsg.equals('Employee Saved')}">
@@ -138,7 +124,8 @@
 												<div class="form-line">
 													<label>First Name</label> <input type="text"
 														name="firstname" id="firstname" class="form-control"
-														placeholder="First Name" required="required">
+														placeholder="First Name" required="required" size="50"
+														maxlength="50">
 												</div>
 											</div>
 										</div>
@@ -149,7 +136,8 @@
 												<div class="form-line">
 													<label>Last Name </label> <input type="text"
 														name="lastname" id="lastname" class="form-control"
-														placeholder="Last Name " required="required">
+														placeholder="Last Name " required="required" size="50"
+														maxlength="50">
 												</div>
 											</div>
 										</div>
@@ -160,7 +148,7 @@
 												<div class="form-line">
 													<label>Username</label> <input type="text" name="uname"
 														id="uname" class="form-control" placeholder="Username"
-														required="required">
+														required="required" size="50" maxlength="50">
 												</div>
 											</div>
 										</div>
@@ -171,7 +159,7 @@
 												<div class="form-line">
 													<label>Email</label> <input type="email" name="email"
 														id="email" class="form-control" placeholder="Email"
-														required="required">
+														required="required" size="50" maxlength="50">
 												</div>
 											</div>
 										</div>
@@ -182,7 +170,9 @@
 												<div class="form-line">
 													<label>Password </label> <input type="password" name="pswd"
 														id="pswd" class="form-control" placeholder="Password"
-														pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="required">
+														pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+														title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+														required="required">
 												</div>
 											</div>
 										</div>
@@ -204,7 +194,7 @@
 												<div class="form-line">
 													<label>Employee ID </label> <input type="text" name="empid"
 														id="empid" class="form-control" placeholder="Employee ID"
-														required="required">
+														required="required" size="15" maxlength="15">
 												</div>
 											</div>
 										</div>
@@ -213,8 +203,9 @@
 										<div class="form-group">
 											<div class="input-group addon-line">
 												<div class="form-line">
-													<label>Joining Date </label> <input type="date" name="joindate"
-														class="form-control" placeholder="Joining Date">
+													<label>Joining Date </label> <input type="date"
+														name="joindate" class="form-control"
+														placeholder="Joining Date">
 												</div>
 												<span class="input-group-addon"><i
 													class="material-icons">date_range </i></span>
@@ -227,50 +218,53 @@
 												<div class="form-line">
 													<label>Phone </label> <input type="number" name="phone"
 														id="phone" class="form-control" placeholder="Phone"
-														required="required">
+														required="required" size="10" maxlength="10">
 												</div>
 											</div>
 										</div>
 									</div>
 									<c:if test="${Role.equals('ADMIN_ROLE')}">
-									<div class="col-md-6">
-										<div class="form-group">
-											<div class="form-line">
-												<label>Company</label> <input type="text" name="company"
+										<div class="col-md-6">
+											<div class="form-group">
+												<div class="form-line">
+													<label>Company</label> <input type="text" name="company"
 														id="company" class="form-control" placeholder="Company"
+														required="required" size="50" maxlength="50">
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<div class="form-line">
+													<label>Department</label> <select class="form-control"
+														size="1" name="department" id="department"
 														required="required">
+														<option value="">Please select</option>
+														<c:forEach items="${departments}" var="deper">
+															<option value="${deper.getDepartment()}">${deper.getDepartment()}</option>
+														</c:forEach>
+													</select>
+												</div>
 											</div>
 										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<div class="form-line">
-												<label>Department</label> <select class="form-control"
-													size="1" name="department" id="department" required="required">
-													<option value="">Please select</option>
-													<c:forEach items="${departments}" var="deper">
-													<option value="${deper.getDepartment()}">${deper.getDepartment()}</option>
-													</c:forEach>
-												</select>
-											</div>
-										</div>
-									</div>
 									</c:if>
-									<c:if test="${Role.equals('MANAGER_ROLE')}">									
-									<div class="col-md-6">
-										<div class="form-group">
-											<div class="form-line">
-												<label>Designation</label> <select class="form-control"
-													size="1" name="designation" id="designation" required="required">
-													<option value="0">Please select</option>
-													<c:forEach items="${designations}" var="desig">
-													<c:if test="${desig.getDesignation()!='Manager'}">
-													<option value="${desig.getDesignation()}">${desig.getDesignation()}</option></c:if>
-													</c:forEach>
-												</select>
+									<c:if test="${Role.equals('MANAGER_ROLE')}">
+										<div class="col-md-6">
+											<div class="form-group">
+												<div class="form-line">
+													<label>Designation</label> <select class="form-control"
+														size="1" name="designation" id="designation"
+														required="required">
+														<option value="0">Please select</option>
+														<c:forEach items="${designations}" var="desig">
+															<c:if test="${desig.getDesignation()!='Manager'}">
+																<option value="${desig.getDesignation()}">${desig.getDesignation()}</option>
+															</c:if>
+														</c:forEach>
+													</select>
+												</div>
 											</div>
 										</div>
-									</div>
 									</c:if>
 									<div class="clearfix"></div>
 									<div class="form-actions">
@@ -289,106 +283,113 @@
 
 					<div class="row clearfix"></div>
 
+					<form action="${contextRoot}/${role}/employee/search">
+						<div class="card" style="padding: 5px;">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
+								<div class="col-md-2 padding_col">
+									<div class="form-group">
+										<input type="text" class="form-control" id="username"
+											placeholder="Username" name="username" />
+									</div>
+								</div>
+								<div class="col-md-2 padding_col">
+									<div class="form-group">
+										<select id="department" name="department" class="form-control"
+											size="1">
+											<option value="">please select</option>
+											<c:forEach items="${departments}" var="departments">
+												<option value="${departments.getDepartment()}">
+													${departments.getDepartment()}</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-2 padding_col">
+									<div class="form-group">
+										<select id="designation" name="designation"
+											class="form-control" size="1">
+											<option value="">please select</option>
+											<c:forEach items="${designations}" var="designations">
+												<option value="${designations.getDesignation()}">
+													${designations.getDesignation()}</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
 
-					<div class="card" style="padding: 5px;">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
-							<div class="col-md-2 padding_col">
-								<div class="form-group">
 
-									<input type="text" class="form-control" placeholder="Username">
+								<div class="col-md-2 ">
+									<button type="submit"
+										class="btn btn-primary  pull-right waves-effect ">Search</button>
 								</div>
 							</div>
-							<div class="col-md-2 padding_col">
-								<div class="form-group">
+					</form>
+					<div class="body">
+						<div class="clearfix"></div>
+						<table
+							class="tablesaw table-striped table-bordered table-hover one"
+							style="width: 100%;">
+							<thead class="tableheding">
+								<tr>
+									<th data-tablesaw-sortable-col=""
+										data-tablesaw-sortable-default-col=""
+										data-tablesaw-priority="persist">Employee</th>
+									<th data-tablesaw-sortable-col="" data-tablesaw-priority="3">
+										Employee ID</th>
+									<th data-tablesaw-sortable-col="" data-tablesaw-priority="2">Username</th>
+									<th data-tablesaw-sortable-col="" data-tablesaw-priority="4">Email
+									</th>
 
-									<select class="form-control" size="1">
-										<option value="0">Please select</option>
-										<option value="1">Option #1</option>
-										<option value="2">Option #2</option>
-										<option value="3">Option #3</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-2 padding_col">
-								<div class="form-group">
-
-									<select class="form-control" size="1">
-										<option value="0">Please select</option>
-										<option value="1">Option #1</option>
-										<option value="2">Option #2</option>
-										<option value="3">Option #3</option>
-									</select>
-								</div>
-							</div>
-
-
-							<div class="col-md-2 ">
-								<button type="button"
-									class="btn btn-primary  pull-right waves-effect ">Search</button>
-							</div>
-						</div>
-						<div class="body">
-							<div class="clearfix"></div>
-							<table
-								class="tablesaw table-striped table-bordered table-hover one"
-								style="width: 100%;">
-								<thead class="tableheding">
-									<tr>
-										<th data-tablesaw-sortable-col=""
-											data-tablesaw-sortable-default-col=""
-											data-tablesaw-priority="persist">Employee</th>
-										<th data-tablesaw-sortable-col="" data-tablesaw-priority="3">
-											Employee ID</th>
-										<th data-tablesaw-sortable-col="" data-tablesaw-priority="2">Username</th>
-										<th data-tablesaw-sortable-col="" data-tablesaw-priority="4">Email
-										</th>
-
-										<th data-tablesaw-sortable-col="" data-tablesaw-priority="4">Joining
-											Date</th>
-										<th data-tablesaw-sortable-col="" data-tablesaw-priority="2">
-											Phone</th>
-										<th data-tablesaw-sortable-col="" data-tablesaw-priority="4">Company
-										</th>
-<c:if test="${Role.equals('ADMIN_ROLE')}">
+									<th data-tablesaw-sortable-col="" data-tablesaw-priority="4">Joining
+										Date</th>
+									<th data-tablesaw-sortable-col="" data-tablesaw-priority="2">
+										Phone</th>
+									<th data-tablesaw-sortable-col="" data-tablesaw-priority="4">Company
+									</th>
+									<c:if test="${Role.equals('ADMIN_ROLE')}">
 										<th data-tablesaw-sortable-col="" data-tablesaw-priority="1"
-											class="actiontabel">Action</th></c:if>
+											class="actiontabel">Action</th>
+									</c:if>
 
-									</tr>
-								</thead>
-								<tbody>
-									<c:set var="manager" value="${User.getEid()}" />
-									<c:forEach items="${employees}" var="empl">
-										<c:if test="${empl.getManagerid() ==  manager}">
+								</tr>
+							</thead>
+							<tbody>
+								<c:set var="manager" value="${User.getEid()}" />
+								<c:set var="compname" value="${User.getCompName()}" />
+
+								<c:forEach items="${employees}" var="empl">
+									<%-- <c:if test="${empl.getCompName() == compname}"> --%>
+									<c:if test="${empl.getManagerid() ==  manager}">
 
 
 
 
 
-											<tr>
-												<td>
-													<div class="chip">
-														<a
-															href="<%=request.getContextPath()%>/${role}/allemp/register/${empl.getId()}/employeedetails">
-															<img src="/erp.demo/resources/images/mail/one.jpg"
-															alt="Contact Person">
-															<div class="profiletitlewidth hideOverflow ">${empl.getFname()}
-																${empl.getLname()}</div>
+										<tr>
+											<td>
+												<div class="chip">
+													<a
+														href="<%=request.getContextPath()%>/${role}/allemp/register/${empl.getId()}/employeedetails">
+														<img src="/erp.demo/resources/images/mail/one.jpg"
+														alt="Contact Person">
+														<div class="profiletitlewidth hideOverflow ">${empl.getFname()}
+															${empl.getLname()}</div>
 
-															<div class="userprofile_sub" style="text-align: center">${empl.getDesignation()}</div>
+														<div class="userprofile_sub" style="text-align: center">${empl.getDesignation()}</div>
 
-														</a>
+													</a>
 
-													</div>
-												</td>
-												<td>${empl.getEid()}</td>
-												<td>${empl.getUname()}</td>
-												<td>${empl.getEmail()}</td>
-												<td>${empl.getJdate()}</td>
-												<td>${empl.getPhone()}</td>
-												<td>${empl.getCompName()}</td>
-												<td>
-												
-													<ul class="tabelaction">
+												</div>
+											</td>
+											<td>${empl.getEid()}</td>
+											<td>${empl.getUname()}</td>
+											<td>${empl.getEmail()}</td>
+											<td>${empl.getJdate()}</td>
+											<td>${empl.getPhone()}</td>
+											<td>${empl.getCompName()}</td>
+											<td>
+
+												<ul class="tabelaction">
 													<c:if test="${Role.equals('ADMIN_ROLE')}">
 														<li class="dropdown"><a href="javascript:void(0);"
 															class="dropdown-toggle" data-toggle="dropdown"
@@ -396,7 +397,8 @@
 																<i class="material-icons">more_vert</i>
 														</a>
 															<ul class="dropdown-menu pull-right">
-																<li><a href="javascript:void(0);"
+																<li><a
+																	href="${contextRoot}/admin/empdetais/edit/${empl.getId()}"
 																	class=" waves-effect waves-classic"><i
 																		class="material-icons">edit</i>Edit</a></li>
 																<li><a
@@ -406,68 +408,69 @@
 
 															</ul></li>
 													</c:if>
-													</ul>
-												</td>
-											</tr>
+												</ul>
+											</td>
+										</tr>
 
 
 
-										</c:if>
-									</c:forEach>
-									<c:if test="${Role.equals('ADMIN_ROLE')}">
+									</c:if>
+									<%-- </c:if> --%>
+								</c:forEach>
+								<c:if test="${Role.equals('ADMIN_ROLE')}">
 									<c:forEach items="${employees}" var="empl">
 										<c:if test="${empl.getManagerid() !=  manager}">
-										
-											<tr style="background: gray; color: #FFF;">
-												<td>
-													<div class="chip">
-														<a
-															href="<%=request.getContextPath()%>/admin/allemp/register/${empl.getId()}/employeedetails">
-															<img src="/erp.demo/resources/images/mail/one.jpg"
-															alt="Contact Person">
-															<div class="profiletitlewidth hideOverflow ">${empl.getFname()}
-																${empl.getLname()}</div>
+											<c:if test="${empl.getManagerid() !=  null}">
+												<tr style="background: #ededed;">
+													<td>
+														<div class="chip">
+															<a
+																href="<%=request.getContextPath()%>/admin/allemp/register/${empl.getId()}/employeedetails">
+																<img src="/erp.demo/resources/images/mail/one.jpg"
+																alt="Contact Person">
+																<div class="profiletitlewidth hideOverflow ">${empl.getFname()}
+																	${empl.getLname()}</div>
 
-															<div class="userprofile_sub" style="text-align: center">${empl.getDesignation()}</div>
+																<div class="userprofile_sub" style="text-align: center">${empl.getDesignation()}</div>
 
-														</a>
+															</a>
 
-													</div>
-												</td>
-												<td>${empl.getEid()}</td>
-												<td>${empl.getUname()}</td>
-												<td>${empl.getEmail()}</td>
-												<td>${empl.getJdate()}</td>
-												<td>${empl.getPhone()}</td>
-												<td>${empl.getCompName()}</td>
-												<td>
-													<ul class="tabelaction">
-													<c:if test="${Role.equals('ADMIN_ROLE')}">
-														<li class="dropdown"><a href="javascript:void(0);"
-															class="dropdown-toggle" data-toggle="dropdown"
-															role="button" aria-haspopup="true" aria-expanded="false">
-																<i class="material-icons">more_vert</i>
-														</a>
-															<ul class="dropdown-menu pull-right">
-																<li><a href="javascript:void(0);"
-																	class=" waves-effect waves-classic"><i
-																		class="material-icons">edit</i>Edit</a></li>
-																<li><a
-																	href="${contextRoot}/admin/allemp/delete/${empl.getId()}"
-																	class=" waves-effect waves-classic"><i
-																		class="material-icons">delete</i>Delete</a></li>
+														</div>
+													</td>
+													<td>${empl.getEid()}</td>
+													<td>${empl.getUname()}</td>
+													<td>${empl.getEmail()}</td>
+													<td>${empl.getJdate()}</td>
+													<td>${empl.getPhone()}</td>
+													<td>${empl.getCompName()}</td>
+													<td>
+														<ul class="tabelaction">
+															<c:if test="${Role.equals('ADMIN_ROLE')}">
+																<li class="dropdown"><a href="javascript:void(0);"
+																	class="dropdown-toggle" data-toggle="dropdown"
+																	role="button" aria-haspopup="true"
+																	aria-expanded="false"> <i class="material-icons">more_vert</i>
+																</a>
+																	<ul class="dropdown-menu pull-right">
+																		<li><a href="javascript:void(0);"
+																			class=" waves-effect waves-classic"><i
+																				class="material-icons">edit</i>Edit</a></li>
+																		<li><a
+																			href="${contextRoot}/admin/allemp/delete/${empl.getId()}"
+																			class=" waves-effect waves-classic"><i
+																				class="material-icons">delete</i>Delete</a></li>
 
-															</ul></li>
-													</c:if>
-													</ul>
-												</td>
-											</tr>
-
+																	</ul></li>
+															</c:if>
+														</ul>
+													</td>
+												</tr>
+											</c:if>
 										</c:if>
 									</c:forEach>
-									</c:if>
-								</tbody>
-							</table>
+								</c:if>
+							</tbody>
+						</table>
 		</section>
 		<!-- FOOTER-->
 		<footer>
@@ -496,47 +499,65 @@
 	<script src="${js}/layout.js"></script>
 
 	<script>
-$(document).ready(function(){
+		$(document).ready(function() {
 
-showdiv();
-$("#detailview").click(function (){
-$("#detail").css("display","block");
-$("#list").css("display","none");
-});
+			showdiv();
+			$("#detailview").click(function() {
+				$("#detail").css("display", "block");
+				$("#list").css("display", "none");
+			});
 
-$("#listview").click(function(){
-$("#detail").css("display","none");
-$("#list").css("display","block");
-});
+			$("#listview").click(function() {
+				$("#detail").css("display", "none");
+				$("#list").css("display", "block");
+			});
 
-});
+		});
 
-function showdiv()
-{
-$("#gi").css("display","block");
-$("#list").css("display","none");
-}
-function Validate() {
-    var password = document.getElementById("pswd").value;
-    var confirmPassword = document.getElementById("cpswd").value;
-  	     var ph=document.getElementById("phone").value;
-    if (password != confirmPassword) {
-        alert("Passwords do not match.");
-       pswd.focus();
-        return false; 
-    }
+		function showdiv() {
+			$("#gi").css("display", "block");
+			$("#list").css("display", "none");
+		}
+		function Validate() {
+			var password = document.getElementById("pswd").value;
+			var confirmPassword = document.getElementById("cpswd").value;
+			var ph = document.getElementById("phone").value;
+			if (password != confirmPassword) {
+				alert("Passwords do not match.");
+				pswd.focus();
+				return false;
+			}
 
-  
-   
-    if((ph.length <10) || ph.length >10 )
-    {
-    alert(" Your Mobile Number must ");
-    phone.focus();
-    return false;
-    }      
-   
-}
-</script>
+			if ((ph.length < 10) || ph.length > 10) {
+				alert(" Your Mobile Number must ");
+				phone.focus();
+				return false;
+			}
+
+		}
+	</script>
+
+	<script>
+		$(document).ready(function() {
+
+			$("#addnewemp").css("display", "none");
+
+			$("#addnew").click(function() {
+
+				$("#addnewemp").css("display", "block");
+				$("#addnewemp").addClass("animated bounce");
+				$("this").css("display", "none")
+
+			});
+
+			$(".close").click(function() {
+				$("#addnewemp").css("display", "none");
+				$("#addnewemp").addClass("animated");
+
+			});
+
+		});
+	</script>
 
 </body>
 

@@ -117,7 +117,7 @@ public class ManagerPageController {
 	@RequestMapping(value="/manager/allemp/register", method=RequestMethod.POST)
 	public ModelAndView saveEmpPage(HttpServletRequest request, HttpServletResponse response) throws ConstraintViolationException{
 
-		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null,null,null);
+		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null,null,null,null);
 
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
 		emp.setRole("EMPLOYEE_ROLE");
@@ -340,12 +340,13 @@ public class ManagerPageController {
 		mav.addObject("allempleave", allempleave);
 		mav.addObject("count",count);
 		mav.addObject("attendancelist",attendances);
-		mav.addObject("empservices", mandao.list());
+		mav.addObject("manservices", mandao.list());
 		mav.addObject("Role",role);
 		mav.addObject("User", user);
 
 		return mav;
 	}
+	
 	@RequestMapping(value= "/manager/timesheet/register", method=RequestMethod.POST)
 	public ModelAndView timesheetSave(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("emptimesheet");
@@ -381,6 +382,7 @@ public class ManagerPageController {
 		emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", emailToRecipient, emailMessage, emailSubject);
 		empattreq.save(attedance);
 		List<TblEmpAttendanceNew> attendances =  empattreq.viewbyid(user.getEid());
+		System.out.println(attendances);
 		List<TblEmpLeavereq> allempleave = empleavereq.view();
 		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
 		List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
@@ -546,6 +548,7 @@ public class ManagerPageController {
 		roletransfor.setTomanid(request.getParameter("managerId"));
 
 		String msg = roleTransfer.save(roletransfor);
+		String fromdate = request.getParameter("fromdate");
 		if(msg.equals("Saved")) {
 			//update emptable
 			List<EmpDetails> employees = client.getByManid(user.getEid());

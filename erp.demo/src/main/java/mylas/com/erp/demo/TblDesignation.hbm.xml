@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 26 May, 2018 3:17:31 PM by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15 Jun, 2018 3:48:28 PM by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
-    <class catalog="mylasfyt_krishna" dynamic-insert="false" dynamic-update="false" mutable="true" name="mylas.com.erp.demo.TblDesignation" optimistic-lock="version" polymorphism="implicit" schema="krishna" select-before-update="false" table="tbl_Designation">
+    <class catalog="mylasfyt_krishna" dynamic-insert="false" dynamic-update="false" mutable="true" name="mylas.com.erp.demo.TblDesignation" optimistic-lock="version" polymorphism="implicit" schema="dbo" select-before-update="false" table="tbl_Designation">
         <id name="designationId" type="java.lang.Integer">
             <column name="DesignationId"/>
             <generator class="identity"/>
         </id>
         <property generated="never" lazy="false" name="designation" optimistic-lock="true" type="string" unique="false">
             <column length="50" name="Designation"/>
+        </property>
+        <property generated="never" lazy="false" name="department" optimistic-lock="true" type="string" unique="false">
+            <column length="55" name="department"/>
         </property>
     </class>
 </hibernate-mapping>

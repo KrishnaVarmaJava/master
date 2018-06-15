@@ -83,7 +83,7 @@
 								<div class="col-md-6">
 									<div class="row pagetitle">
 										<span class="pull-right">
-											<button type="button"
+											<button type="button" id="addnew"
 												class="btn btn-primary btn-rounded waves-effect">Add
 												Leave</button>
 										</span>
@@ -100,7 +100,10 @@
 					</div>
 				</div>
 
-				<div class="col-md-12 card">
+				<div class="col-md-12 card" id="addnewemp">
+				<button type="button" class="close" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 					<div class="custom_title">
 						<h2>Add Leave Request</h2>
 					</div>
@@ -294,7 +297,7 @@
 														<button type="button"
 															class="btn btn-primary btn-outline btn-rounded waves-effect"
 															data-toggle="dropdown" aria-haspopup="true"
-															aria-expanded="false">Panding 
+															aria-expanded="false">Pending 
 														</button>
 														</c:if><c:if test="${empleaveslist.getStatus() == false}">
 																<button type="button"
@@ -383,7 +386,27 @@ function Validate() {
 }
 </script>
 
+<script>
+		$(document).ready(function() {
 
+			$("#addnewemp").css("display", "none");
+
+			$("#addnew").click(function() {
+
+				$("#addnewemp").css("display", "block");
+				$("#addnewemp").addClass("animated bounce");
+				$("this").css("display", "none")
+
+			});
+
+			$(".close").click(function() {
+				$("#addnewemp").css("display", "none");
+				$("#addnewemp").addClass("animated");
+
+			});
+
+		});
+	</script>
 </body>
 
 </html>

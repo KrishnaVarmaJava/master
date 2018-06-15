@@ -7,11 +7,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.springframework.stereotype.Repository;
 
 import mylas.com.erp.demo.TblDesignation;
 import mylas.com.erp.demo.appservices.GetSession;
 import mylas.com.erp.demo.dao.DesignationDao;
 
+@Repository("designationImpl")
 public class DesignationService implements DesignationDao {
 
 
@@ -54,6 +56,31 @@ public class DesignationService implements DesignationDao {
 		fact.close();*/
 		
 	}
+
+	@Override
+	public void updateDetails(int id, String newDep,String newDep1) {
+
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		TblDesignation deptdel = session.load(TblDesignation.class, id);
+		deptdel.setDesignation(newDep);
+		deptdel.setDepartment(newDep1);
+		session.saveOrUpdate(deptdel);
+		session.getTransaction().commit();
+		
+	}
+
+	@Override
+	public TblDesignation getById(int id) {
+		 Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		  session.beginTransaction();
+
+		  TblDesignation deptdel = session.get(TblDesignation.class, id);
+		  session.getTransaction().commit();
+		  return deptdel;
+	}
+
+
 
 
 

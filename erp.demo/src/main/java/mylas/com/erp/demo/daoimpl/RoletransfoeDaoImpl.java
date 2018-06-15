@@ -115,6 +115,30 @@ public class RoletransfoeDaoImpl implements RoleTrasforDao {
 		session.getTransaction().commit();
 		return null;
 	}
+
+	@Override
+	public String changeMainManager(String frommanid, String tomanid) {
+		List<EmpDetails> employees = client.getByManid(frommanid);
+		List<TblEmpAttendanceNew> attrequests = empattreq.viewbymanagerid(frommanid);
+		List<TblEmpLeavereq> leaverequests = empleavereq.viewbyManagerid(frommanid);
+		
+		if(employees != null) {
+			for(EmpDetails employee : employees) {
+				client.ChangeManager(employee.getId());
+			}
+		}
+		if(attrequests != null) {
+			for(TblEmpAttendanceNew att : attrequests) {
+				empattreq.ChangeManager(att.getId());
+			}
+		}
+		if(leaverequests != null) {
+			for(TblEmpLeavereq employee : leaverequests) {
+				empleavereq.ChangeManager(employee.getId());
+			}
+		}
+		return null;
+	}
 	
 	
 

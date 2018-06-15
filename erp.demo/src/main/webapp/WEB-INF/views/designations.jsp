@@ -96,7 +96,7 @@
 								<div class="col-md-6">
 									<div class="row pagetitle">
 										<span class="pull-right">
-											<button type="button"
+											<button type="button" id="addnew"
 												class="btn btn-primary btn-rounded waves-effect">Add
 												New Designations</button>
 										</span>
@@ -109,7 +109,10 @@
 					</div>
 				</div>
 
-				<div class="col-md-12 card">
+				<div class="col-md-12 card" id="addnewemp">
+					<button type="button" class="close" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 					<div class="custom_title">
 						<h2>Add Designations</h2>
 					</div>
@@ -133,6 +136,19 @@
 
 							</div>
 
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="form-line">
+												<label>Department</label> <select class="form-control"
+													size="1" name="department" id="department" required="required">
+													<option value="">Please select</option>
+													<c:forEach items="${departments}" var="deper">
+													<option value="${deper.getDepartment()}">${deper.getDepartment()}</option>
+													</c:forEach>
+												</select>
+											</div>
+										</div>
+									</div>
 
 							<div class="clearfix"></div>
 							<div style="text-align: center;">
@@ -180,9 +196,9 @@
 
 											<tr>
 
-												<td>01</td>
+												<td>${desig.getDesignationId()}</td>
 												<td>${desig.getDesignation()}</td>
-												<td>Web Development</td>
+												<td>${desig.getDepartment()}</td>
 
 												<td>
 													<ul class="tabelaction">
@@ -192,7 +208,7 @@
 																<i class="material-icons">more_vert</i>
 														</a>
 															<ul class="dropdown-menu pull-right">
-																<li><a href="javascript:void(0);"><i
+																<li><a href="${contextRoot}/${role}/designation/edit/${desig.getDesignationId()}"><i
 																		class="material-icons">edit</i>Edit</a></li>
 																<li><a
 																	href="${contextRoot}/${role}/designations/delete/${desig.getDesignationId()}"><i
@@ -245,7 +261,27 @@
 	<script src="${js}/layout.js"></script>
 
 
+	<script>
+		$(document).ready(function() {
 
+			$("#addnewemp").css("display", "none");
+
+			$("#addnew").click(function() {
+
+				$("#addnewemp").css("display", "block");
+				$("#addnewemp").addClass("animated bounce");
+				$("this").css("display", "none")
+
+			});
+
+			$(".close").click(function() {
+				$("#addnewemp").css("display", "none");
+				$("#addnewemp").addClass("animated");
+
+			});
+
+		});
+	</script>
 
 
 

@@ -15,4 +15,6 @@ public interface DepartmentDao {
 	public List<TblDepartment> getDetails();
 	public void updateDetails(TblDepartment tbl);
 	public void deleteDetails(int id);
+	public void updateDetails(int id,String newDep);
+	public TblDepartment getById(int id);
 }

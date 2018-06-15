@@ -21,7 +21,7 @@ import mylas.com.erp.demo.appservices.GetSession;
 import mylas.com.erp.demo.dao.EmpLeaveRequestDao;
 
 
-@Repository("empleavereq")
+@Repository("ers")
 public class EmpLeaveRequestService implements EmpLeaveRequestDao {
 
 
@@ -49,12 +49,11 @@ public class EmpLeaveRequestService implements EmpLeaveRequestDao {
 
 	@Override
 	public List<TblEmpLeavereq> viewbyid(String empid) {
-		String sqlquery = "SELECT * FROM tbl_emp_leavereq WHERE employeeid ='"+empid+"'";
+		String sqlquery = "FROM TblEmpLeavereq WHERE employeeid ='"+empid+"'";
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		List<TblEmpLeavereq> map = null;
-		SQLQuery query = session.createSQLQuery(sqlquery);
-		query.addEntity(TblEmpLeavereq.class);
+		Query query = session.createQuery(sqlquery);
 		List<TblEmpLeavereq> leaves = query.list();
 		session.getTransaction().commit();
 		return leaves;
@@ -161,6 +160,62 @@ public class EmpLeaveRequestService implements EmpLeaveRequestDao {
 		  List<TblEmpLeavereq> emps = crit.list();
 		  session.getTransaction().commit();
 		return emps.size();
+	}
+
+	@Override
+	public List<TblEmpLeavereq> viewSearch(String username, String month, String status) {
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		System.out.println("start");
+		Query q = null;
+		if(username!="" && month!="" && status!="") {
+
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND fromdate LIKE '%"+month+"%' AND status="+status);
+			}else {
+				q=session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND fromdate LIKE '%"+month+"%' AND status is null");
+			}
+		}
+		else if(username!="" && month!="") {
+			q=session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND fromdate LIKE '%"+month+"%' AND status is null");
+		}
+		else if(username!="" && status!="") {
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND status="+status);
+			}else {
+				q=session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND status is null");
+			}
+		}
+		else if(month!="" && status!="") {
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpLeavereq where fromdate LIKE '%"+month+"%' AND status="+status);
+			}else {
+				q=session.createQuery("from TblEmpLeavereq where fromdate LIKE '%"+month+"%' AND status is null");
+			}
+
+		}
+		else if(username!="")
+		{
+
+			q = session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'");	
+		}
+		else if(month!="")
+		{
+
+			q = session.createQuery("from TblEmpLeavereq where fromdate LIKE '%"+month+"%'");	
+		}
+		else if(status!="")
+		{
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpLeavereq where status="+status);
+			}else {
+				q=session.createQuery("from TblEmpLeavereq where status is null");
+			}
+		}
+		List<TblEmpLeavereq> empleave = q.list();
+		System.out.println(empleave);
+		session.getTransaction().commit();
+		return (empleave);
 	}
 
 }

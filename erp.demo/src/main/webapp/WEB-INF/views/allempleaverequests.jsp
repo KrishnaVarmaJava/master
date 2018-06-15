@@ -95,53 +95,55 @@
 						<!-- Table Kitchen Sink -->
 						<div class="card">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
-								<div class="col-md-2 padding_col">
-									<div class="form-group">
+								<form action="${contextRoot}/admin/search/register">
+									<div class="col-md-2 padding_col">
 
-										<input type="text" class="form-control" placeholder="Username" />
-									</div>
-								</div>
-								<div class="col-md-2 padding_col">
-									<div class="form-group">
+										<div class="form-group">
 
-										<select class="form-control" size="1">
-											<option value="0">Please select</option>
-											<option value="1">Option #1</option>
-											<option value="2">Option #2</option>
-											<option value="3">Option #3</option>
-										</select>
+											<input type="text" class="form-control"
+												placeholder="Username" name="uname" id="uname" />
+										</div>
 									</div>
-								</div>
-								<div class="col-md-2 padding_col">
-									<div class="form-group">
+									<div class="col-md-2 padding_col">
+										<div class="form-group">
 
-										<select class="form-control" size="1">
-											<option value="0">Please select</option>
-											<option value="1">Option #1</option>
-											<option value="2">Option #2</option>
-											<option value="3">Option #3</option>
-										</select>
+											<select class="form-control" size="1" name="month" id="month">
+												<option value="">Please select</option>
+												<option value="01">January</option>
+												<option value="02">February</option>
+												<option value="03">March</option>
+												<option value="04">April</option>
+												<option value="05">May</option>
+												<option value="06">June</option>
+												<option value="07">July</option>
+												<option value="08">August</option>
+												<option value="09">September</option>
+												<option value="10">October</option>
+												<option value="11">November</option>
+												<option value="12">December</option>
+											</select>
+										</div>
 									</div>
-								</div>
-								<div class="col-md-2 padding_col">
-									<div class="input-group">
-										<input type="text" class="form-control"
-											data-provide="datepicker"> <span
-											class="input-group-addon bg"><i class="fa fa-calendar"></i></span>
+									<div class="col-md-2 padding_col">
+										<div class="form-group">
+
+											<select class="form-control" size="1" name="status"
+												id="status">
+												<option value="">Please select</option>
+												<option value="2">Pending</option>
+												<option value="1">Approved</option>
+												<option value="0">Declined</option>
+												</select>
+										</div>
 									</div>
-								</div>
-								<div class="col-md-2 padding_col">
-									<div class="input-group">
-										<input type="text" class="form-control"
-											data-provide="datepicker"> <span
-											class="input-group-addon bg"><i class="fa fa-calendar"></i></span>
+
+
+									<div class="col-md-2 ">
+										<button type="button"
+											class="btn btn-primary  pull-right waves-effect ">
+											Search</button>
 									</div>
-								</div>
-								<div class="col-md-2 ">
-									<button type="button"
-										class="btn btn-primary  pull-right waves-effect ">
-										Search</button>
-								</div>
+								</form>
 							</div>
 							<div class="body">
 								<p style="color: green;">${UMsg}</p>
@@ -173,7 +175,8 @@
 										<c:if test="${User.getRole().equals('MANAGER_ROLE')}">
 											<c:set var="user" value="${User.getEid()}" />
 											<c:if test="${empleaveslist.getEmployeeid() != user}">
-												<c:if test="${empleaveslist.getManagerid()==user || empleaveslist.getMantrans() == user}">
+												<c:if
+													test="${empleaveslist.getManagerid()==user || empleaveslist.getMantrans() == user}">
 
 													<tbody>
 														<tr>
@@ -198,7 +201,7 @@
 																		<button type="button"
 																			class="btn btn-primary btn-outline btn-rounded waves-effect"
 																			data-toggle="dropdown" aria-haspopup="true"
-																			aria-expanded="false">Panding</button>
+																			aria-expanded="false">Pending</button>
 																	</c:if>
 																	<c:if test="${empleaveslist.getStatus() == false}">
 																		<button type="button"
@@ -212,7 +215,8 @@
 																		</button>
 																	</c:if>
 																	<c:set var="eid" value="${User.getEid()}"></c:set>
-																	<c:if test="${empleaveslist.getManagerid() == eid || empleaveslist.getMantrans() == eid}">
+																	<c:if
+																		test="${empleaveslist.getManagerid() == eid || empleaveslist.getMantrans() == eid}">
 																		<c:if test="${empleaveslist.getStatus() == null}">
 
 																			<ul class="dropdown-menu bullet">
@@ -273,7 +277,7 @@
 																<button type="button"
 																	class="btn btn-primary btn-outline btn-rounded waves-effect"
 																	data-toggle="dropdown" aria-haspopup="true"
-																	aria-expanded="false">Panding</button>
+																	aria-expanded="false">Pending</button>
 															</c:if>
 															<c:if test="${empleaveslist.getStatus() == false}">
 																<button type="button"
@@ -287,7 +291,8 @@
 																</button>
 															</c:if>
 															<c:set var="eid" value="${User.getEid()}"></c:set>
-															<c:if test="${empleaveslist.getManagerid() == eid || empleaveslist.getMantrans() == eid}">
+															<c:if
+																test="${empleaveslist.getManagerid() == eid || empleaveslist.getMantrans() == eid}">
 																<c:if test="${empleaveslist.getStatus() == null}">
 
 																	<ul class="dropdown-menu bullet">
@@ -304,12 +309,16 @@
 																		</c:if>
 
 
-																		<li><a
-																			href="${contextRoot}/${role}/leave/approve/${empleaveslist.getId()}"><i
-																				class="material-icons">print</i>Approved</a></li>
-																		<li><a
-																			href="${contextRoot}/${role}/leave/decline/${empleaveslist.getId()}"><i
-																				class="material-icons">favorite</i>Declined</a></li>
+																		<li>
+																			<button type="button"
+																				class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
+																				data-toggle="modal" data-target="#longmodal1">Declined</button>
+																			
+																		</li>
+																		<li><button type="button"
+																				class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect"
+																				data-toggle="modal" data-target="#longmodal">Approved</button>
+																			</li>
 
 																	</ul>
 																</c:if>
@@ -336,6 +345,86 @@
 				</div>
 			</div>
 			<div class="md-overlay custom-overlay"></div>
+			<div class="modal fade" id="longmodal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">x</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel4">Long Modal</h4>
+						</div>
+						<div class="modal-body">
+							<div class="long-modal">
+								<form action="${contextRoot}/reason" method="post">
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="form-line">
+												<label>Approve Reason* </label>
+												<textarea name="reason" id="reason" class="form-control"
+													rows="3" required="required"></textarea>
+											</div>
+										</div>
+
+									</div>
+									<div class="clearfix"></div>
+									<div style="text-align: center;">
+										<button type="submit"
+											class="btn btn-primary btn-rounded waves-effect">Approve
+											Reason</button>
+									</div>
+
+
+								</form>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="md-overlay custom-overlay"></div>
+			<div class="modal fade" id="longmodal1" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">x</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel4">Long Modal</h4>
+						</div>
+						<div class="modal-body">
+							<div class="long-modal">
+								<form action="${contextRoot}/reason" method="post">
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="form-line">
+												<label>Decline Reason* </label>
+												<textarea name="reason" id="reason" class="form-control"
+													rows="3" required="required"></textarea>
+											</div>
+										</div>
+
+									</div>
+									<div class="clearfix"></div>
+									<div style="text-align: center;">
+										<button type="submit"
+											class="btn btn-primary btn-rounded waves-effect">Decline</button>
+									</div>
+
+
+								</form>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
 		</section>
 		<!-- FOOTER-->
 		<footer>

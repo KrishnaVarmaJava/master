@@ -13,7 +13,7 @@ import mylas.com.erp.demo.TblEmpAttendanceNew;
 import mylas.com.erp.demo.appservices.GetSession;
 import mylas.com.erp.demo.dao.EmpAttendenceDao;
 
-@Repository("empattdao")
+@Repository("attimpl")
 public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 
 
@@ -70,13 +70,10 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 
 	@Override
 	public List<TblEmpAttendanceNew> viewbyid(String empid) {
-		String sqlquery = "SELECT * FROM tbl_emp_attendance_new WHERE empid ='"+empid+"'";
+		String sqlquery = "FROM TblEmpAttendanceNew WHERE empid ='"+empid+"'";
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		List<TblEmpAttendanceNew> map = null;
-
-		SQLQuery query = session.createSQLQuery(sqlquery);
-		query.addEntity(TblEmpAttendanceNew.class);
+		Query query = session.createQuery(sqlquery);
 		List<TblEmpAttendanceNew> EmpAtt = query.list();
 		session.getTransaction().commit();	
 		return EmpAtt;

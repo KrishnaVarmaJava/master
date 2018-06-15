@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 8 Jun, 2018 12:46:53 PM by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14 Jun, 2018 1:44:46 PM by Hibernate Tools 5.2.8.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
-    <class catalog="mylasfyt_krishna" dynamic-insert="false" dynamic-update="false" mutable="true" name="TblEmpAttendanceNew" optimistic-lock="version" polymorphism="implicit" schema="krishna" select-before-update="false" table="tbl_emp_attendance_new">
+    <class catalog="mylasfyt_krishna" dynamic-insert="false" dynamic-update="false" mutable="true" name="TblEmpAttendanceNew" optimistic-lock="version" polymorphism="implicit" schema="dbo" select-before-update="false" table="tbl_emp_attendance_new">
         <id name="id" type="java.lang.Integer">
             <column name="id"/>
             <generator class="identity"/>
         </id>
         <property generated="never" lazy="false" name="managerid" optimistic-lock="true" type="string" unique="false">
-            <column length="15" name="managerid"/>
+            <column length="50" name="managerid"/>
         </property>
         <property generated="never" lazy="false" name="empid" optimistic-lock="true" type="string" unique="false">
-            <column length="15" name="empid"/>
+            <column length="50" name="empid"/>
         </property>
         <property generated="never" lazy="false" name="month" optimistic-lock="true" type="string" unique="false">
-            <column length="15" name="month"/>
+            <column length="50" name="month"/>
         </property>
         <property generated="never" lazy="false" name="year" optimistic-lock="true" type="java.lang.Integer" unique="false">
             <column name="year"/>
@@ -115,7 +115,7 @@
             <column name="statas"/>
         </property>
         <property generated="never" lazy="false" name="reasion" optimistic-lock="true" type="string" unique="false">
-            <column length="50" name="reasion"/>
+            <column length="150" name="reasion"/>
         </property>
         <property generated="never" lazy="false" name="mantrans" optimistic-lock="true" type="string" unique="false">
             <column length="50" name="mantrans"/>

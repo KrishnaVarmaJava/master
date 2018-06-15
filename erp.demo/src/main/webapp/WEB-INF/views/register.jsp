@@ -57,7 +57,7 @@
 						</span>
 						<div class="form-line">
 							<input type="text" class="form-control" name="username"
-								placeholder="Username" required autofocus>
+								placeholder="Username" required autofocus size="50" maxlength="50">
 						</div>
 					</div>
 					<div class="input-group addon-line">
@@ -65,7 +65,7 @@
 						</span>
 						<div class="form-line">
 							<input type="email" class="form-control" name="email"
-								placeholder="Email Address" required>
+								placeholder="Email Address" required size="50" maxlength="50">
 						</div>
 					</div>
 					<div class="input-group addon-line">
@@ -73,7 +73,7 @@
 						</span>
 						<div class="form-line">
 							<input type="text" class="form-control" name="empid"
-								placeholder="Admin ID" required>
+								placeholder="Admin ID" required size="50" maxlength="50">
 						</div>
 					</div>
 					<div class="input-group addon-line">

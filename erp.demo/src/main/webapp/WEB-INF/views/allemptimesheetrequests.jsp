@@ -525,7 +525,7 @@
 														<button type="button"
 															class="btn btn-primary btn-outline btn-rounded waves-effect"
 															data-toggle="dropdown" aria-haspopup="true"
-															aria-expanded="false">Panding 
+															aria-expanded="false">Pending 
 														</button>
 														</c:if><c:if test="${attlist.getStatas() == false}">
 																<button type="button"
@@ -841,6 +841,8 @@
                                         </c:if>
                                         <c:if test="${attlist.getDay29() == 3}">
                                         <td><i class="${gray}" ></i></td>
+                                        </c:if><c:if test="${attlist.getDay29() == null}">
+                                        <td><i class="${gray}" ></i></td>
                                         </c:if>
 										        <c:if test="${attlist.getDay30() == 1}">
                                         <td><i class="${green}" ></i></td>
@@ -849,6 +851,8 @@
                                         <td><i class="${red}" ></i></td>
                                         </c:if>
                                         <c:if test="${attlist.getDay30() == 3}">
+                                        <td><i class="${gray}" ></i></td>
+                                        </c:if> <c:if test="${attlist.getDay30() == null}">
                                         <td><i class="${gray}" ></i></td>
                                         </c:if>
                                           <c:if test="${attlist.getDay31() == 1}">
@@ -859,6 +863,8 @@
                                         </c:if>
                                         <c:if test="${attlist.getDay31() == 3}">
                                         <td><i class="${gray}" ></i></td>
+                                        </c:if><c:if test="${attlist.getDay31() == null}">
+                                        <td><i class="${gray}" ></i></td>
                                         </c:if>
                                     												<td>
 
@@ -868,7 +874,7 @@
 														<button type="button"
 															class="btn btn-primary btn-outline btn-rounded waves-effect"
 															data-toggle="dropdown" aria-haspopup="true"
-															aria-expanded="false">Panding 
+															aria-expanded="false">Pending 
 														</button>
 														</c:if><c:if test="${attlist.getStatas() == false}">
 																<button type="button"

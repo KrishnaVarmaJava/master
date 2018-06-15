@@ -65,7 +65,7 @@
 						</span>
 						<div class="form-line">
 							<input type="text" class="form-control" name="username"
-								placeholder="Username" required autofocus>
+								placeholder="Username" required autofocus size="50" maxlength="50">
 						</div>
 					</div>
 					<div class="input-group addon-line">
@@ -73,7 +73,7 @@
 						</span>
 						<div class="form-line">
 							<input type="password" class="form-control" name="password"
-								placeholder="Password" required>
+								placeholder="Password" required size="50" maxlength="50">
 						</div>
 					</div>
 					<div class="row">

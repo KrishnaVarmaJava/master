@@ -1,6 +1,6 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <spring:url var="css" value="/resources/css" />
@@ -8,6 +8,8 @@
 <spring:url var="images" value="/resources/images" />
 <spring:url var="plugins" value="/resources/plugins" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+
+
 <!DOCTYPE html>
 <html>
 
@@ -19,8 +21,7 @@
 	name="viewport">
 <title>Amp Demo</title>
 <!-- Favicon-->
-<link rel="icon" href="${images}/resources/images/favicon.png"
-	type="image/x-icon">
+<link rel="icon" href="${images}/favicon.png" type="image/x-icon">
 
 <!--REQUIRED PLUGIN CSS-->
 <link href="${plugins}/font-awesome/css/font-awesome.min.css"
@@ -34,9 +35,7 @@
 <link href="${plugins}/tablesaw/css/tablesaw.min.css" rel="stylesheet">
 <link href="${plugins}/nifty-modal/component.css" rel="stylesheet" />
 
-<link
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-	rel="stylesheet" />
+
 <!--REQUIRED THEME CSS -->
 <link href="${css}/style.css" rel="stylesheet">
 <link href="${css}/layout.css" rel="stylesheet">
@@ -44,34 +43,11 @@
 <link href="${css}/custom_style.css" rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
-<style>
-.icn {
-	font-size: 20px;
-	color: #428bca;
-	border-color: #357ebd;
-	margin-top: 44px;
-}
-</style>
 </head>
 
 <body class="theme-indigo light layout-fixed">
 	<div class="wrapper">
-<!-- top navbar-->
-<!-- top navbar-->
-		<header class="topnavbar-wrapper">
-
-			<%@include file="shared/navbar.jsp"%>
-		</header>
-		<!-- sidebar-->
-		<%@include file="shared/slidebar.jsp"%>
-		<!-- offsidebar-->
-		<%@include file="shared/offslidebar.jsp"%>
-			<!-- Main section-->
 		<c:if test="${Role.equals('ADMIN_ROLE')}">
 			<c:set var="role" value="admin" />
 		</c:if>
@@ -84,7 +60,16 @@
 			<c:set var="role" value="employee" />
 		</c:if>
 
-		
+		<!-- top navbar-->
+		<header class="topnavbar-wrapper">
+
+			<%@include file="shared/navbar.jsp"%>
+		</header>
+		<!-- sidebar-->
+		<%@include file="shared/slidebar.jsp"%>
+		<!-- offsidebar-->
+		<%@include file="shared/offslidebar.jsp"%>
+		<!-- Main section-->
 		<section>
 			<!-- Page content-->
 			<div class="content-wrapper">
@@ -99,22 +84,14 @@
 
 								<div class="col-md-6">
 									<div class="row pagetitle">
-										<span> Department</span>
+										<span> Designations</span>
 									</div>
 								</div>
 
 
 
 
-								<div class="col-md-6">
-									<div class="row pagetitle">
-										<span class="pull-right">
-											<button type="button" id="addnew"
-												class="btn btn-primary btn-rounded waves-effect">Add
-												New Department</button>
-										</span>
-									</div>
-								</div>
+						
 
 							</div>
 
@@ -122,25 +99,41 @@
 					</div>
 				</div>
 
-
-					<div class="col-md-12 card" id="addnewemp">
-				<button type="button" class="close" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+				<div class="col-md-12 card">
 					<div class="custom_title">
-						<h2>Add Department</h2>
+						<h2>Edit Designations</h2>
 					</div>
-					<form action="${contextRoot}/admin/empdep/register" method="post">
-						<hr class="custom_line">
-						<div class="body">
-							<div class="col-md-5">
+					<hr class="custom_line">
+					<div class="body">
+
+
+						<form
+							action="${contextRoot}/admin/empdesignation/edit/${depdetailsforedit.getDesignationId()}"
+							method="post">
+
+							<div class="col-md-6">
 								<div class="form-group">
 									<div class="input-group addon-line">
 										<div class="form-line">
-											<label>Department Name</label> <input type="text"
-												name="departmentname" id="departmentname"
-												class="form-control" placeholder="Department Name">
+											<label>Designations Name</label> <input type="text"
+												name="designationname" id="designationname"
+												class="form-control" placeholder="Designations Name">
 										</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class="form-line">
+										<label>Department</label> <select class="form-control"
+											size="1" name="department" id="department"
+											required="required">
+											<option value="">Please select</option>
+											<c:forEach items="${departments}" var="deper">
+												<option value="${deper.getDepartment()}">${deper.getDepartment()}</option>
+											</c:forEach>
+										</select>
 									</div>
 								</div>
 							</div>
@@ -148,11 +141,13 @@
 							<div class="clearfix"></div>
 							<div style="text-align: center;">
 								<button type="submit"
-									class="btn btn-primary btn-rounded waves-effect">Create
-									Department</button>
+									class="btn btn-primary btn-rounded waves-effect">Edit
+									Designations</button>
 							</div>
-						</div>
-					</form>
+
+						</form>
+					</div>
+
 				</div>
 
 
@@ -165,63 +160,7 @@
 
 
 						<!-- Table Kitchen Sink -->
-						<div class="card">
 
-							<div class="body">
-								<table class="tablesaw table-striped table-bordered table-hover"
-									style="width: 100%;">
-									<thead class="tableheding">
-										<tr>
-											<th data-tablesaw-sortable-col
-												data-tablesaw-sortable-default-col
-												data-tablesaw-priority="persist">Id</th>
-											<th data-tablesaw-sortable-col data-tablesaw-priority="3">Department
-												Name</th>
-
-											<th data-tablesaw-sortable-col data-tablesaw-priority="1"
-												class="actiontabel">Action</th>
-
-										</tr>
-									</thead>
-
-									<div class="clearfix"></div>
-
-									<c:forEach items="${departments}" var="dep">
-									
-										<tbody>
-											
-
-											<tr>
-
-												<td>${dep.getDepartmentId()}</td>
-												<td>${dep.getDepartment()}</td>
-
-
-												<td>
-													<ul class="tabelaction">
-														<li class="dropdown"><a href="javascript:void(0);"
-															class="dropdown-toggle" data-toggle="dropdown"
-															role="button" aria-haspopup="true" aria-expanded="false">
-																<i class="material-icons">more_vert</i>
-														</a>
-															<ul class="dropdown-menu pull-right">
-																<li><a href="${contextRoot}/${role}/departments/edit/${dep.getDepartmentId()}"><i
-																		class="material-icons">edit</i>Edit</a></li>
-																<li><a
-																	href="${contextRoot}/${role}/departments/delete/${dep.getDepartmentId()}"><i
-																		class="material-icons">delete</i>Delete</a></li>
-
-															</ul></li>
-													</ul>
-												</td>
-
-											</tr>
-
-										</tbody>
-									</c:forEach>
-								</table>
-							</div>
-						</div>
 						<!-- #END# Kitchen Sink -->
 
 
@@ -256,29 +195,12 @@
 	<script src="${js}/demo.js"></script>
 	<script src="${js}/layout.js"></script>
 
-
-
-<script>
-		$(document).ready(function() {
-
-			$("#addnewemp").css("display", "none");
-
-			$("#addnew").click(function() {
-
-				$("#addnewemp").css("display", "block");
-				$("#addnewemp").addClass("animated bounce");
-				$("this").css("display", "none")
-
-			});
-
-			$(".close").click(function() {
-				$("#addnewemp").css("display", "none");
-				$("#addnewemp").addClass("animated");
-
-			});
-
-		});
+	<script>
+		document.getElementById("designationname").value = "${depdetailsforedit.getDesignation()}";
+		document.getElementById("department").value = "${depdetailsforedit.getDepartment()}";
+		designationname.focus();
 	</script>
+
 
 
 
