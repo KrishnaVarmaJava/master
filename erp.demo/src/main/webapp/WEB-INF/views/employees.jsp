@@ -452,7 +452,7 @@
 																	aria-expanded="false"> <i class="material-icons">more_vert</i>
 																</a>
 																	<ul class="dropdown-menu pull-right">
-																		<li><a href="javascript:void(0);"
+																		<li><a href="${contextRoot}/admin/empdetais/edit/${empl.getId()}"
 																			class=" waves-effect waves-classic"><i
 																				class="material-icons">edit</i>Edit</a></li>
 																		<li><a

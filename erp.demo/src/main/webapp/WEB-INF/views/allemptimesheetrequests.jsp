@@ -113,58 +113,55 @@
 
 
 						<!-- Table Kitchen Sink -->
+						<form action="${contextRoot}/${role}/employee/timesheetSearch" method="post">
 						<div class="card">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
 								<div class="col-md-2 padding_col">
 									<div class="form-group">
 
-										<input type="text" class="form-control" placeholder="Username" />
+										<input type="text" class="form-control" placeholder="Username" name="username" id="username" />
 									</div>
 								</div>
 								<div class="col-md-2 padding_col">
 									<div class="form-group">
 
-										<select class="form-control" size="1">
-											<option value="0">Please select</option>
-											<option value="1">Option #1</option>
-											<option value="2">Option #2</option>
-											<option value="3">Option #3</option>
+										<select name="month" id="month"class="form-control" size="1">
+											<option value="">Please select</option>
+											<option value="January">January</option>
+											<option value="February">February</option>
+											<option value="March">March</option>
+											<option value="April">April</option>
+											<option value="May">May</option>
+											<option value="June">June</option>
+											<option value="July">July</option>
+											<option value="August">August</option>
+											<option value="September">September</option>
+											<option value="October">October</option>
+											<option value="November">November</option>
+											<option value="December">December</option>
 										</select>
 									</div>
 								</div>
 								<div class="col-md-2 padding_col">
 									<div class="form-group">
 
-										<select class="form-control" size="1">
-											<option value="0">Please select</option>
-											<option value="1">Option #1</option>
-											<option value="2">Option #2</option>
-											<option value="3">Option #3</option>
+										<select name="status" id="status" class="form-control" size="1">
+											<option value="">Please select</option>
+											<option value="2">Pending</option>
+											<option value="1">Approved</option>
+											<option value="0">Declined</option>
+
 										</select>
-									</div>
-								</div>
-								<div class="col-md-2 padding_col">
-									<div class="input-group">
-										<input type="text" class="form-control"
-											data-provide="datepicker"> <span
-											class="input-group-addon bg"><i class="fa fa-calendar"></i></span>
-									</div>
-								</div>
-								<div class="col-md-2 padding_col">
-									<div class="input-group">
-										<input type="text" class="form-control"
-											data-provide="datepicker"> <span
-											class="input-group-addon bg"><i class="fa fa-calendar"></i></span>
 									</div>
 								</div>
 								<div class="col-md-2 ">
-									<button type="button"
+									<button type="submit" onclick="return Search()"
 										class="btn btn-primary  pull-right waves-effect ">
 										Search</button>
 								</div>
 							</div>
 
-						</div>
+						</div></form>
 						                        <div class="card">
                         		 
                             <div class="body" style="overflow: hidden; overflow-x: scroll;">
@@ -978,7 +975,19 @@
 	
 	</script>
  -->
+<script>
+     function Search(){
+	 var name = document.getElementById("uname").value;
+	 var mon = document.getElementById("month").value;
+	 var sta = document.getElementById("status").value;
+	 if(name=="" && mon=="" && sta=="")
+		 {
+		 alert("plese Select any one of these");
+		 return false;
+		 }
 
+}
+  </script>
 </body>
 
 </html>

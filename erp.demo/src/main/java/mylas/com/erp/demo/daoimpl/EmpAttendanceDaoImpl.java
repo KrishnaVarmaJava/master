@@ -127,6 +127,63 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 		return emps.size();
 	}
 
+	@Override
+	public List<TblEmpAttendanceNew> viewSearch(String username, String month, String status) {
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		System.out.println("start");
+		Query q = null;
+		if(username!="" && month!="" && status!="") {
+
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpAttendanceNew where empid='"+username+"'AND month='"+month+"' AND statas="+status);
+			}else {
+				q=session.createQuery("from TblEmpAttendanceNew where empid='"+username+"'AND month='"+month+"' AND statas is null");
+			}
+		}
+		else if(username!="" && month!="") {
+			q=session.createQuery("from TblEmpAttendanceNew where empid='"+username+"'AND month='"+month+"' AND statas is null");
+		}
+		else if(username!="" && status!="") {
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpAttendanceNew where empid='"+username+"'AND statas="+status);
+			}else {
+				q=session.createQuery("from TblEmpAttendanceNew where empid='"+username+"'AND statas is null");
+			}
+		}
+		else if(month!="" && status!="") {
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpAttendanceNew where month='"+month+"' AND statas="+status);
+			}else {
+				q=session.createQuery("from TblEmpAttendanceNew where month='"+month+"' AND status is null");
+			}
+
+		}
+		else if(username!="")
+		{
+
+			q = session.createQuery("from TblEmpAttendanceNew where empid='"+username+"'");	
+		}
+		else if(month!="")
+		{
+
+			q = session.createQuery("from TblEmpAttendanceNew where month='"+month+"'");	
+		}
+		else if(status!="")
+		{
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpAttendanceNew where status="+status);
+			}else {
+				q=session.createQuery("from TblEmpAttendanceNew where status is null");
+			}
+		}
+		List<TblEmpAttendanceNew> empleave = q.list();
+		System.out.println(empleave);
+		session.getTransaction().commit();
+		return (empleave);		
+	
+	}
+
 
 
 }

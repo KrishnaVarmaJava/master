@@ -885,6 +885,29 @@ public class PageController<JavaMailSender> {
 			mav.addObject(user);
 			return mav;		
 		}
+	 
+	 @RequestMapping(value="/admin/employee/timesheetSearch")
+		public ModelAndView attendanceSearch(HttpServletRequest request) {
+			String username = request.getParameter("username");
+			System.out.println(request.getParameter("month"));
+			ModelAndView mav = new ModelAndView("allemptimesheetrequests");
+			mav.addObject("services", servicesdao.list());
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			EmpDetails user=null;
+			if (principal instanceof EmpDetails) {
+			user = ((EmpDetails)principal);
+			}
+			
+			String role = user.getRole();
+			mav.addObject("Role",role);
+			List<TblEmpAttendanceNew> attendances =  empattreq.viewSearch(request.getParameter("username"), request.getParameter("month"), request.getParameter("status"));
+			List<EmpDetails> emp1 = userDetails.getDetails();
+			mav.addObject("User",user);
+			mav.addObject("employees", emp1);
+			mav.addObject("attendancelist",attendances);
+			return mav;		
+		}
+		
 
 	@RequestMapping(value= "/403")
 	public ModelAndView Page403() {

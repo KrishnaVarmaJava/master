@@ -27,18 +27,21 @@ public class Client implements EmployeeDao {
 		session.beginTransaction();
 		try {
 		int num = (Integer) session.save(emp);
-		session.getTransaction().commit();
+		
 		if(num!=0) {
 			System.out.println("Table Updated");
-			return "Employee Saved";
+			session.getTransaction().commit();
+			return "Employee Saved Please Login!!!";
 		}else {
 			System.out.println("Table Faied to Update");
 		}
 		
 		}catch(ConstraintViolationException e) {
 			System.out.println("Duplicate Entry");
+			session.getTransaction().commit();
 			return "This is a Duplicate Entry";
 		}
+		session.getTransaction().commit();
 		return null;
 	}
 
