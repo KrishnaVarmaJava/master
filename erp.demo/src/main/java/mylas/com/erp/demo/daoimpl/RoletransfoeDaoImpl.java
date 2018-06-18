@@ -35,7 +35,8 @@ public class RoletransfoeDaoImpl implements RoleTrasforDao {
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		try{session.save(roletransfor);System.out.println("Table Saved");session.getTransaction().commit();return "Saved";}catch(Exception e) {
-			e.getMessage();session.getTransaction().commit();return "Save Failed";
+			e.getMessage();			session.getTransaction().rollback();
+return "Save Failed";
 		}
 
 		

@@ -56,7 +56,7 @@ public class UserServiceImpl implements User {
 
 
 		} catch (NullPointerException e) {
-			// TODO Auto-generated catch block
+			session.getTransaction().rollback();
 			return null;
 		}
 

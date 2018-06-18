@@ -99,7 +99,8 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 		employe.setMantrans(transmanid);
 		try {
 			session.update(employe);session.getTransaction().commit();return "Updated";
-		}catch(Exception e){session.getTransaction().commit();return "error occured while updating";}
+		}catch(Exception e){			session.getTransaction().rollback();
+		return "error occured while updating";}
 
 	}
 
@@ -111,7 +112,8 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 		employe.setMantrans(null);
 		try {
 			session.update(employe);session.getTransaction().commit();return "Updated";
-		}catch(Exception e){session.getTransaction().commit();return "error occured while updating";}
+		}catch(Exception e){			session.getTransaction().rollback();
+		return "error occured while updating";}
 
 	}
 
@@ -181,7 +183,7 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 		System.out.println(empleave);
 		session.getTransaction().commit();
 		return (empleave);		
-	
+
 	}
 
 

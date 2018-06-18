@@ -131,7 +131,7 @@ public class ManagerPageController {
 		emp.setManagerid(user.getEid());
 		emp.setJdate(request.getParameter("joindate"));
 		emp.setPhone((request.getParameter("phone")));
-		emp.setCompName(request.getParameter("company"));
+		emp.setCompName(user.getCompName());
 		emp.setDepartment(user.getDepartment());
 		emp.setDesignation(request.getParameter("designation"));
 		ModelAndView mav = new ModelAndView("employees");

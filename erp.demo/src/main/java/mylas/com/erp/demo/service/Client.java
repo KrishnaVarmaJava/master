@@ -19,27 +19,29 @@ import mylas.com.erp.demo.dao.EmployeeDao;
 @Repository("userDetails")
 public class Client implements EmployeeDao {
 
-	
-	
+
+
 
 	public String getConnection(EmpDetails emp) throws ConstraintViolationException{
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
-		session.beginTransaction();
+		
 		try {
-		int num = (Integer) session.save(emp);
-		
-		if(num!=0) {
-			System.out.println("Table Updated");
-			session.getTransaction().commit();
-			return "Employee Saved Please Login!!!";
-		}else {
-			System.out.println("Table Faied to Update");
-/*			session.getTransaction().commit();
-*/			return "Employee Save Failed";
-		}
-		
+			session.beginTransaction();
+			int num = (Integer) session.save(emp);
+
+			if(num!=0) {
+				System.out.println("Table Updated");
+				session.getTransaction().commit();
+				return "Employee Saved Please Login!!!";
+			}else {
+				System.out.println("Table Faied to Update");
+				/*			session.getTransaction().commit();
+				 */			return "Employee Save Failed";
+			}
+
 		}catch(ConstraintViolationException e) {
 			System.out.println("Duplicate Entry");
+			session.getTransaction().rollback();
 			return "This is a Duplicate Entry";
 		}
 	}
@@ -52,7 +54,7 @@ public class Client implements EmployeeDao {
 		List<EmpDetails> emp1 = q.list();
 		session.getTransaction().commit();
 		return (emp1);
-		
+
 
 	}
 
@@ -62,8 +64,6 @@ public class Client implements EmployeeDao {
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		EmpDetails emp = session.load(EmpDetails.class,id);
-
-
 		emp.setCompName(empl.getCompName());
 
 		session.update(emp);
@@ -95,7 +95,7 @@ public class Client implements EmployeeDao {
 		user =  session.get(EmpDetails.class, id);
 		session.getTransaction().commit();
 		return user;
-		
+
 	}
 
 
@@ -105,15 +105,15 @@ public class Client implements EmployeeDao {
 		session.beginTransaction();
 		Query q = session.createQuery("from EmpDetails");
 		List<EmpDetails> emp1 = q.list();
-		session.getTransaction().commit();
 		for(EmpDetails user : emp1) {
 			if(user.getUname().equals(empuname)) {
-			 return user;	
+				session.getTransaction().commit();
+				return user;	
 			}
 		}
-		
+
 		return null;
-		
+
 	}
 
 	@Override
@@ -136,8 +136,9 @@ public class Client implements EmployeeDao {
 		employe.setMantrans(mantrans);
 		try {
 			session.update(employe);session.getTransaction().commit();return "Updated";
-		}catch(Exception e){session.getTransaction().commit();return "error occured while updating";}
-		
+		}catch(Exception e){			session.getTransaction().rollback();
+return "error occured while updating";}
+
 	}
 
 	@Override
@@ -160,8 +161,9 @@ public class Client implements EmployeeDao {
 		employe.setMantrans(null);;
 		try {
 			session.update(employe);session.getTransaction().commit();return "Updated";
-		}catch(Exception e){session.getTransaction().commit();return "error occured while updating";}
-		
+		}catch(Exception e){			session.getTransaction().rollback();
+return "error occured while updating";}
+
 	}
 
 	@Override
@@ -171,60 +173,60 @@ public class Client implements EmployeeDao {
 	}
 
 	@Override
-	 public void updateEditDetails(int id, String firstname, String lastname, String uname, String empid, String pswd,
-	   String cpswd, String joindate, String phone, String company, String department,String lastworkingday) {
-	  // TODO Auto-generated method stub
-	  Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
-	  session.beginTransaction();
-	  EmpDetails  empdt = session.load(EmpDetails .class, id);
-	  empdt.setFname(firstname);empdt.setLname(lastname);empdt.setUname(uname);empdt.setEid(empid);empdt.setPswd(pswd);
-	  empdt.setCpswd(cpswd);empdt.setJdate(joindate);empdt.setPhone(phone);empdt.setCompName(company);empdt.setDepartment(department);empdt.setLastworkingday(lastworkingday);
-	  session.saveOrUpdate(empdt);
-	  System.out.println("updated");
-	  session.getTransaction().commit();
-	  
-	 }
+	public void updateEditDetails(int id, String firstname, String lastname, String uname, String empid, String pswd,
+			String cpswd, String joindate, String phone, String company, String department,String lastworkingday) {
+		// TODO Auto-generated method stub
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		EmpDetails  empdt = session.load(EmpDetails .class, id);
+		empdt.setFname(firstname);empdt.setLname(lastname);empdt.setUname(uname);empdt.setEid(empid);empdt.setPswd(pswd);
+		empdt.setCpswd(cpswd);empdt.setJdate(joindate);empdt.setPhone(phone);empdt.setCompName(company);empdt.setDepartment(department);empdt.setLastworkingday(lastworkingday);
+		session.saveOrUpdate(empdt);
+		System.out.println("updated");
+		session.getTransaction().commit();
+
+	}
 
 	@Override
 	public List<EmpDetails> viewSearch(String username, String department, String designation) {
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
-		  session.beginTransaction();
-		
-			Query q = null;
-			if(username!="" && department!="" && designation!="") {
-				 q = session.createQuery("from EmpDetails where eid='"+username+"'AND department='"+department+"'AND designation='"+designation+"'");
-			}
-			
-			 else if(username!="" && department!="")
-				{
-				 q = session.createQuery("from EmpDetails where eid='"+username+"'AND department='"+department+"'");	
-				}
-			 else if(username!="" && designation!="")
-				{	
-				 q = session.createQuery("from EmpDetails where eid='"+username+"'AND designation='"+designation+"'");
-				}	
-				 else if(department!="" && designation!="")
-				 {
-						q = session.createQuery("from EmpDetails where department='"+department+"'AND designation='"+designation+"'");
-				 }
-			else  if(username!="")
-			{ 
-			 q = session.createQuery("from EmpDetails where eid='"+username+"'");	
-			}
-			else if(department!="") {
-				 q = session.createQuery("from EmpDetails where department='"+department+"'");
-			}
-			else if(designation!="") {
-			 q = session.createQuery("from EmpDetails where designation='"+designation+"'");
-			}
-			List<EmpDetails> empleave = q.list();
-		
-			session.getTransaction().commit();
-			return (empleave);		
-		}
-	}
+		session.beginTransaction();
 
-	
+		Query q = null;
+		if(username!="" && department!="" && designation!="") {
+			q = session.createQuery("from EmpDetails where eid='"+username+"'AND department='"+department+"'AND designation='"+designation+"'");
+		}
+
+		else if(username!="" && department!="")
+		{
+			q = session.createQuery("from EmpDetails where eid='"+username+"'AND department='"+department+"'");	
+		}
+		else if(username!="" && designation!="")
+		{	
+			q = session.createQuery("from EmpDetails where eid='"+username+"'AND designation='"+designation+"'");
+		}	
+		else if(department!="" && designation!="")
+		{
+			q = session.createQuery("from EmpDetails where department='"+department+"'AND designation='"+designation+"'");
+		}
+		else  if(username!="")
+		{ 
+			q = session.createQuery("from EmpDetails where eid='"+username+"'");	
+		}
+		else if(department!="") {
+			q = session.createQuery("from EmpDetails where department='"+department+"'");
+		}
+		else if(designation!="") {
+			q = session.createQuery("from EmpDetails where designation='"+designation+"'");
+		}
+		List<EmpDetails> empleave = q.list();
+
+		session.getTransaction().commit();
+		return (empleave);		
+	}
+}
+
+
 
 
 
