@@ -365,14 +365,14 @@ public class ManagerPageController {
 		attedance.setStatas(null);
 		attedance.setMonth(request.getParameter("month"));
 		attedance.setYear(Integer.parseInt(request.getParameter("year")));
-		if(attedance.getYear().equals("January")||attedance.getYear().equals("March")||attedance.getYear().equals("May")||attedance.getYear().equals("July")||attedance.getYear().equals("August")||attedance.getYear().equals("October")||attedance.getYear().equals("December")) {
+		if(attedance.getMonth().equals("January")||attedance.getMonth().equals("March")||attedance.getMonth().equals("May")||attedance.getMonth().equals("July")||attedance.getMonth().equals("August")||attedance.getMonth().equals("October")||attedance.getMonth().equals("December")) {
 			attedance.setDay29(Integer.parseInt(request.getParameter("day29")));
 			attedance.setDay30(Integer.parseInt(request.getParameter("day30")));
 			attedance.setDay31(Integer.parseInt(request.getParameter("day31")));
-		}else if(attedance.getYear().equals("April")||attedance.getYear().equals("June")||attedance.getYear().equals("September")||attedance.getYear().equals("November")) {
+		}else if(attedance.getMonth().equals("April")||attedance.getMonth().equals("June")||attedance.getMonth().equals("September")||attedance.getMonth().equals("November")) {
 			attedance.setDay29(Integer.parseInt(request.getParameter("day29")));
 			attedance.setDay30(Integer.parseInt(request.getParameter("day30")));
-		}else if(attedance.getYear().equals("Febraury") && (attedance.getYear()%4==0)) {
+		}else if(attedance.getMonth().equals("Febraury") && (attedance.getYear()%4==0)) {
 			attedance.setDay29(Integer.parseInt(request.getParameter("day29")));
 		}
 		emailSubject = "New Time Sheet For:"+attedance.getMonth()+" "+attedance.getYear()+"";
@@ -575,5 +575,89 @@ public class ManagerPageController {
 		mav.addObject("manservices", mandao.list());	
 		return mav;
 	}
+    @RequestMapping(value= "/manager/timesheet/search")
+ public ModelAndView indvidtimesheetSearch(HttpSession session,HttpServletRequest request) {
+  ModelAndView mav = new ModelAndView("emptimesheet");
+  Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+  EmpDetails user=null;
+  if (principal instanceof EmpDetails) {
+   user = ((EmpDetails)principal);
+  }
+
+  String role = user.getRole();
+  mav.addObject("Role",role);
+
+  List<TblEmpAttendanceNew> attendances =  empattreq.Search(request.getParameter("month"), request.getParameter("status"), user.getEid());
+    //viewSearch(request.getParameter("month"), request.getParameter("status"),empattreq.countEmployee(user.getEid()));
+  List<EmpDetails> emp1 = client.getDetails();
+  List<TblEmpLeavereq> allempleave = empleavereq.view();
+  int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+  List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+  mav.addObject("empattendances",empattendances);
+ mav.addObject("allempleave", allempleave);
+ mav.addObject("count",count);
+  mav.addObject("attendancelist",attendances);
+  mav.addObject("manservices", mandao.list()); 
+  mav.addObject("User", user);
+  mav.addObject("employees", emp1);
+  return mav;
+ }
+    @RequestMapping(value="/manager/search/register")
+	public ModelAndView empLeaveSearch(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("allempleaverequests");
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+			user = ((EmpDetails)principal);
+		}
+
+		String role = user.getRole();
+		mav.addObject("Role",role);
+		
+		List<TblEmpLeavereq> empleave =  empleavereq.empLeaveSearch(request.getParameter("uname"),request.getParameter("month"), request.getParameter("status"));
+		
+		List<EmpDetails> emp1 = client.getDetails();
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+		mav.addObject("employees", emp1);
+		 
+		mav.addObject("empleave", empleave);
+		mav.addObject("User",user);
+		mav.addObject("manservices", mandao.list());	
+		mav.addObject("count",count);
+		return mav;
+	}
+    @RequestMapping(value= "/manager/leave/search")
+    public ModelAndView managerLeaveSearch(HttpServletRequest request) {
+     ModelAndView mav = new ModelAndView("empleaverequests");
+     Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+     EmpDetails user=null;
+     if (principal instanceof EmpDetails) {
+      user = ((EmpDetails)principal);
+     }
+
+     String role = user.getRole();
+     mav.addObject("Role",role);
+     Client cl = new Client();
+     List<TblEmpLeavereq> leavereq =  empleavereq.empLeaveSearch(user.getEid(),request.getParameter("month"), request.getParameter("status"));
+     int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+     List<EmpDetails> emp1 = client.getDetails();
+     List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+     mav.addObject("empattendances",empattendances);
+     
+     mav.addObject("count",count);
+     mav.addObject("User", user);
+     mav.addObject("empleave", leavereq);
+     mav.addObject("manservices", mandao.list());
+     mav.addObject("employees", emp1);
+     mav.addObject("count",count);
+     return mav;
+   }
+    @RequestMapping(value= "/manager/timesheet/delete/{id}")
+	public ModelAndView empTimeSheetdeletePage(HttpSession session,@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("redirect:/manager/timesheet/register");
+		String DelMsg = empattreq.delete(id);
+		return mav;
+	}
+
 
 }

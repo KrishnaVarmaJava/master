@@ -95,7 +95,7 @@
 						<!-- Table Kitchen Sink -->
 						<div class="card">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
-								<form action="${contextRoot}/admin/search/register">
+								<form action="${contextRoot}/${role}/search/register" method="post">
 									<div class="col-md-2 padding_col">
 
 										<div class="form-group">
@@ -189,7 +189,7 @@
 															</td>
 															<td>${empleaveslist.getLeavetype()}</td>
 															<td>${empleaveslist.getFromdate()}</td>
-															<td>${empleaveslist.getTodate()}$</td>
+															<td>${empleaveslist.getTodate()}</td>
 															<td>${empleaveslist.getCount()}days</td>
 															<td>${empleaveslist.getLeavereason()}</td>
 
@@ -233,12 +233,16 @@
 																				</c:if>
 
 
-																				<li><a
-																					href="${contextRoot}/${role}/leave/approve/${empleaveslist.getId()}"><i
-																						class="material-icons">print</i>Approved</a></li>
-																				<li><a
-																					href="${contextRoot}/${role}/leave/decline/${empleaveslist.getId()}"><i
-																						class="material-icons">favorite</i>Declined</a></li>
+																					<li>
+																			<button type="button"
+																				class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
+																				data-toggle="modal" data-target="#longmodal1" id="${empleaveslist.getId()}" onclick="display(this.id)">Declined</button>
+																			
+																		</li>
+																		<li><button type="button"
+																				class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect"
+																				data-toggle="modal" data-target="#longmodal" id="${empleaveslist.getId()}" onclick="display(this.id)">Approved</button>
+																			</li>
 
 																			</ul>
 																		</c:if>
@@ -265,7 +269,7 @@
 													</td>
 													<td>${empleaveslist.getLeavetype()}</td>
 													<td>${empleaveslist.getFromdate()}</td>
-													<td>${empleaveslist.getTodate()}$</td>
+													<td>${empleaveslist.getTodate()}</td>
 													<td>${empleaveslist.getCount()}days</td>
 													<td>${empleaveslist.getLeavereason()}</td>
 
@@ -312,12 +316,12 @@
 																		<li>
 																			<button type="button"
 																				class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
-																				data-toggle="modal" data-target="#longmodal1">Declined</button>
+																				data-toggle="modal" data-target="#longmodal1" id="${empleaveslist.getId()}" onclick="display(this.id)">Declined</button>
 																			
 																		</li>
 																		<li><button type="button"
 																				class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect"
-																				data-toggle="modal" data-target="#longmodal">Approved</button>
+																				data-toggle="modal" data-target="#longmodal" id="${empleaveslist.getId()}" onclick="display(this.id)">Approved</button>
 																			</li>
 
 																	</ul>
@@ -358,7 +362,7 @@
 						</div>
 						<div class="modal-body">
 							<div class="long-modal">
-								<form action="${contextRoot}/reason" method="post">
+								<form id="form_a" method="post">
 									<div class="col-md-6">
 										<div class="form-group">
 											<div class="form-line">
@@ -373,7 +377,7 @@
 									<div style="text-align: center;">
 										<button type="submit"
 											class="btn btn-primary btn-rounded waves-effect">Approve
-											Reason</button>
+											</button>
 									</div>
 
 
@@ -399,7 +403,7 @@
 						</div>
 						<div class="modal-body">
 							<div class="long-modal">
-								<form action="${contextRoot}/reason" method="post">
+								<form id="form_d"  method="post">
 									<div class="col-md-6">
 										<div class="form-group">
 											<div class="form-line">
@@ -486,6 +490,17 @@
 		 }
 
 }
+  </script>
+  
+  <script type="text/javascript">
+  function display(id){
+	    document.getElementById('form_d').action = "${contextRoot}/${role}/leave/decline/"+id;
+	    document.getElementById('form_a').action = "${contextRoot}/${role}/leave/approve/"+id;
+	    }
+
+
+   
+
   </script>
 </body>
 

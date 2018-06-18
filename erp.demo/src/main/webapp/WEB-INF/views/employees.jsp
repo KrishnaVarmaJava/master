@@ -289,7 +289,7 @@
 								<div class="col-md-2 padding_col">
 									<div class="form-group">
 										<input type="text" class="form-control" id="username"
-											placeholder="Username" name="username" />
+											placeholder="Employee ID" name="username" />
 									</div>
 								</div>
 								<div class="col-md-2 padding_col">

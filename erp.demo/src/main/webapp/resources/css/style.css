@@ -8,7 +8,7 @@
 ****************************************************/
 
 body {
-	background:url('../images/bg/bg1.png');
+	background:#fff;
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -8472,7 +8472,7 @@ fieldset[disabled] .form-control {
 ****************************************************/
 
 .login-page {
-	background:url('../images/bg/bg1.png');
+	background:#fff;
 
     padding-left: 0;
     max-width: 360px;

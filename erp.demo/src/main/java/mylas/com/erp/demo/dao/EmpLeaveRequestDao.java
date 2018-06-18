@@ -19,4 +19,5 @@ public interface EmpLeaveRequestDao {
 	public String ChangeManager(int id);
 	public int countEmployee(String manid);
 	public List<TblEmpLeavereq> viewSearch(String username, String month, String status);
+	public List<TblEmpLeavereq> empLeaveSearch(String uname,String month, String status); 
 }

@@ -308,7 +308,7 @@ public class PageController<JavaMailSender> {
 		ModelAndView mav = new ModelAndView("employees");
 		mav.addObject("services", servicesdao.list());
 		String mesg = "hi";
-
+		mesg = userDetails.getConnection(emp);
 		List<TblManRoleTransfer> transferrole = roleTransfer.viewAll();
 		List<TblEmpLeavereq> allempleave = empleavereq.view();
 		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
@@ -331,7 +331,7 @@ public class PageController<JavaMailSender> {
 		mav.addObject("Role",role);
 		
 		mav.addObject("employees", emp1);
-		mesg = userDetails.getConnection(emp);
+		
 
 		mav.addObject("dupmsg", mesg);
 		mav.addObject("User",user);
@@ -585,11 +585,10 @@ public class PageController<JavaMailSender> {
 		return mav;
 	}
 	@RequestMapping(value= "/admin/leave/approve/{id}")
-	public ModelAndView empLeaveApprovePage(HttpSession session,@PathVariable("id") int id) {
+	public ModelAndView empLeaveApprovePage(HttpSession session,@PathVariable("id") int id,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("redirect:/admin/leaverequests/register");
-
 		List<TblEmpLeavereq> leavereq =  empleavereq.view();
-		String reason = "Approved";
+		String reason = request.getParameter("reason");
 		boolean status = true;
 		String UMsg = empleavereq.update(id,reason,status);
 		mav.addObject("empleave", leavereq);
@@ -599,10 +598,10 @@ public class PageController<JavaMailSender> {
 		return mav;
 	}
 	@RequestMapping(value= "/admin/leave/decline/{id}")
-	public ModelAndView empLeavedeclinePage(HttpSession session,@PathVariable("id") int id) {
+	public ModelAndView empLeavedeclinePage(HttpSession session,@PathVariable("id") int id,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("redirect:/admin/leaverequests/register");
-		List<TblEmpLeavereq> leavereq =  empleavereq.view();
-		String reason = "Decline";
+		List<TblEmpLeavereq> leavereq =  empleavereq.view();		
+		String reason = request.getParameter("reason");
 		boolean status = false;
 		String UMsg = empleavereq.update(id,reason,status);
 		mav.addObject("empleave", leavereq);

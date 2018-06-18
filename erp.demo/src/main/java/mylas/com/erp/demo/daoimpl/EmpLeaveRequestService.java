@@ -168,7 +168,6 @@ return "error occured while updating";}
 	public List<TblEmpLeavereq> viewSearch(String username, String month, String status) {
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		System.out.println("start");
 		Query q = null;
 		if(username!="" && month!="" && status!="") {
 
@@ -215,9 +214,66 @@ return "error occured while updating";}
 			}
 		}
 		List<TblEmpLeavereq> empleave = q.list();
-		System.out.println(empleave);
 		session.getTransaction().commit();
 		return (empleave);
+	}
+
+	@Override
+	public List<TblEmpLeavereq> empLeaveSearch(String uname, String month, String status) {
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		System.out.println("start");
+		Query q = null;
+		if(uname!="" && month!="" && status!="") {
+
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpLeavereq where employeeid='"+uname+"'AND fromdate LIKE '%"+month+"%' AND status="+status);
+			}else {
+				q=session.createQuery("from TblEmpLeavereq where employeeid='"+uname+"'AND fromdate LIKE '%"+month+"%' AND status is null");
+			}
+		}
+		else if(uname!="" && month!="") {
+			System.out.println("inside");
+			System.out.println(month	);
+			q=session.createQuery("from TblEmpLeavereq where employeeid='"+uname+"'AND fromdate LIKE '%"+month+"%'");
+		}
+		else if(uname!="" && status!="") {
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpLeavereq where employeeid='"+uname+"'AND status="+status);
+			}else {
+				q=session.createQuery("from TblEmpLeavereq where employeeid='"+uname+"'AND status is null");
+			}
+		}
+		else if(month!="" && status!="") {
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpLeavereq where fromdate LIKE '%"+month+"%' AND status="+status);
+			}else {
+				q=session.createQuery("from TblEmpLeavereq where fromdate LIKE '%"+month+"%' AND status is null");
+			}
+
+		}
+		else if(uname!="")
+		{
+
+			q = session.createQuery("from TblEmpLeavereq where employeeid='"+uname+"'");	
+		}
+		else if(month!="")
+		{
+
+			q = session.createQuery("from TblEmpLeavereq where fromdate LIKE '%"+month+"%'");	
+		}
+		else if(status!="")
+		{
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpLeavereq where status="+status);
+			}else {
+				q=session.createQuery("from TblEmpLeavereq where status is null");
+			}
+		}
+		List<TblEmpLeavereq> empleave = q.list();
+		System.out.println(empleave);
+		session.getTransaction().commit();
+		return (empleave);	
 	}
 
 }

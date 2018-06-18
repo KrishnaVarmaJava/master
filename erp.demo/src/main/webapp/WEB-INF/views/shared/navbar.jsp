@@ -1,3 +1,12 @@
+
+<style>
+.fontname{
+color :	#fff;
+padding : 12px;
+}
+</style>
+
+
 <c:if test="${Role.equals('ADMIN_ROLE')}">
 	<c:set var="role" value="admin" />
 </c:if>
@@ -41,6 +50,7 @@
 		<!-- END Left navbar-->
 		<!-- START Right Navbar-->
 		<ul class="nav navbar-nav navbar-right">
+		<li><h4 class="fontname">Welcome: ${User.getFname()} ${User.getLname()}</h4></li>
 			<li><a href="#" data-search-open=""> <em
 					class="material-icons">search</em>
 			</a></li>

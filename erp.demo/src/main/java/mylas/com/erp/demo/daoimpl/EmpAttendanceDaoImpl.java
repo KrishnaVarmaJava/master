@@ -144,7 +144,7 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 			}
 		}
 		else if(username!="" && month!="") {
-			q=session.createQuery("from TblEmpAttendanceNew where empid='"+username+"'AND month='"+month+"' AND statas is null");
+			q=session.createQuery("from TblEmpAttendanceNew where empid='"+username+"'AND month='"+month+"'");
 		}
 		else if(username!="" && status!="") {
 			if(status.equals("1")||status.equals("0")) {
@@ -184,6 +184,37 @@ public class EmpAttendanceDaoImpl implements EmpAttendenceDao {
 		session.getTransaction().commit();
 		return (empleave);		
 
+	}
+
+	@Override
+	public List<TblEmpAttendanceNew> Search(String month, String status, String id) {
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		  session.beginTransaction();
+		  Query q = null;
+		  if( month!="" && status!="") {
+
+		   if(status.equals("1")||status.equals("0")) {
+		    q= session.createQuery("from TblEmpAttendanceNew where empid='"+id+"'AND month='"+month+"' AND statas="+status);
+		   }else {
+		    q=session.createQuery("from TblEmpAttendanceNew where empid='"+id+"'AND month='"+month+"' AND statas is null");
+		   }
+		  }
+		  else if(month!="")
+		  {
+
+		   q = session.createQuery("from TblEmpAttendanceNew where empid='"+id+"'AND month='"+month+"'"); 
+		  }
+		  else if(status!="")
+		  {
+		   if(status.equals("1")||status.equals("0")) {
+		    q= session.createQuery("from TblEmpAttendanceNew where empid='"+id+"'AND statas="+status);
+		   }else {
+		    q=session.createQuery("from TblEmpAttendanceNew where empid='"+id+"'AND statas is null");
+		   }
+		  }
+		  List<TblEmpAttendanceNew> empleave = q.list();
+		  session.getTransaction().commit();
+		  return (empleave); 
 	}
 
 

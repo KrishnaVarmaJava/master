@@ -110,6 +110,24 @@ public class EmployeePageController {
 		return mav;
 	}
 
+	@RequestMapping(value= "/employee/timesheet/search")
+	public ModelAndView indvidtimesheetSearch(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("emptimesheet");
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+			user = ((EmpDetails)principal);
+		}
+
+		String role = user.getRole();
+		List<TblEmpAttendanceNew> attendances =  empattreq.Search(request.getParameter("month"), request.getParameter("status"), user.getEid());
+		mav.addObject("attendancelist",attendances);
+		mav.addObject("empservices", empservicesdao.list());
+		mav.addObject("Role",role);
+		mav.addObject("User", user);
+		return mav;
+	}
+	
 	@RequestMapping(value= "/employee/timesheet/register/{id}")
 	public ModelAndView indvidtimesheets(HttpSession session,@PathVariable("id") String id) {
 
@@ -169,14 +187,14 @@ public class EmployeePageController {
 		
 		
 		System.out.println("\nMessage Send Successfully.... Hurrey!\n");
-		if(attedance.getYear().equals("January")||attedance.getYear().equals("March")||attedance.getYear().equals("May")||attedance.getYear().equals("July")||attedance.getYear().equals("August")||attedance.getYear().equals("October")||attedance.getYear().equals("December")) {
+		if(attedance.getMonth().equals("January")||attedance.getMonth().equals("March")||attedance.getMonth().equals("May")||attedance.getMonth().equals("July")||attedance.getMonth().equals("August")||attedance.getMonth().equals("October")||attedance.getMonth().equals("December")) {
 			attedance.setDay29(Integer.parseInt(request.getParameter("day29")));
 			attedance.setDay30(Integer.parseInt(request.getParameter("day30")));
 			attedance.setDay31(Integer.parseInt(request.getParameter("day31")));
-		}else if(attedance.getYear().equals("April")||attedance.getYear().equals("June")||attedance.getYear().equals("September")||attedance.getYear().equals("November")) {
+		}else if(attedance.getMonth().equals("April")||attedance.getMonth().equals("June")||attedance.getMonth().equals("September")||attedance.getMonth().equals("November")) {
 			attedance.setDay29(Integer.parseInt(request.getParameter("day29")));
 			attedance.setDay30(Integer.parseInt(request.getParameter("day30")));
-		}else if(attedance.getYear().equals("Febraury") && (attedance.getYear()%4==0)) {
+		}else if(attedance.getMonth().equals("Febraury") && (attedance.getYear()%4==0)) {
 			attedance.setDay29(Integer.parseInt(request.getParameter("day29")));
 		}
 		empattreq.save(attedance);
@@ -266,6 +284,25 @@ public class EmployeePageController {
 		mav.addObject("Role",role);
 		return mav;
 	}
+	
+	@RequestMapping(value= "/employee/leave/search")
+	 public ModelAndView empLeavePageSearch(HttpSession session,HttpServletRequest request) {
+	  Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	  EmpDetails user=null;
+	  if (principal instanceof EmpDetails) {
+	   user = ((EmpDetails)principal);
+	  }
+	  String role = user.getRole();
+	  ModelAndView mav = new ModelAndView("empleaverequests");
+	  System.out.println(request.getParameter("month"));
+	  List<TblEmpLeavereq> leavereq =  empleavereq.empLeaveSearch(user.getEid(),request.getParameter("month"), request.getParameter("status"));
+	   
+	  mav.addObject("Role",role);
+	  mav.addObject("User", user);
+	  mav.addObject("empleave", leavereq);
+	  mav.addObject("empservices", empservicesdao.list());
+	  return mav;
+	 }
 
 
 	/*

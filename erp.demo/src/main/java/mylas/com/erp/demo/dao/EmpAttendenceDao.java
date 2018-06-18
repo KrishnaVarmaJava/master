@@ -17,4 +17,5 @@ public interface EmpAttendenceDao {
 	public String ChangeManager(int id);
 	public int countEmployee(String managerid);
 	public List<TblEmpAttendanceNew> viewSearch(String username, String month, String status); 
+	public List<TblEmpAttendanceNew> Search(String month, String status,String id);
 }

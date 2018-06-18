@@ -101,7 +101,7 @@
 				</div>
 
 				<div class="col-md-12 card" id="addnewemp">
-				<button type="button" class="close" aria-label="Close">
+					<button type="button" class="close" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<div class="custom_title">
@@ -110,18 +110,19 @@
 					<p style="color: green;">${Submitmsg}</p>
 					<p style="color: red;">${errmsg}</p>
 					<c:if test="${Role.equals('ADMIN_ROLE')}">
-															<c:set var="role" value="admin"/>
-														</c:if>
-						
-														<c:if test="${Role.equals('MANAGER_ROLE')}">
-															<c:set var="role" value="manager"/>
-														</c:if>
-														
-														<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
-																<c:set var="role" value="employee"/>
-														</c:if>
-					
-					<form action="${contextRoot}/${role}/leave/register" method="post" onsubmit="return Validate()" name="form">
+						<c:set var="role" value="admin" />
+					</c:if>
+
+					<c:if test="${Role.equals('MANAGER_ROLE')}">
+						<c:set var="role" value="manager" />
+					</c:if>
+
+					<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
+						<c:set var="role" value="employee" />
+					</c:if>
+
+					<form action="${contextRoot}/${role}/leave/register" method="post"
+						onsubmit="return Validate()" name="form">
 						<hr class="custom_line">
 						<div class="body">
 
@@ -143,7 +144,8 @@
 									<div class="input-group addon-line">
 										<div class="form-line">
 											<label>From </label> <input type="date" name="fromdate"
-												id="fromdate" class="form-control" placeholder="From Date" required="required">
+												id="fromdate" class="form-control" placeholder="From Date"
+												required="required">
 										</div>
 										<span class="input-group-addon"><i
 											class="material-icons">date_range </i></span>
@@ -157,7 +159,8 @@
 									<div class="input-group addon-line">
 										<div class="form-line">
 											<label>To </label> <input type="date" name="todate"
-												id="todate" class="form-control" placeholder="To Date" required="required">
+												id="todate" class="form-control" placeholder="To Date"
+												required="required">
 										</div>
 										<span class="input-group-addon"><i
 											class="material-icons">date_range </i></span>
@@ -196,57 +199,51 @@
 
 						<!-- Table Kitchen Sink -->
 						<div class="card">
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
-								<div class="col-md-2 padding_col">
-									<div class="form-group">
+							<form action="${contextRoot}/${role}/leave/search" method="post">
 
-										<input type="text" class="form-control" placeholder="Username" />
-									</div>
-								</div>
-								<div class="col-md-2 padding_col">
-									<div class="form-group">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
 
-										<select class="form-control" size="1">
-											<option value="0">Please select</option>
-											<option value="1">Option #1</option>
-											<option value="2">Option #2</option>
-											<option value="3">Option #3</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-2 padding_col">
-									<div class="form-group">
+									<div class="col-md-2 padding_col">
+										<div class="form-group">
 
-										<select class="form-control" size="1">
-											<option value="0">Please select</option>
-											<option value="1">Option #1</option>
-											<option value="2">Option #2</option>
-											<option value="3">Option #3</option>
-										</select>
+											<select class="form-control" size="1" name="month" id="month">
+												<option value="">Please select</option>
+												<option value="01">January</option>
+												<option value="02">February</option>
+												<option value="03">March</option>
+												<option value="04">April</option>
+												<option value="05">May</option>
+												<option value="06">June</option>
+												<option value="07">July</option>
+												<option value="08">August</option>
+												<option value="09">September</option>
+												<option value="10">October</option>
+												<option value="11">November</option>
+												<option value="12">December</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-2 padding_col">
+										<div class="form-group">
+
+											<select class="form-control" size="1" id="status"
+												name="status">
+												<option value="">Please select</option>
+												<option value="2">Pending</option>
+												<option value="1">Approved</option>
+												<option value="0">Declined</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-2 ">
+										<button type="submit" 
+											class="btn btn-primary  pull-right waves-effect ">
+											Search</button>
 									</div>
 								</div>
-								<div class="col-md-2 padding_col">
-									<div class="input-group">
-										<input type="text" class="form-control"
-											data-provide="datepicker"> <span
-											class="input-group-addon bg"><i class="fa fa-calendar"></i></span>
-									</div>
-								</div>
-								<div class="col-md-2 padding_col">
-									<div class="input-group">
-										<input type="text" class="form-control"
-											data-provide="datepicker"> <span
-											class="input-group-addon bg"><i class="fa fa-calendar"></i></span>
-									</div>
-								</div>
-								<div class="col-md-2 ">
-									<button type="button"
-										class="btn btn-primary  pull-right waves-effect ">
-										Search</button>
-								</div>
-							</div>
+							</form>
 							<div class="body">
-							<p style="color: green;">${DelMsg}</p>
+								<p style="color: green;">${DelMsg}</p>
 								<table class="tablesaw table-striped table-bordered table-hover">
 									<thead class="tableheding">
 										<tr>
@@ -271,7 +268,7 @@
 										</tr>
 									</thead>
 									<div class="clearfix"></div>
-									
+
 									<c:forEach items="${empleave}" var="empleaveslist">
 										<tbody>
 
@@ -280,8 +277,7 @@
 												<td>
 													<div class="chip">
 														<img src="${images}/mail/one.jpg" alt="Contact Person">
-														<span>${User.getFname()}
-															${User.getLname()}</span>
+														<span>${User.getFname()} ${User.getLname()}</span>
 														<div style="text-align: center">${User.getEid()}</div>
 													</div>
 												</td>
@@ -293,23 +289,23 @@
 												<td>
 
 													<div class="btn-group">
-													<c:if test="${empleaveslist.getStatus() == null}">
-														<button type="button"
-															class="btn btn-primary btn-outline btn-rounded waves-effect"
-															data-toggle="dropdown" aria-haspopup="true"
-															aria-expanded="false">Pending 
-														</button>
-														</c:if><c:if test="${empleaveslist.getStatus() == false}">
-																<button type="button"
-															class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
-															>Declined 
-														</button></c:if><c:if test="${empleaveslist.getStatus() == true}">
-																<button type="button"
-															class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect "
-															data-toggle="dropdown" aria-haspopup="true"
-															aria-expanded="false">Approved 
-														</button>
-												</c:if>
+														<c:if test="${empleaveslist.getStatus() == null}">
+															<button type="button"
+																class="btn btn-primary btn-outline btn-rounded waves-effect"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">Pending</button>
+														</c:if>
+														<c:if test="${empleaveslist.getStatus() == false}">
+															<button type="button"
+																class="btn btn-primary  btn-outline btn-rounded waves-effect colorred">Declined
+															</button>
+														</c:if>
+														<c:if test="${empleaveslist.getStatus() == true}">
+															<button type="button"
+																class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect "
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">Approved</button>
+														</c:if>
 													</div>
 												</td>
 												<td>
@@ -320,9 +316,10 @@
 																<i class="material-icons">more_vert</i>
 														</a>
 															<ul class="dropdown-menu pull-right">
-															<c:if test="${empleaveslist.getStatus() == null}">
-																<li><a href="${contextRoot}/${role}/leave/delete/${empleaveslist.getId()}"><i
-																		class="material-icons">delete</i>Delete</a></li>
+																<c:if test="${empleaveslist.getStatus() == null}">
+																	<li><a
+																		href="${contextRoot}/${role}/leave/delete/${empleaveslist.getId()}"><i
+																			class="material-icons">delete</i>Delete</a></li>
 																</c:if>
 															</ul></li>
 													</ul>
@@ -331,7 +328,7 @@
 											</tr>
 
 										</tbody>
-										
+
 									</c:forEach>
 
 
@@ -373,7 +370,7 @@
 	<script src="${js}/layout.js"></script>
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
 function Validate() {
     var startDate = document.getElementById("fromdate").value;
     var endDate = document.getElementById("todate").value;
@@ -386,7 +383,7 @@ function Validate() {
 }
 </script>
 
-<script>
+	<script>
 		$(document).ready(function() {
 
 			$("#addnewemp").css("display", "none");
