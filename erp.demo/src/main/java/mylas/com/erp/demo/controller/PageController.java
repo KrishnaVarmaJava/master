@@ -489,7 +489,7 @@ public class PageController<JavaMailSender> {
 		emp.setLname("Admin");
 		String msg = userDetails.getConnection(emp);
 		ModelAndView mav;
-		if(msg.contains("Duplicate Entry")) {
+		if(msg.equalsIgnoreCase("This is a Duplicate Entry")) {
 			mav = new ModelAndView("register");	
 		}else {
 			mav = new ModelAndView("newlogin");

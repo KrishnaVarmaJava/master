@@ -22,7 +22,7 @@ public class Client implements EmployeeDao {
 	
 	
 
-	public String getConnection(EmpDetails emp) {
+	public String getConnection(EmpDetails emp) throws ConstraintViolationException{
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		try {
@@ -34,15 +34,14 @@ public class Client implements EmployeeDao {
 			return "Employee Saved Please Login!!!";
 		}else {
 			System.out.println("Table Faied to Update");
+/*			session.getTransaction().commit();
+*/			return "Employee Save Failed";
 		}
 		
 		}catch(ConstraintViolationException e) {
 			System.out.println("Duplicate Entry");
-			session.getTransaction().commit();
 			return "This is a Duplicate Entry";
 		}
-		session.getTransaction().commit();
-		return null;
 	}
 
 	@Override
