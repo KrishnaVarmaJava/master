@@ -104,7 +104,7 @@
 										<div class="form-group">
 
 											<input type="text" class="form-control"
-												placeholder="Username" name="username" id="username" />
+												placeholder="Employee Id" name="username" id="username" />
 										</div>
 									</div>
 									<div class="col-md-2 padding_col">
@@ -151,7 +151,7 @@
 						</form>
 						<div class="card">
 
-							<div class="body" style="overflow: hidden; overflow-x: scroll;">
+							<div class="body" style="overflow-y: hidden; overflow-x: scroll;height: 400px; ">
 								<table class="tablesaw table-striped table-hover table-bordered">
 									<thead class="tableheding">
 										<tr>
@@ -1105,7 +1105,7 @@
  -->
 	<script>
 		function Search() {
-			var name = document.getElementById("uname").value;
+			var name = document.getElementById("username").value;
 			var mon = document.getElementById("month").value;
 			var sta = document.getElementById("status").value;
 			if (name == "" && mon == "" && sta == "") {
@@ -1123,6 +1123,7 @@
 			document.getElementById('form_a').action = "${contextRoot}/${role}/attendance/approve/"
 					+ id;
 		}
+		</script>
 
 		</body>
 

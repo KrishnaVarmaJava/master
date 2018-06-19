@@ -236,7 +236,7 @@
 										</div>
 									</div>
 									<div class="col-md-2 ">
-										<button type="submit" 
+										<button type="submit" onclick="return Search()"
 											class="btn btn-primary  pull-right waves-effect ">
 											Search</button>
 									</div>
@@ -404,6 +404,18 @@ function Validate() {
 
 		});
 	</script>
+	<script>
+     function Search(){
+	 var mon = document.getElementById("month").value;
+	 var sta = document.getElementById("status").value;
+	 if(name=="" && mon=="" && sta=="")
+		 {
+		 alert("plese Select any one of these");
+		 return false;
+		 }
+
+}
+  </script>
 </body>
 
 </html>

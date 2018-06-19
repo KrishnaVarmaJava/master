@@ -70,7 +70,7 @@ padding : 12px;
 					<li class="body">
 						<ul class="menu">
 							<c:forEach items="${allempleave}" var="empleaveslist">
-								<c:if test="${User.getRole().equals('MANAGER_ROLE')}">
+								<c:if test="${User.getRole().equals('MANAGER_ROLE') || User.getRole().equals('ADMIN_ROLE') }">
 									<c:set var="user" value="${User.getEid()}" />
 									<c:if test="${empleaveslist.getEmployeeid() != user}">
 										<c:if

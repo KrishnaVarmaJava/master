@@ -245,7 +245,7 @@
 												<div class="col-md-2 padding_col">
 													<div class="form-group">
 
-														<select class="form-control" id="month" name="month"
+														<select class="form-control" id="months" name="month"
 															size="1">
 															<option value="">Please select</option>
 															<option value="January">January</option>
@@ -276,7 +276,7 @@
 													</div>
 												</div>
 												<div class="col-md-2 ">
-													<button type="submit"
+													<button type="submit" onclick="return Search()"
 														class="btn btn-primary  pull-right waves-effect ">
 														Search</button>
 												</div>
@@ -895,8 +895,19 @@
 		});
 	</script>
 	</c:if>
+<script>
+     function Search(){
 
+	 var mon = document.getElementById("months").value;
+	 var sta = document.getElementById("status").value;
+	 if(mon=="" && sta=="")
+		 {
+		 alert("plese Select any one of these");
+		 return false;
+		 }
 
+}
+</script>
 
 </body>
 

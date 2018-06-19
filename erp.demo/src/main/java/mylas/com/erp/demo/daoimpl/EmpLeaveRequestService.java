@@ -172,13 +172,13 @@ return "error occured while updating";}
 		if(username!="" && month!="" && status!="") {
 
 			if(status.equals("1")||status.equals("0")) {
-				q= session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND fromdate LIKE '%"+month+"%' AND status="+status);
+				q= session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND fromdate LIKE '%-"+month+"-%' AND status="+status);
 			}else {
-				q=session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND fromdate LIKE '%"+month+"%' AND status is null");
+				q=session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND fromdate LIKE '%-"+month+"-%' AND status is null");
 			}
 		}
 		else if(username!="" && month!="") {
-			q=session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND fromdate LIKE '%"+month+"%' AND status is null");
+			q=session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND fromdate LIKE '%-"+month+"-%' AND status is null");
 		}
 		else if(username!="" && status!="") {
 			if(status.equals("1")||status.equals("0")) {
@@ -189,9 +189,9 @@ return "error occured while updating";}
 		}
 		else if(month!="" && status!="") {
 			if(status.equals("1")||status.equals("0")) {
-				q= session.createQuery("from TblEmpLeavereq where fromdate LIKE '%"+month+"%' AND status="+status);
+				q= session.createQuery("from TblEmpLeavereq where fromdate LIKE '%-"+month+"-%' AND status="+status);
 			}else {
-				q=session.createQuery("from TblEmpLeavereq where fromdate LIKE '%"+month+"%' AND status is null");
+				q=session.createQuery("from TblEmpLeavereq where fromdate LIKE '%-"+month+"-%' AND status is null");
 			}
 
 		}
@@ -203,7 +203,7 @@ return "error occured while updating";}
 		else if(month!="")
 		{
 
-			q = session.createQuery("from TblEmpLeavereq where fromdate LIKE '%"+month+"%'");	
+			q = session.createQuery("from TblEmpLeavereq where fromdate LIKE '%-"+month+"-%'");	
 		}
 		else if(status!="")
 		{
@@ -222,20 +222,17 @@ return "error occured while updating";}
 	public List<TblEmpLeavereq> empLeaveSearch(String uname, String month, String status) {
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		System.out.println("start");
 		Query q = null;
 		if(uname!="" && month!="" && status!="") {
 
 			if(status.equals("1")||status.equals("0")) {
-				q= session.createQuery("from TblEmpLeavereq where employeeid='"+uname+"'AND fromdate LIKE '%"+month+"%' AND status="+status);
+				q= session.createQuery("from TblEmpLeavereq where employeeid='"+uname+"'AND fromdate LIKE '%-"+month+"-%' AND status="+status);
 			}else {
-				q=session.createQuery("from TblEmpLeavereq where employeeid='"+uname+"'AND fromdate LIKE '%"+month+"%' AND status is null");
+				q=session.createQuery("from TblEmpLeavereq where employeeid='"+uname+"'AND fromdate LIKE '%-"+month+"-%' AND status is null");
 			}
 		}
 		else if(uname!="" && month!="") {
-			System.out.println("inside");
-			System.out.println(month	);
-			q=session.createQuery("from TblEmpLeavereq where employeeid='"+uname+"'AND fromdate LIKE '%"+month+"%'");
+			q=session.createQuery("from TblEmpLeavereq where employeeid='"+uname+"'AND fromdate LIKE '%-"+month+"-%'");
 		}
 		else if(uname!="" && status!="") {
 			if(status.equals("1")||status.equals("0")) {
@@ -246,9 +243,9 @@ return "error occured while updating";}
 		}
 		else if(month!="" && status!="") {
 			if(status.equals("1")||status.equals("0")) {
-				q= session.createQuery("from TblEmpLeavereq where fromdate LIKE '%"+month+"%' AND status="+status);
+				q= session.createQuery("from TblEmpLeavereq where fromdate LIKE '%-"+month+"-%' AND status="+status);
 			}else {
-				q=session.createQuery("from TblEmpLeavereq where fromdate LIKE '%"+month+"%' AND status is null");
+				q=session.createQuery("from TblEmpLeavereq where fromdate LIKE '%-"+month+"-%' AND status is null");
 			}
 
 		}
@@ -260,7 +257,7 @@ return "error occured while updating";}
 		else if(month!="")
 		{
 
-			q = session.createQuery("from TblEmpLeavereq where fromdate LIKE '%"+month+"%'");	
+			q = session.createQuery("from TblEmpLeavereq where fromdate LIKE '%-"+month+"-%'");	
 		}
 		else if(status!="")
 		{
@@ -271,7 +268,7 @@ return "error occured while updating";}
 			}
 		}
 		List<TblEmpLeavereq> empleave = q.list();
-		System.out.println(empleave);
+
 		session.getTransaction().commit();
 		return (empleave);	
 	}

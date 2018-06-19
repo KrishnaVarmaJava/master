@@ -101,7 +101,7 @@
 										<div class="form-group">
 
 											<input type="text" class="form-control"
-												placeholder="Username" name="uname" id="uname" />
+												placeholder="Employee ID" name="uname" id="uname" />
 										</div>
 									</div>
 									<div class="col-md-2 padding_col">
@@ -321,7 +321,7 @@
 																		</li>
 																		<li><button type="button"
 																				class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect"
-																				data-toggle="modal" data-target="#longmodal" id="${empleaveslist.getId()}" onclick="display(this.id)">
+																				data-toggle="modal" data-target="#longmodal" id="${empleaveslist.getId()}" onclick="display(this.id)">Approved</button>
 </button>
 																			</li>
 
@@ -498,10 +498,6 @@
 	    document.getElementById('form_d').action = "${contextRoot}/${role}/leave/decline/"+id;
 	    document.getElementById('form_a').action = "${contextRoot}/${role}/leave/approve/"+id;
 	    }
-
-
-   
-
   </script>
 </body>
 

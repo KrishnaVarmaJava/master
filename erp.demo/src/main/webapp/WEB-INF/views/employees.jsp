@@ -283,18 +283,18 @@
 
 					<div class="row clearfix"></div>
 
-					<form action="${contextRoot}/${role}/employee/search">
+					<form action="${contextRoot}/${role}/employee/search" method="post">
 						<div class="card" style="padding: 5px;">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
 								<div class="col-md-2 padding_col">
 									<div class="form-group">
-										<input type="text" class="form-control" id="username"
+										<input type="text" class="form-control" id="username1"
 											placeholder="Employee ID" name="username" />
 									</div>
 								</div>
 								<div class="col-md-2 padding_col">
 									<div class="form-group">
-										<select id="department" name="department" class="form-control"
+										<select id="department1" name="department" class="form-control"
 											size="1">
 											<option value="">please select</option>
 											<c:forEach items="${departments}" var="departments">
@@ -306,7 +306,7 @@
 								</div>
 								<div class="col-md-2 padding_col">
 									<div class="form-group">
-										<select id="designation" name="designation"
+										<select id="designation1" name="designation"
 											class="form-control" size="1">
 											<option value="">please select</option>
 											<c:forEach items="${designations}" var="designations">
@@ -319,7 +319,7 @@
 
 
 								<div class="col-md-2 ">
-									<button type="submit"
+									<button type="submit" onclick="return Search()"
 										class="btn btn-primary  pull-right waves-effect ">Search</button>
 								</div>
 							</div>
@@ -558,7 +558,19 @@
 
 		});
 	</script>
+<script>
+     function Search(){
+	 var name = document.getElementById("username1").value;
+	 var mon = document.getElementById("department1").value;
+	 var sta = document.getElementById("designation1").value;
+	 if(name=="" && mon=="" && sta=="")
+		 {
+		 alert("plese Select any one of these");
+		 return false;
+		 }
 
+}
+     </script>
 </body>
 
 </html>
