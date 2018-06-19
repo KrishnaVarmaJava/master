@@ -144,7 +144,21 @@
 									</div>
 								</div>
 							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class="input-group addon-line">
+										<div class="form-line">
+											<label>From Date </label> <input type="date" name="fromdate"
+												id="fromdate" class="form-control" placeholder="From Date"
+												required="required">
+										</div>
+										<span class="input-group-addon"><i
+											class="material-icons">date_range </i></span>
+									</div>
+								</div>
 
+							</div>
+							
 							<div class="clearfix"></div>
 							<div style="text-align: center;">
 								<button type="submit"
@@ -172,12 +186,12 @@
 									style="width: 100%;">
 									<thead class="tableheding">
 										<tr>
-											<th data-tablesaw-sortable-col
-												data-tablesaw-sortable-default-col
-												data-tablesaw-priority="persist">Id</th>
+											
 											<th data-tablesaw-sortable-col data-tablesaw-priority="3">Department
 												Name</th>
-
+                                            <th data-tablesaw-sortable-col data-tablesaw-priority="2">From</th>
+											<th data-tablesaw-sortable-col data-tablesaw-priority="4">To</th>
+											<th data-tablesaw-sortable-col data-tablesaw-priority="4">Active State</th>
 											<th data-tablesaw-sortable-col data-tablesaw-priority="1"
 												class="actiontabel">Action</th>
 
@@ -185,7 +199,10 @@
 									</thead>
 
 									<div class="clearfix"></div>
-
+<c:set var="green"
+																value="icon-display  fa fa-check attenedance_check_green" />
+															<c:set var="red"
+																value="icon-display  fa fa-close  attenedance_check_red" />
 									<c:forEach items="${departments}" var="dep">
 									
 										<tbody>
@@ -193,9 +210,19 @@
 
 											<tr>
 
-												<td>${dep.getDepartmentId()}</td>
+												
 												<td>${dep.getDepartment()}</td>
-
+                                                 <td>${dep.getFromdate()}</td>
+                                                 <c:if test="${dep.getTodate() == null}">
+                                                 <td>--/--/--</td></c:if>
+                                                 <c:if test="${dep.getTodate() != null}">
+                                                 <td>${desig.getTodate()}</td></c:if>
+                                                 <c:if test="${dep.getActivestate() == true}">
+													<td><i class="${green}"></i></td>
+												</c:if>
+												<c:if test="${dep.getActivestate() == false}">
+													<td><i class="${red}"></i></td>
+												</c:if>
 
 												<td>
 													<ul class="tabelaction">

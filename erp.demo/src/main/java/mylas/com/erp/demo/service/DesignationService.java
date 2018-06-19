@@ -58,13 +58,18 @@ public class DesignationService implements DesignationDao {
 	}
 
 	@Override
-	public void updateDetails(int id, String newDep,String newDep1) {
+	public void updateDetails(int id, String newDep,String newDep1,String todate) {
 
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		TblDesignation deptdel = session.load(TblDesignation.class, id);
+		
 		deptdel.setDesignation(newDep);
 		deptdel.setDepartment(newDep1);
+		if(todate!="") {
+			deptdel.setTodate(todate);
+			deptdel.setActivestate(false);
+		}
 		session.saveOrUpdate(deptdel);
 		session.getTransaction().commit();
 		

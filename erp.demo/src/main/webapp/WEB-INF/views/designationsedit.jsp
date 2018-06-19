@@ -91,7 +91,7 @@
 
 
 
-						
+
 
 							</div>
 
@@ -138,6 +138,19 @@
 								</div>
 							</div>
 
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class="input-group addon-line">
+										<div class="form-line">
+											<label>To Date </label> <input type="date" name="todate"
+												id="todate" class="form-control" placeholder="To Date">
+										</div>
+										<span class="input-group-addon"><i
+											class="material-icons">date_range </i></span>
+									</div>
+								</div>
+
+							</div>
 							<div class="clearfix"></div>
 							<div style="text-align: center;">
 								<button type="submit"

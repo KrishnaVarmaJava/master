@@ -321,7 +321,8 @@
 																		</li>
 																		<li><button type="button"
 																				class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect"
-																				data-toggle="modal" data-target="#longmodal" id="${empleaveslist.getId()}" onclick="display(this.id)">Approved</button>
+																				data-toggle="modal" data-target="#longmodal" id="${empleaveslist.getId()}" onclick="display(this.id)">
+</button>
 																			</li>
 
 																	</ul>

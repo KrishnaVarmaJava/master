@@ -73,11 +73,17 @@ public class DepartmentService implements DepartmentDao {
 	 }
 	
 	@Override
-	 public void updateDetails(int id,String newDep) {
+	 public void updateDetails(int id,String newDep,String toDate) {
 	  Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 	  session.beginTransaction();
 	  TblDepartment deptdel = session.load(TblDepartment.class, id);
 	  deptdel.setDepartment(newDep);
+	  if(toDate!="") {
+		  deptdel.setTodate(toDate);
+		  deptdel.setActivestate(false);
+
+	  }
+	  
 	  session.saveOrUpdate(deptdel);
 	  session.getTransaction().commit();
 	 }

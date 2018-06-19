@@ -352,7 +352,9 @@ public class PageController<JavaMailSender> {
 	@RequestMapping(value="/admin/empdep/register", method=RequestMethod.POST)
 	public ModelAndView addEmpDepartmentPage(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("departments");
-		TblDepartment tbldep = new TblDepartment(request.getParameter("departmentname"));
+		TblDepartment tbldep = new TblDepartment(request.getParameter("departmentname"),null,null,null);
+		tbldep.setFromdate(request.getParameter("fromdate"));
+		tbldep.setActivestate(true);
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		EmpDetails user=null;
 		if (principal instanceof EmpDetails) {
@@ -381,7 +383,9 @@ public class PageController<JavaMailSender> {
 	@RequestMapping(value="/admin/empdesig/register", method=RequestMethod.POST)
 	public ModelAndView AddEmpDesignationPage(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("designations");
-		TblDesignation tbldes = new TblDesignation(request.getParameter("designationname"), request.getParameter("department"));
+		TblDesignation tbldes = new TblDesignation(request.getParameter("designationname"), request.getParameter("department"),null,null,null);
+		tbldes.setFromdate(request.getParameter("fromdate"));
+		tbldes.setActivestate(true);
 		DesignationService depdetails = new DesignationService();
 		depdetails.saveDetails(tbldes);
 		List<TblDesignation> depts = depdetails.getDetails();
@@ -729,25 +733,30 @@ public class PageController<JavaMailSender> {
 
 		//Integer id = (Integer) request.getAttribute("DepId");
 		ModelAndView mav = new ModelAndView("redirect:/admin/empdep/register");
-		deptdao.updateDetails(id, request.getParameter("departmentname")); 
+		deptdao.updateDetails(id, request.getParameter("departmentname"),request.getParameter("todate")); 
 		return mav;
 
 	}
 
 	@RequestMapping(value="/admin/designation/edit/{id}")
-	public ModelAndView editAdminDesignation(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") int id) {
+	public ModelAndView editAdminDesignation(HttpServletResponse response,@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView("designationsedit");
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
 		EmpDetails user=null;
 		if (principal instanceof EmpDetails) {
 			user = ((EmpDetails)principal);
 		}
-
+		String role = user.getRole();
+		mav.addObject("Role",role);
+		
 		List<TblManRoleTransfer> transferrole = roleTransfer.viewAll();
 		List<TblEmpLeavereq> allempleave = empleavereq.view();
 		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
 		List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
 		List<EmpDetails> emp1 = userDetails.getDetails();
+		
+		mav.addObject("User",user);
 		mav.addObject("empattendances",empattendances);
 		mav.addObject("allempleave", allempleave);
 		mav.addObject("count",count);
@@ -756,13 +765,14 @@ public class PageController<JavaMailSender> {
 		List<TblDepartment> depts1 = deptdao.getDetails();
 		mav.addObject("departments", depts1);
 		mav.addObject("depdetailsforedit",editdep);
+		mav.addObject("services", servicesdao.list());
 		return mav;
 
 	}
-	@RequestMapping(value="/admin/empdesignation/edit/{id}")
+	@RequestMapping(value="/admin/empdesignation/edit/{id}", method=RequestMethod.POST)
 	public ModelAndView updateAdmindesignation(HttpServletRequest request,@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView("redirect:/admin/empdesig/register");
-		designationImpl.updateDetails(id, request.getParameter("designationname"),request.getParameter("department"));
+		designationImpl.updateDetails(id, request.getParameter("designationname"),request.getParameter("department"),request.getParameter("todate"));
 		return mav;
 
 	}

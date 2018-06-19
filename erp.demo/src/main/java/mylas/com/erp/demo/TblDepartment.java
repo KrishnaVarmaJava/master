@@ -1,4 +1,6 @@
 package mylas.com.erp.demo;
+// Generated 19 Jun, 2018 10:51:25 AM by Hibernate Tools 5.2.8.Final
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,12 +17,18 @@ public class TblDepartment implements java.io.Serializable {
 
 	private Integer departmentId;
 	private String department;
+	private String fromdate;
+	private String todate;
+	private Boolean activestate;
 
 	public TblDepartment() {
 	}
 
-	public TblDepartment(String department) {
+	public TblDepartment(String department, String fromdate, String todate, Boolean activestate) {
 		this.department = department;
+		this.fromdate = fromdate;
+		this.todate = todate;
+		this.activestate = activestate;
 	}
 
 	@Id
@@ -42,6 +50,33 @@ public class TblDepartment implements java.io.Serializable {
 
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+
+	@Column(name = "fromdate", length = 50)
+	public String getFromdate() {
+		return this.fromdate;
+	}
+
+	public void setFromdate(String fromdate) {
+		this.fromdate = fromdate;
+	}
+
+	@Column(name = "todate", length = 50)
+	public String getTodate() {
+		return this.todate;
+	}
+
+	public void setTodate(String todate) {
+		this.todate = todate;
+	}
+
+	@Column(name = "activestate")
+	public Boolean getActivestate() {
+		return this.activestate;
+	}
+
+	public void setActivestate(Boolean activestate) {
+		this.activestate = activestate;
 	}
 
 }
