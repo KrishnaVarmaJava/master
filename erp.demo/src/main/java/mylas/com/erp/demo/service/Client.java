@@ -168,8 +168,14 @@ return "error occured while updating";}
 
 	@Override
 	public String ChangeTransManager(int id, String tomanagerid) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		EmpDetails employe = session.load(EmpDetails.class, id);
+		employe.setMantrans(tomanagerid);;
+		try {
+			session.update(employe);session.getTransaction().commit();return "Updated";
+		}catch(Exception e){			session.getTransaction().rollback();
+return "error occured while updating";}
 	}
 
 	@Override

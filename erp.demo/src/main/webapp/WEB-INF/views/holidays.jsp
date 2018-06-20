@@ -153,9 +153,6 @@
 								<table class="tablesaw table-striped table-bordered table-hover">
 									<thead class="tableheding">
 										<tr>
-											<th data-tablesaw-sortable-col
-												data-tablesaw-sortable-default-col
-												data-tablesaw-priority="persist">ID</th>
 											<th data-tablesaw-sortable-col data-tablesaw-priority="3">Title
 											</th>
 											<th data-tablesaw-sortable-col data-tablesaw-priority="2">Holiday
@@ -171,7 +168,6 @@
 									<tbody>
 										<c:forEach items="${HolidaysList}" var="Holiday">
 											<tr>
-												<td><a href="javascript:void(0)">001</a></td>
 												<td>${Holiday.getName()}</td>
 												<td>${Holiday.getDate()}-${Holiday.getMonth()}-${Holiday.getYear()}</td>
 												<td id="day${Holiday.getId()}"></td>
