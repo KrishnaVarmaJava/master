@@ -560,23 +560,6 @@ public class ManagerPageController {
 
 		String msg = roleTransfer.save(roletransfor);
 		String fromdate = request.getParameter("fromdate");
-		if(msg.equals("Saved")) {
-			//update emptable
-			List<EmpDetails> employees = userDetails.getByManid(user.getEid());
-			for(EmpDetails employee : employees) {
-				userDetails.TransferManager(employee.getId(), roletransfor.getTomanid());
-			}
-			//update leave req table for all the employees under the manager
-			List<TblEmpLeavereq> leaverequests = ers.viewbyManagerid(user.getEid());
-			for(TblEmpLeavereq employee : leaverequests) {
-				ers.updatetransManager(employee.getId(), roletransfor.getTomanid());
-			}
-			//update timesheet table for all the employees under the manager
-			List<TblEmpAttendanceNew> attrequests = attimpl.viewbymanagerid(user.getEid());
-			for(TblEmpAttendanceNew employee : attrequests) {
-				attimpl.updatetransManager(employee.getId(), roletransfor.getTomanid());
-			}
-		}
 
 		String role = user.getRole();
 		mav.addObject("Role",role);

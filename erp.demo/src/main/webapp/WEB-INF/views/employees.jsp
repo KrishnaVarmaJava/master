@@ -370,7 +370,7 @@
 												<div class="chip">
 													<a
 														href="<%=request.getContextPath()%>/${role}/allemp/register/${empl.getId()}/employeedetails">
-														<img src="/erp.demo/resources/images/mail/one.jpg"
+														<img src="${images}/mail/one.jpg"
 														alt="Contact Person">
 														<div class="profiletitlewidth hideOverflow ">${empl.getFname()}
 															${empl.getLname()}</div>
@@ -426,7 +426,7 @@
 														<div class="chip">
 															<a
 																href="<%=request.getContextPath()%>/admin/allemp/register/${empl.getId()}/employeedetails">
-																<img src="/erp.demo/resources/images/mail/one.jpg"
+																<img src="${images}/mail/one.jpg"
 																alt="Contact Person">
 																<div class="profiletitlewidth hideOverflow ">${empl.getFname()}
 																	${empl.getLname()}</div>
