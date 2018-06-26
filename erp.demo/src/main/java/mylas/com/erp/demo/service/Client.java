@@ -1,5 +1,6 @@
 package mylas.com.erp.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -261,6 +262,45 @@ return "error occured while updating";}
 
 		session.getTransaction().commit();
 		return (empleave);		
+	}
+	
+
+	@Override
+	public List<EmpDetails> simulateSearchResult(String tagName) {
+		// TODO Auto-generated method stub
+	
+		List<EmpDetails> emp1 = getDetails();
+		List<EmpDetails> result = new ArrayList<EmpDetails>();
+	
+		// iterate a list and filter by tagName
+		for (EmpDetails tag : emp1) {
+			if (tag.getFname().contains(tagName)) {
+				result.add(tag);
+			}
+		}
+	
+
+		return result;
+		
+	}
+
+	@Override
+	public List<EmpDetails> simulateSearchResultLastName(String tagName) {
+		
+	
+		List<EmpDetails> emp1 = getDetails();
+		List<EmpDetails> result = new ArrayList<EmpDetails>();
+	
+		// iterate a list and filter by tagName
+		for (EmpDetails tag : emp1) {
+			if (tag.getLname().contains(tagName)) {
+				result.add(tag);
+			}
+		}
+	
+
+		return result;
+		
 	}
 }
 

@@ -1,7 +1,19 @@
+<%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<spring:url var="css" value="/resources/css" />
+<spring:url var="js" value="/resources/js" />
+<spring:url var="images" value="/resources/images" />
+<spring:url var="plugins" value="/resources/plugins" />
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" /> --%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@page import="java.util.List"%>
+<%@page import="mylas.com.erp.demo.*"%>
 <spring:url var="css" value="/resources/css" />
 <spring:url var="js" value="/resources/js" />
 <spring:url var="images" value="/resources/images" />
@@ -45,6 +57,8 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+	<link href="${css}/main.css" rel="stylesheet">
 </head>
 
 <body class="theme-indigo light layout-fixed">
@@ -99,17 +113,16 @@
 														<div class="col-md-2 padding_col">
 
 										<div class="form-group">
-
-											<input type="text" class="form-control"
-												placeholder="First Name" name="firstname" id="firstname" />
+											<input type="text" id="firstname" value=""
+												class="form-control" placeholder="First Name" name="firstname" />
 										</div>
 									</div>
 									<div class="col-md-2 padding_col">
 
 										<div class="form-group">
 
-											<input type="text" class="form-control"
-												placeholder="Last Name" name="lastname" id="lastname" />
+												<input type="text"  id="lastname" value="" class="form-control"
+												placeholder="Last Name" name="lastname" />
 										</div>
 									</div>
 									<div class="col-md-2 padding_col">
@@ -475,6 +488,8 @@
 	<!-- LAYOUT JS -->
 	<script src="${js}/demo.js"></script>
 	<script src="${js}/layout.js"></script>
+	<script src="${js}/jquery.1.10.2.min.js"></script>
+	<script src="${js}/jquery.autocomplete.min.js"></script>
 
 
 
@@ -516,7 +531,59 @@
 	    document.getElementById('form_d').action = "${contextRoot}/${role}/leave/decline/"+id;
 	    document.getElementById('form_a').action = "${contextRoot}/${role}/leave/approve/"+id;
 	    }
-  </script>
+  </script> 
+<script>
+	$(document).ready(function() {
+
+		$('#firstname').autocomplete({
+			serviceUrl: '${contextRoot}/getTags',
+			paramName: "firstname",
+			delimiter: ",",
+		    transformResult: function(response) {
+		    	
+		        return {
+		        	
+		            suggestions: $.map($.parseJSON(response), function(item) {
+		            	
+		                return { value: item.fname, data: item.id };
+		            })
+		            
+		        };
+		        
+		    }
+		    
+		});
+		
+		
+	});
+	</script>
+	<script>
+	$(document).ready(function() {
+
+		$('#lastname').autocomplete({
+			
+			serviceUrl: '${contextRoot}/lastNames',
+			paramName: "lastname",
+			delimiter: ",",
+		    transformResult: function(response) {
+		    	
+		        return {
+		        	
+		            suggestions: $.map($.parseJSON(response), function(item) {
+		            	
+		                return { value: item.lname, data: item.id };
+		            })
+		            
+		        };
+		        
+		    }
+		    
+		});
+		
+		
+	});
+	</script>
+
 </body>
 
 </html>
