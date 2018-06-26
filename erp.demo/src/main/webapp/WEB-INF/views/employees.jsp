@@ -40,12 +40,14 @@
 <link href="${css}/layout.css" rel="stylesheet">
 <link href="${css}/themes/main_theme.css" rel="stylesheet" />
 <link href="${css}/custom_style.css" rel="stylesheet">
+<link href="${css}/main.css" rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 </head>
 
 <body class="theme-indigo light layout-fixed">
@@ -123,9 +125,8 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>First Name</label> <input type="text"
-														name="firstname" id="firstname" class="form-control"
-														 required="required" size="50"
-														maxlength="50">
+														name="firstname1" id="firstname1" class="form-control"
+														required="required" size="50" maxlength="50">
 												</div>
 											</div>
 										</div>
@@ -135,9 +136,8 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Last Name </label> <input type="text"
-														name="lastname" id="lastname" class="form-control"
-														 required="required" size="50"
-														maxlength="50">
+														name="lastname1" id="lastname1" class="form-control"
+														required="required" size="50" maxlength="50">
 												</div>
 											</div>
 										</div>
@@ -147,8 +147,8 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Username</label> <input type="text" name="uname"
-														id="uname" class="form-control" 
-														required="required" size="50" maxlength="50">
+														id="uname" class="form-control" required="required"
+														size="50" maxlength="50">
 												</div>
 											</div>
 										</div>
@@ -158,8 +158,8 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Email</label> <input type="email" name="email"
-														id="email" class="form-control" 
-														required="required" size="50" maxlength="50">
+														id="email" class="form-control" required="required"
+														size="50" maxlength="50">
 												</div>
 											</div>
 										</div>
@@ -169,7 +169,7 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Password </label> <input type="password" name="pswd"
-														id="pswd" class="form-control" 
+														id="pswd" class="form-control"
 														pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 														title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
 														required="required">
@@ -183,7 +183,7 @@
 												<div class="form-line">
 													<label>Confirm Password </label> <input type="password"
 														name="cpswd" id="cpswd" class="form-control"
-														 required="required">
+														required="required">
 												</div>
 											</div>
 										</div>
@@ -193,8 +193,8 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Employee ID </label> <input type="text" name="empid"
-														id="empid" class="form-control" 
-														required="required" size="15" maxlength="15">
+														id="empid" class="form-control" required="required"
+														size="15" maxlength="15">
 												</div>
 											</div>
 										</div>
@@ -204,8 +204,7 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Joining Date </label> <input type="date"
-														name="joindate" class="form-control"
-														required="required">
+														name="joindate" class="form-control" required="required">
 												</div>
 												<span class="input-group-addon"><i
 													class="material-icons">date_range </i></span>
@@ -217,8 +216,8 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Phone </label> <input type="number" name="phone"
-														id="phone" class="form-control" 
-														required="required" size="10" maxlength="10">
+														id="phone" class="form-control" required="required"
+														size="10" maxlength="10">
 												</div>
 											</div>
 										</div>
@@ -227,15 +226,16 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<div class="form-line">
-													<label>Company</label> <!-- <input type="text" name="company"
+													<label>Company</label>
+													<!-- <input type="text" name="company"
 														id="company" class="form-control" 
 														required="required" size="50" maxlength="50"> -->
-													<select class="form-control" size="1" name="company" id="company"
-														required="required">
+													<select class="form-control" size="1" name="company"
+														id="company" required="required">
 														<option value="">Please select</option>
 														<option value="mylasit">MylasIT</option>
-														
-														</select>	
+
+													</select>
 												</div>
 											</div>
 										</div>
@@ -294,20 +294,20 @@
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
 								<div class="col-md-2 padding_col">
 									<div class="form-group">
-										<input type="text" class="form-control" id="firstname1"
-											placeholder="First Name" name="firstname1" />
+										<input type="text" class="form-control" id="firstname"
+											placeholder="First Name" name="firstname" value=""/>
 									</div>
 								</div>
 								<div class="col-md-2 padding_col">
 									<div class="form-group">
-										<input type="text" class="form-control" id="lastname2"
-											placeholder="Last Name" name="lastname2" />
+										<input type="text" class="form-control" id="lastname"
+											placeholder="Last Name" name="lastname" value=""/>
 									</div>
 								</div>
 								<div class="col-md-3 padding_col">
 									<div class="form-group">
-										<select id="department1" name="department" class="form-control"
-											size="1">
+										<select id="department1" name="department"
+											class="form-control" size="1">
 											<option value="">Select Department</option>
 											<c:forEach items="${departments}" var="departments">
 												<option value="${departments.getDepartment()}">
@@ -382,8 +382,7 @@
 												<div class="chip">
 													<a
 														href="<%=request.getContextPath()%>/${role}/allemp/register/${empl.getId()}/employeedetails">
-														<img src="${images}/mail/one.jpg"
-														alt="Contact Person">
+														<img src="${images}/mail/one.jpg" alt="Contact Person">
 														<div class="profiletitlewidth hideOverflow ">${empl.getFname()}
 															${empl.getLname()}</div>
 
@@ -413,7 +412,7 @@
 																	href="${contextRoot}/admin/empdetais/edit/${empl.getId()}"
 																	class=" waves-effect waves-classic"><i
 																		class="material-icons">edit</i>Edit</a></li>
-															<%-- 	<li><a
+																<%-- 	<li><a
 																	href="${contextRoot}/admin/allemp/delete/${empl.getId()}"
 																	class=" waves-effect waves-classic"><i
 																		class="material-icons">delete</i>Delete</a></li> --%>
@@ -438,8 +437,7 @@
 														<div class="chip">
 															<a
 																href="<%=request.getContextPath()%>/admin/allemp/register/${empl.getId()}/employeedetails">
-																<img src="${images}/mail/one.jpg"
-																alt="Contact Person">
+																<img src="${images}/mail/one.jpg" alt="Contact Person">
 																<div class="profiletitlewidth hideOverflow ">${empl.getFname()}
 																	${empl.getLname()}</div>
 
@@ -464,7 +462,8 @@
 																	aria-expanded="false"> <i class="material-icons">more_vert</i>
 																</a>
 																	<ul class="dropdown-menu pull-right">
-																		<li><a href="${contextRoot}/admin/empdetais/edit/${empl.getId()}"
+																		<li><a
+																			href="${contextRoot}/admin/empdetais/edit/${empl.getId()}"
 																			class=" waves-effect waves-classic"><i
 																				class="material-icons">edit</i>Edit</a></li>
 																		<%-- <li><a
@@ -509,6 +508,8 @@
 	<!-- LAYOUT JS -->
 	<script src="${js}/demo.js"></script>
 	<script src="${js}/layout.js"></script>
+	<script src="${js}/jquery.1.10.2.min.js"></script>
+	<script src="${js}/jquery.autocomplete.min.js"></script>
 
 	<script>
 		$(document).ready(function() {
@@ -570,10 +571,10 @@
 
 		});
 	</script>
-<script>
+	<script>
      function Search(){
-	 var fname = document.getElementById("firstname1").value;
-	 var lname = document.getElementById("lastname2").value;
+	 var fname = document.getElementById("firstname").value;
+	 var lname = document.getElementById("lastname").value;
 	 var mon = document.getElementById("department1").value;
 	 var sta = document.getElementById("designation1").value;
 	 if(fname=="" && lname=="" && mon=="" && sta=="")
@@ -584,6 +585,59 @@
 
 }
      </script>
+
+	<script>
+	$(document).ready(function() {
+
+		$('#firstname').autocomplete({
+			
+			serviceUrl: '${contextRoot}/getTags',
+			paramName: "firstname",
+			delimiter: ",",
+		    transformResult: function(response) {
+		    	
+		        return {
+		        	
+		            suggestions: $.map($.parseJSON(response), function(item) {
+		            	
+		                return { value: item.fname, data: item.id };
+		            })
+		            
+		        };
+		        
+		    }
+		    
+		});
+		
+		
+	});
+	</script>
+	<script>
+	$(document).ready(function() {
+
+		$('#lastname').autocomplete({
+			
+			serviceUrl: '${contextRoot}/lastNames',
+			paramName: "lastname",
+			delimiter: ",",
+		    transformResult: function(response) {
+		    	
+		        return {
+		        	
+		            suggestions: $.map($.parseJSON(response), function(item) {
+		            	
+		                return { value: item.lname, data: item.id };
+		            })
+		            
+		        };
+		        
+		    }
+		    
+		});
+		
+		
+	});
+	</script>
 </body>
 
 </html>

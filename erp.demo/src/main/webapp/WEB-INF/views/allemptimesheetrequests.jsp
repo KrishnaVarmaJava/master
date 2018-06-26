@@ -40,6 +40,7 @@
 <link href="${css}/layout.css" rel="stylesheet">
 <link href="${css}/themes/main_theme.css" rel="stylesheet" />
 <link href="${css}/custom_style.css" rel="stylesheet">
+<link href="${css}/main.css" rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -1090,6 +1091,8 @@
 	<!-- LAYOUT JS -->
 	<script src="${js}/demo.js"></script>
 	<script src="${js}/layout.js"></script>
+	<script src="${js}/jquery.1.10.2.min.js"></script>
+	<script src="${js}/jquery.autocomplete.min.js"></script>
 
 
 
@@ -1132,7 +1135,58 @@
 					+ id;
 		}
 		</script>
+<script>
+	$(document).ready(function() {
 
+		$('#firstname').autocomplete({
+			
+			serviceUrl: '${contextRoot}/getTags',
+			paramName: "firstname",
+			delimiter: ",",
+		    transformResult: function(response) {
+		    	
+		        return {
+		        	
+		            suggestions: $.map($.parseJSON(response), function(item) {
+		            	
+		                return { value: item.fname, data: item.id };
+		            })
+		            
+		        };
+		        
+		    }
+		    
+		});
+		
+		
+	});
+	</script>
+	<script>
+	$(document).ready(function() {
+
+		$('#lastname').autocomplete({
+			
+			serviceUrl: '${contextRoot}/lastNames',
+			paramName: "lastname",
+			delimiter: ",",
+		    transformResult: function(response) {
+		    	
+		        return {
+		        	
+		            suggestions: $.map($.parseJSON(response), function(item) {
+		            	
+		                return { value: item.lname, data: item.id };
+		            })
+		            
+		        };
+		        
+		    }
+		    
+		});
+		
+		
+	});
+	</script>
 		</body>
 
 		</html>

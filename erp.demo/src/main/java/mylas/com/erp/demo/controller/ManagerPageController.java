@@ -19,6 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import mylas.com.erp.demo.EmpDetails;
@@ -728,7 +730,31 @@ public class ManagerPageController {
 		mav.addObject("attendancelist",attendances);
 		return mav;		
 	}
+/*
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public ModelAndView getPages() {
 
+		ModelAndView model = new ModelAndView("example");
+		return model;
+
+	}
+*/
+	@RequestMapping(value = "/getTags", method = RequestMethod.GET)
+	public @ResponseBody
+	List<EmpDetails> getTags(@RequestParam String firstname) {
+		
+
+		return userDetails.simulateSearchResult(firstname);
+
+	}
+	@RequestMapping(value = "/lastNames", method = RequestMethod.GET)
+	public @ResponseBody
+	List<EmpDetails> lastName(@RequestParam String lastname) {
+		
+
+		return userDetails.simulateSearchResultLastName(lastname);
+
+	}
 
 
 }
