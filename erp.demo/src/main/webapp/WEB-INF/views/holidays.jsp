@@ -112,7 +112,10 @@
 								<div class="form-group">
 									<div class="form-line">
 										<label>Holiday Name </label> <input type="text" name="holiday"
-											id="holiday" class="form-control" required="required">
+
+											id="holiday" class="form-control" required="required"/>
+
+
 									</div>
 								</div>
 							</div>
