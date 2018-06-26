@@ -112,7 +112,7 @@
 								<div class="form-group">
 									<div class="form-line">
 										<label>Holiday Name </label> <input type="text" name="holiday"
-											id="holiday" class="form-control" placeholder="Holiday Name " />
+											id="holiday" class="form-control" required="required">
 									</div>
 								</div>
 							</div>
@@ -121,7 +121,7 @@
 									<div class="input-group addon-line">
 										<div class="form-line">
 											<label>Holiday Date</label> <input type="date" name="hdate"
-												id="hdate" class="form-control" placeholder="Holiday Date">
+												id="hdate" class="form-control" placeholder="Holiday Date" required="required">
 										</div>
 										<span class="input-group-addon"><i
 											class="material-icons">date_range </i></span>
@@ -168,7 +168,7 @@
 									<tbody>
 										<c:forEach items="${HolidaysList}" var="Holiday">
 											<tr>
-												<td>${Holiday.getName()}</td>
+											<td>${Holiday.getName()}</td>
 												<td>${Holiday.getDate()}-${Holiday.getMonth()}-${Holiday.getYear()}</td>
 												<td id="day${Holiday.getId()}"></td>
 												<td>

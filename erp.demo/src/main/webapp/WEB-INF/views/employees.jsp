@@ -124,7 +124,7 @@
 												<div class="form-line">
 													<label>First Name</label> <input type="text"
 														name="firstname" id="firstname" class="form-control"
-														placeholder="First Name" required="required" size="50"
+														 required="required" size="50"
 														maxlength="50">
 												</div>
 											</div>
@@ -136,7 +136,7 @@
 												<div class="form-line">
 													<label>Last Name </label> <input type="text"
 														name="lastname" id="lastname" class="form-control"
-														placeholder="Last Name " required="required" size="50"
+														 required="required" size="50"
 														maxlength="50">
 												</div>
 											</div>
@@ -147,7 +147,7 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Username</label> <input type="text" name="uname"
-														id="uname" class="form-control" placeholder="Username"
+														id="uname" class="form-control" 
 														required="required" size="50" maxlength="50">
 												</div>
 											</div>
@@ -158,7 +158,7 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Email</label> <input type="email" name="email"
-														id="email" class="form-control" placeholder="Email"
+														id="email" class="form-control" 
 														required="required" size="50" maxlength="50">
 												</div>
 											</div>
@@ -169,7 +169,7 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Password </label> <input type="password" name="pswd"
-														id="pswd" class="form-control" placeholder="Password"
+														id="pswd" class="form-control" 
 														pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 														title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
 														required="required">
@@ -183,7 +183,7 @@
 												<div class="form-line">
 													<label>Confirm Password </label> <input type="password"
 														name="cpswd" id="cpswd" class="form-control"
-														placeholder="Confirm Password" required="required">
+														 required="required">
 												</div>
 											</div>
 										</div>
@@ -193,7 +193,7 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Employee ID </label> <input type="text" name="empid"
-														id="empid" class="form-control" placeholder="Employee ID"
+														id="empid" class="form-control" 
 														required="required" size="15" maxlength="15">
 												</div>
 											</div>
@@ -205,7 +205,7 @@
 												<div class="form-line">
 													<label>Joining Date </label> <input type="date"
 														name="joindate" class="form-control"
-														placeholder="Joining Date">
+														required="required">
 												</div>
 												<span class="input-group-addon"><i
 													class="material-icons">date_range </i></span>
@@ -217,7 +217,7 @@
 											<div class="input-group addon-line">
 												<div class="form-line">
 													<label>Phone </label> <input type="number" name="phone"
-														id="phone" class="form-control" placeholder="Phone"
+														id="phone" class="form-control" 
 														required="required" size="10" maxlength="10">
 												</div>
 											</div>
@@ -227,9 +227,15 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<div class="form-line">
-													<label>Company</label> <input type="text" name="company"
-														id="company" class="form-control" placeholder="Company"
-														required="required" size="50" maxlength="50">
+													<label>Company</label> <!-- <input type="text" name="company"
+														id="company" class="form-control" 
+														required="required" size="50" maxlength="50"> -->
+													<select class="form-control" size="1" name="company" id="company"
+														required="required">
+														<option value="">Please select</option>
+														<option value="mylasit">MylasIT</option>
+														
+														</select>	
 												</div>
 											</div>
 										</div>
@@ -288,15 +294,21 @@
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
 								<div class="col-md-2 padding_col">
 									<div class="form-group">
-										<input type="text" class="form-control" id="username1"
-											placeholder="Employee ID" name="username" />
+										<input type="text" class="form-control" id="firstname1"
+											placeholder="First Name" name="firstname1" />
 									</div>
 								</div>
 								<div class="col-md-2 padding_col">
 									<div class="form-group">
+										<input type="text" class="form-control" id="lastname2"
+											placeholder="Last Name" name="lastname2" />
+									</div>
+								</div>
+								<div class="col-md-3 padding_col">
+									<div class="form-group">
 										<select id="department1" name="department" class="form-control"
 											size="1">
-											<option value="">please select</option>
+											<option value="">Select Department</option>
 											<c:forEach items="${departments}" var="departments">
 												<option value="${departments.getDepartment()}">
 													${departments.getDepartment()}</option>
@@ -304,11 +316,11 @@
 										</select>
 									</div>
 								</div>
-								<div class="col-md-2 padding_col">
+								<div class="col-md-3 padding_col">
 									<div class="form-group">
 										<select id="designation1" name="designation"
 											class="form-control" size="1">
-											<option value="">please select</option>
+											<option value="">Select Designation</option>
 											<c:forEach items="${designations}" var="designations">
 												<option value="${designations.getDesignation()}">
 													${designations.getDesignation()}</option>
@@ -401,10 +413,10 @@
 																	href="${contextRoot}/admin/empdetais/edit/${empl.getId()}"
 																	class=" waves-effect waves-classic"><i
 																		class="material-icons">edit</i>Edit</a></li>
-																<li><a
+															<%-- 	<li><a
 																	href="${contextRoot}/admin/allemp/delete/${empl.getId()}"
 																	class=" waves-effect waves-classic"><i
-																		class="material-icons">delete</i>Delete</a></li>
+																		class="material-icons">delete</i>Delete</a></li> --%>
 
 															</ul></li>
 													</c:if>
@@ -455,10 +467,10 @@
 																		<li><a href="${contextRoot}/admin/empdetais/edit/${empl.getId()}"
 																			class=" waves-effect waves-classic"><i
 																				class="material-icons">edit</i>Edit</a></li>
-																		<li><a
+																		<%-- <li><a
 																			href="${contextRoot}/admin/allemp/delete/${empl.getId()}"
 																			class=" waves-effect waves-classic"><i
-																				class="material-icons">delete</i>Delete</a></li>
+																				class="material-icons">delete</i>Delete</a></li> --%>
 
 																	</ul></li>
 															</c:if>
@@ -560,10 +572,11 @@
 	</script>
 <script>
      function Search(){
-	 var name = document.getElementById("username1").value;
+	 var fname = document.getElementById("firstname1").value;
+	 var lname = document.getElementById("lastname2").value;
 	 var mon = document.getElementById("department1").value;
 	 var sta = document.getElementById("designation1").value;
-	 if(name=="" && mon=="" && sta=="")
+	 if(fname=="" && lname=="" && mon=="" && sta=="")
 		 {
 		 alert("plese Select any one of these");
 		 return false;

@@ -127,7 +127,7 @@
 										<div class="form-line">
 											<label>Department Name</label> <input type="text"
 												name="departmentname" id="departmentname"
-												class="form-control" placeholder="Department Name">
+												class="form-control">
 										</div>
 									</div>
 								</div>

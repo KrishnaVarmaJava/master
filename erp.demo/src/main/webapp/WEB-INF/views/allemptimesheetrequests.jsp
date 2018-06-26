@@ -104,14 +104,21 @@
 										<div class="form-group">
 
 											<input type="text" class="form-control"
-												placeholder="Employee Id" name="username" id="username" />
+												placeholder="First Name" name="firstname" id="firstname" />
+										</div>
+									</div>
+									<div class="col-md-2 padding_col">
+										<div class="form-group">
+
+											<input type="text" class="form-control"
+												placeholder="Last Name" name="lastname" id="lastname" />
 										</div>
 									</div>
 									<div class="col-md-2 padding_col">
 										<div class="form-group">
 
 											<select name="month" id="month" class="form-control" size="1">
-												<option value="">Please select</option>
+												<option value="">Select Month</option>
 												<option value="January">January</option>
 												<option value="February">February</option>
 												<option value="March">March</option>
@@ -132,7 +139,7 @@
 
 											<select name="status" id="status" class="form-control"
 												size="1">
-												<option value="">Please select</option>
+												<option value="">Select Status</option>
 												<option value="2">Pending</option>
 												<option value="1">Approved</option>
 												<option value="0">Declined</option>
@@ -1105,10 +1112,11 @@
  -->
 	<script>
 		function Search() {
-			var name = document.getElementById("username").value;
+			var fname = document.getElementById("firstname").value;
+			var lname = document.getElementById("lastname").value;
 			var mon = document.getElementById("month").value;
 			var sta = document.getElementById("status").value;
-			if (name == "" && mon == "" && sta == "") {
+			if (fname == "" && lname == "" && mon == "" && sta == "") {
 				alert("plese Select any one of these");
 				return false;
 			}

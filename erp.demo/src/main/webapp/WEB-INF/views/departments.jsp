@@ -138,8 +138,7 @@
 									<div class="input-group addon-line">
 										<div class="form-line">
 											<label>Department Name</label> <input type="text"
-												name="departmentname" id="departmentname"
-												class="form-control" placeholder="Department Name">
+												name="departmentname" id="departmentname" class="form-control" required="required">
 										</div>
 									</div>
 								</div>
@@ -216,7 +215,7 @@
                                                  <c:if test="${dep.getTodate() == null}">
                                                  <td>--/--/--</td></c:if>
                                                  <c:if test="${dep.getTodate() != null}">
-                                                 <td>${desig.getTodate()}</td></c:if>
+                                                 <td>${dep.getTodate()}</td></c:if>
                                                  <c:if test="${dep.getActivestate() == true}">
 													<td><i class="${green}"></i></td>
 												</c:if>

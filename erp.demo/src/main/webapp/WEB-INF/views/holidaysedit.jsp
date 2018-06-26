@@ -71,7 +71,7 @@
 								<div class="form-group">
 									<div class="form-line">
 										<label>Holiday Name </label> <input type="text" name="holiday" id="holiday"
-											class="form-control" placeholder="Holiday Name " />
+											class="form-control"/>
 									</div>
 								</div>
 							</div>

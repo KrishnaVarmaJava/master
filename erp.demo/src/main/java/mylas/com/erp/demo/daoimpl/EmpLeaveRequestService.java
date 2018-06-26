@@ -165,26 +165,68 @@ return "error occured while updating";}
 	}
 
 	@Override
-	public List<TblEmpLeavereq> viewSearch(String username, String month, String status) {
+	public List<TblEmpLeavereq> viewSearch(String firstname, String lastname, String month, String status) {
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		Query q = null;
-		if(username!="" && month!="" && status!="") {
+		if(firstname!="" && lastname!="" && month!="" && status!="") {
 
 			if(status.equals("1")||status.equals("0")) {
-				q= session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND fromdate LIKE '%-"+month+"-%' AND status="+status);
+				q= session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where fname='"+firstname+"' AND lname='"+lastname+"') AND fromdate LIKE '%-"+month+"-%' AND status="+status);
 			}else {
-				q=session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND fromdate LIKE '%-"+month+"-%' AND status is null");
+				q=session.createQuery("from TblEmpLeavereq where  employeeid IN (select eid from EmpDetails where fname='"+firstname+"' AND lname='"+lastname+"') AND fromdate LIKE '%-"+month+"-%' AND status is null");
 			}
 		}
-		else if(username!="" && month!="") {
-			q=session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND fromdate LIKE '%-"+month+"-%' AND status is null");
-		}
-		else if(username!="" && status!="") {
+		else if(firstname!="" && lastname!="" && month!="") {
+
+				q=session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where fname='"+firstname+"' AND lname='"+lastname+"') AND fromdate LIKE '%-"+month+"-%'");
+			}
+		
+		else if(firstname!="" && lastname!="" && status!="") {
+
 			if(status.equals("1")||status.equals("0")) {
-				q= session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND status="+status);
+				q= session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where fname='"+firstname+"' AND lname='"+lastname+"') AND status="+status);
 			}else {
-				q=session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'AND status is null");
+				q=session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where fname='"+firstname+"' AND lname='"+lastname+"') AND status is null");
+			}
+		}
+		else if(firstname!="" && month!="" && status!="") {
+
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpLeavereq where  employeeid IN (select eid from EmpDetails where fname='"+firstname+"') AND fromdate LIKE '%-"+month+"-%' AND status="+status);
+			}else {
+				q=session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where fname='"+firstname+"') AND fromdate LIKE '%-"+month+"-%' AND status is null");
+			}
+		}
+		else if(lastname!="" && month!="" && status!="") {
+
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpLeavereq where  employeeid IN (select eid from EmpDetails where lname='"+lastname+"') AND fromdate LIKE '%-"+month+"-%' AND status="+status);
+			}else {
+				q=session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where lname='"+lastname+"') AND fromdate LIKE '%-"+month+"-%' AND status is null");
+			}
+		}
+		else if(firstname!="" && month!="") {
+			q=session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where fname='"+firstname+"') AND fromdate LIKE '%-"+month+"-%'");
+		}
+		else if(firstname!="" && lastname!="") {
+			q=session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where fname='"+firstname+"' AND lname='"+lastname+"')");
+		}
+		else if(firstname!="" && status!="") {
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where fname='"+firstname+"') AND status="+status);
+			}else {
+				q=session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where fname='"+firstname+"') AND status is null");
+			}
+		}
+		else if(lastname!="" && month!="") {
+			q=session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where lname='"+lastname+"') AND fromdate LIKE '%-"+month+"-%'");
+		}
+		else if(lastname!="" && status!="") {
+			if(status.equals("1")||status.equals("0")) {
+				q= session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where lname='"+lastname+"') AND status="+status);
+			}else {
+				q=session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where lname='"+lastname+"') AND status is null");
 			}
 		}
 		else if(month!="" && status!="") {
@@ -195,10 +237,15 @@ return "error occured while updating";}
 			}
 
 		}
-		else if(username!="")
+		else if(firstname!="")
 		{
 
-			q = session.createQuery("from TblEmpLeavereq where employeeid='"+username+"'");	
+			q = session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where fname='"+firstname+"')");	
+		}
+		else if(lastname!="")
+		{
+
+			q = session.createQuery("from TblEmpLeavereq where employeeid IN (select eid from EmpDetails where lname='"+lastname+"')");	
 		}
 		else if(month!="")
 		{
@@ -214,6 +261,7 @@ return "error occured while updating";}
 			}
 		}
 		List<TblEmpLeavereq> empleave = q.list();
+		
 		session.getTransaction().commit();
 		return (empleave);
 	}
@@ -272,5 +320,34 @@ return "error occured while updating";}
 		session.getTransaction().commit();
 		return (empleave);	
 	}
+	@Override
+	public TblEmpLeavereq getById(int id) {
+		TblEmpLeavereq user;
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		user =  session.get(TblEmpLeavereq.class, id);
+		session.getTransaction().commit();
+		return user;
 
+}
+
+
+	@Override
+	public String updateLeave(int id, String leavetype, String fdate, String tdate, String reasion,int count,
+			boolean status) {
+		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		TblEmpLeavereq update= session.load(TblEmpLeavereq.class, id);
+		update.setLeavetype(leavetype);update.setFromdate(fdate);update.setTodate(tdate);update.setReason(reasion);
+		update.setCount(count);update.setStatus(status);
+		try {
+			session.update(update);session.getTransaction().commit();return "Updated";
+		}catch(Exception e){
+			
+			
+			session.getTransaction().rollback();
+return "error occured while updating";}
+		
+		
+	}
 }

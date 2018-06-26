@@ -96,19 +96,27 @@
 						<div class="card">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
 								<form action="${contextRoot}/${role}/search/register" method="post">
+														<div class="col-md-2 padding_col">
+
+										<div class="form-group">
+
+											<input type="text" class="form-control"
+												placeholder="First Name" name="firstname" id="firstname" />
+										</div>
+									</div>
 									<div class="col-md-2 padding_col">
 
 										<div class="form-group">
 
 											<input type="text" class="form-control"
-												placeholder="Employee ID" name="uname" id="uname" />
+												placeholder="Last Name" name="lastname" id="lastname" />
 										</div>
 									</div>
 									<div class="col-md-2 padding_col">
 										<div class="form-group">
 
 											<select class="form-control" size="1" name="month" id="month">
-												<option value="">Please select</option>
+												<option value="">Select Month</option>
 												<option value="01">January</option>
 												<option value="02">February</option>
 												<option value="03">March</option>
@@ -129,7 +137,7 @@
 
 											<select class="form-control" size="1" name="status"
 												id="status">
-												<option value="">Please select</option>
+												<option value="">Select Status</option>
 												<option value="2">Pending</option>
 												<option value="1">Approved</option>
 												<option value="0">Declined</option>
@@ -285,8 +293,16 @@
 															</c:if>
 															<c:if test="${empleaveslist.getStatus() == false}">
 																<button type="button"
-																	class="btn btn-primary  btn-outline btn-rounded waves-effect colorred">Declined
+																	class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
+																	data-toggle="dropdown" aria-haspopup="true"
+																	aria-expanded="false">Declined
 																</button>
+																<ul class="dropdown-menu pull-right">
+																<li><a
+																	href="${contextRoot}/admin/leavereq/edit/${empleaveslist.getId()}">
+																		Edit</a></li>
+
+															</ul>
 															</c:if>
 															<c:if test="${empleaveslist.getStatus() == true}">
 																<button type="button"
@@ -377,7 +393,7 @@
 									<div class="clearfix"></div>
 									<div style="text-align: center;">
 										<button type="submit"
-											class="btn btn-primary btn-rounded waves-effect">Approve
+											class="btn btn-primary btn-rounded waves-effect">Edit
 											</button>
 									</div>
 
@@ -481,10 +497,11 @@
 
 <script>
      function Search(){
-	 var name = document.getElementById("uname").value;
+	 var fname = document.getElementById("firstname").value;
+	 var lname = document.getElementById("lastname").value;
 	 var mon = document.getElementById("month").value;
 	 var sta = document.getElementById("status").value;
-	 if(name=="" && mon=="" && sta=="")
+	 if(fname=="" && lname=="" && mon=="" && sta=="")
 		 {
 		 alert("plese Select any one of these");
 		 return false;

@@ -608,7 +608,7 @@ public class ManagerPageController {
 		String role = user.getRole();
 		mav.addObject("Role",role);
 		
-		List<TblEmpLeavereq> empleave =  ers.empLeaveSearch(request.getParameter("uname"),request.getParameter("month"), request.getParameter("status"));
+		List<TblEmpLeavereq> empleave =  ers.viewSearch(request.getParameter("firstname"),request.getParameter("lastname"),request.getParameter("month"), request.getParameter("status"));
 		
 		List<EmpDetails> emp1 = userDetails.getDetails();
 		int count = ers.countEmployee(user.getEid()) + attimpl.countEmployee(user.getEid());
@@ -654,13 +654,14 @@ public class ManagerPageController {
     @RequestMapping(value="/manager/employee/search", method=RequestMethod.POST)
 	public ModelAndView searchBars(HttpServletRequest req) {
 
-		String username = req.getParameter("username");
+		String firstname = req.getParameter("firstname1");
+		String lastname = req.getParameter("lastname2");
 		String department = req.getParameter("department");
 		String designation = req.getParameter("designation");
 		List<TblDepartment> deptList = deptdao.getDetails();
 		List<TblDesignation> designList = designationImpl.getDetails();
 
-		List<EmpDetails> details = userDetails.viewSearch(username, department, designation);
+		List<EmpDetails> details = userDetails.viewSearch(firstname, lastname, department, designation);
 
 		ModelAndView mav = new ModelAndView("employees");
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -720,7 +721,7 @@ public class ManagerPageController {
 		mav.addObject("manservices", mandao.list());
 		String role = user.getRole();
 		mav.addObject("Role",role);
-		List<TblEmpAttendanceNew> attendances =  attimpl.viewSearch(request.getParameter("username"), request.getParameter("month"), request.getParameter("status"));
+		List<TblEmpAttendanceNew> attendances =  attimpl.viewSearch(request.getParameter("firstname"), request.getParameter("lastname"), request.getParameter("month"), request.getParameter("status"));
 		List<EmpDetails> emp1 = userDetails.getDetails();
 		mav.addObject("User",user);
 		mav.addObject("employees", emp1);

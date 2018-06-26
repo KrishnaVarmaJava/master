@@ -127,7 +127,7 @@
 										<div class="form-line">
 											<label>Designations Name</label> <input type="text"
 												name="designationname" id="designationname"
-												class="form-control" placeholder="Designations Name">
+												class="form-control" required="required">
 										</div>
 									</div>
 								</div>

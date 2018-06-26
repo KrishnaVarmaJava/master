@@ -194,36 +194,68 @@ return "error occured while updating";}
 	}
 
 	@Override
-	public List<EmpDetails> viewSearch(String username, String department, String designation) {
+	public List<EmpDetails> viewSearch(String firstname, String lastname, String department, String designation) {
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 
 		Query q = null;
-		if(username!="" && department!="" && designation!="") {
-			q = session.createQuery("from EmpDetails where eid='"+username+"'AND department='"+department+"'AND designation='"+designation+"'");
+		if(firstname!="" && lastname!="" && department!="" && designation!="") {
+			q = session.createQuery("from EmpDetails where fname='"+firstname+"'AND lname='"+lastname+"'AND department='"+department+"'AND designation='"+designation+"'");
 		}
 
-		else if(username!="" && department!="")
+		else if(firstname!="" && lastname!="" && department!="")
 		{
-			q = session.createQuery("from EmpDetails where eid='"+username+"'AND department='"+department+"'");	
+			q = session.createQuery("from EmpDetails where fname='"+firstname+"'AND lname='"+lastname+"'AND department='"+department+"'");	
 		}
-		else if(username!="" && designation!="")
+		else if(firstname!="" && lastname!="" && designation!="")
 		{	
-			q = session.createQuery("from EmpDetails where eid='"+username+"'AND designation='"+designation+"'");
+			q = session.createQuery("from EmpDetails where fname='"+firstname+"'AND lname='"+lastname+"'AND designation='"+designation+"'");
+		}
+		else if(firstname!="" && department!="" && designation!="")
+		{	
+			q = session.createQuery("from EmpDetails where fname='"+firstname+"'AND department='"+department+"'AND designation='"+designation+"'");
 		}	
+		else if(lastname!="" && department!="" && designation!="")
+		{	
+			q = session.createQuery("from EmpDetails where lname='"+lastname+"'AND department='"+department+"'AND designation='"+designation+"'");
+		}	
+		else if(firstname!="" && lastname!="")
+		{
+			q = session.createQuery("from EmpDetails where fname='"+firstname+"'AND lname='"+lastname+"'");
+		}
+		else if(firstname!="" && department!="")
+		{
+			q = session.createQuery("from EmpDetails where fname='"+firstname+"'AND department='"+department+"'");
+		}
+		else if(firstname!="" && designation!="")
+		{
+			q = session.createQuery("from EmpDetails where fname='"+firstname+"'AND designation='"+designation+"'");
+		}
+		else if(lastname!="" && department!="")
+		{
+			q = session.createQuery("from EmpDetails where lname='"+lastname+"'AND department='"+department+"'");
+		}
+		else if(lastname!="" && designation!="")
+		{
+			q = session.createQuery("from EmpDetails where lname='"+lastname+"'AND designation='"+designation+"'");
+		}
 		else if(department!="" && designation!="")
 		{
 			q = session.createQuery("from EmpDetails where department='"+department+"'AND designation='"+designation+"'");
 		}
-		else  if(username!="")
-		{ 
-			q = session.createQuery("from EmpDetails where eid='"+username+"'");	
+		else if(firstname!="") {
+			q = session.createQuery("from EmpDetails where fname='"+firstname+"'");
+		}
+		else if(lastname!="") {
+			q = session.createQuery("from EmpDetails where lname='"+lastname+"'");
 		}
 		else if(department!="") {
-			q = session.createQuery("from EmpDetails where department='"+department+"'");
+			q = session.createQuery("from EmpDetails where  department='"+department+"'");
 		}
 		else if(designation!="") {
+		
 			q = session.createQuery("from EmpDetails where designation='"+designation+"'");
+			
 		}
 		List<EmpDetails> empleave = q.list();
 

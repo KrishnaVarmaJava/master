@@ -69,7 +69,7 @@
 						<div class="">
 
 
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topbar">
+							<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topbar">
 
 								<div class="col-md-6">
 									<div class="row pagetitle">
@@ -88,25 +88,25 @@
 												Leave</button>
 										</span>
 									</div>
-								</div>
+								</div> 
 
 
 								<div></div>
 
 
-							</div>
+							</div> -->
 
 						</div>
 					</div>
 				</div>
 
 				<div class="col-md-12 card" id="addnewemp">
-					<button type="button" class="close" aria-label="Close">
+					<!--  <button type="button" class="close" aria-label="Close"> 
 						<span aria-hidden="true">&times;</span>
-					</button>
+					</button> -->
 					<div class="custom_title">
-						<h2>Add Leave Request</h2>
-					</div>
+						<h2>Edit Leave Request</h2>
+					</div> 
 					<p style="color: green;">${Submitmsg}</p>
 					<p style="color: red;">${errmsg}</p>
 					<c:if test="${Role.equals('ADMIN_ROLE')}">
@@ -121,7 +121,7 @@
 						<c:set var="role" value="employee" />
 					</c:if>
 
-					<form action="${contextRoot}/${role}/leave/register" method="post"
+					<form action="${contextRoot}/admin/leave/upload/${id}" method="post"
 						onsubmit="return Validate()" name="form">
 						<hr class="custom_line">
 						<div class="body">
@@ -182,14 +182,14 @@
 							<div class="clearfix"></div>
 							<div style="text-align: center;">
 								<button type="submit"
-									class="btn btn-primary btn-rounded waves-effect">Send
-									Leave Request</button>
+									class="btn btn-primary btn-rounded waves-effect">
+									updated</button>
 							</div>
 						</div>
 					</form>
-				</div>
+				<%-- </div>
 
-				<div class="row clearfix">
+				 <div class="row clearfix">
 
 
 
@@ -207,7 +207,7 @@
 										<div class="form-group">
 
 											<select class="form-control" size="1" name="month" id="month">
-												<option value="">Select Month</option>
+												<option value="">Please select</option>
 												<option value="01">January</option>
 												<option value="02">February</option>
 												<option value="03">March</option>
@@ -228,7 +228,7 @@
 
 											<select class="form-control" size="1" id="status"
 												name="status">
-												<option value="">Select Status</option>
+												<option value="">Please select</option>
 												<option value="2">Pending</option>
 												<option value="1">Approved</option>
 												<option value="0">Declined</option>
@@ -242,6 +242,7 @@
 									</div>
 								</div>
 							</form>
+							
 							<div class="body">
 								<p style="color: green;">${DelMsg}</p>
 								<table class="tablesaw table-striped table-bordered table-hover">
@@ -334,7 +335,7 @@
 
 								</table>
 							</div>
-						</div>
+						</div> --%>
 						<!-- #END# Kitchen Sink -->
 
 
@@ -369,7 +370,6 @@
 	<script src="${js}/demo.js"></script>
 	<script src="${js}/layout.js"></script>
 
-
 	<script type="text/javascript">
 function Validate() {
     var startDate = document.getElementById("fromdate").value;
@@ -383,7 +383,7 @@ function Validate() {
 }
 </script>
 
-	<script>
+	<!-- <script>
 		$(document).ready(function() {
 
 			$("#addnewemp").css("display", "none");
@@ -403,19 +403,14 @@ function Validate() {
 			});
 
 		});
-	</script>
-	<script>
-     function Search(){
-	 var mon = document.getElementById("month").value;
-	 var sta = document.getElementById("status").value;
-	 if(name=="" && mon=="" && sta=="")
-		 {
-		 alert("plese Select any one of these");
-		 return false;
-		 }
-
-}
-  </script>
+	</script> -->
+	<script type="text/javascript">
+	document.getElementById("leavetype").value = "${empleave.getLeavetype()}";
+		document.getElementById("fromdate").value = "${empleave.getFromdate()}";
+		document.getElementById("todate").value = "${empleave.getTodate()}";
+		document.getElementById("leavereason").value = "${empleave.getLeavereason()}";
+	
+		</script>
 </body>
 
 </html>

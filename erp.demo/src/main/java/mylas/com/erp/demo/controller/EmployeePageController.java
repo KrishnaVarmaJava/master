@@ -121,6 +121,7 @@ public class EmployeePageController {
 
 		String role = user.getRole();
 		List<TblEmpAttendanceNew> attendances =  empattreq.Search(request.getParameter("month"), request.getParameter("status"), user.getEid());
+		
 		mav.addObject("attendancelist",attendances);
 		mav.addObject("empservices", empservicesdao.list());
 		mav.addObject("Role",role);
