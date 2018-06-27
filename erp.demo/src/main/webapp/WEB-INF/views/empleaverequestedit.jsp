@@ -179,6 +179,16 @@
 								</div>
 
 							</div>
+														<div class="col-md-6">
+								<div class="form-group">
+									<div class="form-line">
+										<label>Reason* </label>
+										<textarea name="reason" id="reason"
+											class="form-control" rows="3" required="required"></textarea>
+									</div>
+								</div>
+
+							</div>
 							<div class="clearfix"></div>
 							<div style="text-align: center;">
 								<button type="submit"

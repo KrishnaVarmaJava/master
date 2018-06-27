@@ -7,7 +7,7 @@
 <spring:url var="images" value="/resources/images" />
 <spring:url var="plugins" value="/resources/plugins" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" /> --%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -16,6 +16,7 @@
 <%@page import="mylas.com.erp.demo.*"%>
 <spring:url var="css" value="/resources/css" />
 <spring:url var="js" value="/resources/js" />
+
 <spring:url var="images" value="/resources/images" />
 <spring:url var="plugins" value="/resources/plugins" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
@@ -58,7 +59,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-	<link href="${css}/main.css" rel="stylesheet">
+<link href="${css}/main.css" rel="stylesheet">
 </head>
 
 <body class="theme-indigo light layout-fixed">
@@ -109,20 +110,22 @@
 						<!-- Table Kitchen Sink -->
 						<div class="card">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
-								<form action="${contextRoot}/${role}/search/register" method="post">
-														<div class="col-md-2 padding_col">
+								<form action="${contextRoot}/${role}/search/register"
+									method="post">
+									<div class="col-md-2 padding_col">
 
 										<div class="form-group">
 											<input type="text" id="firstname" value=""
-												class="form-control" placeholder="First Name" name="firstname" />
+												class="form-control" placeholder="First Name"
+												name="firstname" />
 										</div>
 									</div>
 									<div class="col-md-2 padding_col">
 
 										<div class="form-group">
 
-												<input type="text"  id="lastname" value="" class="form-control"
-												placeholder="Last Name" name="lastname" />
+											<input type="text" id="lastname" value=""
+												class="form-control" placeholder="Last Name" name="lastname" />
 										</div>
 									</div>
 									<div class="col-md-2 padding_col">
@@ -154,7 +157,7 @@
 												<option value="2">Pending</option>
 												<option value="1">Approved</option>
 												<option value="0">Declined</option>
-												</select>
+											</select>
 										</div>
 									</div>
 
@@ -254,16 +257,19 @@
 																				</c:if>
 
 
-																					<li>
-																			<button type="button"
-																				class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
-																				data-toggle="modal" data-target="#longmodal1" id="${empleaveslist.getId()}" onclick="display(this.id)">Declined</button>
-																			
-																		</li>
-																		<li><button type="button"
-																				class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect"
-																				data-toggle="modal" data-target="#longmodal" id="${empleaveslist.getId()}" onclick="display(this.id)">Approved</button>
-																			</li>
+																				<li>
+																					<button type="button"
+																						class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
+																						data-toggle="modal" data-target="#longmodal1"
+																						id="${empleaveslist.getId()}"
+																						onclick="display(this.id)">Declined</button>
+
+																				</li>
+																				<li><button type="button"
+																						class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect"
+																						data-toggle="modal" data-target="#longmodal"
+																						id="${empleaveslist.getId()}"
+																						onclick="display(this.id)">Approved</button></li>
 
 																			</ul>
 																		</c:if>
@@ -279,93 +285,106 @@
 											</c:if>
 										</c:if>
 										<c:if test="${User.getRole().equals('ADMIN_ROLE')}">
-											<tbody>
-												<tr>
-													<td>
-														<div class="chip">
-															<img src="${images}/mail/one.jpg" alt="Contact Person">
-															<span>${empleaveslist.getEmployeeid()}</span>
-															<div style="text-align: center"></div>
-														</div>
-													</td>
-													<td>${empleaveslist.getLeavetype()}</td>
-													<td>${empleaveslist.getFromdate()}</td>
-													<td>${empleaveslist.getTodate()}</td>
-													<td>${empleaveslist.getCount()}days</td>
-													<td>${empleaveslist.getLeavereason()}</td>
-
-													<td>
-
-														<div class="btn-group">
-
-															<c:if test="${empleaveslist.getStatus() == null}">
-																<button type="button"
-																	class="btn btn-primary btn-outline btn-rounded waves-effect"
-																	data-toggle="dropdown" aria-haspopup="true"
-																	aria-expanded="false">Pending</button>
-															</c:if>
-															<c:if test="${empleaveslist.getStatus() == false}">
-																<button type="button"
-																	class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
-																	data-toggle="dropdown" aria-haspopup="true"
-																	aria-expanded="false">Declined
-																</button>
-																<ul class="dropdown-menu pull-right">
-																<li><a
-																	href="${contextRoot}/admin/leavereq/edit/${empleaveslist.getId()}">
-																		Edit</a></li>
+											<c:if test="${empleaveslist.getReferenceid()!=0}">
 
 
-															</ul>
-															</c:if>
-															<c:if test="${empleaveslist.getStatus() == true}">
-																<button type="button"
-																	class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect "
-																	aria-haspopup="true" aria-expanded="false">Approved
+
+												<tbody>
+													<tr>
+														<td>
+															<div class="chip">
+
+																<img src="${images}/mail/one.jpg" alt="Contact Person">
+																<span>${empleaveslist.getEmployeeid()}</span>
+																<div style="text-align: center"></div>
+															</div>
+															<c:if test="${empleaveslist.getReferenceid()>0}">
+																<button style="border: none; background: none;" id="${empleaveslist.getReferenceid()}" data-target="#leavehistory"  data-toggle="modal" onclick="displayhistory(this.id)">
+																	<i class="material-icons">bubble_chart</i>
 																</button>
 															</c:if>
-															<c:set var="eid" value="${User.getEid()}"></c:set>
-															<c:if
-																test="${empleaveslist.getManagerid() == eid || empleaveslist.getMantrans() == eid}">
+														</td>
+														<td>${empleaveslist.getLeavetype()}</td>
+														<td>${empleaveslist.getFromdate()}</td>
+														<td>${empleaveslist.getTodate()}</td>
+														<td>${empleaveslist.getCount()}days</td>
+														<td>${empleaveslist.getLeavereason()}</td>
+
+														<td>
+
+															<div class="btn-group">
+
 																<c:if test="${empleaveslist.getStatus() == null}">
+																	<button type="button"
+																		class="btn btn-primary btn-outline btn-rounded waves-effect"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false">Pending</button>
+																</c:if>
+																<c:if test="${empleaveslist.getStatus() == false}">
+																	<button type="button"
+																		class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false">Declined</button>
+																	<ul class="dropdown-menu pull-right">
+																		<li><a
+																			href="${contextRoot}/admin/leavereq/edit/${empleaveslist.getId()}">
+																				Edit</a></li>
 
-																	<ul class="dropdown-menu bullet">
-																		<c:if test="${Role.equals('ADMIN_ROLE')}">
-																			<c:set var="role" value="admin" />
-																		</c:if>
-
-																		<c:if test="${Role.equals('MANAGER_ROLE')}">
-																			<c:set var="role" value="manager" />
-																		</c:if>
-
-																		<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
-																			<c:set var="role" value="employee" />
-																		</c:if>
-
-
-																		<li>
-																			<button type="button"
-																				class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
-																				data-toggle="modal" data-target="#longmodal1" id="${empleaveslist.getId()}" onclick="display(this.id)">Declined</button>
-																			
-																		</li>
-																		<li><button type="button"
-																				class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect"
-																				data-toggle="modal" data-target="#longmodal" id="${empleaveslist.getId()}" onclick="display(this.id)">Approved</button>
-</button>
-																			</li>
 
 																	</ul>
 																</c:if>
-															</c:if>
-														</div>
-													</td>
+																<c:if test="${empleaveslist.getStatus() == true}">
+																	<button type="button"
+																		class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect "
+																		aria-haspopup="true" aria-expanded="false">Approved
+																	</button>
+																</c:if>
+																<c:set var="eid" value="${User.getEid()}"></c:set>
+																<c:if
+																	test="${empleaveslist.getManagerid() == eid || empleaveslist.getMantrans() == eid}">
+																	<c:if test="${empleaveslist.getStatus() == null}">
+
+																		<ul class="dropdown-menu bullet">
+																			<c:if test="${Role.equals('ADMIN_ROLE')}">
+																				<c:set var="role" value="admin" />
+																			</c:if>
+
+																			<c:if test="${Role.equals('MANAGER_ROLE')}">
+																				<c:set var="role" value="manager" />
+																			</c:if>
+
+																			<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
+																				<c:set var="role" value="employee" />
+																			</c:if>
 
 
-												</tr>
+																			<li>
+																				<button type="button"
+																					class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
+																					data-toggle="modal" data-target="#longmodal1"
+																					id="${empleaveslist.getId()}"
+																					onclick="display(this.id)">Declined</button>
 
-											</tbody>
+																			</li>
+																			<li><button type="button"
+																					class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect"
+																					data-toggle="modal" data-target="#longmodal"
+																					id="${empleaveslist.getId()}"
+																					onclick="display(this.id)">Approved</button>
+																				</button></li>
 
+																		</ul>
+																	</c:if>
+																</c:if>
+															</div>
+														</td>
+
+
+													</tr>
+
+												</tbody>
+
+											</c:if>
 										</c:if>
 									</c:forEach>
 
@@ -408,7 +427,7 @@
 									<div style="text-align: center;">
 										<button type="submit"
 											class="btn btn-primary btn-rounded waves-effect">Edit
-											</button>
+										</button>
 									</div>
 
 
@@ -434,7 +453,7 @@
 						</div>
 						<div class="modal-body">
 							<div class="long-modal">
-								<form id="form_d"  method="post">
+								<form id="form_d" method="post">
 									<div class="col-md-6">
 										<div class="form-group">
 											<div class="form-line">
@@ -459,7 +478,35 @@
 					</div>
 				</div>
 			</div>
+			<div class="modal fade" id="leavehistory" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true"
+				style="display: none">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">x</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel4">Long Modal</h4>
+						</div>
+						<div class="modal-body">
+							<div class="long-modal">
+								<table id="result" border='1'>
+									<tr>
+										<th>EmployeeId</th>
+										<th>Leave Type</th>
+										<th>From Date</th>
+										<th>To Date</th>
+										<th>Status</th>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
 
+				</div>
+			</div>
 		</section>
 		<!-- FOOTER-->
 		<footer>
@@ -492,98 +539,151 @@
 	<script src="${js}/jquery.autocomplete.min.js"></script>
 
 
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-	<!-- 	<script type="text/javascript">
-	
-	$(document).ready(function(){
-    $("#de").click(function(){
+	<script>
+		function Search() {
+			var fname = document.getElementById("firstname").value;
+			var lname = document.getElementById("lastname").value;
+			var mon = document.getElementById("month").value;
+			var sta = document.getElementById("status").value;
+			if (fname == "" && lname == "" && mon == "" && sta == "") {
+				alert("plese Select any one of these");
+				return false;
+			}
 
-    	var abc = $("#reason").val();
-    	  
-    	 alert(abc);
-    	 
-    	var word = document.getElementById("reason").value;
-       alert(word);
-        
-    });
-});
-	
+		}
 	</script>
- -->
 
-<script>
-     function Search(){
-	 var fname = document.getElementById("firstname").value;
-	 var lname = document.getElementById("lastname").value;
-	 var mon = document.getElementById("month").value;
-	 var sta = document.getElementById("status").value;
-	 if(fname=="" && lname=="" && mon=="" && sta=="")
-		 {
-		 alert("plese Select any one of these");
-		 return false;
-		 }
 
-}
-  </script>
-  
-  <script type="text/javascript">
-  function display(id){
-	    document.getElementById('form_d').action = "${contextRoot}/${role}/leave/decline/"+id;
-	    document.getElementById('form_a').action = "${contextRoot}/${role}/leave/approve/"+id;
-	    }
-  </script> 
-<script>
-	$(document).ready(function() {
 
-		$('#firstname').autocomplete({
-			serviceUrl: '${contextRoot}/getTags',
-			paramName: "firstname",
-			delimiter: ",",
-		    transformResult: function(response) {
-		    	
-		        return {
-		        	
-		            suggestions: $.map($.parseJSON(response), function(item) {
-		            	
-		                return { value: item.fname, data: item.id };
-		            })
-		            
-		        };
-		        
-		    }
-		    
+
+	<script>
+		$(document).ready(function() {
+
+			$(".tr").css("display", "none");
+
+			$("#star").click(function() {
+				alert("plese Select any one of these");
+				$(".tr").css("display", "inline-block");
+				alert("plese Select any one of these2");
+				$(".tr").addClass("animated bounce");
+
+			});
+
 		});
-		
-		
-	});
+	</script>
+
+
+	<script type="text/javascript">
+		function display(id) {
+			document.getElementById('form_d').action = "${contextRoot}/${role}/leave/decline/"
+					+ id;
+			document.getElementById('form_a').action = "${contextRoot}/${role}/leave/approve/"
+					+ id;
+		}
+	</script>
+
+	<script type="text/javascript">
+		function leveHistory(id) {
+			window.location
+					.replace("${contextRoot}/${role}/leaverequests/register?leavehistory="
+							+ id);
+
+		}
 	</script>
 	<script>
-	$(document).ready(function() {
+		$(document).ready(
+				function() {
 
-		$('#lastname').autocomplete({
-			
-			serviceUrl: '${contextRoot}/lastNames',
-			paramName: "lastname",
-			delimiter: ",",
-		    transformResult: function(response) {
-		    	
-		        return {
-		        	
-		            suggestions: $.map($.parseJSON(response), function(item) {
-		            	
-		                return { value: item.lname, data: item.id };
-		            })
-		            
-		        };
-		        
-		    }
-		    
-		});
-		
-		
-	});
+					$('#firstname').autocomplete(
+							{
+								serviceUrl : '${contextRoot}/getTags',
+								paramName : "firstname",
+								delimiter : ",",
+								transformResult : function(response) {
+
+									return {
+
+										suggestions : $.map($
+												.parseJSON(response), function(
+												item) {
+
+											return {
+												value : item.fname,
+												data : item.id
+											};
+										})
+
+									};
+
+								}
+
+							});
+
+				});
 	</script>
+	<script>
+		$(document).ready(
+				function() {
 
+					$('#lastname').autocomplete(
+							{
+
+								serviceUrl : '${contextRoot}/lastNames',
+								paramName : "lastname",
+								delimiter : ",",
+								transformResult : function(response) {
+
+									return {
+
+										suggestions : $.map($
+												.parseJSON(response), function(
+												item) {
+
+											return {
+												value : item.lname,
+												data : item.id
+											};
+										})
+
+									};
+
+								}
+
+							});
+
+				});
+	</script>
+	<script type="text/javascript">
+		function displayhistory(id) {
+
+			$.ajax({
+				type : "POST",
+				url : "${contextRoot}/leavehistory",
+				data : "id=" + id,
+				cache: false,
+				success : function(response) {
+					//document.getElementById("result").value = response;
+
+					$('#result').html("<tr><th>EmployeeId</th><th>Leave Type</th><th>From Date</th><th>To Date</th><th>Status</th></tr>");
+					//var obj = JSON.parse(response);
+					$('#result').append(
+							'<td>' + response.employeeid + '<td>'
+									+ response.leavetype + '<td>'
+									+ response.fromdate + '<td>'
+									+ response.todate + '<td>'
+									+ response.status);
+				},
+				error : function() {
+					alert('Error while request..');
+				}
+
+			});
+
+		};
+	</script>
 </body>
 
 </html>

@@ -256,7 +256,7 @@ public class EmployeePageController {
 
 
 
-		TblEmpLeavereq empleave = new TblEmpLeavereq((int)daysNegative,null, request.getParameter("fromdate"),request.getParameter("leavereason"), request.getParameter("leavetype"), null, null,  request.getParameter("todate"),null,null);
+		TblEmpLeavereq empleave = new TblEmpLeavereq((int)daysNegative,null, request.getParameter("fromdate"),request.getParameter("leavereason"), request.getParameter("leavetype"), null, null,  request.getParameter("todate"),null,null,null);
 		empleave.setManagerid(user.getManagerid());
 		empleave.setEmployeeid(user.getEid());
 		empleave.setStatus(null);

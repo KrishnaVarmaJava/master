@@ -334,14 +334,19 @@ return "error occured while updating";}
 
 	@Override
 	public String updateLeave(int id, String leavetype, String fdate, String tdate, String reasion,int count,
-			boolean status) {
+			String status) {
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		TblEmpLeavereq update= session.load(TblEmpLeavereq.class, id);
-		update.setLeavetype(leavetype);update.setFromdate(fdate);update.setTodate(tdate);update.setReason(reasion);
-		update.setCount(count);update.setStatus(status);
+		update.setReferenceid(0);
+		TblEmpLeavereq newLeaveEntryByManager = new TblEmpLeavereq();
+		newLeaveEntryByManager.setEmployeeid(update.getEmployeeid());
+		newLeaveEntryByManager.setLeavetype(leavetype);newLeaveEntryByManager.setFromdate(fdate);newLeaveEntryByManager.setTodate(tdate);newLeaveEntryByManager.setLeavereason(reasion);
+		newLeaveEntryByManager.setCount(count);newLeaveEntryByManager.setReferenceid(id);newLeaveEntryByManager.setStatus(true);
+		newLeaveEntryByManager.setManagerid(update.getManagerid());newLeaveEntryByManager.setReason(status);
 		try {
-			session.update(update);session.getTransaction().commit();return "Updated";
+			session.update(update);
+			session.save(newLeaveEntryByManager);session.getTransaction().commit();return "Updated";
 		}catch(Exception e){
 			
 			

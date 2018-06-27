@@ -70,7 +70,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<div class="form-line">
-										<label>Holiday Name </label> <input type="text" name="holiday" id="holiday"
+										<label>Holiday Name </label> <input type="text" name="holiday" id="holiday" required="required"
 
 											class="form-control"/>
 
@@ -157,9 +157,10 @@
 
  -->
 <script type="text/javascript">
+/* alert("${Holiday.getName()}"); */
 
-alert("${Holiday.getName()}");
 document.getElementById("holiday").value = "${Holiday.getName()}";
+document.getElementById("hdate").value = "${Holiday.getHdate()}";
 
 </script>
 

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import mylas.com.erp.demo.EmpDetails;
@@ -42,10 +43,8 @@ import mylas.com.erp.demo.dao.ManagerServicesDao;
 import mylas.com.erp.demo.dao.RoleTrasforDao;
 import mylas.com.erp.demo.dao.ServicesDao;
 import mylas.com.erp.demo.daoimpl.EmpAttendanceDaoImpl;
-import mylas.com.erp.demo.daoimpl.RoletransfoeDaoImpl;
 import mylas.com.erp.demo.exceptions.UserBlockedException;
 import mylas.com.erp.demo.operations.LoginOperations;
-import mylas.com.erp.demo.service.Client;
 import mylas.com.erp.demo.service.DepartmentService;
 import mylas.com.erp.demo.service.DesignationService;
 
@@ -646,13 +645,14 @@ public class PageController<JavaMailSender> {
 		String role = user.getRole();
 		mav.addObject("Role",role);
 		String dt=request.getParameter("hdate");
-		String[]sdt=dt.split("-");		
+		/*String[]sdt=dt.split("-");	*/	
 		String name=request.getParameter("holiday");
-		Holidays hday=new Holidays(name, sdt[2], sdt[1], sdt[0]);
-		himpl.saveHoliday(hday);
+		Holidays hday=new Holidays(name,dt);
+		String msg=himpl.saveHoliday(hday);
 		List<Holidays> holidays = himpl.viewAll();
 		mav.addObject("HolidaysList",holidays);
 		mav.addObject("services", servicesdao.list());
+		mav.addObject("msg",msg);
 		return mav;
 	}
 
@@ -694,8 +694,9 @@ public class PageController<JavaMailSender> {
 		String dt=request.getParameter("hdate");
 		String[]sdt=dt.split("-");		
 		String name=request.getParameter("holiday");
-		Holidays hday=new Holidays(name, sdt[2], sdt[1], sdt[0]);
-		himpl.updateHOliday(id, hday);
+		Holidays hday=new Holidays(name, dt);
+		String msg=himpl.updateHOliday(id, hday);
+		mav.addObject("msg",msg);
 		return mav;
 	}
 	@RequestMapping(value="/admin/departments/edit/{id}")
@@ -967,7 +968,7 @@ public class PageController<JavaMailSender> {
 		mav.addObject(user);
 		return mav;
 	}
-	@RequestMapping(value="/admin/leave/upload/{id}")
+	@RequestMapping(value="/admin/leave/upload/{id}", method=RequestMethod.POST)
 	public ModelAndView updateLeaveRequest(HttpServletRequest request,@PathVariable("id") int id) {
 		//ModelAndView mav = new ModelAndView("redirect:/admin/search/register");
 		String fromdate = request.getParameter("fromdate");
@@ -988,10 +989,26 @@ public class PageController<JavaMailSender> {
 		LocalDate Day2 = LocalDate.parse(todate);
 
 		long daysNegative = ChronoUnit.DAYS.between(Day1, Day2);
-		ers.updateLeave(id,request.getParameter("leavetype"),request.getParameter("fromdate"),request.getParameter("todate"),request.getParameter("leavereason"),(int)daysNegative,true);
+		ers.updateLeave(id,request.getParameter("leavetype"),request.getParameter("fromdate"),request.getParameter("todate"),request.getParameter("leavereason"),(int)daysNegative,request.getParameter("reason"));
 		ModelAndView mav = new ModelAndView("redirect:/admin/leaverequests/register");
 		return mav;
 
 	}
 
+	
+	@RequestMapping(value="/admin/leavehistory/{id}")
+	public ModelAndView empLeavehistory(@PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("allempleaverequests");
+		TblEmpLeavereq leavereq=ers.getById(id);
+		mav.addObject("empleavehistory", leavereq);
+		return mav;
+	}
+	@RequestMapping(value="/leavehistory", method=RequestMethod.POST)
+	@ResponseBody
+	public TblEmpLeavereq leaveHistory(HttpServletRequest request) {
+		TblEmpLeavereq leavereq=ers.getById(Integer.parseInt(request.getParameter("id")));
+		return leavereq;
+		
+	}
+	
 }

@@ -245,7 +245,7 @@ public class ManagerPageController {
 		mav.addObject("manservices", mandao.list());	
 		mav.addObject("employees", emp1);
 
-		TblEmpLeavereq empleave = new TblEmpLeavereq((int)daysNegative,null, request.getParameter("fromdate"),request.getParameter("leavereason"), request.getParameter("leavetype"), null, null,  request.getParameter("todate"),null,null);
+		TblEmpLeavereq empleave = new TblEmpLeavereq((int)daysNegative,null, request.getParameter("fromdate"),request.getParameter("leavereason"), request.getParameter("leavetype"), null, null,  request.getParameter("todate"),null,null,null);
 
 
 		empleave.setManagerid(user.getManagerid());

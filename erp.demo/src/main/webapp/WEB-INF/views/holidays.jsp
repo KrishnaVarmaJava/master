@@ -76,6 +76,12 @@
 										<span> Holidays </span>
 									</div>
 								</div>
+									<c:if test="${msgup.equals('HoliDay UpDated Successfully')}">
+									<h4 style="color: green;">${msgup}</h4>
+								</c:if>
+								<c:if test="${msgup.equals('HoliDay is notUpdated.Please try Again')}">
+									<h4 style="color: red;">${msgup}</h4>
+									</c:if>
 
 
 
@@ -99,7 +105,13 @@
 						</div>
 					</div>
 				</div>
-
+                         <td><c:if test="${msg.equals('Holiday added successfully!....')}">
+									<h4 style="color: green;">${msg}</h4>
+								</c:if></td>
+						<td><c:if test="${msg.equals('Holiday already exists')}">
+									<h4 style="color: red;">${msg}</h4>
+								</c:if></td>
+								
 				<div class="col-md-12 card" id="addnewemp">
 
 					<button type="button" class="close" aria-label="Close">
@@ -112,8 +124,7 @@
 								<div class="form-group">
 									<div class="form-line">
 										<label>Holiday Name </label> <input type="text" name="holiday"
-
-											id="holiday" class="form-control" required="required"/>
+											id="holiday" class="form-control" required="required" />
 
 
 									</div>
@@ -124,7 +135,8 @@
 									<div class="input-group addon-line">
 										<div class="form-line">
 											<label>Holiday Date</label> <input type="date" name="hdate"
-												id="hdate" class="form-control" placeholder="Holiday Date" required="required">
+												id="hdate" class="form-control" placeholder="Holiday Date"
+												required="required">
 										</div>
 										<span class="input-group-addon"><i
 											class="material-icons">date_range </i></span>
@@ -171,8 +183,8 @@
 									<tbody>
 										<c:forEach items="${HolidaysList}" var="Holiday">
 											<tr>
-											<td>${Holiday.getName()}</td>
-												<td>${Holiday.getDate()}-${Holiday.getMonth()}-${Holiday.getYear()}</td>
+												<td>${Holiday.getName()}</td>
+												<td>${Holiday.getHdate()}</td>
 												<td id="day${Holiday.getId()}"></td>
 												<td>
 													<ul class="tabelaction">
@@ -250,7 +262,7 @@
 			});
 
 			$(".close").click(function() {
-			
+
 				$("#addnewemp").css("display", "none");
 				$("#addnewemp").addClass("animated");
 
@@ -258,13 +270,17 @@
 
 		});
 	</script>
+
 	<c:forEach items="${HolidaysList}" var="Holiday">
 
 		<script type="text/javascript">
+		var input = '${Holiday.getHdate()}';
 
-var date = "${Holiday.getDate()}";
-var month1 = "${Holiday.getMonth()}";
-var year = "${Holiday.getYear()}";
+var fields = input.split('-');
+		
+var date = fields[2];
+var month1 = fields[1];
+var year = fields[0];
 
 switch (month1) {
 case "01":
@@ -330,12 +346,12 @@ case 5:
 case 6:
     day = "Saturday";
 }
-document.getElementById('day'+${Holiday.getId()}).innerHTML = day;
+ document.getElementById('day'+${Holiday.getId()}).innerHTML = day; 
 
 
 </script>
 
-	</c:forEach>
+	</c:forEach> 
 
 
 </body>

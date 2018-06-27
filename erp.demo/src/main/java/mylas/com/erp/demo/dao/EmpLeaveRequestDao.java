@@ -21,6 +21,6 @@ public interface EmpLeaveRequestDao {
 	public List<TblEmpLeavereq> viewSearch(String firstname, String lnamename, String month, String status);
 	public List<TblEmpLeavereq> empLeaveSearch(String uname, String month, String status); 
 	public String updateLeave(int id, String leavetype, String fdate, String tdate, String reasion,int count,
-			boolean status);
+			String status);
 	public TblEmpLeavereq getById(int id);
 }
