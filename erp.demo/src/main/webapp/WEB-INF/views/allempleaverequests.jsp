@@ -229,14 +229,25 @@
 																	</c:if>
 																	<c:if test="${empleaveslist.getStatus() == false}">
 																		<button type="button"
-																			class="btn btn-primary  btn-outline btn-rounded waves-effect colorred">Declined
-																		</button>
+																			class="btn btn-primary  btn-outline btn-rounded waves-effect colorred"
+																			data-toggle="dropdown">Declined</button>
+																		<ul class="dropdown-menu pull-right">
+																			<li><a
+																				href="${contextRoot}/${role}/leavereq/edit/${empleaveslist.getId()}">
+																					Edit</a></li>
+
+																		</ul>
 																	</c:if>
 																	<c:if test="${empleaveslist.getStatus() == true}">
 																		<button type="button"
 																			class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect "
-																			aria-haspopup="true" aria-expanded="false">Approved
-																		</button>
+																			aria-haspopup="true" aria-expanded="false"
+																			data-toggle="dropdown">Approved</button>
+																		<ul class="dropdown-menu pull-right">
+																			<li><a
+																				href="${contextRoot}/${role}/leavereq/edit/${empleaveslist.getId()}">
+																					Edit</a></li>
+																		</ul>
 																	</c:if>
 																	<c:set var="eid" value="${User.getEid()}"></c:set>
 																	<c:if
@@ -297,9 +308,11 @@
 																<img src="${images}/mail/one.jpg" alt="Contact Person">
 																<span>${empleaveslist.getEmployeeid()}</span>
 																<div style="text-align: center"></div>
-															</div>
-															<c:if test="${empleaveslist.getReferenceid()>0}">
-																<button style="border: none; background: none;" id="${empleaveslist.getReferenceid()}" data-target="#leavehistory"  data-toggle="modal" onclick="displayhistory(this.id)">
+															</div> <c:if test="${empleaveslist.getReferenceid()>0}">
+																<button style="border: none; background: none;"
+																	id="${empleaveslist.getReferenceid()}"
+																	data-target="#leavehistory" data-toggle="modal"
+																	onclick="displayhistory(this.id)">
 																	<i class="material-icons">bubble_chart</i>
 																</button>
 															</c:if>
@@ -336,8 +349,16 @@
 																<c:if test="${empleaveslist.getStatus() == true}">
 																	<button type="button"
 																		class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect "
+																		data-toggle="dropdown" aria-haspopup="true"
 																		aria-haspopup="true" aria-expanded="false">Approved
 																	</button>
+																	<ul class="dropdown-menu pull-right">
+																		<li><a
+																			href="${contextRoot}/admin/leavereq/edit/${empleaveslist.getId()}">
+																				Edit</a></li>
+
+
+																	</ul>
 																</c:if>
 																<c:set var="eid" value="${User.getEid()}"></c:set>
 																<c:if
@@ -481,7 +502,7 @@
 			<div class="modal fade" id="leavehistory" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true"
 				style="display: none">
-				<div class="modal-dialog">
+				<div class="modal-dialog" style="width: 70%;">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
@@ -492,15 +513,14 @@
 						</div>
 						<div class="modal-body">
 							<div class="long-modal">
-								<table id="result" border='1'>
-									<tr>
-										<th>EmployeeId</th>
-										<th>Leave Type</th>
-										<th>From Date</th>
-										<th>To Date</th>
-										<th>Status</th>
-									</tr>
-								</table>
+
+								<div class="body">
+									<table  class="tablesaw table-striped table-bordered table-hover"
+										id="result">
+										<thead class="tableheding">
+										</thead>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -659,31 +679,49 @@
 	<script type="text/javascript">
 		function displayhistory(id) {
 
-			$.ajax({
-				type : "POST",
-				url : "${contextRoot}/leavehistory",
-				data : "id=" + id,
-				cache: false,
-				success : function(response) {
-					//document.getElementById("result").value = response;
+			$
+					.ajax({
+						type : "POST",
+						url : "${contextRoot}/leavehistory",
+						data : "id=" + id,
+						cache : false,
+						success : function(response) {
+							//document.getElementById("result").value = response;
 
-					$('#result').html("<tr><th>EmployeeId</th><th>Leave Type</th><th>From Date</th><th>To Date</th><th>Status</th></tr>");
-					//var obj = JSON.parse(response);
-					$('#result').append(
-							'<td>' + response.employeeid + '<td>'
-									+ response.leavetype + '<td>'
-									+ response.fromdate + '<td>'
-									+ response.todate + '<td>'
-									+ response.status);
-				},
-				error : function() {
-					alert('Error while request..');
-				}
+							$('#result')
+									.html(
+											"<tr><th>Employee</th><th data-tablesaw-sortable-col data-tablesaw-priority='3'>Leave Type</th><th data-tablesaw-sortable-col data-tablesaw-priority='2'>From</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>To</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>No of Days</th><th data-tablesaw-sortable-col data-tablesaw-priority='2'>Reason</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>Status</th></tr>");
+							//var obj = JSON.parse(response);
+							
+							var stat = response.status;
 
-			});
+							if(stat==true){
+								var ststus = '<button type="button" class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect " data-toggle="dropdown" aria-haspopup="true" aria-haspopup="true" aria-expanded="false">Approved</button>';
+								}else if(stat==false){
+									var ststus = '<button type="button" class="btn btn-primary colorred btn-outline btn-rounded waves-effect " data-toggle="dropdown" aria-haspopup="true" aria-haspopup="true" aria-expanded="false">Declined</button>';
+									}
+							
+							$('#result').append(
+									'<td style="border: 1px solid #eee"><div class="chip"><img src="${images}/mail/one.jpg" style="width: 32px;height: 32px;" alt="Contact Person"><span>' + response.employeeid + '</span><div style="text-align: center"></div></div><td style="border: 1px solid #eee">'
+											+ response.leavetype + '<td style="border: 1px solid #eee">'
+											+ response.fromdate + '<td style="border: 1px solid #eee">'
+											+ response.todate + '<td style="border: 1px solid #eee">'
+											+ response.count + '<td style="border: 1px solid #eee">'
+											+ response.leavereason + '<td style="border: 1px solid #eee">'
+											+ ststus);
+
+						
+						},
+						error : function() {
+							alert('Error while request..');
+						}
+
+					});
 
 		};
 	</script>
+	
+
 </body>
 
 </html>

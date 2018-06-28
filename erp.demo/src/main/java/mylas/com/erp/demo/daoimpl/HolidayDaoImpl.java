@@ -78,11 +78,11 @@ public class HolidayDaoImpl implements HolidayDao {
 		}catch(ConstraintViolationException e) {
 			System.out.println("exception");
 			session.getTransaction().rollback();
-			return "HoliDay is notUpdated.Please try Again";
+			return "HoliDay is Already Exists.Please try Again";
 		}catch(PersistenceException e){                                                       
 			System.out.println("this is PersistenceException exception throw");   
 			session.getTransaction().rollback();
-			return "HoliDay is notUpdated.Please try Again";
+			return "HoliDay is Already Exists.Please try Again";
          }
 	
 		

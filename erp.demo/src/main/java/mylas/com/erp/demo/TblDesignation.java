@@ -1,5 +1,5 @@
 package mylas.com.erp.demo;
-// Generated 19 Jun, 2018 10:51:25 AM by Hibernate Tools 5.2.8.Final
+// Generated 28 Jun, 2018 12:18:19 PM by Hibernate Tools 5.2.8.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

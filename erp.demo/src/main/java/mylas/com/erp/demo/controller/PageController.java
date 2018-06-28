@@ -689,15 +689,44 @@ public class PageController<JavaMailSender> {
 	}
 	@RequestMapping(value= "/holidays/edit/{id}", method=RequestMethod.POST)
 	public ModelAndView updateHoliday(HttpServletRequest request,@PathVariable("id") int id) {
-		ModelAndView mav = new ModelAndView("redirect:/admin/empholidays/register");
-
+		ModelAndView mav = new ModelAndView();
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+			user = ((EmpDetails)principal);
+		}
+		List<TblManRoleTransfer> transferrole = roleTransfer.viewAll();
+		List<TblEmpLeavereq> allempleave = empleavereq.view();
+		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+		List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+		List<EmpDetails> emp1 = userDetails.getDetails();
 		String dt=request.getParameter("hdate");
 		String[]sdt=dt.split("-");		
 		String name=request.getParameter("holiday");
 		Holidays hday=new Holidays(name, dt);
 		String msg=himpl.updateHOliday(id, hday);
-		mav.addObject("msg",msg);
+		if(msg.equalsIgnoreCase("HoliDay UpDated Successfully")) {
+			mav = new ModelAndView("redirect:/admin/empholidays/register");
+			return mav;
+		}else if(msg.equalsIgnoreCase("HoliDay is notUpdated.Please try Again")) {
+			mav = new ModelAndView("holidaysedit");
+			mav.addObject("empattendances",empattendances);
+			mav.addObject("User",user);
+			mav.addObject("allempleave", allempleave);
+			mav.addObject("count",count);
+			mav.addObject("TransferRoleList", transferrole);
+			String role = user.getRole();
+			mav.addObject("Role",role);
+			Holidays holidays = himpl.getHolidayById(id);
+			mav.addObject("Holiday",holidays);
+			mav.addObject("services", servicesdao.list());
+			mav.addObject("msg",msg);
+			return mav;
+		}
+		mav.addObject("msg", "Unable to Update");
 		return mav;
+		
+		
 	}
 	@RequestMapping(value="/admin/departments/edit/{id}")
 	public ModelAndView editAdminDepartments(HttpServletRequest request, HttpServletResponse response,@PathVariable("id") int id) {

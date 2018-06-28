@@ -62,17 +62,17 @@
 		<section>
 			<!-- Page content-->
 			<div class="content-wrapper">
-
+				<p style="color: red;" align="center">${msg}</p>
 				<div class="col-md-12 card" id="addnewemp">
 
 					<div class="body">
-						<form action="${contextRoot}/holidays/edit/${Holiday.getId()}" method="post">
+						<form action="${contextRoot}/holidays/edit/${Holiday.getId()}"
+							method="post">
 							<div class="col-md-6">
 								<div class="form-group">
 									<div class="form-line">
-										<label>Holiday Name </label> <input type="text" name="holiday" id="holiday" required="required"
-
-											class="form-control"/>
+										<label>Holiday Name </label> <input type="text" name="holiday"
+											id="holiday" required="required" class="form-control" />
 
 									</div>
 								</div>
@@ -81,8 +81,9 @@
 								<div class="form-group">
 									<div class="input-group addon-line">
 										<div class="form-line">
-											<label>Holiday Date</label> <input type="date" name="hdate" id="hdate"
-												class="form-control" placeholder="Holiday Date" required="required">
+											<label>Holiday Date</label> <input type="date" name="hdate"
+												id="hdate" class="form-control" placeholder="Holiday Date"
+												required="required">
 										</div>
 										<span class="input-group-addon"><i
 											class="material-icons">date_range </i></span>
@@ -132,7 +133,7 @@
 	<script src="${js}/layout.js"></script>
 
 
-<!-- 	<script>
+	<!-- 	<script>
 		$(document).ready(function() {
 
 			$("#addnewemp").css("display", "none");
@@ -156,13 +157,12 @@
 	</script>
 
  -->
-<script type="text/javascript">
-/* alert("${Holiday.getName()}"); */
+	<script type="text/javascript">
+		/* alert("${Holiday.getName()}"); */
 
-document.getElementById("holiday").value = "${Holiday.getName()}";
-document.getElementById("hdate").value = "${Holiday.getHdate()}";
-
-</script>
+		document.getElementById("holiday").value = "${Holiday.getName()}";
+		document.getElementById("hdate").value = "${Holiday.getHdate()}";
+	</script>
 
 
 
