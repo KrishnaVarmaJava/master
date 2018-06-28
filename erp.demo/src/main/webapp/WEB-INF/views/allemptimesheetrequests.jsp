@@ -159,7 +159,7 @@
 						</form>
 						<div class="card">
 
-							<div class="body" style="overflow-y: hidden; overflow-x: scroll;height: 400px; ">
+							<div class="body" style="overflow-y: visible; overflow-x: scroll;height: 600px; ">
 								<table class="tablesaw table-striped table-hover table-bordered">
 									<thead class="tableheding">
 										<tr>

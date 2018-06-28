@@ -416,7 +416,7 @@
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel4">Long Modal</h4>
+							<h4 class="modal-title" id="myModalLabel4">Approve Leave Request</h4>
 						</div>
 						<div class="modal-body">
 							<div class="long-modal">
@@ -457,7 +457,7 @@
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel4">Long Modal</h4>
+							<h4 class="modal-title" id="myModalLabel4">Decline Leave Request</h4>
 						</div>
 						<div class="modal-body">
 							<div class="long-modal">
@@ -496,7 +496,7 @@
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel4">Long Modal</h4>
+							<h4 class="modal-title" id="myModalLabel4">Employee Leave History</h4>
 						</div>
 						<div class="modal-body">
 							<div class="long-modal">

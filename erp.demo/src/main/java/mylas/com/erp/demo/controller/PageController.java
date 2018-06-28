@@ -440,6 +440,7 @@ public class PageController<JavaMailSender> {
 		Edetails = userDetails.getById(id);
 		mav.addObject("empID", id);
 		mav.addObject("employee",Edetails);
+		mav.addObject("User", user);
 		mav.addObject("services", servicesdao.list());
 		return mav;		
 	}
@@ -710,7 +711,7 @@ public class PageController<JavaMailSender> {
 		if(msg.equalsIgnoreCase("HoliDay UpDated Successfully")) {
 			mav = new ModelAndView("redirect:/admin/empholidays/register");
 			return mav;
-		}else if(msg.equalsIgnoreCase("HoliDay is notUpdated.Please try Again")) {
+		}else if(msg.equalsIgnoreCase("HoliDay is Already Exists.Please try Again")) {
 			mav = new ModelAndView("holidaysedit");
 			mav.addObject("empattendances",empattendances);
 			mav.addObject("User",user);
@@ -954,8 +955,8 @@ public class PageController<JavaMailSender> {
 	@RequestMapping(value="/admin/employee/search")
 	public ModelAndView searchBars(HttpServletRequest req) {
 
-		String firstname = req.getParameter("firstname1");
-		String lastname = req.getParameter("lastname2");
+		String firstname = req.getParameter("firstname");
+		String lastname = req.getParameter("lastname");
 		String department = req.getParameter("department");
 		String designation = req.getParameter("designation");
 		List<TblDepartment> deptList = deptdao.getDetails();
