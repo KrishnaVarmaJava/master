@@ -106,7 +106,12 @@
 						</div>
 					</div>
 				</div>
-
+<td><c:if test="${dsmsg.equals('Designation added successfully')}">
+         <h4 style="color: green;">${dsmsg}</h4>
+        </c:if></td>
+      <td><c:if test="${dsmsg.equals('Designation already exists')}">
+         <h4 style="color: red;">${dsmsg}</h4>
+        </c:if></td>
 				<div class="col-md-12 card" id="addnewemp">
 					<button type="button" class="close" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -114,9 +119,10 @@
 					<div class="custom_title">
 						<h2>Add Designations</h2>
 					</div>
+					 
 					<hr class="custom_line">
 					<div class="body">
-
+	
 
 						<form action="${contextRoot}/admin/empdesig/register"
 							method="post">
@@ -235,7 +241,7 @@
 															class="dropdown-toggle" data-toggle="dropdown"
 															role="button" aria-haspopup="true" aria-expanded="false">
 																<i class="material-icons">more_vert</i>
-														</a>
+														</a><c:if test="${desig.getActivestate() == true}">
 															<ul class="dropdown-menu pull-right">
 																<li><a
 																	href="${contextRoot}/${role}/designation/edit/${desig.getDesignationId()}"><i
@@ -244,7 +250,7 @@
 																	href="${contextRoot}/${role}/designations/delete/${desig.getDesignationId()}"><i
 																		class="material-icons">delete</i>Delete</a></li>
 
-															</ul></li>
+															</ul></c:if> </li>
 													</ul>
 												</td>
 

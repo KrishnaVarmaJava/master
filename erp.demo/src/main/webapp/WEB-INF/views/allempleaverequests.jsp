@@ -194,7 +194,17 @@
 										</tr>
 									</thead>
 									<div class="clearfix"></div>
+									<c:if test="${Role.equals('ADMIN_ROLE')}">
+										<c:set var="role" value="admin" />
+									</c:if>
 
+									<c:if test="${Role.equals('MANAGER_ROLE')}">
+										<c:set var="role" value="manager" />
+									</c:if>
+
+									<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
+										<c:set var="role" value="employee" />
+									</c:if>
 									<c:forEach items="${empleave}" var="empleaveslist">
 										<c:if test="${User.getRole().equals('MANAGER_ROLE')}">
 											<c:set var="user" value="${User.getEid()}" />
@@ -255,18 +265,6 @@
 																		<c:if test="${empleaveslist.getStatus() == null}">
 
 																			<ul class="dropdown-menu bullet">
-																				<c:if test="${Role.equals('ADMIN_ROLE')}">
-																					<c:set var="role" value="admin" />
-																				</c:if>
-
-																				<c:if test="${Role.equals('MANAGER_ROLE')}">
-																					<c:set var="role" value="manager" />
-																				</c:if>
-
-																				<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
-																					<c:set var="role" value="employee" />
-																				</c:if>
-
 
 																				<li>
 																					<button type="button"
@@ -366,17 +364,6 @@
 																	<c:if test="${empleaveslist.getStatus() == null}">
 
 																		<ul class="dropdown-menu bullet">
-																			<c:if test="${Role.equals('ADMIN_ROLE')}">
-																				<c:set var="role" value="admin" />
-																			</c:if>
-
-																			<c:if test="${Role.equals('MANAGER_ROLE')}">
-																				<c:set var="role" value="manager" />
-																			</c:if>
-
-																			<c:if test="${Role.equals('EMPLOYEE_ROLE')}">
-																				<c:set var="role" value="employee" />
-																			</c:if>
 
 
 																			<li>
@@ -515,7 +502,8 @@
 							<div class="long-modal">
 
 								<div class="body">
-									<table  class="tablesaw table-striped table-bordered table-hover"
+									<table
+										class="tablesaw table-striped table-bordered table-hover"
 										id="result">
 										<thead class="tableheding">
 										</thead>
@@ -690,7 +678,7 @@
 
 							$('#result')
 									.html(
-											"<tr><th>Employee</th><th data-tablesaw-sortable-col data-tablesaw-priority='3'>Leave Type</th><th data-tablesaw-sortable-col data-tablesaw-priority='2'>From</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>To</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>No of Days</th><th data-tablesaw-sortable-col data-tablesaw-priority='2'>Reason</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>Status</th></tr>");
+											"<tr><th>Employee</th><th data-tablesaw-sortable-col data-tablesaw-priority='3'>Leave Type</th><th data-tablesaw-sortable-col data-tablesaw-priority='2'>From</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>To</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>No of Days</th><th data-tablesaw-sortable-col data-tablesaw-priority='2'>Leave Reason</th><th data-tablesaw-sortable-col data-tablesaw-priority='2'>Manager Remark</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>Status</th></tr>");
 							//var obj = JSON.parse(response);
 							
 							var stat = response.status;
@@ -706,8 +694,9 @@
 											+ response.leavetype + '<td style="border: 1px solid #eee">'
 											+ response.fromdate + '<td style="border: 1px solid #eee">'
 											+ response.todate + '<td style="border: 1px solid #eee">'
-											+ response.count + '<td style="border: 1px solid #eee">'
+											+ response.count + ' Days<td style="border: 1px solid #eee">'
 											+ response.leavereason + '<td style="border: 1px solid #eee">'
+											+ response.reason + '<td style="border: 1px solid #eee">'
 											+ ststus);
 
 						
@@ -720,7 +709,7 @@
 
 		};
 	</script>
-	
+
 
 </body>
 

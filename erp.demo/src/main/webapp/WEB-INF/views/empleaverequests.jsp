@@ -314,14 +314,14 @@
 															class="dropdown-toggle" data-toggle="dropdown"
 															role="button" aria-haspopup="true" aria-expanded="false">
 																<i class="material-icons">more_vert</i>
-														</a>
+														</a><c:if test="${empleaveslist.getStatus() == null}">
 															<ul class="dropdown-menu pull-right">
-																<c:if test="${empleaveslist.getStatus() == null}">
+																
 																	<li><a
 																		href="${contextRoot}/${role}/leave/delete/${empleaveslist.getId()}"><i
 																			class="material-icons">delete</i>Delete</a></li>
-																</c:if>
-															</ul></li>
+																
+															</ul></c:if></li>
 													</ul>
 												</td>
 

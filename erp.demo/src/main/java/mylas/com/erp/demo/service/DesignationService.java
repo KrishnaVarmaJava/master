@@ -2,11 +2,11 @@ package mylas.com.erp.demo.service;
 
 import java.util.List;
 
+import javax.persistence.PersistenceException;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
 
 import mylas.com.erp.demo.TblDesignation;
@@ -18,13 +18,28 @@ public class DesignationService implements DesignationDao {
 
 
 	@Override
-	public void saveDetails(TblDesignation tbldesg) {
-		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		Integer num = (Integer) session.save(tbldesg);
-		session.getTransaction().commit();
-		
-	}
+	 public String saveDetails(TblDesignation tbldesg) {
+	  Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+	  try {
+	  session.beginTransaction();
+	  Integer num = (Integer) session.save(tbldesg);
+	  session.getTransaction().commit();
+	  if(num!=0) {
+	   System.out.println("Designation added successfully");
+	   session.getTransaction().commit();
+	   return "Designation added successfully";
+	  }else {
+	  
+	     session.getTransaction().commit();
+	       return "Designation already exists";
+	  }
+	  }catch(ConstraintViolationException e) {
+		  System.out.println("Duplicate Entry");
+		  session.getTransaction().rollback();
+		  return "Designation already exists";
+		 }
+		  
+		 }
 
 	@Override
 	public List<TblDesignation> getDetails() {
@@ -58,22 +73,35 @@ public class DesignationService implements DesignationDao {
 	}
 
 	@Override
-	public void updateDetails(int id, String newDep,String newDep1,String todate) {
+	 public String updateDetails(int id, String newDep,String newDep1,String todate) {
 
-		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		TblDesignation deptdel = session.load(TblDesignation.class, id);
-		
-		deptdel.setDesignation(newDep);
-		deptdel.setDepartment(newDep1);
-		if(todate!="") {
-			deptdel.setTodate(todate);
-			deptdel.setActivestate(false);
-		}
-		session.saveOrUpdate(deptdel);
-		session.getTransaction().commit();
-		
-	}
+	  Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
+	  try {
+	  session.beginTransaction();
+	  TblDesignation deptdel = session.load(TblDesignation.class, id);
+	  deptdel.setDesignation(newDep);
+	  deptdel.setDepartment(newDep1);
+	  if(todate!="") {
+	   deptdel.setTodate(todate);
+	   deptdel.setActivestate(false);
+	  }
+	  session.saveOrUpdate(deptdel);
+	  System.out.println("saveor updated");
+	  session.getTransaction().commit();
+	  System.out.println("commited");
+	  return "Designation UpDated Successfully";
+	  }catch(ConstraintViolationException e) {
+	   System.out.println("exception");
+	   session.getTransaction().rollback();
+	   return "Designation already exists.Please try Again";
+	  }catch(PersistenceException e){                                                       
+	   System.out.println("this is PersistenceException exception throw");   
+	   session.getTransaction().rollback();
+	   return "Designation already exists.Please try Again";
+	         }
+
+	  
+	 }
 
 	@Override
 	public TblDesignation getById(int id) {

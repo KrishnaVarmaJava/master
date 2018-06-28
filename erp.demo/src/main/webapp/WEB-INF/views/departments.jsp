@@ -103,7 +103,7 @@
 									</div>
 								</div>
 
-
+               
 
 
 								<div class="col-md-6">
@@ -121,7 +121,12 @@
 						</div>
 					</div>
 				</div>
-
+  <td><c:if test="${msg.equals('Department added successfully!....')}">
+         <h4 style="color: green;">${msg}</h4>
+        </c:if></td>
+                <td><c:if test="${msg.equals('Department already exists')}">
+         <h4 style="color: red;">${msg}</h4>
+        </c:if></td>
 
 					<div class="col-md-12 card" id="addnewemp">
 				<button type="button" class="close" aria-label="Close">
@@ -229,7 +234,7 @@
 															class="dropdown-toggle" data-toggle="dropdown"
 															role="button" aria-haspopup="true" aria-expanded="false">
 																<i class="material-icons">more_vert</i>
-														</a>
+														</a><c:if test="${dep.getActivestate() == true}">
 															<ul class="dropdown-menu pull-right">
 																<li><a href="${contextRoot}/${role}/departments/edit/${dep.getDepartmentId()}"><i
 																		class="material-icons">edit</i>Edit</a></li>
@@ -237,7 +242,7 @@
 																	href="${contextRoot}/${role}/departments/delete/${dep.getDepartmentId()}"><i
 																		class="material-icons">delete</i>Delete</a></li>
 
-															</ul></li>
+															</ul></c:if> </li>
 													</ul>
 												</td>
 

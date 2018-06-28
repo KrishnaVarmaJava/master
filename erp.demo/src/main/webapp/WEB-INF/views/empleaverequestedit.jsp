@@ -69,32 +69,6 @@
 						<div class="">
 
 
-							<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 topbar">
-
-								<div class="col-md-6">
-									<div class="row pagetitle">
-										<span> Leave Request </span>
-									</div>
-								</div>
-
-
-
-
-								<div class="col-md-6">
-									<div class="row pagetitle">
-										<span class="pull-right">
-											<button type="button" id="addnew"
-												class="btn btn-primary btn-rounded waves-effect">Add
-												Leave</button>
-										</span>
-									</div>
-								</div> 
-
-
-								<div></div>
-
-
-							</div> -->
 
 						</div>
 					</div>
@@ -121,7 +95,7 @@
 						<c:set var="role" value="employee" />
 					</c:if>
 
-					<form action="${contextRoot}/admin/leave/upload/${id}" method="post"
+					<form action="${contextRoot}/${role}/leave/upload/${id}" method="post"
 						onsubmit="return Validate()" name="form">
 						<hr class="custom_line">
 						<div class="body">
@@ -197,155 +171,7 @@
 							</div>
 						</div>
 					</form>
-				<%-- </div>
-
-				 <div class="row clearfix">
-
-
-
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-
-
-
-						<!-- Table Kitchen Sink -->
-						<div class="card">
-							<form action="${contextRoot}/${role}/leave/search" method="post">
-
-								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search_leav">
-
-									<div class="col-md-2 padding_col">
-										<div class="form-group">
-
-											<select class="form-control" size="1" name="month" id="month">
-												<option value="">Please select</option>
-												<option value="01">January</option>
-												<option value="02">February</option>
-												<option value="03">March</option>
-												<option value="04">April</option>
-												<option value="05">May</option>
-												<option value="06">June</option>
-												<option value="07">July</option>
-												<option value="08">August</option>
-												<option value="09">September</option>
-												<option value="10">October</option>
-												<option value="11">November</option>
-												<option value="12">December</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-2 padding_col">
-										<div class="form-group">
-
-											<select class="form-control" size="1" id="status"
-												name="status">
-												<option value="">Please select</option>
-												<option value="2">Pending</option>
-												<option value="1">Approved</option>
-												<option value="0">Declined</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-2 ">
-										<button type="submit" onclick="return Search()"
-											class="btn btn-primary  pull-right waves-effect ">
-											Search</button>
-									</div>
-								</div>
-							</form>
-							
-							<div class="body">
-								<p style="color: green;">${DelMsg}</p>
-								<table class="tablesaw table-striped table-bordered table-hover">
-									<thead class="tableheding">
-										<tr>
-											<th data-tablesaw-sortable-col
-												data-tablesaw-sortable-default-col
-												data-tablesaw-priority="persist">Employee</th>
-											<th data-tablesaw-sortable-col data-tablesaw-priority="3">
-												Leave Type</th>
-											<th data-tablesaw-sortable-col data-tablesaw-priority="2">From</th>
-											<th data-tablesaw-sortable-col data-tablesaw-priority="4">To
-											</th>
-
-											<th data-tablesaw-sortable-col data-tablesaw-priority="4">No
-												of Days</th>
-											<th data-tablesaw-sortable-col data-tablesaw-priority="2">
-												Reason</th>
-											<th data-tablesaw-sortable-col data-tablesaw-priority="4">Status
-											</th>
-											<th data-tablesaw-sortable-col data-tablesaw-priority="1"
-												class="actiontabel">Action</th>
-
-										</tr>
-									</thead>
-									<div class="clearfix"></div>
-
-									<c:forEach items="${empleave}" var="empleaveslist">
-										<tbody>
-
-
-											<tr>
-												<td>
-													<div class="chip">
-														<img src="${images}/mail/one.jpg" alt="Contact Person">
-														<span>${User.getFname()} ${User.getLname()}</span>
-														<div style="text-align: center">${User.getEid()}</div>
-													</div>
-												</td>
-												<td>${empleaveslist.getLeavetype()}</td>
-												<td>${empleaveslist.getFromdate()}</td>
-												<td>${empleaveslist.getTodate()}</td>
-												<td>${empleaveslist.getCount()}days</td>
-												<td>${empleaveslist.getLeavereason()}</td>
-												<td>
-
-													<div class="btn-group">
-														<c:if test="${empleaveslist.getStatus() == null}">
-															<button type="button"
-																class="btn btn-primary btn-outline btn-rounded waves-effect"
-																data-toggle="dropdown" aria-haspopup="true"
-																aria-expanded="false">Pending</button>
-														</c:if>
-														<c:if test="${empleaveslist.getStatus() == false}">
-															<button type="button"
-																class="btn btn-primary  btn-outline btn-rounded waves-effect colorred">Declined
-															</button>
-														</c:if>
-														<c:if test="${empleaveslist.getStatus() == true}">
-															<button type="button"
-																class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect "
-																data-toggle="dropdown" aria-haspopup="true"
-																aria-expanded="false">Approved</button>
-														</c:if>
-													</div>
-												</td>
-												<td>
-													<ul class="tabelaction">
-														<li class="dropdown"><a href="javascript:void(0);"
-															class="dropdown-toggle" data-toggle="dropdown"
-															role="button" aria-haspopup="true" aria-expanded="false">
-																<i class="material-icons">more_vert</i>
-														</a>
-															<ul class="dropdown-menu pull-right">
-																<c:if test="${empleaveslist.getStatus() == null}">
-																	<li><a
-																		href="${contextRoot}/${role}/leave/delete/${empleaveslist.getId()}"><i
-																			class="material-icons">delete</i>Delete</a></li>
-																</c:if>
-															</ul></li>
-													</ul>
-												</td>
-
-											</tr>
-
-										</tbody>
-
-									</c:forEach>
-
-
-								</table>
-							</div>
-						</div> --%>
+				
 						<!-- #END# Kitchen Sink -->
 
 

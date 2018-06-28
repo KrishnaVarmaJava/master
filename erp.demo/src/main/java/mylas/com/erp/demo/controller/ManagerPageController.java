@@ -755,6 +755,67 @@ public class ManagerPageController {
 		return userDetails.simulateSearchResultLastName(lastname);
 
 	}
+	@RequestMapping(value= "manager/leavereq/edit/{id}")
+	public ModelAndView empLeaveEdit(HttpSession session, @PathVariable("id") int id) {
+		ModelAndView mav = new ModelAndView("empleaverequestedit");
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		EmpDetails user=null;
+		if (principal instanceof EmpDetails) {
+			user = ((EmpDetails)principal);
+		}
+
+		String role = user.getRole();
+		mav.addObject("Role",role);
+		//List<TblEmpLeavereq> allempleave = ers.view();
+		//List<TblEmpLeavereq> leavereq =  ers.viewbyid(id);
+		TblEmpLeavereq leavereq=ers.getById(id);
+		//int count = ers.countEmployee(user.getEid()) + attimpl.countEmployee(user.getEid());
+		//List<EmpDetails> emp1 = userDetails.getDetails();
+		//List<TblEmpAttendanceNew> empattendances =  attimpl.getDetails();
+		//mav.addObject("empattendances",empattendances);
+	//	mav.addObject("allempleave", allempleave);
+	//	mav.addObject("count",count);
+		mav.addObject("User", user);
+		mav.addObject("empleave", leavereq);
+		//mav.addObject("manservices", mandao.list());
+		//mav.addObject("employees", emp1);
+		//mav.addObject("count",count);
+	//	List<TblManRoleTransfer> transferrole = roleTransfer.viewAll();
+	//	mav.addObject("TransferRoleList", transferrole);
+		mav.addObject("id",id);
+		mav.addObject("manservices", mandao.list());
+		mav.addObject(user);
+		return mav;
+			
+	}
+
+	@RequestMapping(value="manager/leave/upload/{id}")
+	public ModelAndView updateLeaveRequest(HttpServletRequest request,@PathVariable("id") int id) {
+		//ModelAndView mav = new ModelAndView("redirect:/admin/search/register");
+		String fromdate = request.getParameter("fromdate");
+		String[] date = fromdate.split("-");
+		String todate = request.getParameter("todate");
+		SimpleDateFormat formatfromdate = new SimpleDateFormat("yyyy-mm-dd");
+		Date reqfromDate = null;
+		Date reqtoDate = null;
+		try {
+			reqfromDate = formatfromdate.parse(fromdate);
+			reqtoDate = formatfromdate.parse(todate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		LocalDate Day1 = LocalDate.parse(fromdate);
+		LocalDate Day2 = LocalDate.parse(todate);
+
+		long daysNegative = ChronoUnit.DAYS.between(Day1, Day2);
+		ers.updateLeave(id,request.getParameter("leavetype"),request.getParameter("fromdate"),request.getParameter("todate"),request.getParameter("leavereason"),(int)daysNegative,"true");
+		ModelAndView mav = new ModelAndView("redirect:/manager/leaverequests/register");
+		return mav;
+
+	}
+
 
 
 }

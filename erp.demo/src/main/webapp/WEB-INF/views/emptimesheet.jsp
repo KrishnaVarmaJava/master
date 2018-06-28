@@ -687,14 +687,14 @@
 																			data-toggle="dropdown" role="button"
 																			aria-haspopup="true" aria-expanded="false"> <i
 																				class="material-icons">more_vert</i>
-																		</a>
+																		</a><c:if test="${attlist.getStatas() == null}">
 																			<ul class="dropdown-menu pull-right">
-																				<c:if test="${attlist.getStatas() == null}">
+																				
 																					<li><a
 																						href="${contextRoot}/${role}/timesheet/delete/${attlist.getId()}"><i
 																							class="material-icons">delete</i>Delete</a></li>
-																				</c:if>
-																			</ul></li>
+																				
+																			</ul></c:if></li>
 																	</ul>
 																</td>
 															</tr>

@@ -376,11 +376,12 @@ public class PageController<JavaMailSender> {
 		String role = user.getRole();
 		mav.addObject("Role",role);
 		DepartmentService depserv = new DepartmentService();
-		depserv.saveDepartment(tbldep);
+		String msg=depserv.saveDepartment(tbldep);
 		List<TblDepartment> depts = depserv.getDetails();
 		mav.addObject("departments", depts);
 		mav.addObject("services", servicesdao.list());
 		mav.addObject("User", user);
+		mav.addObject("msg",msg);
 		return mav;		
 	}
 
@@ -391,7 +392,7 @@ public class PageController<JavaMailSender> {
 		tbldes.setFromdate(request.getParameter("fromdate"));
 		tbldes.setActivestate(true);
 		DesignationService depdetails = new DesignationService();
-		depdetails.saveDetails(tbldes);
+		String dsmsg=depdetails.saveDetails(tbldes);
 		List<TblDesignation> depts = depdetails.getDetails();
 		mav.addObject("designations", depts);
 		mav.addObject("services", servicesdao.list());
@@ -411,6 +412,7 @@ public class PageController<JavaMailSender> {
 		mav.addObject("TransferRoleList", transferrole);
 		String role = user.getRole();
 		mav.addObject("Role",role);
+		mav.addObject("dsmsg",dsmsg);
 		return mav;		
 	}
 
@@ -753,15 +755,47 @@ public class PageController<JavaMailSender> {
 		return mav;
 
 	}
-	@RequestMapping(value="/admin/empdep/edit/{id}")
-	public ModelAndView updateAdminDepartments(HttpServletRequest request,@PathVariable("id") int id) {
-
-		//Integer id = (Integer) request.getAttribute("DepId");
-		ModelAndView mav = new ModelAndView("redirect:/admin/empdep/register");
-		deptdao.updateDetails(id, request.getParameter("departmentname"),request.getParameter("todate")); 
-		return mav;
-
-	}
+	@RequestMapping(value="/admin/departments/edit/{id}",method=RequestMethod.POST)
+	 public ModelAndView updateAdminDepartments(HttpServletRequest request,@PathVariable("id") int id) {
+	  ModelAndView mav = new ModelAndView();
+	  Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	  EmpDetails user=null;
+	  if (principal instanceof EmpDetails) {
+	   user = ((EmpDetails)principal);
+	  }
+	  List<TblManRoleTransfer> transferrole = roleTransfer.viewAll();
+	  List<TblEmpLeavereq> allempleave = empleavereq.view();
+	  int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+	  List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+	  List<EmpDetails> emp1 = userDetails.getDetails();
+	  List<TblDepartment> depts = deptdao.getDetails();
+	  String msg=deptdao.updateDetails(id, request.getParameter("departmentname"),request.getParameter("todate"));
+	  System.out.println(msg);
+	  if(msg.equalsIgnoreCase("Department UpDated Successfully")) {
+	   mav = new ModelAndView("redirect:/admin/empdep/register");
+	   return mav;
+	  }
+	  else if(msg.equalsIgnoreCase("Department is Already Exists.Please try Again")) {
+	   mav = new ModelAndView("departmentsedit");
+	   mav.addObject("empattendances",empattendances);
+	   mav.addObject("allempleave", allempleave);
+	   mav.addObject("count",count);
+	   mav.addObject("TransferRoleList", transferrole);
+	   String role = user.getRole();
+	   mav.addObject("Role",role);
+	   mav.addObject("User", user);
+	   mav.addObject("emp1",emp1);
+	   mav.addObject("departments", depts);
+	   mav.addObject("services", servicesdao.list());
+	   mav.addObject("msg", msg);
+	   TblDepartment editdep = deptdao.getById(id);
+	   mav.addObject("depdetailsforedit",editdep);
+	   return mav;
+	  }
+	  mav.addObject("msg", "Unable to Update");
+	  return mav;
+	 
+	 }
 
 	@RequestMapping(value="/admin/designation/edit/{id}")
 	public ModelAndView editAdminDesignation(HttpServletResponse response,@PathVariable("id") int id) {
@@ -794,13 +828,56 @@ public class PageController<JavaMailSender> {
 		return mav;
 
 	}
-	@RequestMapping(value="/admin/empdesignation/edit/{id}", method=RequestMethod.POST)
+	/*@RequestMapping(value="/admin/empdesignation/edit/{id}", method=RequestMethod.POST)
 	public ModelAndView updateAdmindesignation(HttpServletRequest request,@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView("redirect:/admin/empdesig/register");
 		designationImpl.updateDetails(id, request.getParameter("designationname"),request.getParameter("department"),request.getParameter("todate"));
 		return mav;
 
-	}
+	}*/
+	 @RequestMapping(value="/admin/designation/edit/{id}",method=RequestMethod.POST)
+	 public ModelAndView updateAdmindesignation(HttpServletRequest request,@PathVariable("id") int id) {
+	  ModelAndView mav = new ModelAndView();
+	  Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	  EmpDetails user=null;
+	  if (principal instanceof EmpDetails) {
+	   user = ((EmpDetails)principal);
+	  }
+	  List<TblManRoleTransfer> transferrole = roleTransfer.viewAll();
+	  List<TblEmpLeavereq> allempleave = empleavereq.view();
+	  int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
+	  List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
+	  List<EmpDetails> emp1 = userDetails.getDetails();
+	  List<TblDesignation> design = designationImpl.getDetails();
+	  String dsmsg=designationImpl.updateDetails(id, request.getParameter("designationname"),request.getParameter("department"),request.getParameter("todate"));
+	  System.out.println(dsmsg);
+	  if(dsmsg.equalsIgnoreCase("Designation UpDated Successfully")) {
+	   mav = new ModelAndView("redirect:/admin/empdesig/register");
+	   return mav;
+	  }
+	  else if(dsmsg.equalsIgnoreCase("Designation already exists.Please try Again")) {
+	   mav = new ModelAndView("designationsedit");
+	   mav.addObject("empattendances",empattendances);
+	   mav.addObject("allempleave", allempleave);
+	   mav.addObject("count",count);
+	   mav.addObject("TransferRoleList", transferrole);
+	   String role = user.getRole();
+	   mav.addObject("Role",role);
+	   mav.addObject("User", user);
+	   mav.addObject("emp1",emp1);
+	   mav.addObject("designations", design);
+	   mav.addObject("services", servicesdao.list());
+	   mav.addObject("dsmsg", dsmsg);
+	   List<TblDepartment> depts1 = deptdao.getDetails();
+		mav.addObject("departments", depts1);
+	   TblDesignation editdesign = designationImpl.getById(id);
+	   mav.addObject("depdetailsforedit",editdesign);
+	   return mav;
+	  }
+	  mav.addObject("msg", "Unable to Update");
+	  return mav;
+	 
+	 }
 
 	@RequestMapping(value="/admin/search/register")
 	public ModelAndView empLeaveSearch(HttpServletRequest request) {
