@@ -656,10 +656,10 @@ public class ManagerPageController {
     @RequestMapping(value="/manager/employee/search", method=RequestMethod.POST)
 	public ModelAndView searchBars(HttpServletRequest req) {
 
-		String firstname = req.getParameter("firstname1");
-		String lastname = req.getParameter("lastname2");
-		String department = req.getParameter("department");
-		String designation = req.getParameter("designation");
+		String firstname = req.getParameter("firstname");
+		String lastname = req.getParameter("lastname");
+		String department = req.getParameter("department1");
+		String designation = req.getParameter("designation1");
 		List<TblDepartment> deptList = deptdao.getDetails();
 		List<TblDesignation> designList = designationImpl.getDetails();
 
@@ -816,6 +816,6 @@ public class ManagerPageController {
 
 	}
 
-
+	
 
 }

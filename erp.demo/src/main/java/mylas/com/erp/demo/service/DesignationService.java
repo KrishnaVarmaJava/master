@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
 
+import mylas.com.erp.demo.TblDepartment;
 import mylas.com.erp.demo.TblDesignation;
 import mylas.com.erp.demo.appservices.GetSession;
 import mylas.com.erp.demo.dao.DesignationDao;
@@ -22,15 +23,13 @@ public class DesignationService implements DesignationDao {
 	  Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();
 	  try {
 	  session.beginTransaction();
-	  Integer num = (Integer) session.save(tbldesg);
-	  session.getTransaction().commit();
-	  if(num!=0) {
-	   System.out.println("Designation added successfully");
+	  int num = (Integer) session.save(tbldesg);
+	    if(num!=0) {
+	   System.out.println("Designation added successfully!...");
 	   session.getTransaction().commit();
-	   return "Designation added successfully";
+	   return "Designation added successfully!...";
 	  }else {
-	  
-	     session.getTransaction().commit();
+		  
 	       return "Designation already exists";
 	  }
 	  }catch(ConstraintViolationException e) {
@@ -38,9 +37,8 @@ public class DesignationService implements DesignationDao {
 		  session.getTransaction().rollback();
 		  return "Designation already exists";
 		 }
-		  
 		 }
-
+	
 	@Override
 	public List<TblDesignation> getDetails() {
 		Session session = GetSession.buildSession().getSessionFactory().getCurrentSession();

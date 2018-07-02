@@ -96,7 +96,7 @@ padding : 12px;
 								</c:if>
 							</c:forEach>
 							<c:forEach var="attlist" items="${empattendances}">
-								<c:if test="${User.getRole().equals('MANAGER_ROLE')}">
+								<c:if test="${User.getRole().equals('MANAGER_ROLE') || User.getRole().equals('ADMIN_ROLE')}">
 									<c:set var="user" value="${User.getEid()}" />
 									<c:if
 										test="${attlist.getManagerid() == user || attlist.getMantrans() == user}">

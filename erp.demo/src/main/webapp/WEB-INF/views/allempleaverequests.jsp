@@ -207,11 +207,12 @@
 									</c:if>
 									<c:forEach items="${empleave}" var="empleaveslist">
 										<c:if test="${User.getRole().equals('MANAGER_ROLE')}">
+										<c:if test="${empleaveslist.getReferenceid()!=0}">
 											<c:set var="user" value="${User.getEid()}" />
 											<c:if test="${empleaveslist.getEmployeeid() != user}">
 												<c:if
 													test="${empleaveslist.getManagerid()==user || empleaveslist.getMantrans() == user}">
-
+														
 													<tbody>
 														<tr>
 															<td>
@@ -220,7 +221,15 @@
 																	<span>${empleaveslist.getEmployeeid()}</span>
 																	<div style="text-align: center"></div>
 																</div>
-															</td>
+															 <c:if test="${empleaveslist.getReferenceid()>0}">
+																<button style="border: none; background: none;"
+																	id="${empleaveslist.getReferenceid()}"
+																	data-target="#leavehistory" data-toggle="modal"
+																	onclick="displayhistory(this.id)">
+																	<i class="material-icons">bubble_chart</i>
+																</button>
+															</c:if>
+														</td>
 															<td>${empleaveslist.getLeavetype()}</td>
 															<td>${empleaveslist.getFromdate()}</td>
 															<td>${empleaveslist.getTodate()}</td>
@@ -290,6 +299,7 @@
 														</tr>
 
 													</tbody>
+												</c:if>
 												</c:if>
 											</c:if>
 										</c:if>
@@ -547,8 +557,8 @@
 	<script src="${js}/jquery.autocomplete.min.js"></script>
 
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
 	<script>
 		function Search() {
