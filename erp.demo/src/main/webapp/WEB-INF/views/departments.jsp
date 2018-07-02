@@ -203,7 +203,7 @@
 									</thead>
 
 									<div class="clearfix"></div>
-<c:set var="green"
+                                     <c:set var="green"
 																value="icon-display  fa fa-check attenedance_check_green" />
 															<c:set var="red"
 																value="icon-display  fa fa-close  attenedance_check_red" />

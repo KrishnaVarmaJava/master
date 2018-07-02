@@ -208,11 +208,12 @@
 									</c:if>
 									<c:forEach items="${empleave}" var="empleaveslist">
 										<c:if test="${User.getRole().equals('MANAGER_ROLE')}">
+										<c:if test="${empleaveslist.getReferenceid()!=0}">
 											<c:set var="user" value="${User.getEid()}" />
 											<c:if test="${empleaveslist.getEmployeeid() != user}">
 												<c:if
 													test="${empleaveslist.getManagerid()==user || empleaveslist.getMantrans() == user}">
-
+														
 													<tbody>
 														<tr>
 															<td>
@@ -229,7 +230,15 @@
 																		</button>
 																	</c:if>
 																</div>
-															</td>
+															 <c:if test="${empleaveslist.getReferenceid()>0}">
+																<button style="border: none; background: none;"
+																	id="${empleaveslist.getReferenceid()}"
+																	data-target="#leavehistory" data-toggle="modal"
+																	onclick="displayhistory(this.id)">
+																	<i class="material-icons">bubble_chart</i>
+																</button>
+															</c:if>
+														</td>
 															<td>${empleaveslist.getLeavetype()}</td>
 															<td>${empleaveslist.getFromdate()}</td>
 															<td>${empleaveslist.getTodate()}</td>
@@ -299,6 +308,7 @@
 														</tr>
 
 													</tbody>
+												</c:if>
 												</c:if>
 											</c:if>
 										</c:if>

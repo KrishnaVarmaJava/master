@@ -817,6 +817,6 @@ public class ManagerPageController {
 
 	}
 
-
+	
 
 }

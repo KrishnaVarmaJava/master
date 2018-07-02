@@ -392,7 +392,7 @@ public class PageController<JavaMailSender> {
 		tbldes.setFromdate(request.getParameter("fromdate"));
 		tbldes.setActivestate(true);
 		DesignationService depdetails = new DesignationService();
-		String dsmsg=depdetails.saveDetails(tbldes);
+		
 		List<TblDesignation> depts = depdetails.getDetails();
 		mav.addObject("designations", depts);
 		mav.addObject("services", servicesdao.list());
@@ -406,15 +406,16 @@ public class PageController<JavaMailSender> {
 		int count = empleavereq.countEmployee(user.getEid()) + empattreq.countEmployee(user.getEid());
 		List<TblEmpAttendanceNew> empattendances =  empattreq.getDetails();
 		List<EmpDetails> emp1 = userDetails.getDetails();
+		List<TblDepartment> depts1 = deptdao.getDetails();
+		String dgmsg=depdetails.saveDetails(tbldes);
+		mav.addObject("departments", depts1);
 		mav.addObject("empattendances",empattendances);
 		mav.addObject("allempleave", allempleave);
 		mav.addObject("count",count);
 		mav.addObject("TransferRoleList", transferrole);
-		List<TblDepartment> depts1 = deptdao.getDetails();
-		mav.addObject("departments", depts1);
 		String role = user.getRole();
 		mav.addObject("Role",role);
-		mav.addObject("dsmsg",dsmsg);
+		mav.addObject("dgmsg",dgmsg);
 		return mav;		
 	}
 

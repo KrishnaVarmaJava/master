@@ -106,13 +106,13 @@
 						</div>
 					</div>
 				</div>
-<td><c:if test="${dsmsg.equals('Designation added successfully')}">
-         <h4 style="color: green;">${dsmsg}</h4>
-        </c:if></td>
-      <td><c:if test="${dsmsg.equals('Designation already exists')}">
-         <h4 style="color: red;">${dsmsg}</h4>
-        </c:if></td>
-				<div class="col-md-12 card" id="addnewemp">
+                <td><c:if test="${dgmsg.equals('Designation added successfully!...')}">
+                 <h4 style="color: green;">${dgmsg}</h4>
+                 </c:if></td>
+                  <td><c:if test="${dgmsg.equals('Designation already exists')}">
+                     <h4 style="color: red;">${dgmsg}</h4>
+                   </c:if></td>
+				     <div class="col-md-12 card" id="addnewemp">
 					<button type="button" class="close" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
