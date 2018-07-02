@@ -306,7 +306,7 @@
 								</div>
 								<div class="col-md-3 padding_col">
 									<div class="form-group">
-										<select id="department1" name="department"
+										<select id="department1" name="department1"
 											class="form-control" size="1">
 											<option value="">Select Department</option>
 											<c:forEach items="${departments}" var="departments">
@@ -318,7 +318,7 @@
 								</div>
 								<div class="col-md-3 padding_col">
 									<div class="form-group">
-										<select id="designation1" name="designation"
+										<select id="designation1" name="designation1"
 											class="form-control" size="1">
 											<option value="">Select Designation</option>
 											<c:forEach items="${designations}" var="designations">

@@ -250,6 +250,13 @@
 																	href="${contextRoot}/${role}/designations/delete/${desig.getDesignationId()}"><i
 																		class="material-icons">delete</i>Delete</a></li>
 
+															</ul></c:if>
+															<c:if test="${desig.getActivestate() != true}">
+															<ul class="dropdown-menu pull-right">
+																<li><a
+																	href="${contextRoot}/${role}/designations/delete/${desig.getDesignationId()}"><i
+																		class="material-icons">delete</i>Delete</a></li>
+
 															</ul></c:if> </li>
 													</ul>
 												</td>

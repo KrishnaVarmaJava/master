@@ -410,6 +410,8 @@ public class PageController<JavaMailSender> {
 		mav.addObject("allempleave", allempleave);
 		mav.addObject("count",count);
 		mav.addObject("TransferRoleList", transferrole);
+		List<TblDepartment> depts1 = deptdao.getDetails();
+		mav.addObject("departments", depts1);
 		String role = user.getRole();
 		mav.addObject("Role",role);
 		mav.addObject("dsmsg",dsmsg);
@@ -957,8 +959,8 @@ public class PageController<JavaMailSender> {
 
 		String firstname = req.getParameter("firstname");
 		String lastname = req.getParameter("lastname");
-		String department = req.getParameter("department");
-		String designation = req.getParameter("designation");
+		String department = req.getParameter("department1");
+		String designation = req.getParameter("designation1");
 		List<TblDepartment> deptList = deptdao.getDetails();
 		List<TblDesignation> designList = designationImpl.getDetails();
 

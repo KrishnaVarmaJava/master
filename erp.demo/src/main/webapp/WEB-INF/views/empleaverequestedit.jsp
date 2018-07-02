@@ -66,11 +66,7 @@
 
 					<div class="row clearfix">
 
-						<div class="">
-
-
-
-						</div>
+						<div class=""></div>
 					</div>
 				</div>
 
@@ -80,7 +76,7 @@
 					</button> -->
 					<div class="custom_title">
 						<h2>Edit Leave Request</h2>
-					</div> 
+					</div>
 					<p style="color: green;">${Submitmsg}</p>
 					<p style="color: red;">${errmsg}</p>
 					<c:if test="${Role.equals('ADMIN_ROLE')}">
@@ -95,8 +91,8 @@
 						<c:set var="role" value="employee" />
 					</c:if>
 
-					<form action="${contextRoot}/${role}/leave/upload/${id}" method="post"
-						onsubmit="return Validate()" name="form">
+					<form action="${contextRoot}/${role}/leave/upload/${id}"
+						method="post" onsubmit="return Validate()" name="form">
 						<hr class="custom_line">
 						<div class="body">
 
@@ -153,12 +149,12 @@
 								</div>
 
 							</div>
-														<div class="col-md-6">
+							<div class="col-md-6">
 								<div class="form-group">
 									<div class="form-line">
 										<label>Reason* </label>
-										<textarea name="reason" id="reason"
-											class="form-control" rows="3" required="required"></textarea>
+										<textarea name="reason" id="reason" class="form-control"
+											rows="3" required="required"></textarea>
 									</div>
 								</div>
 
@@ -171,19 +167,19 @@
 							</div>
 						</div>
 					</form>
-				
-						<!-- #END# Kitchen Sink -->
+
+					<!-- #END# Kitchen Sink -->
 
 
-					</div>
 				</div>
 			</div>
-			<div class="md-overlay custom-overlay"></div>
-		</section>
-		<!-- FOOTER-->
-		<footer>
-			<span>&copy; 2018 - <b class="col-blue">Amp</b></span>
-		</footer>
+	</div>
+	<div class="md-overlay custom-overlay"></div>
+	</section>
+	<!-- FOOTER-->
+	<footer>
+		<span>&copy; 2018 - <b class="col-blue">Amp</b></span>
+	</footer>
 	</div>
 	<!-- CORE PLUGIN JS -->
 	<script src="${plugins}/jquery/jquery.min.js"></script>
@@ -206,18 +202,19 @@
 	<script src="${js}/demo.js"></script>
 	<script src="${js}/layout.js"></script>
 
-	<script type="text/javascript">
-function Validate() {
-    var startDate = document.getElementById("fromdate").value;
-    var endDate = document.getElementById("todate").value;
- 
-    if (Date.parse(endDate) <= Date.parse(startDate)) {
-        alert("To date should be greater than From date");
-        fromdate.focus();
-        return false;
-}
-}
-</script>
+	<script>
+	alert("Hello");
+		function Validate() {
+			var startDate = document.getElementById("fromdate").value;
+			var endDate = document.getElementById("todate").value;
+
+			if (Date.parse(endDate) <= Date.parse(startDate)) {
+				alert("To date should be greater than From date");
+				fromdate.focus();
+				return false;
+			}
+		}
+	</script>
 
 	<!-- <script>
 		$(document).ready(function() {
@@ -240,13 +237,13 @@ function Validate() {
 
 		});
 	</script> -->
-	<script type="text/javascript">
-	document.getElementById("leavetype").value = "${empleave.getLeavetype()}";
+	<script>
+		alert("sdfsdf");
+		document.getElementById("leavetype").value = "${empleave.getLeavetype()}";
 		document.getElementById("fromdate").value = "${empleave.getFromdate()}";
 		document.getElementById("todate").value = "${empleave.getTodate()}";
 		document.getElementById("leavereason").value = "${empleave.getLeavereason()}";
-	
-		</script>
+	</script>
 </body>
 
 </html>

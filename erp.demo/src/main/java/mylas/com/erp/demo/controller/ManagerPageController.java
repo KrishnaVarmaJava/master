@@ -131,7 +131,7 @@ public class ManagerPageController {
 	@RequestMapping(value="/manager/allemp/register", method=RequestMethod.POST)
 	public ModelAndView saveEmpPage(HttpServletRequest request, HttpServletResponse response) throws ConstraintViolationException{
 
-		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname"), null, request.getParameter("lastname"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null,null,null,null);
+		EmpDetails emp = new EmpDetails(null, request.getParameter("cpswd"), null, request.getParameter("empid"), request.getParameter("email"), request.getParameter("firstname1"), null, request.getParameter("lastname1"), false, null, request.getParameter("pswd"), null, request.getParameter("uname"), null,null,null,null);
 
 		emp.setLoginStatus(UserServiceImpl.Login_Status_Active);
 		emp.setRole("EMPLOYEE_ROLE");
@@ -656,10 +656,10 @@ public class ManagerPageController {
     @RequestMapping(value="/manager/employee/search", method=RequestMethod.POST)
 	public ModelAndView searchBars(HttpServletRequest req) {
 
-		String firstname = req.getParameter("firstname1");
-		String lastname = req.getParameter("lastname2");
-		String department = req.getParameter("department");
-		String designation = req.getParameter("designation");
+		String firstname = req.getParameter("firstname");
+		String lastname = req.getParameter("lastname");
+		String department = req.getParameter("department1");
+		String designation = req.getParameter("designation1");
 		List<TblDepartment> deptList = deptdao.getDetails();
 		List<TblDesignation> designList = designationImpl.getDetails();
 
@@ -777,6 +777,7 @@ public class ManagerPageController {
 	//	mav.addObject("count",count);
 		mav.addObject("User", user);
 		mav.addObject("empleave", leavereq);
+		System.out.println(leavereq);
 		//mav.addObject("manservices", mandao.list());
 		//mav.addObject("employees", emp1);
 		//mav.addObject("count",count);
@@ -784,7 +785,7 @@ public class ManagerPageController {
 	//	mav.addObject("TransferRoleList", transferrole);
 		mav.addObject("id",id);
 		mav.addObject("manservices", mandao.list());
-		mav.addObject(user);
+		mav.addObject("User",user);
 		return mav;
 			
 	}

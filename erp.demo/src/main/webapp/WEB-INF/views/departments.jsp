@@ -242,9 +242,17 @@
 																	href="${contextRoot}/${role}/departments/delete/${dep.getDepartmentId()}"><i
 																		class="material-icons">delete</i>Delete</a></li>
 
-															</ul></c:if> </li>
+															</ul></c:if>
+															<c:if test="${dep.getActivestate() != true}">
+															<ul class="dropdown-menu pull-right">
+																<li><a
+																	href="${contextRoot}/${role}/departments/delete/${dep.getDepartmentId()}"><i
+																		class="material-icons">delete</i>Delete</a></li>
+
+															</ul></c:if>  </li>
 													</ul>
 												</td>
+												
 
 											</tr>
 
