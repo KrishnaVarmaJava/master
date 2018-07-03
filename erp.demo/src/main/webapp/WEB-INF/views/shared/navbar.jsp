@@ -100,6 +100,7 @@ padding : 12px;
 									<c:set var="user" value="${User.getEid()}" />
 									<c:if
 										test="${attlist.getManagerid() == user || attlist.getMantrans() == user}">
+										
 										<c:if test="${attlist.getEmpid() != user}">
 											<c:if test="${attlist.getStatas() == null}">
 												<li class="media"><a

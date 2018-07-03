@@ -49,7 +49,7 @@ public class EmployeePageController {
 	@Autowired
 	EmpAttendanceDaoImpl empattreq;
 
-	//EmailSender emailsender = new EmailSender();
+	EmailSender emailsender = new EmailSender();
 
 	static String emailToRecipient, emailSubject, emailMessage;
 
@@ -273,6 +273,12 @@ public class EmployeePageController {
 		mav.addObject("empleave", leavereq);
 		mav.addObject("Submitmsg", "Your Leave Request Has Been Submitted Sucessfully! Please Wait for your Manager Approval");
 		mav.addObject("Role",role);
+		emailSubject = "New Time Sheet For:";
+		emailMessage = "A new Time Sheet For Approval has Been Sent to :"+"On: "+new Date();
+		emailToRecipient = "kpraveen@mylastech.com";
+		//System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+		emailsender.javaMailService("bgrao@mylastech.com", "Bganga@07", emailToRecipient, emailMessage, emailSubject);
+		System.out.println("send mail");
 		return mav;
 	}
 	

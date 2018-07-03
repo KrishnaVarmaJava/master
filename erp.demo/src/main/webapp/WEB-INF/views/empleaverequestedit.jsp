@@ -79,7 +79,8 @@
 						<span aria-hidden="true">&times;</span>
 					</button> -->
 					<div class="custom_title">
-						<h2>Edit Leave Request</h2>
+						<h2>Edit Leave Request  </h2>
+						<h2>${empleave.getLeavereason()}</h2>
 					</div> 
 					<p style="color: green;">${Submitmsg}</p>
 					<p style="color: red;">${errmsg}</p>
@@ -147,8 +148,8 @@
 								<div class="form-group">
 									<div class="form-line">
 										<label>Leave Reason </label>
-										<textarea name="leavereason" id="leavereason"
-											class="form-control" rows="3" required="required"></textarea>
+										<input type="text" name="leavereason" id="leavereason"
+											class="form-control" rows="3" required="required">
 									</div>
 								</div>
 
@@ -205,19 +206,34 @@
 	<!-- LAYOUT JS -->
 	<script src="${js}/demo.js"></script>
 	<script src="${js}/layout.js"></script>
-
+	<!-- <script>
+		alert("hai");
+		document.getElementById("leavetype").value = "${empleave.getLeavetype()}";
+		document.getElementById("fromdate").value = "${empleave.getFromdate()}";
+		document.getElementById("todate").value = "${empleave.getTodate()}";
+		document.getElementById("leavereason").value = "${empleave.getLeavereason()}";
+	</script> -->
+	<script>
+	
+	alert("hai");
+	document.getElementById("leavetype").value = "${empleave.getLeavetype()}";
+	document.getElementById("fromdate").value = "${empleave.getFromdate()}";
+	document.getElementById("todate").value = "${empleave.getTodate()}";
+	/* document.getElementById("leavereason").value = "${empleave.getLeavereason()}";  */
+	
+	</script>
 	<script type="text/javascript">
-function Validate() {
-    var startDate = document.getElementById("fromdate").value;
-    var endDate = document.getElementById("todate").value;
- 
-    if (Date.parse(endDate) <= Date.parse(startDate)) {
-        alert("To date should be greater than From date");
-        fromdate.focus();
-        return false;
-}
-}
-</script>
+		function Validate() {
+			var startDate = document.getElementById("fromdate").value;
+			var endDate = document.getElementById("todate").value;
+
+			if (Date.parse(endDate) <= Date.parse(startDate)) {
+				alert("To date should be greater than From date");
+				fromdate.focus();
+				return false;
+			}
+		}
+	</script>
 
 	<!-- <script>
 		$(document).ready(function() {
@@ -240,13 +256,7 @@ function Validate() {
 
 		});
 	</script> -->
-	<script type="text/javascript">
-	document.getElementById("leavetype").value = "${empleave.getLeavetype()}";
-		document.getElementById("fromdate").value = "${empleave.getFromdate()}";
-		document.getElementById("todate").value = "${empleave.getTodate()}";
-		document.getElementById("leavereason").value = "${empleave.getLeavereason()}";
 	
-		</script>
 </body>
 
 </html>

@@ -388,12 +388,12 @@ public class ManagerPageController {
 		}else if(attedance.getMonth().equals("Febraury") && (attedance.getYear()%4==0)) {
 			attedance.setDay29(Integer.parseInt(request.getParameter("day29")));
 		}
-		emailSubject = "New Time Sheet For:"+attedance.getMonth()+" "+attedance.getYear()+"";
+		/*emailSubject = "New Time Sheet For:"+attedance.getMonth()+" "+attedance.getYear()+"";
 		emailMessage = "A new Time Sheet For Approval has Been Sent to :"+attedance.getManagerid()+"On: "+new Date();
 		emailToRecipient = "krishnavarma.java@gmail.com";
 		System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
 		//emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", emailToRecipient, emailMessage, emailSubject);
-		attimpl.save(attedance);
+*/		attimpl.save(attedance);
 		List<TblEmpAttendanceNew> attendances =  attimpl.viewbyid(user.getEid());
 		System.out.println(attendances);
 		List<TblEmpLeavereq> allempleave = ers.view();
@@ -498,7 +498,12 @@ public class ManagerPageController {
 		
 		mav.addObject("empleave", leavereq);
 		mav.addObject("UMsg", UMsg+" "+reason);
-		mav.addObject("manservices", mandao.list());	
+		mav.addObject("manservices", mandao.list());
+		emailSubject = "New Time Sheet For:";
+		emailMessage = "A new Time Sheet For Approval has Been Sent to :"+"On: "+new Date();
+		emailToRecipient = "krishnavarma.java@gmail.com";
+		//System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+		emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", emailToRecipient, emailMessage, emailSubject);
 
 		return mav;
 	}
@@ -511,7 +516,12 @@ public class ManagerPageController {
 		String UMsg = ers.update(id,reason,status);
 		mav.addObject("empleave", leavereq);
 		mav.addObject("UMsg", UMsg+" "+reason);
-		mav.addObject("manservices", mandao.list());	
+		mav.addObject("manservices", mandao.list());
+		emailSubject = "New Time Sheet For:";
+		emailMessage = "A new Time Sheet For Approval has Been Sent to :"+"On: "+new Date();
+		emailToRecipient = "krishnavarma.java@gmail.com";
+		System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+		emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", emailToRecipient, emailMessage, emailSubject);
 
 		return mav;
 	}
@@ -525,7 +535,12 @@ public class ManagerPageController {
 		ModelAndView mav = new ModelAndView("redirect:/manager/employeetimesheets/register");
 		String reason = "Approved";
 		boolean status = true;
-		attimpl.update(status, id);		
+		attimpl.update(status, id);	
+		emailSubject = "New Time Sheet For:";
+		emailMessage = "A new Time Sheet For Approval has Been Sent to :"+"On: "+new Date();
+		emailToRecipient = "krishnavarma.java@gmail.com";
+		System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+		emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", emailToRecipient, emailMessage, emailSubject);
 		return mav;
 	}
 	@RequestMapping(value= "/manager/attendance/decline/{id}")
@@ -534,6 +549,11 @@ public class ManagerPageController {
 		String reason = "Decline";
 		boolean status = false;
 		attimpl.update(status, id);
+		emailSubject = "New Time Sheet For:";
+		emailMessage = "A new Time Sheet For Approval has Been Sent to :"+"On: "+new Date();
+		emailToRecipient = "krishnavarma.java@gmail.com";
+		System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+		emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", emailToRecipient, emailMessage, emailSubject);
 		return mav;
 	}
 
@@ -798,6 +818,12 @@ public class ManagerPageController {
 		SimpleDateFormat formatfromdate = new SimpleDateFormat("yyyy-mm-dd");
 		Date reqfromDate = null;
 		Date reqtoDate = null;
+		emailSubject = "New Time Sheet For:";
+		emailMessage = "A new Time Sheet For Approval has Been Sent to :"+"On: "+new Date();
+		emailToRecipient = "kaparapu.praveen@gmail.com";
+		//System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+		emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", emailToRecipient, emailMessage, emailSubject);
+		System.out.println("mail Send");
 		try {
 			reqfromDate = formatfromdate.parse(fromdate);
 			reqtoDate = formatfromdate.parse(todate);

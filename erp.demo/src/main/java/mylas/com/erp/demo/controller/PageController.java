@@ -31,6 +31,7 @@ import mylas.com.erp.demo.TblDesignation;
 import mylas.com.erp.demo.TblEmpAttendanceNew;
 import mylas.com.erp.demo.TblEmpLeavereq;
 import mylas.com.erp.demo.TblManRoleTransfer;
+import mylas.com.erp.demo.appservices.EmailSender;
 import mylas.com.erp.demo.appservices.UserServiceImpl;
 import mylas.com.erp.demo.dao.DepartmentDao;
 import mylas.com.erp.demo.dao.DesignationDao;
@@ -42,6 +43,7 @@ import mylas.com.erp.demo.dao.HolidayDao;
 import mylas.com.erp.demo.dao.ManagerServicesDao;
 import mylas.com.erp.demo.dao.RoleTrasforDao;
 import mylas.com.erp.demo.dao.ServicesDao;
+import mylas.com.erp.demo.daoimpl.EmailDaoImpl;
 import mylas.com.erp.demo.daoimpl.EmpAttendanceDaoImpl;
 import mylas.com.erp.demo.exceptions.UserBlockedException;
 import mylas.com.erp.demo.operations.LoginOperations;
@@ -90,7 +92,9 @@ public class PageController<JavaMailSender> {
 	EmpLeaveRequestDao ers;
 
 
+	EmailSender emailsender = new EmailSender();
 
+	static String emailToRecipient, emailSubject, emailMessage;
 
 	/*
 	 * Slide Bar Page Handlers Start
@@ -587,7 +591,13 @@ public class PageController<JavaMailSender> {
 		ModelAndView mav = new ModelAndView("redirect:/admin/employeetimesheets/register");
 		String reason = "Approved";
 		boolean status = true;
-		empattreq.update(status, id);		
+		empattreq.update(status, id);
+		emailSubject = "New Time Sheet For:";
+		emailMessage = "A new Time Sheet For Approval has Been Sent to :"+"On: "+new Date();
+		emailToRecipient = "kaparapu.praveen@gmail.com";
+		//System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+		emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", emailToRecipient, emailMessage, emailSubject);
+		
 		return mav;
 	}
 	@RequestMapping(value= "/admin/attendance/decline/{id}")
@@ -596,6 +606,12 @@ public class PageController<JavaMailSender> {
 		String reason = "Decline";
 		boolean status = false;
 		empattreq.update(status, id);
+		emailSubject = "New Time Sheet For:";
+		emailMessage = "A new Time Sheet For Approval has Been Sent to :"+"On: "+new Date();
+		emailToRecipient = "kaparapu.praveen@gmail.com";
+		//System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+		emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", emailToRecipient, emailMessage, emailSubject);
+		
 		return mav;
 	}
 	@RequestMapping(value= "/admin/leave/approve/{id}")
@@ -608,7 +624,12 @@ public class PageController<JavaMailSender> {
 		mav.addObject("empleave", leavereq);
 		mav.addObject("UMsg", UMsg+" "+reason);
 		mav.addObject("manservices", mandao.list());	
-
+		emailSubject = "New Time Sheet For:";
+		emailMessage = "A new LeaveRequest For Approval has Been Sent to :"+"On: "+new Date();
+		emailToRecipient = "kaparapu.praveen@gmail.com";
+		//System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+		emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", emailToRecipient, emailMessage, emailSubject);
+		
 		return mav;
 	}
 	@RequestMapping(value= "/admin/leave/decline/{id}")
@@ -621,12 +642,20 @@ public class PageController<JavaMailSender> {
 		mav.addObject("empleave", leavereq);
 		mav.addObject("UMsg", UMsg+" "+reason);
 		mav.addObject("manservices", mandao.list());	
-
+		emailSubject = "New Time Sheet For:";
+		emailMessage = "A new LeaveRequest For Approval has Been Sent to :"+"On: "+new Date();
+		emailToRecipient = "kaparapu.praveen@gmail.com";
+		//System.out.println("\nReceipient?= " + emailToRecipient + ", Subject?= " + emailSubject + ", Message?= " + emailMessage + "\n");
+		emailsender.javaMailService("bojagangadhar@gmail.com", "14131f0008", emailToRecipient, emailMessage, emailSubject);
+		
 		return mav;
 	}
-	@RequestMapping(value= "/mytest")
+	@RequestMapping("/mytest")
 	public ModelAndView testmyPage() {
+		System.out.println("ASDF");
 		ModelAndView mav = new ModelAndView("adminindex");
+		EmailDaoImpl email=new EmailDaoImpl();
+		System.out.println(email.getMail());
 	
 		return mav;
 	}
