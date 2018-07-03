@@ -203,7 +203,7 @@
 	<script src="${js}/layout.js"></script>
 
 	<script>
-	alert("Hello");
+	
 		function Validate() {
 			var startDate = document.getElementById("fromdate").value;
 			var endDate = document.getElementById("todate").value;
@@ -238,7 +238,7 @@
 		});
 	</script> -->
 	<script>
-		alert("sdfsdf");
+		
 		document.getElementById("leavetype").value = "${empleave.getLeavetype()}";
 		document.getElementById("fromdate").value = "${empleave.getFromdate()}";
 		document.getElementById("todate").value = "${empleave.getTodate()}";
