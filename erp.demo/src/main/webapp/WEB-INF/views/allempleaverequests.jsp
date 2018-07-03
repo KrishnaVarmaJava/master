@@ -176,7 +176,8 @@
 										<tr>
 											<th data-tablesaw-sortable-col
 												data-tablesaw-sortable-default-col
-												data-tablesaw-priority="persist">Employee</th>
+												data-tablesaw-priority="persist">Employee 
+												</th>
 											<th data-tablesaw-sortable-col data-tablesaw-priority="3">
 												Leave Type</th>
 											<th data-tablesaw-sortable-col data-tablesaw-priority="2">From</th>
@@ -220,6 +221,14 @@
 																	<img src="${images}/mail/one.jpg" alt="Contact Person">
 																	<span>${empleaveslist.getEmployeeid()}</span>
 																	<div style="text-align: center"></div>
+																	<c:if test="${empleaveslist.getReferenceid()>0}">
+																		<button style="border: none; background: none;"
+																			id="${empleaveslist.getReferenceid()}"
+																			data-target="#leavehistory" data-toggle="modal"
+																			onclick="displayhistory(this.id)">
+																			<i class="material-icons">bubble_chart</i>
+																		</button>
+																	</c:if>
 																</div>
 															 <c:if test="${empleaveslist.getReferenceid()>0}">
 																<button style="border: none; background: none;"
@@ -426,7 +435,8 @@
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel4">Approve Leave Request</h4>
+							<h4 class="modal-title" id="myModalLabel4">Approve Leave
+								Request</h4>
 						</div>
 						<div class="modal-body">
 							<div class="long-modal">
@@ -467,7 +477,8 @@
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel4">Decline Leave Request</h4>
+							<h4 class="modal-title" id="myModalLabel4">Decline Leave
+								Request</h4>
 						</div>
 						<div class="modal-body">
 							<div class="long-modal">
@@ -506,7 +517,8 @@
 								aria-label="Close">
 								<span aria-hidden="true">x</span>
 							</button>
-							<h4 class="modal-title" id="myModalLabel4">Employee Leave History</h4>
+							<h4 class="modal-title" id="myModalLabel4">Employee Leave
+								History</h4>
 						</div>
 						<div class="modal-body">
 							<div class="long-modal">
@@ -516,6 +528,93 @@
 										class="tablesaw table-striped table-bordered table-hover"
 										id="result">
 										<thead class="tableheding">
+											<div class="demo timeline-block">
+												<div class="row">
+													<div class="col-md-1 col-md-offset-3"></div>
+												</div>
+												<div class="time-bar"></div>
+												<div class="row">
+													<div class="col-md-2 col-md-offset-1">
+														<div class="timeline-date" id="frommonthandyear"></div>
+													</div>
+													<div class="col-md-1">
+														<div class="timeline2-icon bg-indigo">
+															<i class="material-icons">flag</i>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="timeline-hover">
+															<div class="timeline-heading bg-indigo">
+																<div class="timeline-arrow arrow-indigo"></div>
+																Peding Leave Request
+															</div>
+															<div class="timeline-content">
+
+																<div id="leaverequestcount"></div>
+																<div id="leaverequestfrom"></div>
+
+																<p id="leaverequestto">
+																<p id="leaveststusbyadmin">
+
+
+																	<!--  <p id="leaverequestinitialststus"></p> -->
+															</div>
+
+
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-2 col-md-offset-1">
+														<!-- <div class="timeline-date">
+                                                    14-Mar-2017,
+                                                    <br>Sat 16:30
+                                                </div> -->
+													</div>
+													<div class="col-md-1">
+														<div class="timeline2-icon bg-red">
+															<i class="material-icons">chat</i>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="timeline-hover">
+															<div class="timeline-heading bg-red" id="leavemanagerid">
+																<div class="timeline-arrow arrow-red"></div>
+
+															</div>
+															<div class="timeline-comment">
+																<p id="leavemanagerststus"></p>
+																<p id="leavemanreason"></p>
+
+															</div>
+														</div>
+													</div>
+												</div>
+												<c:if test="${empleaveslist.getReferenceid() == 1}"></c:if>
+												<div class="row">
+													<div class="col-md-2 col-md-offset-1"></div>
+													<div class="col-md-1">
+														<div class="timeline2-icon bg-green">
+															<i class="material-icons">chat</i>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="timeline-hover">
+															<div class="timeline-heading bg-green">
+																<div class="timeline-arrow arrow-red">
+																</div>
+
+															</div>
+															<div class="timeline-comment">
+																<p id="leavemanagerststus"></p>
+																<p id="leavemanreason"></p>
+
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
 										</thead>
 									</table>
 								</div>
@@ -686,20 +785,48 @@
 						success : function(response) {
 							//document.getElementById("result").value = response;
 
-							$('#result')
+							$('#result').html("");
+							/*  $('#leaveststusbyadmin').html("Was Sent to :"); */
+							$('#frommonthandyear').html("");
+							/*  $('#leaverequestinitialststus').html(""); */
+							/*  $('#leaverequestfrom').html("From :"); */
+							/* $('#leaverequestto').html("To :"); */
+							$('#leaverequestcount')
+									.html("A Leave Request of :");
+							$('#leavemanagerid').html("");
+							$('#leavemanagerststus').html(
+									"Leave Request Was : ");
+							$('#leavemanreason').html("With The Reason : ");
+
+							/* $('#result')
 									.html(
-											"<tr><th>Employee</th><th data-tablesaw-sortable-col data-tablesaw-priority='3'>Leave Type</th><th data-tablesaw-sortable-col data-tablesaw-priority='2'>From</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>To</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>No of Days</th><th data-tablesaw-sortable-col data-tablesaw-priority='2'>Leave Reason</th><th data-tablesaw-sortable-col data-tablesaw-priority='2'>Manager Remark</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>Status</th></tr>");
+											"<tr><th>Employee</th><th data-tablesaw-sortable-col data-tablesaw-priority='3'>Leave Type</th><th data-tablesaw-sortable-col data-tablesaw-priority='2'>From</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>To</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>No of Days</th><th data-tablesaw-sortable-col data-tablesaw-priority='2'>Leave Reason</th><th data-tablesaw-sortable-col data-tablesaw-priority='2'>Manager Remark</th><th data-tablesaw-sortable-col data-tablesaw-priority='4'>Status</th></tr>"); */
 							//var obj = JSON.parse(response);
-							
 							var stat = response.status;
 
-							if(stat==true){
+							if (stat == true) {
 								var ststus = '<button type="button" class="btn btn-primary colorgreen btn-outline btn-rounded waves-effect " data-toggle="dropdown" aria-haspopup="true" aria-haspopup="true" aria-expanded="false">Approved</button>';
-								}else if(stat==false){
-									var ststus = '<button type="button" class="btn btn-primary colorred btn-outline btn-rounded waves-effect " data-toggle="dropdown" aria-haspopup="true" aria-haspopup="true" aria-expanded="false">Declined</button>';
-									}
-							
-							$('#result').append(
+							} else if (stat == false) {
+								var ststus = '<button type="button" class="btn btn-primary colorred btn-outline btn-rounded waves-effect " data-toggle="dropdown" aria-haspopup="true" aria-haspopup="true" aria-expanded="false">Declined</button>';
+							}
+
+							$('#frommonthandyear').append(response.fromdate);
+							/* $('#leaveststusbyadmin').append(response.managerid); */
+							/* $('#leaverequestinitialststus').append(ststus); */
+							/* $('#leaverequestfrom').append(response.fromdate);
+							$('#leaverequestto').append(response.fromdate); */
+							$('#leaverequestcount').append(
+									+response.count + " Days From : "
+											+ response.fromdate + "<br> To :"
+											+ response.todate
+											+ " Was Sent to : "
+											+ response.managerid);
+							$('#leavemanagerid').append(response.managerid);
+							$('#leavemanagerststus').append(
+									ststus + " by " + response.managerid);
+							$('#leavemanreason').append(response.reason);
+
+							/* $('#result').append(
 									'<td style="border: 1px solid #eee"><div class="chip"><img src="${images}/mail/one.jpg" style="width: 32px;height: 32px;" alt="Contact Person"><span>' + response.employeeid + '</span><div style="text-align: center"></div></div><td style="border: 1px solid #eee">'
 											+ response.leavetype + '<td style="border: 1px solid #eee">'
 											+ response.fromdate + '<td style="border: 1px solid #eee">'
@@ -707,13 +834,9 @@
 											+ response.count + ' Days<td style="border: 1px solid #eee">'
 											+ response.leavereason + '<td style="border: 1px solid #eee">'
 											+ response.reason + '<td style="border: 1px solid #eee">'
-											+ ststus);
+											+ ststus); */
 
-						
 						},
-						error : function() {
-							alert('Error while request..');
-						}
 
 					});
 

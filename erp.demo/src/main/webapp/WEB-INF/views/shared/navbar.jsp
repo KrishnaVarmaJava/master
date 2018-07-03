@@ -91,6 +91,22 @@ padding : 12px;
 
 												</a></li>
 											</c:if>
+											<%-- <c:if test="${empleaveslist.getStatus() == 1}">
+												<li class="media"><a
+													href="${contextRoot}/${role}/leaverequests/register">
+														<div class="media-left">
+															<div class="icon-circle bg-green">
+																<i class="material-icons">alarm</i>
+															</div>
+														</div>
+														<div class="media-body menu-note">
+															<p class="pull-right">20 mins</p>
+															<h4>Approved Leave Request for
+																${empleaveslist.getEmployeeid()}</h4>
+														</div>
+
+												</a></li>
+											</c:if> --%>
 										</c:if>
 									</c:if>
 								</c:if>
